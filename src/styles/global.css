@@ -84,17 +84,15 @@ svg { width: 1rem; height: 1rem; fill: none; stroke: currentColor; stroke-width:
 .research-goal { max-width: var(--reading-width); margin: var(--space-8) 0; padding: var(--space-6) 0; border-block: var(--divider); }
 .research-goal h3 { margin: 0 0 var(--space-3); color: var(--color-primary); }
 .research-goal p { font-size: var(--type-lead); line-height: 1.5; margin: 0; }
-.milestones { margin-block: var(--space-12); }
-.milestones h2 { font-size: var(--type-heading-3); margin: 0 0 var(--space-4); }
-.table-scroll { overflow-x: auto; }
-.milestones table { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: var(--type-navigation); line-height: 1.5; }
-.milestones th { text-align: left; vertical-align: top; font-weight: var(--weight-semibold); border-top: var(--divider); padding: var(--space-5) var(--space-5) var(--space-4) 0; }
-.milestones td { padding: var(--space-3) var(--space-5) var(--space-5) 0; vertical-align: top; }
-.milestones th + th, .milestones td + td { border-left: var(--divider); padding-left: var(--space-5); }
-.milestones tr:last-child td { border-bottom: var(--divider); }
-.milestones .milestone-numbers td { padding-bottom: 0; }
-.milestone-numbers strong { display: block; font-size: var(--type-heading-2); letter-spacing: var(--tracking-heading); line-height: 1.2; margin-bottom: var(--space-1); }
-.milestones .milestone-dates td { color: var(--color-on-surface-variant); font-size: var(--type-small); padding-top: var(--space-2); }
+.milestones { --milestone-card-min-width: 13.5rem; margin-block: var(--space-12); }
+.milestones h2 { font-size: var(--type-heading-3); margin: 0 0 var(--space-6); }
+.milestone-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--milestone-card-min-width)), 1fr)); gap: var(--space-4); list-style: none; padding: 0; margin: 0; }
+.milestone-cards > li { display: grid; grid-template-rows: subgrid; grid-row: span 4; min-width: 0; padding: var(--space-6); margin: 0; background: var(--color-surface); border-radius: var(--radius-subtle); }
+.milestone-cards h3 { font-size: var(--type-navigation); line-height: var(--line-height-navigation); letter-spacing: normal; margin: 0; }
+.milestone-cards p { margin: 0; font-size: var(--type-navigation); line-height: var(--line-height-reading); }
+.milestone-cards .milestone-metric { color: var(--color-on-surface-variant); }
+.milestone-cards .milestone-metric strong { display: block; font-size: var(--type-heading-1); font-weight: var(--weight-semibold); line-height: var(--line-height-heading); letter-spacing: var(--tracking-heading); font-variant-numeric: tabular-nums; color: var(--color-on-surface); margin-bottom: var(--space-2); }
+.milestone-cards .milestone-date { color: var(--color-on-surface-variant); font-size: var(--type-small); }
 .research-figure { margin: var(--figure-gap) 0; width: 100%; }
 .image-trigger { position: relative; display: block; cursor: zoom-in; border-radius: var(--figure-radius); background: var(--color-evidence-surface); }
 .research-figure img { display: block; width: 100%; height: auto; border-radius: var(--figure-radius); }
@@ -216,7 +214,7 @@ html[data-astro-transition='back']::view-transition-new(reading-canvas) { animat
   .figure-group-mobile-ui[data-enhanced] .figure-group-status { grid-column: auto; }
   .intro { grid-template-columns: 1fr; gap: var(--space-4); }
   .portrait { width: var(--portrait-width); }
-  .milestones table { min-width: 36rem; }
+  .milestone-cards { grid-template-columns: minmax(0, 1fr); }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; }

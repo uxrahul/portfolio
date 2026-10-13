@@ -28,13 +28,13 @@ between Fit and 100%, then close or press Escape. Move between About and HEIR an
 use browser back/forward to inspect canvas-only motion. Reduced motion follows
 your system or browser emulation preference.
 
-The usability plots, three paired haptic compositions, and six Health Scan stages
+Four statistical plot pairs, three paired haptic compositions, and six Health Scan stages
 use manual carousels. Test opposite-edge arrows, mouse dragging/touch swiping,
 horizontal trackpad gestures, and Arrow Left/Right or Home/End while focused.
 Each figure opens in the shared full-screen viewer; no autoplay is used.
 
-The milestone table scrolls horizontally within its own labeled region on small
-screens. Transparent source evidence remains on a light image surface in both
+The three milestone cards adapt to available width and stack on phones, without
+horizontal scrolling. Transparent source evidence remains on a light image surface in both
 themes, so original black chart labels remain readable.
 
 Astro 7 starts background servers. Stop your dev server with:
@@ -55,7 +55,8 @@ npm run preview
 Preview serves the current `dist/`; rebuild after changes. Stop it with
 `npm run preview -- stop`. Run checks/builds sequentially with the dev server
 stopped, because they share Vite's cache. Work remains local: no hosting or
-production domain is configured, and no commits or deployment were made.
+production domain is configured. The GitHub repository versions the website;
+it does not deploy it.
 
 ## Editing and boundaries
 

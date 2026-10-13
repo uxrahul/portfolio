@@ -29,7 +29,7 @@ font-display swap. Body scales from 17 to 18px, line height 1.7; desktop title i
 40px, major headings up to 31px, supporting headings up to 24px. Semibold is 600.
 The italic source subtitle uses a restrained lead scale and a 1.5 line height.
 The reading canvas uses one responsive 43rem content measure. Headings, prose,
-figures, and captions share both horizontal edges. Figure captions preserve bold semantics and use
+figures, and captions use the same horizontal measure. Captions are centered, preserve bold semantics, and use
 secondary color and smaller type. Bullets and qualifications are never flattened.
 
 ## Shared layout
@@ -45,9 +45,9 @@ At 900–1199px the TOC becomes a disclosure above the document; the left hierar
 stays fixed. Below 900px a sticky header exposes Menu, and navigation is a drawer.
 Closed mobile navigation is inert. Open navigation locks background scroll,
 contains keyboard focus, makes the reading region inert, and closes with Escape
-or navigation. The TOC is a separate disclosure. At small widths the milestone
-table scrolls inside a labeled, keyboard-focusable region; the page never scrolls
-horizontally. Product gallery figures stack at every width to retain the content grid.
+or navigation. The TOC is a separate disclosure. Milestone cards adapt to available
+content width and stack on phones without horizontal scrolling. Product gallery
+figures stack at every width to retain the content grid.
 
 Unfinished entries are ordinary text. No pending badges or placeholder URLs.
 Groups retain expansion state in session storage. Active page and active TOC
@@ -57,7 +57,7 @@ section use semantic accent styling. Supporting reports remain contextual.
 
 Navigation hierarchy uses `--navigation-indent`, compact row spacing, and weight/
 type differences. Nested groups have no connector lines. The active page uses a
-small accent dot, semibold label, and a quiet tinted surface. Chevron alignment
+semibold label and a quiet tinted surface, without a dot. Chevron alignment
 is shared at each nesting level. Desktop rows are 40px; mobile rows are at least
 44px. The approved hierarchy remains in `src/data/navigation.ts`.
 
@@ -132,7 +132,7 @@ compact TOC disclosure; this refinement does not alter the navigation or TOC.
 Statistical plots use a subtle outline and generous responsive padding on the
 white evidence surface in both themes. Product compositions and photographs
 have no decorative frame or padding. Captions sit outside the image treatment,
-flush with the content grid, and retain source wording and emphasis. Do not repeat
+centered within the content grid, and retain source wording and emphasis. Do not repeat
 titles embedded in a chart or redraw its contents. Images retain their native
 aspect ratio. Astro generates responsive delivery sizes without upscaling beyond
 the source width; full-resolution originals remain available in the viewer.
@@ -142,7 +142,9 @@ the source width; full-resolution originals remain available in the viewer.
 `variant="statistical" | "mobile-ui"`. `StatisticalCarousel` and
 `MobileUICarousel` are the intended authoring wrappers. No React runtime or
 carousel autoplay plugin is needed. The existing usability group keeps its ID,
-plots, and captions. Haptics uses three intact paired-screen compositions; Health
+plots, and captions. Four statistical groups cover usability, customer priorities,
+haptic adoption/retention, and activity target outcomes. Haptics also uses three
+intact paired-screen compositions; Health
 Scan uses six individual screens, each with its source stage title and full description.
 
 Both variants have Previous/Next controls on opposite edges, a polite live count,
@@ -155,7 +157,7 @@ the tallest slide and caption, avoiding document jumps. Resize and Astro swaps
 reinitialize/destroy the interaction cleanly.
 
 Statistical carousels retain the approved plot frame, responsive padding, white
-evidence surface, and flush caption alignment. Their control row sits beneath
+evidence surface, and centered caption alignment. Their control row sits beneath
 captions, with arrows at its left/right edges. Mobile UI carousels have a transparent
 image area, no added frame/card/background, and centered native-ratio imagery
 bounded by `--figure-ui-height` (32rem). Precomposed pairs remain one image. Each
@@ -182,11 +184,26 @@ before the page router handles the click. Modified clicks retain native behavior
 Original files are delivered unchanged in the modal. Do not pass PNG originals
 through a quality encoder: even a PNG quality setting can quantize colors.
 
-The milestone data remains an accessible table with column headers. Source goal
-shading is translated into restrained spacing, typography, accent, and rules.
+### Milestone cards
+
+The labeled `product-milestones` section contains an ordered list of three cards.
+Each preserves the complete source-table stage: title, business metric/qualifier,
+date/status, and product contribution, with exact wording and bold emphasis.
+The reading measure and Source Sans 3 remain unchanged.
+
+`.milestone-cards` uses an auto-fit grid with a scoped 13.5rem minimum card width,
+bounded by available width. It fits three columns at 688px and two at 560px; below
+540px it explicitly stacks. Cards use `--color-surface`, `--space-6` padding,
+`--space-4` gaps, and `--radius-subtle`, without borders, dividers, shadows, gradients,
+or icons. CSS subgrid aligns stage/metric/date/contribution rows on wider layouts.
+Metrics use `--type-heading-1`; qualifiers/contributions use `--type-navigation`,
+and dates use `--type-small`. The original section entrance remains intact.
+
+Source goal shading is translated into restrained spacing, typography, accent, and rules.
 Word tables that compose screens become ordered mobile UI carousel slides, with
 their stage labels, descriptions, and any shared caption preserved.
-No cards, ornamental shadows/gradients, or added research summaries.
+Outside approved milestones, do not introduce cards, ornamental shadows/gradients,
+or added research summaries.
 
 ## Publication and checks
 

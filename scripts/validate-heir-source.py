@@ -26,33 +26,45 @@ class Published(HTMLParser):
     def __init__(self):
         super().__init__(); self.in_article = False; self.tokens = []; self.strong = []; self.italic = []
         self.captures = []; self.figures = []; self.bullets = []; self.list_buffer = None
+        self.milestones = []; self.milestone_buffer = None
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
         if tag == 'article': self.in_article = True
         if not self.in_article: return
         if tag in ['strong', 'em']: self.captures.append([tag, []])
         if tag == 'a' and 'data-image-viewer' in attrs: self.figures.append(attrs)
-        if tag == 'li': self.list_buffer = []
+        if tag == 'li':
+            if 'data-product-milestone' in attrs: self.milestone_buffer = []
+            else: self.list_buffer = []
     def handle_endtag(self, tag):
+        if tag in ['h3', 'p'] and self.milestone_buffer is not None:
+            self.milestone_buffer.append(' ')
         if self.captures and tag == self.captures[-1][0]:
             kind, values = self.captures.pop()
             (self.strong if kind == 'strong' else self.italic).append(normal(''.join(values)))
         if tag == 'li' and self.list_buffer is not None:
             self.bullets.append(normal(''.join(self.list_buffer))); self.list_buffer = None
+        if tag == 'li' and self.milestone_buffer is not None:
+            self.milestones.append(normal(''.join(self.milestone_buffer))); self.milestone_buffer = None
         if tag == 'article': self.in_article = False
     def handle_data(self, data):
         if self.in_article:
             self.tokens.append(data)
             for _, buffer in self.captures: buffer.append(data)
             if self.list_buffer is not None: self.list_buffer.append(data)
+            if self.milestone_buffer is not None: self.milestone_buffer.append(data)
 
 published = Published(); published.feed((site / 'dist/heir/index.html').read_text())
+# Each editorial card preserves one complete column of the source milestone table.
+milestone_rows = [row.findall('w:tc', ns) for row in body[8].findall('w:tr', ns)]
+expected_milestones = [normal(' '.join(text(row[column]) for row in milestone_rows)) for column in range(3)]
+assert published.milestones == expected_milestones, 'Milestone stage wording or chronological order changed.'
 actual = normal(''.join(published.tokens)); cursor = 0; source_bullets = []; image_order = []
 for index, block in enumerate(body):
     paragraphs = block.findall('.//w:tc/w:p', ns) if block.tag.endswith('tbl') else [block]
     for paragraph in paragraphs:
         value = normal(text(paragraph))
-        if value:
+        if value and index != 8:
             found = actual.find(value, cursor)
             assert found >= cursor, f'Source block {index} missing, changed, or out of order: {value}'
             cursor = found + len(value)
@@ -85,4 +97,4 @@ for i in [49,130]:
     for cell in body[i].findall('.//w:tc', ns):
         values = [normal(text(p)) for p in cell.findall('w:p', ns) if normal(text(p))]
         assert ' — '.join(values) in [f['data-caption'] for f in published.figures], 'Missing UI stage title or full description.'
-print(f'Source fidelity passed: all narrative/table cells in sequence, {len(source_bullets)} exact bullets, bold/italic emphasis, 24 byte-verified visuals, every caption/UI description, and conclusion.')
+print(f'Source fidelity passed: three complete milestone cards, all narrative/UI table cells in sequence, {len(source_bullets)} exact bullets, bold/italic emphasis, 24 byte-verified visuals, every caption/UI description, and conclusion.')

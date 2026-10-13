@@ -12,8 +12,8 @@ No research was rerun and no charts were redrawn.
 
 The introduction and first-launch section include every source block in order.
 The introduction has the italic subtitle, context, hero/caption, corporate-athlete
-and calm-technology paragraph, role, and the complete 4-row × 3-column milestone
-table. The first-launch section has Context, Goal, five contribution bullets,
+and calm-technology paragraph, role, and three milestone cards preserving every
+column of the original 4-row × 3-column table. The first-launch section has Context, Goal, five contribution bullets,
 two figures, Outcome, five outcome bullets, and two further figures. Bold decision
 phrases and statistical evidence and the italic independent-sample qualification
 are preserved. Word's blue goal treatment becomes quiet rules and typography;
@@ -73,7 +73,8 @@ in the main narrative. Their presence is not permission to add extra figures.
 ## Verification
 
 `python3 scripts/validate-heir-source.py` compares the entire built article with
-read-only OOXML: every paragraph and table cell in order, all 48 exact bullets,
+read-only OOXML: every narrative/UI table cell in order, all three complete milestone
+stages from source-table columns, all 48 exact bullets,
 source emphasis/qualifications, all captions and nine UI descriptions, and the
 conclusion. It verifies all 24 modal images in order against source bytes (the
 previously approved hero uses its visually matched standalone photograph; the
