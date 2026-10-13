@@ -87,18 +87,18 @@ for slug, folder, stem, chart_count, table_count, export_folder, return_anchor, 
     viewers = [x for x in native.all('a') if 'data-image-viewer' in x.attrs]
     assert len(viewers) == len(originals) == chart_count
     for viewer, original_bytes in zip(viewers, originals):
-        delivered = SITE / 'dist' / viewer.attrs['href'].lstrip('/')
+        delivered = SITE / 'dist' / viewer.attrs['href'].removeprefix('/portfolio/').lstrip('/')
         assert hashlib.sha256(delivered.read_bytes()).digest() == hashlib.sha256(original_bytes).digest(), 'Viewer must deliver untouched source chart.'
     assert 'data-global-navigation' in html and 'data-toc' in html
-    assert any(x.attrs.get('href') == f'/heir/#{return_anchor}' for x in native.all('a'))
+    assert any(x.attrs.get('href') == f'/portfolio/heir/#{return_anchor}' for x in native.all('a'))
     assert any(x.attrs.get('aria-label') == 'Breadcrumb' for x in native.all('nav'))
-    assert any(x.attrs.get('href') == '/heir/' for x in native.all('a'))
+    assert any(x.attrs.get('href') == '/portfolio/heir/' for x in native.all('a'))
     print(f'{slug}: all source text/emphasis, QMD section hierarchy, {chart_count} original charts, {table_count} exact tables/captions, and contextual links passed.')
 
 case = Document((SITE / 'dist/heir/index.html').read_text()).root
 for slug, _, _, _, _, _, return_anchor, link_id in REPORTS:
     link = next(x for x in case.all('a') if x.attrs.get('data-content-link') == link_id)
-    assert link.attrs['href'] == f'/heir/research/{slug}/'
+    assert link.attrs['href'] == f'/portfolio/heir/research/{slug}/'
     section = next(x for x in case.all('section') if x.attrs.get('aria-labelledby') == return_anchor)
     assert any(x.attrs.get('data-content-link') == link_id for x in section.all('a')), f'{link_id}: return anchor must match its originating section.'
 print('All five permanent case-study links resolve to native research pages and return to their originating sections.')

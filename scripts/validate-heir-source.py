@@ -89,7 +89,7 @@ assert normal(text(body[1])) in published.italic, 'Subtitle must preserve italic
 assert published.bullets == source_bullets, 'All source bullets must match in order, wording and count.'
 assert len(published.figures) == len(image_order) == 24, 'All 24 Word visuals must be present exactly once.'
 for i, (figure, media) in enumerate(zip(published.figures, image_order)):
-    delivered = (site / 'dist' / figure['href'].lstrip('/')).read_bytes()
+    delivered = (site / 'dist' / figure['href'].removeprefix('/portfolio/').lstrip('/')).read_bytes()
     # The approved introductory hero uses the visually matched standalone photograph.
     expected = (site / 'src/assets/heir/product/hero-image.webp').read_bytes() if i == 0 else originals['word/'+media]
     assert hashlib.sha256(delivered).digest() == hashlib.sha256(expected).digest(), f'Wrong visual/rendition/order at figure {i+1}: {media}'

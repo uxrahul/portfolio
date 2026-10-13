@@ -1,0 +1,27 @@
+---
+import figma from '../assets/heir/tools/01_figma.svg?raw';
+import r from '../assets/homepage/tools/04_r.svg?raw';
+import sql from '../assets/heir/tools/sql.svg?raw';
+import mixpanel from '../assets/homepage/tools/06_mixpanel.svg?raw';
+import datadog from '../assets/homepage/tools/07_datadog.svg?raw';
+import firebase from '../assets/heir/tools/09_firebase.svg?raw';
+import react from '../assets/heir/tools/11_react.svg?raw';
+import qualtrics from '../assets/heir/tools/02_qualtrics.svg?raw';
+import chatgpt from '../assets/heir/tools/18_chatgpt.svg?raw';
+import claude from '../assets/homepage/tools/19_claude.svg?raw';
+import bigquery from '../assets/homepage/tools/20_bigquery.svg?raw';
+const tools = [
+  { label: 'Figma', icon: figma }, { label: 'R', icon: r },
+  { label: 'SQL', icon: sql }, { label: 'Mixpanel', icon: mixpanel, monochrome: true },
+  { label: 'Datadog', icon: datadog }, { label: 'Firebase', icon: firebase },
+  { label: 'BigQuery', icon: bigquery }, { label: 'React', icon: react },
+  { label: 'Qualtrics', icon: qualtrics }, { label: 'ChatGPT', icon: chatgpt, monochrome: true },
+  { label: 'Claude', icon: claude, monochrome: true },
+];
+---
+<ul class="homepage-tools" aria-label="Selected tools">
+  {tools.map((tool) => <li>
+    {tool.icon && <span class:list={['homepage-tool-mark', { monochrome: tool.monochrome }]} aria-hidden="true" set:html={tool.icon} />}
+    <span>{tool.label}</span>
+  </li>)}
+</ul>

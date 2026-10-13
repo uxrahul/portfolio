@@ -9,14 +9,15 @@ introduction uses the shortened italic subtitle, revised role above
 the unchanged context paragraph, and eight labeled SVG tool icons inside one
 metadata block with subtle top/bottom dividers. The three editorial milestone
 cards remain approved.
-Other typography, section/Goal treatments, navigation, motion, figures, and viewer
+Other typography, section/Goal treatments, motion, figures, and viewer
 remain as implemented at the initial `ef62f53` baseline. Do not reintroduce the
 subsequently rolled-back editorial hierarchy experiments.
 
 All five linked Quarto reports are complete and approved native MDX pages: information architecture,
 usability validation, customer survey, feature adoption, and activity analysis.
 Pending work: the supporting Word documents,
-HEIR product galleries, Lira content, and resume. Seven internal content
+HEIR product galleries and Lira content. The supplied résumé PDF is available at
+`/resume.pdf`; its editable source is not published. Seven internal content
 destinations remain quiet text; the existing
 sedentary demo is the one published external destination. Preserve all 13 IDs and
 relationships in the sibling `heir-content-map.yml`; activate routes only when their
@@ -46,6 +47,102 @@ static pages. There is no Starlight or React runtime. Dependencies are all in us
   navigation, and TOC remain stationary. `section-motion.ts` supplies subtle 400ms
   vertical entrances for sections/figures/cards. Reduced motion and anchor targets
   skip motion as appropriate.
+
+## Global navigation and personal branding
+
+The navigation and branding refinement is approved for publication. Ganance
+starts expanded, its Product Gallery starts collapsed, and Lira starts collapsed.
+Lira remains expandable; unpublished leaves are non-focusable text with
+`aria-disabled="true"`, using a readable mix of existing muted/on-surface-variant
+tokens. Session choices persist, while active-page ancestors always reopen,
+including Ganance on HEIR and its research routes. Existing active indicators,
+260ms submenu motion, and mobile drawer behavior remain intact.
+
+`PersonalLogo.astro` uses the supplied transparent black/white 48px PNGs from
+`source-materials/Website portfolio/My logo/`, displayed at 24px beside the name
+in both headers. No SVG was supplied. Only the needed assets were copied:
+header images in `src/assets/branding/`, themed 32px favicons and 192px touch
+icons in `public/branding/`, plus a legacy `/favicon.ico` containing the supplied
+light-theme 16/32/48px images. The head PNG/touch icons follow Light/Dark/System
+and Astro page swaps; the old placeholder SVG favicon is removed.
+
+Resume uses a small decorative external-window icon and opens `/resume.pdf` in a
+new tab with `noopener noreferrer`. The supplied one-page PDF was renamed from
+`public/Rahul's resume.pdf` without changing its bytes; native browser viewing
+and downloading are available. `src/data/resume.mjs` checks availability at build
+time; without the PDF, Resume renders disabled text with the same icon.
+
+Desktop and 393px mobile navigation, submenu opening/closing, active-page reveal,
+drawer Escape/focus return, black/white header logos and browser favicons, and
+the résumé's separate-tab PDF viewer were checked locally. Production build,
+type/link/token checks, and original HEIR/research fidelity checks pass. No source
+materials were modified or imported wholesale.
+
+## Homepage editorial redesign — approved
+
+The homepage now follows the updated read-only
+`source-materials/Website portfolio/Homepage/homepage.docx`: headline/supporting
+copy, Selected Impact, Expertise / How I Work, Select Tools, and A Little About Me.
+All project wording, statistics, three capability descriptions, and personal copy
+remain exact. The source-document footer is an editorial annotation, not site copy.
+The refreshed 768 × 915 Chicago portrait is copied unchanged into
+`src/assets/homepage/about-me.webp`; Astro supplies optimized responsive delivery.
+
+`Homepage.astro` owns the five-section composition, with one dominant h1,
+vertically centered desktop portrait and centered phone placement, an image-led Ganance feature using the existing
+HEIR photograph, quieter informational Lira copy, numbered capability stages,
+and a personal typographic closing. The MDX route delegates to that component;
+its former duplicate name h1 and Next pagination are replaced by the editorial
+hero and project links. `/heir/` links retain native Astro transitions.
+`homepage.css` scopes a wider 76rem maximum canvas and fluid title/spacing values
+to the homepage. The global navigation, 43rem case-study/research canvas, TOC,
+figures, carousel system, and shared page transitions retain their presentation.
+
+`homepage-motion.ts` uses native Web Animations, IntersectionObserver, and one
+requestAnimationFrame update per scroll frame. Hero content enters progressively;
+other elements reveal once as they enter view. The capability nearest the reading
+area gains quiet accent/typographic emphasis without pinning or scroll snapping.
+Reduced motion cancels entrances and scroll emphasis; content is visible without
+JavaScript, focused elements cancel their entrance, and Astro swaps clean up
+observers, listeners, and active animations. No new dependency or hydration is added.
+
+`HomepageTools.astro` preserves Figma, R, SQL, Mixpanel, Datadog, Firebase,
+BigQuery, React, Qualtrics, ChatGPT, Claude, in that order. Existing matching SVGs
+are reused; R/Mixpanel/Datadog are copied from the supplied logo set.
+The subsequently supplied Claude flower/BigQuery shield SVGs describe themselves
+as vector recreations and do not match the verified product marks. They remain
+unchanged in source materials. The homepage instead uses the Claude symbol path
+from `https://claude.com/` and Google's official BigQuery SVG from the core product
+archive linked at `https://cloud.google.com/icons`, with styling normalized for
+inline SVG delivery. Only the two needed icons are imported. SQL correctly
+uses the generic SQL asset, not a MySQL substitution. Mixpanel/ChatGPT inherit
+theme text color, as does Claude; the other source marks retain their original colors.
+
+The focused refinement separates section eyebrows (13px tracked muted semibold),
+company labels (15px untracked semibold ink), and discipline metadata (12px,
+11px on phones). Lira is a narrow, 42rem maximum text-only feature, with its label
+above its title and description. Desktop/tablet portrait offsets are removed;
+the hero grid centers the photo vertically, and phone margins center its existing
+80% width. Approved wording, image bytes, route links, and motion remain unchanged.
+The refinement was reviewed on desktop and a 393 × 852 phone preview, including
+portrait framing, Selected Impact/Lira hierarchy, SVG wrapping, and dark-theme
+legibility. A clean private preview avoided the regular browser's extension/zoom
+artifacts. Both added marks render correctly. Production build, Astro/content
+checks, HEIR and all five research fidelity checks pass.
+
+Desktop, tablet, and phone layouts, light/dark themes, natural capability
+progression, reduced motion, and internal navigation were reviewed in the local
+production preview. An OOXML-to-built-HTML check confirms every substantive
+source paragraph/heading, the tool order, and portrait bytes. Standard production,
+type/link/token, HEIR fidelity, and all five research fidelity checks pass.
+The resumed final review also covered 320 × 721 and 393 × 852 phone viewports,
+including the full tool list and closing copy, mobile drawer, and light/dark
+themes. The earlier apparent mobile clipping was not reproduced; no overflow
+fix or further design change was needed. Final `check`, `build`, `verify:source`,
+`verify:research`, and `git diff --check` passed. The production preview is left
+at the desktop homepage in light mode for review.
+The homepage redesign and focused refinements are approved for publication;
+source materials remain unchanged.
 
 ## HEIR introduction
 
@@ -166,8 +263,8 @@ manifest is intentionally committed so standalone checkouts build without the
 private workspace. `sync:links` and `verify:source` need the sibling inputs.
 
 GitHub origin is `https://github.com/uxrahul/portfolio.git`, branch `main`; pushes
-are version control, not deployment. Commit/push/reset require explicit user
-instructions. No hosting is configured. Preserve the local verified rollback
+are version control and trigger the GitHub Pages workflow. Commit/push/reset require
+explicit user instructions. Preserve the local verified rollback
 backup under `.git/rollback-backups/`; it is private and must not be cleaned or
 published. Earlier private research notes survive in that backup/archive.
 
@@ -181,9 +278,45 @@ complete milestone stages against Word table columns, all narrative/UI descripti
 bullets, emphasis, captions, figure bytes/order, and conclusion.
 
 Use `npm run dev` for editing or `npm run preview -- --host 127.0.0.1` after a build;
-open the printed URL (ports may advance) and visit `/heir/`. Astro 7 starts background
+open the printed URL (ports may advance) at `/portfolio/`; HEIR is `/portfolio/heir/`. Astro 7 starts background
 servers: stop owned servers with `npm run dev -- stop` / `npm run preview -- stop`
 before builds/checks, which share Vite caches. Review navigation/history, TOC,
 themes, responsive cards, both carousel variants, viewer Fit/100%/Escape, and
 reduced motion. `docs/verification.md` records evidence and limits;
 `docs/design-system.md` owns detailed presentation conventions.
+
+## GitHub Pages publication
+
+The approved homepage, navigation/branding, and résumé are included in the
+publication commit. Astro uses `site: https://uxrahul.github.io` and
+`base: /portfolio`, producing `https://uxrahul.github.io/portfolio/`.
+`.github/workflows/deploy.yml` follows Astro's official deployment workflow with
+`actions/checkout@v7`, `withastro/action@v6` (Node 24, npm lockfile), and
+`actions/deploy-pages@v5`. Pushes to main and manual dispatch validate, rebuild,
+upload only dist, and deploy through the github-pages environment. Private source
+fidelity checks are run locally; CI never requires private archives or datasets.
+
+`src/lib/paths.ts` prefixes internal links from Astro's BASE_URL and removes it
+only when matching active navigation/home routes. Permanent registry IDs and
+logical destinations remain unchanged. Header links, homepage links, research
+breadcrumbs/anchored returns, pagination, résumé, 404 return, themed favicon and
+touch-icon paths are prefixed. Astro prefixes imported images, scripts, styles,
+and fonts. Local dev/preview use the same `/portfolio/` path.
+
+The build validator checks every internal link/fragment, emitted image/srcset,
+script/stylesheet, favicon/theme asset, original viewer image, and private-file
+publication boundary under the base path. Source/research validators account for
+the prefix without changing their content/byte-fidelity assertions.
+
+Repository visibility remains private. GitHub Pages must use GitHub Actions as
+its source; private-repository Pages availability depends on the account plan.
+Do not make the repository public without separate authorization.
+
+Publication setup check: GitHub returned HTTP 422 when enabling Pages:
+“Your current plan does not support GitHub Pages for this repository.”
+Hosting remains disabled; repository visibility is unchanged. To finish, use an
+eligible paid plan (or separately choose public visibility), then Settings → Pages
+→ Source: GitHub Actions, and rerun Deploy to GitHub Pages. Browser checks passed
+homepage → HEIR → information architecture → anchored first-launch return under
+`/portfolio/`. Local check/build/source/research validation and private-file/credential
+review passed before the publication commit.

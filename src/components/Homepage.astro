@@ -1,0 +1,81 @@
+---
+import { withBase } from '../lib/paths';
+import { Image } from 'astro:assets';
+import portrait from '../assets/homepage/about-me.webp';
+import heir from '../assets/heir/product/hero-image.webp';
+import HomepageTools from './HomepageTools.astro';
+import '../styles/homepage.css';
+const capabilities = [
+  { number: '01', discipline: 'PRODUCT STRATEGY & RESEARCH', title: 'Find the right opportunity.', description: 'Turn customer understanding and research into meaningful product priorities.' },
+  { number: '02', discipline: 'PRODUCT & EXPERIENCE DESIGN', title: 'Make the experience work.', description: 'Translate complex problems into intuitive, scalable products that teams can ship.' },
+  { number: '03', discipline: 'PRODUCT ANALYTICS & OPTIMIZATION', title: 'Make progress measurable.', description: 'Define success, instrument behavior, and use product data to inform what comes next.' },
+];
+---
+<div class="homepage" data-homepage>
+  <section class="homepage-hero" aria-labelledby="homepage-headline">
+    <p class="homepage-byline" data-home-entrance><span>RAHUL SINGH</span><span>PRODUCT DESIGNER · UX RESEARCHER · PRODUCT ANALYTICS</span></p>
+    <div class="homepage-hero-grid">
+      <div class="homepage-hero-copy">
+        <h1 id="homepage-headline"><span data-home-entrance>I turn customer insights into products—</span><span class="homepage-headline-second" data-home-entrance>and behavioral data into business decisions.</span></h1>
+        <p class="homepage-support" data-home-entrance>I combine research, hands-on design, and product analytics to help teams shape direction, ship experiences, and measure what works.</p>
+      </div>
+      <figure class="homepage-portrait" data-home-entrance>
+        <Image src={portrait} alt="Rahul Singh overlooking Chicago’s Millennium Park and lakefront" widths={[320, 480, 640, 768]} sizes="(min-width: 1200px) 28vw, (min-width: 600px) 36vw, 80vw" format="webp" quality={90} loading="eager" fetchpriority="high" />
+      </figure>
+    </div>
+  </section>
+  <section class="homepage-section homepage-impact" aria-labelledby="selected-impact" data-home-section>
+    <h2 id="selected-impact" class="homepage-label" data-home-reveal>SELECTED IMPACT</h2>
+    <div class="homepage-ganance">
+      <a class="homepage-project-image" href={withBase('/heir/')} aria-label="Ganance / HEIR case study" data-home-reveal>
+        <Image src={heir} alt="HEIR beneath a traditional watch, beside the screenless tracking device" widths={[480, 800, 1200, 1600]} sizes="(min-width: 1200px) 42vw, 90vw" format="webp" quality={90} />
+      </a>
+      <div class="homepage-project-copy" data-home-reveal>
+        <p class="homepage-project-label">GANANCE / HEIR</p>
+        <h3><a class="homepage-project-link" href={withBase('/heir/')}>Launching, scaling, and expanding HEIR<span class="homepage-project-arrow" aria-hidden="true">↗</span></a></h3>
+        <p>Helped develop a screenless activity tracker as Ganance reached <strong>3,000+ device sales</strong> and <strong>2,000 preorders</strong>; expanded its app into personalized activity and health.</p>
+      </div>
+    </div>
+    <div class="homepage-lira" data-home-reveal>
+      <p class="homepage-project-label">LIRA TECHNOLOGIES</p>
+      <div>
+        <h3>Applying AI to everyday care</h3>
+        <p>Designing an AI-assisted caregiving pendant and planning an eight-week pilot to evaluate its role in helping older adults age at home.</p>
+      </div>
+    </div>
+  </section>
+  <section class="homepage-section homepage-expertise" aria-labelledby="how-i-work" data-home-section>
+    <header data-home-reveal>
+      <h2 id="how-i-work" class="homepage-label">EXPERTISE / HOW I WORK</h2>
+      <p class="homepage-section-statement">From understanding what matters to measuring what works.</p>
+    </header>
+    <ol class="homepage-stages">
+      {capabilities.map((capability) => <li class="homepage-stage" data-home-stage data-home-reveal>
+        <span class="homepage-stage-number" aria-hidden="true">{capability.number}</span>
+        <div class="homepage-stage-heading">
+          <p class="homepage-metadata">{capability.discipline}</p>
+          <h3>{capability.title}</h3>
+        </div>
+        <p class="homepage-stage-description">{capability.description}</p>
+      </li>)}
+    </ol>
+  </section>
+  <section class="homepage-section homepage-tool-section" aria-labelledby="selected-tools" data-home-section>
+    <h2 id="selected-tools" class="homepage-label" data-home-reveal>SELECT TOOLS</h2>
+    <div data-home-reveal><HomepageTools /></div>
+  </section>
+  <section class="homepage-section homepage-about" aria-labelledby="a-little-about-me" data-home-section>
+    <h2 id="a-little-about-me" class="homepage-label" data-home-reveal>A LITTLE ABOUT ME</h2>
+    <div class="homepage-about-grid">
+      <p class="homepage-closing-statement" data-home-reveal>Chicago-based.<br />{' '}Curious by default.</p>
+      <div class="homepage-about-copy" data-home-reveal>
+        <p>I have an M.S. in Human–Computer Interaction from DePaul University and a background in marketing. I’m interested in how people, technology, and business shape one another.</p>
+        <p>Outside work: films, reading, and occasionally games.</p>
+      </div>
+    </div>
+  </section>
+</div>
+<script>
+  import { bindHomepageMotion } from '../lib/homepage-motion';
+  bindHomepageMotion();
+</script>

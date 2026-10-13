@@ -1,4 +1,5 @@
 ---
+import { withBase } from '../lib/paths';
 import manifest from '../generated/heir-links.json';
 type LinkId = keyof typeof manifest.links;
 interface Props { id: LinkId; }
@@ -7,7 +8,7 @@ const link = manifest.links[id];
 if (!link) throw new Error(`Unknown permanent content link ID: ${id}`);
 ---
 {link.status === 'published' && link.href ? (
-  <a href={link.href} data-content-link={id} target={link.newTab ? '_blank' : undefined} rel={link.newTab ? 'noopener noreferrer' : undefined}><slot /></a>
+  <a href={withBase(link.href)} data-content-link={id} target={link.newTab ? '_blank' : undefined} rel={link.newTab ? 'noopener noreferrer' : undefined}><slot /></a>
 ) : (
   <span data-content-link={id} data-link-status="pending"><slot /></span>
 )}

@@ -1,9 +1,15 @@
 import type { TransitionBeforeSwapEvent } from 'astro:transitions/client';
 const systemTheme = matchMedia('(prefers-color-scheme: dark)');
 let preference = 'auto';
+function applyThemeIcons(root: HTMLElement) {
+  root.ownerDocument.querySelectorAll<HTMLLinkElement>('[data-theme-icon]').forEach((icon) => {
+    icon.href = (root.dataset.theme === 'dark' ? icon.dataset.darkSrc : icon.dataset.lightSrc)!;
+  });
+}
 function applyTheme(root = document.documentElement) {
   try { preference = localStorage.getItem('portfolio-theme') || 'auto'; } catch { /* Optional storage. */ }
   root.dataset.theme = preference === 'auto' ? (systemTheme.matches ? 'dark' : 'light') : preference;
+  applyThemeIcons(root);
 }
 let cleanup: (() => void) | undefined;
 function initializeShell() {
@@ -18,6 +24,7 @@ function initializeShell() {
       preference = select.value;
       try { localStorage.setItem('portfolio-theme', preference); } catch { /* Optional storage. */ }
       document.documentElement.dataset.theme = preference === 'auto' ? (systemTheme.matches ? 'dark' : 'light') : preference;
+      applyThemeIcons(document.documentElement);
     }, options);
   }
   const menu = document.querySelector<HTMLButtonElement>('.menu-toggle');

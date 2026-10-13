@@ -5,6 +5,8 @@ import { unified } from '@astrojs/markdown-remark';
 import remarkCaseSections from './src/lib/remark-case-sections.mjs';
 
 export default defineConfig({
+  site: 'https://uxrahul.github.io',
+  base: '/portfolio',
   output: 'static',
   trailingSlash: 'always',
   markdown: { processor: unified({ remarkPlugins: [remarkCaseSections] }) },

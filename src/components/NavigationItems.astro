@@ -1,22 +1,27 @@
 ---
+import { withBase, withoutBase } from '../lib/paths';
 import type { NavigationItem } from '../data/navigation';
 import NavigationItems from './NavigationItems.astro';
+import NewTabIcon from './NewTabIcon.astro';
 interface Props { items: NavigationItem[]; }
 const { items } = Astro.props;
-const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
+const currentPath = withoutBase(Astro.url.pathname).replace(/\/$/, '') || '/';
+const containsCurrentPage = (item: NavigationItem): boolean =>
+  Boolean(item.href && !item.newTab && ((item.href.replace(/\/$/, '') || '/') === currentPath || (item.href !== '/' && withoutBase(Astro.url.pathname).startsWith(item.href)))) ||
+  Boolean(item.children?.some(containsCurrentPage));
 ---
 <ul class="navigation-list">
   {items.map((item) => (
     <li>
       {item.children ? (
-        <details data-nav-group={item.id} open={item.expanded}>
+        <details data-nav-group={item.id} data-nav-active={containsCurrentPage(item) || undefined} open={item.expanded || containsCurrentPage(item)}>
           <summary><span>{item.label}</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m6 4 4 4-4 4" /></svg></summary>
           <div class="nav-submenu"><NavigationItems items={item.children} /></div>
         </details>
       ) : item.href ? (
-        <a href={item.href} aria-current={(item.href.replace(/\/$/, '') || '/') === currentPath ? 'page' : undefined}>{item.label}</a>
+        <a href={withBase(item.href)} target={item.newTab ? '_blank' : undefined} rel={item.newTab ? 'noopener noreferrer' : undefined} data-astro-reload={item.newTab || undefined} aria-label={item.newTab ? `${item.label} (opens in a new tab)` : undefined} aria-current={(item.href.replace(/\/$/, '') || '/') === currentPath ? 'page' : undefined}>{item.label}{item.newTab && <NewTabIcon />}</a>
       ) : (
-        <span class="unpublished">{item.label}</span>
+        <span class="unpublished" aria-disabled="true">{item.label}{item.newTab && <NewTabIcon />}</span>
       )}
     </li>
   ))}

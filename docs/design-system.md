@@ -39,7 +39,8 @@ column. The TOC uses the adjacent page gutter and the same fluid outer padding a
 the shell, giving long titles room to wrap without crowding the viewport edge.
 The reading region uses fluid padding and a bounded canvas. Only the central
 reading canvas participates in horizontal movement. The homepage has no TOC
-content and uses the same document shell and reading alignment.
+content and uses the same document shell; its editorial canvas is wider as described
+below. Case-study/research reading alignment remains unchanged.
 
 At 900–1199px the TOC becomes a disclosure above the document; the left hierarchy
 stays fixed. Below 900px a sticky header exposes Menu, and navigation is a drawer.
@@ -52,6 +53,10 @@ figures stack at every width to retain the content grid.
 Unfinished entries are ordinary text. No pending badges or placeholder URLs.
 Groups retain expansion state in session storage. Active page and active TOC
 section use semantic accent styling. Supporting reports remain contextual.
+Ganance defaults to expanded; its Product Gallery and Lira default to collapsed.
+Active-page ancestors reopen even when a prior session choice collapsed them.
+Unpublished leaves use `aria-disabled="true"` and a mix of 25% `--color-muted`
+with `--color-on-surface-variant`, retaining readable contrast without badges.
 
 ### Navigation and TOC conventions
 
@@ -60,6 +65,15 @@ type differences. Nested groups have no connector lines. The active page uses a
 semibold label and a quiet tinted surface, without a dot. Chevron alignment
 is shared at each nesting level. Desktop rows are 40px; mobile rows are at least
 44px. The approved hierarchy remains in `src/data/navigation.ts`.
+
+The identity pairs the existing name typography with a decorative 24px personal
+mark and `--space-2` gap, without increasing header height. Supplied transparent
+48px PNGs render black on light and white on dark; no SVG variant was available.
+Theme-aware 32px PNG favicons and 192px touch icons follow the same preference,
+including System changes and Astro swaps. `/favicon.ico` is a legacy fallback.
+Resume carries a 16px external-window icon and opens `/resume.pdf` in a new tab
+when the PDF exists at build time; otherwise it remains disabled text. Its PDF
+uses normal browser viewing/downloading, and editable résumé sources stay private.
 
 Native `details`/`summary` retain keyboard activation and a no-JavaScript fallback.
 Enhanced groups animate only submenu height with the Web Animations API; chevrons
@@ -104,6 +118,40 @@ geometry morphing. Clipping is confined to the canvas transition group.
 Major sections/figures enter from 1rem below over 400ms during normal scrolling.
 No pre-JavaScript hiding, snapping, nested reading scroll containers, or focus
 obstruction. Reduced motion disables transitions/entrances and smooth scrolling.
+
+## Homepage editorial composition
+
+The homepage uses a scoped maximum 76rem canvas without reserving the empty TOC
+column. `homepage.css` owns its fluid 44–80px headline, 32–56px statements, and
+80–144px section rhythm, while consuming the established Source Sans 3, semantic
+colors, border roles, and spacing/motion tokens. These values do not change reading
+pages. The main source headline is its sole h1, with a quiet accent second phrase.
+The byline carries the name and disciplines; no duplicate title or document-style
+Next footer is shown.
+
+The supplied Chicago portrait is vertically centered beside the hero copy on
+desktop/tablet, then follows the copy at 80% width with equal side margins on phones. A natural 4:5
+object-fit crop retains the face, skyline, and lakefront without filters. Ganance
+has the primary image/text composition and internal project links; Lira remains
+an informational text-only feature with a 42rem maximum measure: company label,
+title, then description, without an empty thumbnail column. Section eyebrows use
+13px semibold tracked muted text; company labels use 15px semibold untracked ink;
+discipline metadata uses 12px tracked muted text (11px on phones). Existing title,
+statement, body, and supporting-copy scales remain intact.
+Numbered capabilities form ordered rows with semantic
+rules rather than cards. On smaller screens descriptions move below their stage
+heading, preserving source order. Tools use 24px decorative SVG boxes, readable
+15px labels, and responsive wrapping. BigQuery uses Google's official product SVG;
+Claude uses the symbol path from its official website, inheriting theme ink.
+The closing uses generous whitespace and no repeated portrait.
+
+Native Web Animations use the existing 400ms entrance duration/easing with modest
+70–90ms staggering. IntersectionObserver reveals elements once on entry; the stage
+nearest 52% of viewport height receives subtle emphasis via an animation-frame
+scroll update. All copy remains readable before JavaScript, no reading scroll is
+pinned/snapped, and the header/navigation remain stationary. Reduced motion removes
+entrances, stage tracking, hover movement, and transitions. Focus and Astro swaps
+cancel running entrances; listeners/observers are disposed between pages.
 
 ## Evidence and reusable components
 
@@ -246,8 +294,9 @@ embedded report document, or R code is published.
 About, HEIR, and all five linked Quarto research reports are content routes;
 404 uses the same layout. HEIR contains
 the entire source narrative, five projects, and “Where HEIR stands now.” The TOC
-selects those six major sections. Supporting Word documents, gallery destinations, and
-resume content remain outside the current migration scope.
+selects those six major sections. Supporting Word documents and gallery destinations
+remain outside the current migration scope. Resume is a separate-tab static PDF,
+not a content route.
 
 The original archive and raw research stay outside the site. Only selected image
 copies enter `src/assets/`. All 13 IDs and original destination relationships are

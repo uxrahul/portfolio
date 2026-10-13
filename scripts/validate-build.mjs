@@ -13,8 +13,14 @@ async function walk(directory) {
   }
   return files;
 }
+const config = await readFile(new URL('../astro.config.mjs', import.meta.url), 'utf8');
+const deploymentBase = config.match(/base:\s*['"]([^'"]+)['"]/)?.[1].replace(/\/$/, '') || '';
+function outputPath(pathname) {
+  assert.ok(!deploymentBase || pathname.startsWith(deploymentBase + '/'), `Unprefixed internal URL: ${pathname}`);
+  return resolve(root, '.' + pathname.slice(deploymentBase.length));
+}
 const files = await walk(root);
-const forbidden = /\.(csv|qmd|r|rdata|rds|rhistory|docx|py)$/i;
+const forbidden = /\.(csv|tsv|qmd|r|rdata|rds|rhistory|doc|docx|xls|xlsx|ipynb|parquet|feather|db|sqlite|sqlite3|py|tmp|temp|log)$/i;
 for (const file of files) {
   assert.ok(!forbidden.test(file), `Private research format deployed: ${relative(root, file)}`);
   assert.ok(!file.includes('source-materials'), 'Source archive must not be deployed.');
@@ -29,14 +35,14 @@ for (const file of files.filter((file) => file.endsWith('.html'))) {
 let checked = 0;
 for (const [file, { html }] of documents) {
   const pathname = '/' + relative(root, dirname(file)).replaceAll('\\', '/') + '/';
-  const base = new URL(pathname.replace('//', '/'), 'http://portfolio.local');
+  const base = new URL(deploymentBase + pathname.replace('//', '/'), 'http://portfolio.local');
   for (const match of html.matchAll(/<a\b[^>]*\bhref="([^"]+)"/g)) {
     const href = match[1].replaceAll('&amp;', '&');
     assert.ok(href && href !== '#', `Placeholder href in ${relative(root, file)}`);
     const url = new URL(href, base);
     if (url.origin !== base.origin) continue;
     const path = decodeURIComponent(url.pathname);
-    let target = resolve(root, '.' + path);
+    let target = outputPath(path);
     if (path.endsWith('/')) target = resolve(target, 'index.html');
     else if (!path.split('/').at(-1).includes('.')) target = resolve(target, 'index.html');
     assert.ok(target.startsWith(root + '/'), 'Internal href escapes output root.');
@@ -46,9 +52,25 @@ for (const [file, { html }] of documents) {
     }
     checked++;
   }
-  for (const match of html.matchAll(/<img\b[^>]*\bsrc="([^"]+)"/g)) {
+  for (const match of html.matchAll(/<(?:img|script|link)\b[^>]*\b(?:src|href)="([^"]+)"/g)) {
     const src = new URL(match[1], base);
-    if (src.origin === base.origin) await access(resolve(root, '.' + decodeURIComponent(src.pathname)));
+    if (src.origin === base.origin) await access(outputPath(decodeURIComponent(src.pathname)));
+  }
+  for (const match of html.matchAll(/\b(?:data-light-src|data-dark-src)="([^"]+)"/g)) await access(outputPath(match[1]));
+  for (const match of html.matchAll(/\bsrcset="([^"]+)"/g)) {
+    for (const candidate of match[1].split(',')) {
+      const url = new URL(candidate.trim().split(/\s+/)[0], base);
+      if (url.origin === base.origin) await access(outputPath(url.pathname));
+    }
+  }
+
+}
+for (const file of files.filter((file) => file.endsWith('.css'))) {
+  const css = await readFile(file, 'utf8');
+  const base = new URL(deploymentBase + '/' + relative(root, file), 'http://portfolio.local');
+  for (const match of css.matchAll(/url\(["']?([^"')]+)["']?\)/g)) {
+    const url = new URL(match[1], base);
+    if (url.origin === base.origin) await access(outputPath(decodeURIComponent(url.pathname)));
   }
 }
 const home = documents.get(resolve(root, 'index.html')).html;
@@ -70,7 +92,7 @@ const representativeOriginals = [
 ];
 for (const [index, original] of representativeOriginals.entries()) {
   const selected = await readFile(new URL(`../src/assets/heir/${original}`, import.meta.url));
-  const delivered = await readFile(resolve(root, '.' + figureLinks[index]));
+  const delivered = await readFile(outputPath(figureLinks[index]));
   const digest = (data) => createHash('sha256').update(data).digest('hex');
   assert.equal(digest(delivered), digest(selected), `Modal must deliver untouched original: ${original}`);
 }

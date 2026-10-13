@@ -1,4 +1,5 @@
 ---
+import { withBase, withoutBase } from '../lib/paths';
 import { ClientRouter } from 'astro:transitions';
 import '../styles/global.css';
 import { navigation } from '../data/navigation';
@@ -6,6 +7,7 @@ import NavigationItems from '../components/NavigationItems.astro';
 import ImageViewer from '../components/ImageViewer.astro';
 import TableOfContents from '../components/TableOfContents.astro';
 import ResearchContext from '../components/ResearchContext.astro';
+import PersonalLogo from '../components/PersonalLogo.astro';
 interface Props {
   title: string; description: string; tableOfContents?: boolean;
   toc: { slug: string; text: string; depth?: number }[];
@@ -14,7 +16,7 @@ interface Props {
   researchContext?: { label: string; returnHref: string };
 }
 const { title, description, tableOfContents = true, toc, prev, next, researchContext } = Astro.props;
-const isHome = Astro.url.pathname === '/';
+const isHome = withoutBase(Astro.url.pathname) === '/';
 const showToc = tableOfContents && toc.length > 0;
 ---
 <!doctype html>
@@ -24,7 +26,9 @@ const showToc = tableOfContents && toc.length > 0;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <meta name="color-scheme" content="light dark" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href={withBase('/favicon.ico')} sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href={withBase('/branding/icon-light-32.png')} data-theme-icon data-light-src={withBase('/branding/icon-light-32.png')} data-dark-src={withBase('/branding/icon-dark-32.png')} />
+    <link rel="apple-touch-icon" sizes="192x192" href={withBase('/branding/icon-light-192.png')} data-theme-icon data-light-src={withBase('/branding/icon-light-192.png')} data-dark-src={withBase('/branding/icon-dark-192.png')} />
     <title>{isHome ? title : `${title} · Rahul Singh`}</title>
     <script is:inline>
       (() => {
@@ -32,6 +36,9 @@ const showToc = tableOfContents && toc.length > 0;
         try { preference = localStorage.getItem('portfolio-theme') || 'auto'; } catch {}
         document.documentElement.dataset.theme = preference === 'auto'
           ? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : preference;
+        document.querySelectorAll('[data-theme-icon]').forEach((icon) => {
+          icon.href = document.documentElement.dataset.theme === 'dark' ? icon.dataset.darkSrc : icon.dataset.lightSrc;
+        });
       })();
     </script>
     <ClientRouter fallback="swap" />
@@ -39,11 +46,11 @@ const showToc = tableOfContents && toc.length > 0;
   <body>
     <a class="skip-link" href="#reading-canvas">Skip to content</a>
     <header class="mobile-header" transition:name="portfolio-header" transition:animate="none">
-      <a href="/" class="identity">Rahul Singh</a>
+      <a href={withBase('/')} class="identity"><PersonalLogo />Rahul Singh</a>
       <button type="button" class="menu-toggle" aria-label="Open navigation" aria-controls="global-navigation" aria-expanded="false"><span>Menu</span><svg viewBox="0 0 20 20" aria-hidden="true"><path class="menu-line-top" d="M3 10h14" /><path class="menu-line-bottom" d="M3 10h14" /></svg></button>
     </header>
     <aside id="global-navigation" class="global-navigation" data-global-navigation transition:name="global-navigation" transition:animate="none">
-      <a href="/" class="identity desktop-identity">Rahul Singh</a>
+      <a href={withBase('/')} class="identity desktop-identity"><PersonalLogo />Rahul Singh</a>
       <nav aria-label="Portfolio"><NavigationItems items={navigation} /></nav>
       <div class="theme-control">
         <label for="theme-preference">Appearance</label>
@@ -58,12 +65,12 @@ const showToc = tableOfContents && toc.length > 0;
       <main id="reading-canvas" class="reading-canvas" tabindex="-1" transition:name="reading-canvas">
         <article class:list={['editorial', { 'home-content': isHome }]}>
           {researchContext && <ResearchContext {...researchContext} />}
-          <h1>{title}</h1>
+          {!isHome && <h1>{title}</h1>}
           <slot />
         </article>
         {(prev || next) && <nav class="pagination" aria-label="Page navigation">
-          {prev && <a href={prev.link} rel="prev"><span aria-hidden="true">←</span><span><small>Previous</small>{prev.label}</span></a>}
-          {next && <a href={next.link} rel="next"><span><small>Next</small>{next.label}</span><span aria-hidden="true">→</span></a>}
+          {prev && <a href={withBase(prev.link)} rel="prev"><span aria-hidden="true">←</span><span><small>Previous</small>{prev.label}</span></a>}
+          {next && <a href={withBase(next.link)} rel="next"><span><small>Next</small>{next.label}</span><span aria-hidden="true">→</span></a>}
         </nav>}
       </main>
     </div>

@@ -1,4 +1,5 @@
 ---
+import { withBase } from '../lib/paths';
 interface Props { label: string; returnHref: string; }
 const { label, returnHref } = Astro.props;
 ---
@@ -6,11 +7,11 @@ const { label, returnHref } = Astro.props;
   <nav aria-label="Breadcrumb">
     <ol role="list">
       <li>Work at Ganance</li>
-      <li><a href="/heir/">Case study</a></li>
+      <li><a href={withBase('/heir/')}>Case study</a></li>
       <li aria-current="page">{label}</li>
     </ol>
   </nav>
-  <a class="research-return" href={returnHref}><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M16 10H4m5-5-5 5 5 5" /></svg>Back to the case study</a>
+  <a class="research-return" href={withBase(returnHref)}><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M16 10H4m5-5-5 5 5 5" /></svg>Back to the case study</a>
 </div>
 <style>
   .research-context { margin-bottom: var(--space-8); font-size: var(--type-small); color: var(--color-on-surface-variant); }

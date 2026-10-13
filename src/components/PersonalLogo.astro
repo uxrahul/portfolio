@@ -1,0 +1,19 @@
+---
+import lightLogo from '../assets/branding/logo-light.png';
+import darkLogo from '../assets/branding/logo-dark.png';
+---
+<span class="personal-logo" aria-hidden="true">
+  <img class="logo-light" src={lightLogo.src} width="24" height="24" alt="" />
+  <img class="logo-dark" src={darkLogo.src} width="24" height="24" alt="" />
+</span>
+<style>
+  .personal-logo { display: inline-flex; width: var(--space-6); height: var(--space-6); flex-shrink: 0; }
+  img { width: 100%; height: 100%; object-fit: contain; }
+  .logo-dark { display: none; }
+  :global(:root[data-theme='dark']) .logo-light { display: none; }
+  :global(:root[data-theme='dark']) .logo-dark { display: block; }
+  @media (prefers-color-scheme: dark) {
+    :global(:root:not([data-theme])) .logo-light { display: none; }
+    :global(:root:not([data-theme])) .logo-dark { display: block; }
+  }
+</style>

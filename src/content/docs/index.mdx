@@ -3,40 +3,9 @@ title: Rahul Singh
 description: Product designer, UX researcher, and product analytics practitioner in Chicago.
 tableOfContents: false
 prev: false
-next:
-  link: /heir/
-  label: HEIR case study
+next: false
 ---
 
-import { Image } from 'astro:assets';
-import portrait from '../../assets/homepage/about-me.webp';
+import Homepage from '../../components/Homepage.astro';
 
-<p class="eyebrow">PRODUCT DESIGNER | UX RESEARCHER | PRODUCT ANALYTICS</p>
-
-<div class="intro">
-  <div>
-    <p class="lead">I turn customer insights into products—and behavioral data into business decisions.</p>
-    <p>Combining research, design, and analytics to shape product strategy, deliver experiences, and measure success.</p>
-  </div>
-  <figure class="portrait">
-    <Image src={portrait} alt="Rahul Singh" format="webp" widths={[144, 288]} sizes="9rem" loading="eager" />
-  </figure>
-</div>
-
-## Selected Impact
-
-### [Ganance — Launching, Scaling, and Expanding HEIR](/heir/)
-
-Helped launch and scale HEIR, a screenless activity tracker, to 3,000+ device sales and 2,000 additional preorders, while expanding the product into personalized activity guidance and digital health.
-
-### Lira Technologies — Applying AI to Everyday Care
-
-Designing an AI-powered caregiving pendant and leading research planning for an eight-week pilot to evaluate its role in helping older adults age at home.
-
-## Expertise
-
-Product Strategy & UX Research · Product & Systems Design · Behavioral Analytics & Experimentation · Cross-functional Product Delivery
-
-## About
-
-Chicago-based product designer with an M.S. in HCI from DePaul University and a background in marketing. Film enthusiast, reader, and occasional gamer.
+<Homepage />

@@ -14,6 +14,9 @@ export function initializeNavigation() {
     const content = group.querySelector<HTMLElement>(':scope > .nav-submenu');
     if (!summary || !content) return;
     if (typeof saved[id] === 'boolean') group.open = saved[id];
+    // Reveal the current destination even when an ancestor was previously closed.
+    // Keep the user's saved choice so unrelated pages retain their preferred state.
+    if (group.hasAttribute('data-nav-active')) group.open = true;
     let expanded = group.open;
     group.dataset.expanded = String(expanded);
     summary.setAttribute('aria-expanded', String(expanded));
