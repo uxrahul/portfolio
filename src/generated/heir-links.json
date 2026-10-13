@@ -4,13 +4,13 @@
   "registrySha256": "6427d9ed4f2838752808e001201745241bcee45d245f4599601e5b56503d7c26",
   "links": {
     "heir-ia-study": {
-      "status": "pending",
-      "href": null,
+      "status": "published",
+      "href": "/heir/research/information-architecture/",
       "newTab": false
     },
     "heir-usability-validation": {
-      "status": "pending",
-      "href": null,
+      "status": "published",
+      "href": "/heir/research/usability-validation/",
       "newTab": false
     },
     "heir-customer-survey": {

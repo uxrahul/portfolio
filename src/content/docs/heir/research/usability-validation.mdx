@@ -1,0 +1,166 @@
+---
+title: "HEIR redesigned app: usability validation"
+description: "Did the redesigned information architecture improve task completion, efficiency, and perceived ease?"
+researchContext:
+  label: "Redesign usability validation"
+  returnHref: /heir/#first-launch
+---
+
+import StatisticalPlot from '../../../../components/StatisticalPlot.astro';
+import ResearchTable from '../../../../components/ResearchTable.astro';
+import chart0 from '../../../../assets/heir/research/task-success.png';
+import chart1 from '../../../../assets/heir/research/usability-validation/02_task_efficiency.png';
+import chart2 from '../../../../assets/heir/research/expectation-gap.png';
+import chart3 from '../../../../assets/heir/research/usability-validation/04_sus.png';
+
+<p class="page-deck"><em>Did the redesigned information architecture improve task completion, efficiency, and perceived ease?</em></p>
+
+The redesigned prototype was compared with the old app using the same four
+representative tasks. The old study included **50 participants** and the
+redesigned study included **60 participants**.
+
+The tasks exercised the parts of the redesign most relevant to the earlier
+information-architecture work: goals, vibration controls, activity insights,
+and notification controls.
+
+<ResearchTable label="Overall usability at a glance">
+<table>
+<caption>Overall usability at a glance</caption>
+<colgroup>
+<col></col>
+<col></col>
+<col></col>
+<col></col>
+<col></col>
+<col></col>
+</colgroup>
+<thead>
+<tr>
+<th scope="col">interface</th>
+<th class="numeric" scope="col">Task success</th>
+<th class="numeric" scope="col">Average SEQ</th>
+<th class="numeric" scope="col">SUS</th>
+<th class="numeric" scope="col">Median average task time</th>
+<th class="numeric" scope="col">Median average clicks</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Old</td>
+<td class="numeric">70%</td>
+<td class="numeric">3.17</td>
+<td class="numeric">47.5</td>
+<td class="numeric">29.4 sec</td>
+<td class="numeric">24.9</td>
+</tr>
+<tr>
+<td>Redesigned</td>
+<td class="numeric">90.4%</td>
+<td class="numeric">5.10</td>
+<td class="numeric">75.8</td>
+<td class="numeric">25 sec</td>
+<td class="numeric">9.8</td>
+</tr>
+</tbody>
+</table>
+</ResearchTable>
+
+The broad pattern is clear: the redesign produced **higher task completion,
+higher perceived ease, fewer interactions, and a much higher System Usability
+Scale score**. Median average task time improved modestly overall because one
+task moved in the opposite direction.
+
+## 1. Did users complete more tasks?
+
+<StatisticalPlot src={chart0} alt="Task success increased across all four tasks" />
+
+The redesign raised average participant task success from **70.0% to 90.4%**
+(**p &lt; 0.001**). The clearest task-level gains were **Adjust vibration
+intensity** (74% → 95%; adjusted p = 0.005) and **Turn off vibration alerts**
+(60% → 95%; adjusted p &lt; 0.001).
+
+**Check activity insights** also improved from 66% to 83%, but that difference
+did not remain statistically clear after correcting for the four task
+comparisons. **Set step goals** rose from 80% to 88% without a clear statistical
+difference.
+
+## 2. Did the redesign reduce navigation effort?
+
+<StatisticalPlot src={chart1} alt="Most redesigned tasks required less effort" />
+
+The redesigned structure substantially reduced interaction effort for the three
+tasks most directly tied to navigation:
+
+- **Vibration intensity:** median clicks fell from 20 to 7.
+- **Activity insights:** median clicks fell from 31 to 11, while median time
+  fell from 56.7 to 25.9 seconds.
+- **Turning off alerts:** median clicks fell from 28 to 4, while median time
+  fell from 23.2 to 9.2 seconds.
+
+**Set step goals was the exception.** Its median completion time increased from
+13.7 to 40.8 seconds, even though success increased slightly and median clicks
+fell from 16 to 13. The redesigned goal-setting flow therefore remained the
+clearest efficiency problem.
+
+## 3. Did tasks feel as easy as participants expected?
+
+Before each task, participants rated how easy they expected it to be. After the
+task, they rated experienced ease using the 1–7 Single Ease Question (SEQ).
+
+<StatisticalPlot src={chart2} alt="The redesign largely closed the gap between expected and experienced ease" />
+
+In the old app, participants expected all four tasks to be relatively easy, but
+the experience fell well short—especially for vibration intensity, insights,
+and stopping alerts. In the redesign, those three gaps fell close to zero.
+
+**Set step goals again stands out:** the expectation gap improved only modestly,
+which is consistent with its longer completion time.
+
+## 4. Did the app feel more usable overall?
+
+<StatisticalPlot src={chart3} alt="Overall perceived usability rose sharply" />
+
+Mean SUS increased from **47.5 to 75.8** (**p &lt; 0.001**). This is consistent
+with the task-level pattern: the redesign was not merely easier to complete;
+participants also experienced the system as substantially more usable overall.
+
+## 5. What does this validate from the IA redesign?
+
+The usability results provide the strongest follow-through on the earlier card
+sort and tree test around **Settings**.
+
+The two tasks most directly related to the earlier Device Settings–Customize
+ambiguity improved substantially after those controls were consolidated into
+the redesigned Settings structure. **Adjust vibration intensity reached 95%
+success, with median clicks falling from 20 to 7 and SEQ increasing from 3.3 to
+5.9. Turning off vibration alerts also reached 95% success, with median clicks
+falling from 28 to 4 and SEQ increasing from 2.3 to 5.6.**
+
+The redesigned **Insights** destination also performed considerably better:
+success increased from 66% to 83%, median completion time was cut by more than
+half, and SEQ increased from 2.7 to 4.6.
+
+The redesign therefore appears to have resolved much of the navigation friction
+identified in the earlier IA research. **Goal setting remained the clearest
+exception**: users generally completed it successfully, but the redesigned flow
+was slower and did not feel meaningfully easier.
+
+### Method note
+
+The old and redesigned studies are treated as **independent samples**. Task
+success is based on PASS/SKIP status. Time and click comparisons use medians in
+the report because the task-level distributions are skewed. SEQ and pre-task
+ease use 1–7 scales; their difference is shown descriptively as an expectation
+gap.
+
+Task-success significance checks use Fisher's exact tests with
+Benjamini–Hochberg correction across the four tasks. SUS is compared with a
+Welch two-sample t-test.
+
+Three redesigned participants are missing the click count for the
+"Turn off vibration alerts" task; those values remain missing rather than being
+treated as zero.
+
+Exploratory novice-versus-experienced wearable-user comparisons did not show a
+clear redesign-by-experience interaction across the five overall usability
+measures, so that segmentation is not emphasized in the main report.

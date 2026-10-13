@@ -1,0 +1,208 @@
+---
+title: "HEIR information architecture: from card sort to redesign"
+description: "How participant mental models shaped the redesigned app structure"
+researchContext:
+  label: "Information architecture research"
+  returnHref: /heir/#first-launch
+---
+
+import StatisticalPlot from '../../../../components/StatisticalPlot.astro';
+import ResearchTable from '../../../../components/ResearchTable.astro';
+import chart0 from '../../../../assets/heir/research/information-architecture/01_card_sort_placement.png';
+import chart1 from '../../../../assets/heir/research/card-sort-ambiguity.png';
+import chart2 from '../../../../assets/heir/research/information-architecture/03_tree_test_first_choice.png';
+
+<p class="page-deck"><em>How participant mental models shaped the redesigned app structure</em></p>
+
+The information architecture work used two studies in sequence. A **closed card sort**
+first showed how participants conceptually grouped app functions. A **first-choice
+tree test** then challenged selected placement decisions in a navigation context.
+
+The studies were used as design evidence rather than as a mechanical voting
+system. Where participant expectations remained divided, the redesign also
+considered navigation simplicity, competitive research, and product-design
+judgment.
+
+## 1. What mental model did the card sort reveal?
+
+<StatisticalPlot src={chart0} alt="Most functions had a recognizable conceptual home" />
+
+The first study established a useful baseline. **Account-related functions**
+formed a coherent cluster, and core device-management functions were also
+placed consistently. Overall, **13 of 17 cards** reached
+at least 70% agreement.
+
+The uncertainty was not spread evenly across the IA. It was concentrated around
+a specific boundary: **Device Settings versus Customize**.
+
+## 2. Where did the first structure become unstable?
+
+<StatisticalPlot src={chart1} alt="The weak point was the boundary between settings and customization" />
+
+Media controls, tap/vibration settings, notifications, and call controls did
+not point cleanly to one category. This was the important card-sort finding:
+the broad structure worked, but **Device Settings and Customize were competing
+mental models for the same family of controls**.
+
+That uncertainty became a primary target for the follow-up tree test.
+
+## 3. Did the navigation test resolve those boundaries?
+
+<StatisticalPlot src={chart2} alt="The follow-up clarified some placements and challenged others" />
+
+The tree test did not simply confirm the study plan. **Media Controls** became
+clearly associated with Customize, and **Connected Apps** continued to lean
+toward Device Settings. **Tap & Vibration Preferences** remained evenly divided.
+**Vibration Alerts** leaned toward Device Settings rather than the proposed
+Customize destination.
+
+The largest change was **Help & Support**: the card sort had grouped it with
+My Account, but in navigation most participants began under Device Settings.
+
+## 4. What changed between the two studies?
+
+<ResearchTable label="How selected placement evidence evolved from grouping to navigation">
+<table>
+<caption>How selected placement evidence evolved from grouping to navigation</caption>
+<colgroup>
+<col></col>
+<col></col>
+<col></col>
+<col></col>
+</colgroup>
+<thead>
+<tr>
+<th scope="col">Area tested</th>
+<th scope="col">Card sort</th>
+<th scope="col">Tree test</th>
+<th scope="col">What changed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tap &amp; Vibration Preferences</td>
+<td>Device Settings (57%)</td>
+<td>Customize / Device Settings (43%)</td>
+<td>The Device Settings–Customize split remained unresolved.</td>
+</tr>
+<tr>
+<td>Connected Apps</td>
+<td>Device Settings (71%)</td>
+<td>Device Settings (57%)</td>
+<td>Device Settings remained the dominant expectation.</td>
+</tr>
+<tr>
+<td>Vibration Alerts</td>
+<td>Device Settings (57%)</td>
+<td>Device Settings (57%)</td>
+<td>The follow-up reinforced Device Settings over the proposed Customize placement.</td>
+</tr>
+<tr>
+<td>Media Controls</td>
+<td>Customize (57%)</td>
+<td>Customize (71%)</td>
+<td>Customize became a clearer expectation.</td>
+</tr>
+<tr>
+<td>Help &amp; Support</td>
+<td>My Account (71%)</td>
+<td>Device Settings (71%)</td>
+<td>Navigation expectation shifted strongly toward Device Settings.</td>
+</tr>
+</tbody>
+</table>
+</ResearchTable>
+
+The two methods answered different questions. The card sort asked,
+**“What belongs together?”** The tree test asked, **“Where would you start
+looking?”** Their differences therefore became useful design evidence rather
+than something that needed to be averaged away.
+
+Three patterns mattered most:
+
+**Some expectations strengthened.** Media Controls moved from a narrow
+Customize preference in the card sort to a much clearer Customize first choice
+in the tree test.
+
+**Some ambiguity persisted.** Tap and vibration controls remained divided
+between Device Settings and Customize.
+
+**Some conceptual grouping did not predict navigation.** Help & Support is the
+clearest example: participants grouped it with My Account in the card sort but
+looked for it under Device Settings in the tree.
+
+## 5. How did the evidence become the redesigned IA?
+
+<ResearchTable label="How the research was translated into the redesign">
+<table>
+<caption>How the research was translated into the redesign</caption>
+<colgroup>
+<col></col>
+<col></col>
+<col></col>
+</colgroup>
+<thead>
+<tr>
+<th scope="col">Redesigned destination</th>
+<th scope="col">Evidence carried forward</th>
+<th scope="col">Design synthesis</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Account</td>
+<td>Profile Info and Delete Account reached 100% agreement; Sign-Out and Change Password reached 86% under My Account.</td>
+<td>Account remained a distinct top-level destination.</td>
+</tr>
+<tr>
+<td>Settings</td>
+<td>Device-management and configuration cards clustered around Device Settings, while several controls repeatedly crossed the Device Settings–Customize boundary.</td>
+<td>Configuration was consolidated into Settings, with subsections for tap/vibration, notifications, media controls, connected apps, help/support, and related controls.</td>
+</tr>
+<tr>
+<td>Device management shortcut</td>
+<td>Forget Device, Disconnect Device, and About Device reached 100% Device Settings agreement; Troubleshoot Device reached 86%.</td>
+<td>Device status on Home doubled as a direct entry point for device actions such as pairing, unpairing, and disconnecting.</td>
+</tr>
+<tr>
+<td>Home and Insights</td>
+<td>These destinations were not directly evaluated by the card sort or first-choice tree test.</td>
+<td>They were part of the broader redesign, informed by product goals, competitive research, and design judgment.</td>
+</tr>
+</tbody>
+</table>
+</ResearchTable>
+
+The final redesign used **Home, Insights, Settings, and Account** as its four
+major destinations.
+
+The most important synthesis was **Settings**. Instead of preserving
+Device Settings and Customize as competing top-level destinations, the redesign
+placed configuration functions within one broader Settings area and organized
+them into clearer subsections. This absorbed the recurring ambiguity around
+tap/vibration, notifications, media controls, connections, and related controls.
+
+At the same time, the strongest card-sort patterns were preserved. **Account**
+remained distinct, while device-specific management received a direct
+device-status entry point from Home.
+
+The research therefore did not produce a final sitemap by majority vote.
+It identified **stable mental models, unstable boundaries, and navigation
+expectations**. The redesign used those signals—alongside competitive research,
+simplification goals, and design judgment—to decide where separation was useful
+and where consolidation was better.
+
+### Method note
+
+The closed card sort included **49 participants** placing
+**17 cards** into three predefined categories. Agreement is the share
+placing a card in its most-selected category.
+
+The first-choice tree test included **49 participants** and focused on
+five selected navigation decisions. It records only the top-level branch chosen
+first. The gold outlines in the tree-test visualization represent the
+hypothesized destination used in the study design.
+
+The two methods are interpreted together but not treated as interchangeable:
+card sorting measures conceptual grouping, while first choice measures initial
+navigation expectation.

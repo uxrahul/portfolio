@@ -11,6 +11,7 @@ export const collections = {
       title: z.string(), description: z.string(),
       tableOfContents: z.boolean().default(true),
       tocSections: z.array(z.string()).optional(),
+      researchContext: z.object({ label: z.string(), returnHref: z.string() }).optional(),
       prev: pageLink.default(false), next: pageLink.default(false),
     }),
   }),

@@ -8,7 +8,7 @@ export async function getStaticPaths() {
 }
 const { entry } = Astro.props;
 const { Content, headings } = await render(entry);
-const toc = headings.filter((heading) => heading.depth === 2 && (!entry.data.tocSections || entry.data.tocSections.includes(heading.slug)));
+const toc = headings.filter((heading) => (heading.depth === 2 || (entry.data.researchContext && heading.depth === 3)) && (!entry.data.tocSections || entry.data.tocSections.includes(heading.slug)));
 ---
 <PortfolioLayout {...entry.data} toc={toc}>
   <Content />

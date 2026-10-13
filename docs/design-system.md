@@ -222,11 +222,30 @@ their stage labels, descriptions, and any shared caption preserved.
 Outside approved milestones, do not introduce cards, ornamental shadows/gradients,
 or added research summaries.
 
+### Supporting research pages
+
+Research pages use the same shell and reading measure. Optional `researchContext`
+frontmatter adds `ResearchContext` above h1: a wrapping breadcrumb in small,
+secondary text, followed by an inline arrow return link. Work at Ganance is plain
+text; Case study links to `/heir/`; the return targets `/heir/#first-launch`.
+Native Astro routing and normal browser history apply to these links.
+
+Source research questions retain their numbering and wording as h2 headings;
+Method note remains h3. Research TOCs include h3 entries with the existing
+navigation-indent token. Other page TOC selection stays unchanged.
+`ResearchTable` uses body-family/navigation-size text, semibold column headers,
+semantic row dividers, tabular/right-aligned numeric cells, and native captions.
+Its 36rem minimum table width preserves columns; overflow is confined to a
+labeled, keyboard-focusable region on narrow screens. Charts use the existing
+StatisticalPlot frame and full-resolution viewer. No Quarto theme, runtime,
+embedded report document, or R code is published.
+
 ## Publication and checks
 
-Only About and HEIR are content routes; 404 uses the same layout. HEIR contains
+About, HEIR, and the two first-launch research reports are content routes;
+404 uses the same layout. HEIR contains
 the entire source narrative, five projects, and “Where HEIR stands now.” The TOC
-selects those six major sections. Standalone reports, gallery destinations, and
+selects those six major sections. Other supporting reports, gallery destinations, and
 resume content remain outside the current migration scope.
 
 The original archive and raw research stay outside the site. Only selected image
@@ -234,6 +253,7 @@ copies enter `src/assets/`. All 13 IDs and original destination relationships ar
 retained. Pending internal targets remain unpublished; the external demo URL is
 unchanged. See `heir-asset-audit.md` for original-asset decisions and ambiguities.
 
-Run `npm run check`, `npm run build`, and `npm run verify:source`. Then inspect
+Run `npm run check`, `npm run build`, `npm run verify:source`, and
+`npm run verify:research`. Then inspect
 actual desktop/mobile pages and test interactions; a successful build does not
 constitute visual approval.

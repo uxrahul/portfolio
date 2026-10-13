@@ -13,8 +13,10 @@ Other typography, section/Goal treatments, navigation, motion, figures, and view
 remain as implemented at the initial `ef62f53` baseline. Do not reintroduce the
 subsequently rolled-back editorial hierarchy experiments.
 
-Pending work: standalone research reports, HEIR product galleries, Lira content,
-and resume. Twelve internal content destinations remain quiet text; the existing
+The first-launch information-architecture and usability-validation research
+reports are now native MDX pages. Pending work: the other supporting reports,
+HEIR product galleries, Lira content, and resume. Ten internal content
+destinations remain quiet text; the existing
 sedentary demo is the one published external destination. Preserve all 13 IDs and
 relationships in the sibling `heir-content-map.yml`; activate routes only when their
 actual pages and fragments exist. Further content migration requires authorization.
@@ -59,6 +61,29 @@ technology, with visible labels, 24px boxes, and responsive flex wrapping.
 bottom margin, and no card background. Typography and all later content remain
 unchanged. Desktop and 393px mobile layouts were visually reviewed; light/dark
 introductory styling was verified before approval.
+
+## First-launch research pages
+
+`/heir/research/information-architecture/` and
+`/heir/research/usability-validation/` preserve the complete substantive QMD
+structure and precomputed Quarto output: three/two charts/tables in IA and
+four/one in usability. Numbered research questions become native h2 headings;
+the Method note remains h3 and appears indented in each contextual TOC.
+`ResearchContext` adds a compact breadcrumb above the title and an arrow return
+link to `/heir/#first-launch`. `ResearchTable` preserves captions and cell values
+in semantic, keyboard-focusable horizontal scroll regions. `StatisticalPlot`
+and the existing viewer deliver all seven charts; three existing assets are
+reused and four selected high-resolution PNG exports are added.
+
+The permanent `heir-ia-study` and `heir-usability-validation` IDs are activated in
+`src/data/publication.json` and the synchronized public manifest. The private
+registry stays unchanged; all other pending destinations remain quiet text.
+R, QMD, Quarto HTML, and CSV files stay outside the site. Neither build nor page
+load executes R. `npm run verify:research` compares full text/emphasis, hierarchy,
+table cells/captions, chart order/original bytes, and contextual links against the
+read-only source pairs. Desktop/393px mobile, themes, all seven viewer images,
+Fit/100%/Escape, breadcrumbs, anchored return, history, and table scrolling were
+reviewed in a browser. These pages await user approval and are uncommitted.
 
 ## Evidence, carousels, and milestones
 
@@ -108,7 +133,8 @@ published. Earlier private research notes survive in that backup/archive.
 
 ## Verification and review
 
-Run `npm run check`, `npm run build`, then `npm run verify:source` sequentially.
+Run `npm run check`, `npm run build`, `npm run verify:source`, and
+`npm run verify:research` sequentially.
 The build checks pages/fragments, six TOC entries, six carousels, 24 image originals,
 13 content relationships, and private-file exclusions. Source verification checks
 complete milestone stages against Word table columns, all narrative/UI descriptions,

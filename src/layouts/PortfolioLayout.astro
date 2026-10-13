@@ -5,13 +5,15 @@ import { navigation } from '../data/navigation';
 import NavigationItems from '../components/NavigationItems.astro';
 import ImageViewer from '../components/ImageViewer.astro';
 import TableOfContents from '../components/TableOfContents.astro';
+import ResearchContext from '../components/ResearchContext.astro';
 interface Props {
   title: string; description: string; tableOfContents?: boolean;
-  toc: { slug: string; text: string }[];
+  toc: { slug: string; text: string; depth?: number }[];
   prev?: false | { link: string; label: string };
   next?: false | { link: string; label: string };
+  researchContext?: { label: string; returnHref: string };
 }
-const { title, description, tableOfContents = true, toc, prev, next } = Astro.props;
+const { title, description, tableOfContents = true, toc, prev, next, researchContext } = Astro.props;
 const isHome = Astro.url.pathname === '/';
 const showToc = tableOfContents && toc.length > 0;
 ---
@@ -55,6 +57,7 @@ const showToc = tableOfContents && toc.length > 0;
       </aside>
       <main id="reading-canvas" class="reading-canvas" tabindex="-1" transition:name="reading-canvas">
         <article class:list={['editorial', { 'home-content': isHome }]}>
+          {researchContext && <ResearchContext {...researchContext} />}
           <h1>{title}</h1>
           <slot />
         </article>

@@ -1,0 +1,13 @@
+---
+interface Props { label: string; }
+const { label } = Astro.props;
+---
+<div class="research-table" role="region" aria-label={label} tabindex="0"><slot /></div>
+<style>
+  .research-table { max-width: 100%; overflow-x: auto; margin-block: var(--space-8); }
+  .research-table :global(table) { width: 100%; min-width: 36rem; border-collapse: collapse; font-size: var(--type-navigation); line-height: var(--line-height-navigation); }
+  .research-table :global(caption) { text-align: left; font-weight: var(--weight-semibold); padding-bottom: var(--space-4); }
+  .research-table :global(th), .research-table :global(td) { padding: var(--space-3); text-align: left; vertical-align: top; border-bottom: var(--divider); }
+  .research-table :global(th) { font-weight: var(--weight-semibold); }
+  .research-table :global(.numeric) { text-align: right; font-variant-numeric: tabular-nums; }
+</style>

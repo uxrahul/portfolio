@@ -1,5 +1,5 @@
 ---
-interface Props { headings: { slug: string; text: string }[]; }
+interface Props { headings: { slug: string; text: string; depth?: number }[]; }
 const { headings } = Astro.props;
 ---
 <details class="toc-disclosure" open>
@@ -7,10 +7,13 @@ const { headings } = Astro.props;
   <nav aria-label="On this page" data-toc>
     <span class="toc-progress-track" aria-hidden="true"><span class="toc-progress-fill"></span></span>
     <ol>
-      {headings.map((heading) => <li><a href={`#${heading.slug}`}>{heading.text}</a></li>)}
+      {headings.map((heading) => <li class:list={{ 'toc-subsection': heading.depth === 3 }}><a href={`#${heading.slug}`}>{heading.text}</a></li>)}
     </ol>
   </nav>
 </details>
+<style>
+  .toc-subsection { padding-left: var(--navigation-indent); }
+</style>
 <script>
   import { bindTableOfContents } from '../lib/table-of-contents';
   bindTableOfContents();
