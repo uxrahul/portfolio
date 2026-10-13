@@ -1,0 +1,99 @@
+---
+title: "HEIR existing-customer survey"
+description: "Pain points, value, and improvement priorities"
+researchContext:
+  label: "Customer survey analysis"
+  returnHref: /heir/#haptic-roadmap
+---
+
+import StatisticalPlot from '../../../../components/StatisticalPlot.astro';
+import ResearchTable from '../../../../components/ResearchTable.astro';
+import chart0 from '../../../../assets/heir/research/customer-survey/01_overall_usefulness.png';
+import chart1 from '../../../../assets/heir/research/customer-survey/02_primary_value.png';
+import chart2 from '../../../../assets/heir/research/customer-survey/03_difficulties.png';
+import chart3 from '../../../../assets/heir/research/customer-survey/04_improvement_priorities.png';
+import chart4 from '../../../../assets/heir/research/customer-survey/05_behavioral_segments.png';
+import chart5 from '../../../../assets/heir/research/customer-survey/06_open_comment_themes.png';
+
+<p class="page-deck"><em>Pain points, value, and improvement priorities</em></p>
+
+## Survey overview
+
+<ResearchTable label="Survey overview">
+<table>
+<thead>
+<tr>
+<th scope="col">Characteristic</th>
+<th class="numeric" scope="col">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Respondents</td>
+<td class="numeric">100</td>
+</tr>
+<tr>
+<td>Owned HEIR for 4+ months</td>
+<td class="numeric">46%</td>
+</tr>
+<tr>
+<td>Wore HEIR 5–7 days in the past week</td>
+<td class="numeric">55%</td>
+</tr>
+<tr>
+<td>Uses another wearable alongside HEIR</td>
+<td class="numeric">42%</td>
+</tr>
+<tr>
+<td>Median overall usefulness</td>
+<td class="numeric">4 / 5</td>
+</tr>
+<tr>
+<td>Nonblank open-ended comments</td>
+<td class="numeric">81</td>
+</tr>
+<tr>
+<td>Missing closed-ended responses</td>
+<td class="numeric">0</td>
+</tr>
+</tbody>
+</table>
+</ResearchTable>
+
+The sample contains **100 existing HEIR customers**. Overall usefulness was rated **4 or 5 by 53%** of respondents.
+
+<StatisticalPlot src={chart0} alt="Overall usefulness of HEIR" />
+
+## What customers primarily value
+
+<StatisticalPlot src={chart1} alt="Calls and app alerts are the most common primary source of value" />
+
+**58%** selected calls/app alerts, silent alarms, or reminders as their primary value. This is a sample majority, but it does not clearly exceed a 50% population benchmark at the conventional threshold (**p = 0.067**).
+
+## Where customers experience difficulty
+
+<StatisticalPlot src={chart2} alt="Alert clarity is the most common individual pain point" />
+
+Overall, **53%** reported at least one alert-specific difficulty: missed alerts, unclear alerts, or excessive alerts.
+
+## What customers want improved
+
+<StatisticalPlot src={chart3} alt="Notification controls dominate the improvement list" />
+
+**75%** requested at least one improvement to app-alert selection, vibration behavior, quiet hours, alarms, or reminders. The exact one-sided test against 50% gives **p &lt;0.001**. A notification-system item was the single top improvement for **49%**.
+
+## A useful behavioral segmentation
+
+<StatisticalPlot src={chart4} alt="Notification-improvement demand is highest when alert friction is present" />
+
+Customers with alert friction requested notification-system improvements at **85%**, compared with **64%** among customers without alert friction. The association is statistically significant (**odds ratio = 3.1, p = 0.021**).
+
+## Open-ended feedback
+
+<StatisticalPlot src={chart5} alt="Open comments reinforce vibration and notification-control needs" />
+
+The open comments are consistent with the closed-ended results: vibration clarity/strength, notification control, and alarm/reminder flexibility recur alongside settings, activity accuracy, battery, health interpretation, and connection issues. These counts are descriptive theme indicators, not formal qualitative coding with inter-rater reliability.
+
+## Readout
+
+The survey supports prioritizing **notification selection, vibration refinement, quiet-period controls, and alarm/reminder flexibility**. The strongest evidence is not simply that notifications are the only reason customers use HEIR; it is that notification-system improvements are requested broadly, and especially by customers already experiencing alert friction.

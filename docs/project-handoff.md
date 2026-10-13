@@ -13,9 +13,10 @@ Other typography, section/Goal treatments, navigation, motion, figures, and view
 remain as implemented at the initial `ef62f53` baseline. Do not reintroduce the
 subsequently rolled-back editorial hierarchy experiments.
 
-The first-launch information-architecture and usability-validation research
-reports are now native MDX pages. Pending work: the other supporting reports,
-HEIR product galleries, Lira content, and resume. Ten internal content
+All five linked Quarto reports are complete and approved native MDX pages: information architecture,
+usability validation, customer survey, feature adoption, and activity analysis.
+Pending work: the supporting Word documents,
+HEIR product galleries, Lira content, and resume. Seven internal content
 destinations remain quiet text; the existing
 sedentary demo is the one published external destination. Preserve all 13 IDs and
 relationships in the sibling `heir-content-map.yml`; activate routes only when their
@@ -83,7 +84,46 @@ load executes R. `npm run verify:research` compares full text/emphasis, hierarch
 table cells/captions, chart order/original bytes, and contextual links against the
 read-only source pairs. Desktop/393px mobile, themes, all seven viewer images,
 Fit/100%/Escape, breadcrumbs, anchored return, history, and table scrolling were
-reviewed in a browser. These pages await user approval and are uncommitted.
+reviewed in a browser. These two pages were approved and pushed in `1aaad4e`.
+
+## Remaining Quarto research pages
+
+The three additional reports use the same MDX architecture and existing
+`ResearchContext`, `ResearchTable`, `StatisticalPlot`, shell, TOC, transitions,
+and image viewer. No global navigation entries or new presentation styles are
+added; the main HEIR MDX remains unchanged.
+
+- `/heir/research/customer-survey/`: complete survey narrative, six charts and
+  one table; `heir-customer-survey` returns to `/heir/#haptic-roadmap`.
+- `/heir/research/feature-adoption/`: complete feature narrative, four charts and
+  one table, including the day-45 qualification and Method note;
+  `heir-feature-adoption` returns to `/heir/#haptic-roadmap`.
+- `/heir/research/activity-analysis/`: complete activity narrative, eight charts
+  and one table; `heir-activity-analysis` returns to `/heir/#activity-guidance`.
+
+Survey and feature charts use untouched 3000px-wide PNG images extracted from
+the rendered reports, which are higher resolution than their 2000px standalone
+exports and preserve the original output's proportions. Activity uses the eight
+3000px standalone exports, reusing three existing assets and adding five.
+Embedded chart titles, subtitles, legends, notes, and captions remain intact.
+Inline R expressions are replaced only with the original rendered values; R is
+never executed. Source QMD/HTML documents and datasets remain outside the site.
+
+`verify:research` now compares all five reports against their read-only source
+pairs, including full text/emphasis, hierarchy, exact tables, chart sequence,
+original image bytes, breadcrumbs, and permanent IDs with correct return sections.
+Production build/check/source verification passed: eight HTML pages and 147
+internal links/fragments. All five case-study research links, breadcrumbs, anchored
+returns, and browser back/forward were tested in the production preview. The three
+new pages were visually reviewed on desktop and 393 × 852 mobile in light/dark
+themes; all 18 new chart links opened in the existing viewer and closed with Escape.
+Mobile TOC anchors, the navigation drawer, and keyboard access to the feature
+table's final columns were checked. No missing charts or content-fidelity issues
+were found.
+The three additional migrations are approved for commit and push to `origin/main`.
+All five permanent research hyperlinks are active through the publication manifest;
+their contextual breadcrumbs, TOCs, and section return links use the approved
+navigation and page-transition system.
 
 ## Evidence, carousels, and milestones
 

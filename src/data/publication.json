@@ -1,6 +1,9 @@
 {
   "internalTargets": {
     "heir-ia-study": "/heir/research/information-architecture/",
-    "heir-usability-validation": "/heir/research/usability-validation/"
+    "heir-usability-validation": "/heir/research/usability-validation/",
+    "heir-customer-survey": "/heir/research/customer-survey/",
+    "heir-feature-adoption": "/heir/research/feature-adoption/",
+    "heir-activity-analysis": "/heir/research/activity-analysis/"
   }
 }

@@ -1,0 +1,108 @@
+---
+title: "HEIR feature adoption and continued enablement"
+description: "Silent alarms, reminders, and app notifications"
+researchContext:
+  label: "Feature adoption analysis"
+  returnHref: /heir/#haptic-roadmap
+---
+
+import StatisticalPlot from '../../../../components/StatisticalPlot.astro';
+import ResearchTable from '../../../../components/ResearchTable.astro';
+import chart0 from '../../../../assets/heir/research/feature-adoption/01_feature_adoption.png';
+import chart1 from '../../../../assets/heir/research/feature-adoption/02_notification_breadth.png';
+import chart2 from '../../../../assets/heir/research/feature-adoption/03_top_notification_apps.png';
+import chart3 from '../../../../assets/heir/research/feature-adoption/04_configuration_retention.png';
+
+<p class="page-deck"><em>Silent alarms, reminders, and app notifications</em></p>
+
+This report summarizes **1,800 users** and
+**140,043 feature records** through
+**September 26, 2026**.
+
+## 1. Which features caught on?
+
+<StatisticalPlot src={chart0} alt="App notifications show the strongest adoption" />
+
+App notifications lead at every reference point. Silent reminders have the
+clearest adoption gap. First-week alarm activation is
+**25.6 percentage points** higher than reminder
+activation (**McNemar p &lt;0.001**).
+
+## 2. How broadly are notifications configured?
+
+<StatisticalPlot src={chart1} alt="Most users keep notifications to a relatively small set of apps" />
+
+<StatisticalPlot src={chart2} alt="The most commonly enabled apps still reach a minority of all users" />
+
+The notification experience is broad in reach but selective in configuration:
+most users do not enable alerts from a large number of apps.
+
+## 3. What happens after a feature is activated?
+
+<StatisticalPlot src={chart3} alt="Once activated, all three features are usually still enabled at day 45" />
+
+The contrast is clearest for reminders: relatively few users activate them, but
+those who do generally keep them configured.
+
+## 4. What is the simplest feature-level conclusion?
+
+<ResearchTable label="Feature adoption and persistence at a glance">
+<table>
+<caption>Feature adoption and persistence at a glance</caption>
+<colgroup>
+<col></col>
+<col></col>
+<col></col>
+<col></col>
+<col></col>
+</colgroup>
+<thead>
+<tr>
+<th scope="col">Feature</th>
+<th class="numeric" scope="col">First-week activation</th>
+<th class="numeric" scope="col">Ever enabled</th>
+<th class="numeric" scope="col">Currently enabled</th>
+<th class="numeric" scope="col">Enabled at day 45*</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Silent alarms</td>
+<td class="numeric">52.8%</td>
+<td class="numeric">60.2%</td>
+<td class="numeric">53.1%</td>
+<td class="numeric">86.7%</td>
+</tr>
+<tr>
+<td>Silent reminders</td>
+<td class="numeric">27.3%</td>
+<td class="numeric">31.2%</td>
+<td class="numeric">30.3%</td>
+<td class="numeric">95.1%</td>
+</tr>
+<tr>
+<td>App notifications</td>
+<td class="numeric">64.9%</td>
+<td class="numeric">87.3%</td>
+<td class="numeric">80.8%</td>
+<td class="numeric">92.8%</td>
+</tr>
+</tbody>
+</table>
+</ResearchTable>
+
+\*Day-45 percentage is among users who activated the feature and had at least
+45 days of follow-up.
+
+**App notifications** combine broad adoption with strong persistence.
+**Silent alarms** show moderate adoption and similarly strong persistence after
+activation. **Silent reminders** have much lower initial uptake, but their high
+post-activation persistence suggests that the main gap is getting users to adopt
+the feature in the first place.
+
+### Method note
+
+Configuration is reconstructed from successful setting changes and snapshots.
+For app notifications, an app counts as enabled only while both its app toggle
+and the notification master switch are on. Seven-day activation uses equal
+follow-up windows; day-30/day-45 retention uses the same 45-day-mature activators.

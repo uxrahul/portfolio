@@ -1,0 +1,107 @@
+---
+title: "HEIR activity analytics"
+description: "Adaptive targets, app engagement, and movement patterns"
+researchContext:
+  label: "Activity analysis"
+  returnHref: /heir/#activity-guidance
+---
+
+import StatisticalPlot from '../../../../components/StatisticalPlot.astro';
+import ResearchTable from '../../../../components/ResearchTable.astro';
+import chart0 from '../../../../assets/heir/research/activity-analysis/01_app_usage_frequency.png';
+import chart1 from '../../../../assets/heir/research/activity-analysis/02_activity_exploration.png';
+import chart2 from '../../../../assets/heir/research/target-attainment.png';
+import chart3 from '../../../../assets/heir/research/activity-analysis/04_adaptive_target_home_exposure.png';
+import chart4 from '../../../../assets/heir/research/activity-analysis/05_adaptive_target_streaks.png';
+import chart5 from '../../../../assets/heir/research/weekly-step-change.png';
+import chart6 from '../../../../assets/heir/research/activity-analysis/07_app_use_vs_target_attainment.png';
+import chart7 from '../../../../assets/heir/research/movement-composition.png';
+
+<p class="page-deck"><em>Adaptive targets, app engagement, and movement patterns</em></p>
+
+## Data overview
+
+<ResearchTable label="Data overview">
+<table>
+<thead>
+<tr>
+<th scope="col">Characteristic</th>
+<th class="numeric" scope="col">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Users</td>
+<td class="numeric">847</td>
+</tr>
+<tr>
+<td>User-days</td>
+<td class="numeric">21,258</td>
+</tr>
+<tr>
+<td>Days with activity data</td>
+<td class="numeric">20,770</td>
+</tr>
+<tr>
+<td>Median observed days per user</td>
+<td class="numeric">26</td>
+</tr>
+<tr>
+<td>Observation window</td>
+<td class="numeric">28 days</td>
+</tr>
+</tbody>
+</table>
+</ResearchTable>
+
+The dataset contains **847 users** across **21,258 user-days**. Users contribute a median of **26 observed days**, leaving natural variation in how much data each person contributes.
+
+## How often is the app used?
+
+<StatisticalPlot src={chart0} alt="Most users open the app on only a few days" />
+
+The median user opened the app on **2 days**. **12%** never opened it during the observation window, while **12%** opened it on eight or more days.
+
+## Do users explore activity beyond Home?
+
+<StatisticalPlot src={chart1} alt="Insights attract a minority of users" />
+
+**29%** opened Insights at least once. Deeper exploration was less common: **13%** used a longer timeframe and **8%** opened the Pace explanation.
+
+## How attainable is Adaptive Target?
+
+<StatisticalPlot src={chart2} alt="Adaptive Target is reached intermittently, not routinely" />
+
+Across eligible user-days, the Adaptive Target was reached **40%** of the time. The median user reached it on **40%** of eligible days.
+
+<StatisticalPlot src={chart3} alt="Target attainment is similar when Home is actually viewed" />
+
+Attainment was **40.6%** on days when Home was viewed versus **40.0%** across all eligible days. The difference is small.
+
+## How long do target streaks last?
+
+<StatisticalPlot src={chart4} alt="Most users build short target streaks" />
+
+The most common longest streak was **4–5 days**. Only **11%** sustained a streak of six days or longer.
+
+## Did activity change across the month?
+
+<StatisticalPlot src={chart5} alt="Average daily steps rise gradually across the four weeks" />
+
+Among **789 users** with sufficient data in all four weeks, mean daily steps rose from **5,646** to **6,021**: an average increase of **375 steps/day**. **59%** increased, and the paired comparison is statistically significant (**p &lt;0.001**).
+
+## Is heavier app use associated with target success?
+
+<StatisticalPlot src={chart6} alt="Opening the app more often does not strongly separate target success" />
+
+Target-attainment rates are similar across app-use groups. The differences are not statistically clear (**Kruskal–Wallis p = 0.5**).
+
+## What does tracked movement look like?
+
+<StatisticalPlot src={chart7} alt="Most defensible tracked time is sedentary" />
+
+Across defensible tracked time, **69%** was sedentary, **27%** casual, and **4%** active.
+
+## Readout
+
+HEIR behaves like a **low-touch companion app**: most users open it only occasionally, while a smaller group actively explores Insights. Adaptive Target is reached on about **40% of eligible days**, with mostly short streaks rather than constant success. Activity rises modestly across the month, but heavier app use is **not** strongly associated with higher target attainment.

@@ -1,14 +1,18 @@
 """Check native research pages against precomputed Quarto output; never execute R."""
 from pathlib import Path
 from html.parser import HTMLParser
+import base64
 import hashlib
 import re
 
 SITE = Path(__file__).resolve().parents[1]
-SOURCES = SITE.parent / 'source-materials/Website portfolio/Heir case study/01 A clearer app for the first launch/IA'
+SOURCES = SITE.parent / 'source-materials/Website portfolio/Heir case study'
 REPORTS = [
-    ('information-architecture', 'IA redesign/Quarto analysis', 'heir_information_architecture_research_report', 3, 2),
-    ('usability-validation', 'Usability tests/Quarto analysis', 'heir_redesign_usability_report', 4, 1),
+    ('information-architecture', '01 A clearer app for the first launch/IA/IA redesign/Quarto analysis', 'heir_information_architecture_research_report', 3, 2, 'ia_research_pngs', 'first-launch', 'heir-ia-study'),
+    ('usability-validation', '01 A clearer app for the first launch/IA/Usability tests/Quarto analysis', 'heir_redesign_usability_report', 4, 1, 'usability_pngs', 'first-launch', 'heir-usability-validation'),
+    ('customer-survey', '02 Research changed what we prioritized/Existing user research/Quarto analysis', 'heir_customer_survey_clean_report', 6, 1, None, 'haptic-roadmap', 'heir-customer-survey'),
+    ('feature-adoption', '02 Research changed what we prioritized/Post analytics/Quarto analysis', 'heir_feature_analysis_clean', 4, 1, None, 'haptic-roadmap', 'heir-feature-adoption'),
+    ('activity-analysis', '03 Turning movement into useful guidance/Activity analytics/Quarto book', 'heir_activity_analysis', 8, 1, 'PNG', 'activity-guidance', 'heir-activity-analysis'),
 ]
 
 class Node:
@@ -55,7 +59,7 @@ def blocks(node):
         else: result.extend(blocks(child))
     return result
 
-for slug, folder, stem, chart_count, table_count in REPORTS:
+for slug, folder, stem, chart_count, table_count, export_folder, return_anchor, link_id in REPORTS:
     source_path = SOURCES / folder / (stem + '.html')
     original = next(Document(source_path.read_text()).root.all('main'))
     path = SITE / 'dist/heir/research' / slug / 'index.html'
@@ -77,20 +81,24 @@ for slug, folder, stem, chart_count, table_count in REPORTS:
     source_qmd = re.sub(r'```\{r[^\n]*\}\n[\s\S]*?```', '', source_qmd)
     qmd_headings = re.findall(r'^#{1,2} (.+)$', source_qmd, re.M)
     assert qmd_headings == [x.text() for x in old_headings[1:]], 'QMD and rendered analysis structure must agree.'
-    exports = sorted((source_path.parent / ('ia_research_pngs' if slug == 'information-architecture' else 'usability_pngs')).glob('*.png'))
+    # Use the selected original PNG exports, or higher-resolution PNGs embedded
+    # in Quarto. Decode only the image bytes; never publish the report document.
+    originals = [p.read_bytes() for p in sorted((source_path.parent / export_folder).glob('*.png'))] if export_folder else [base64.b64decode(x.attrs['src'].split(',', 1)[1]) for x in original.all('img')]
     viewers = [x for x in native.all('a') if 'data-image-viewer' in x.attrs]
-    assert len(viewers) == len(exports) == chart_count
-    for viewer, export in zip(viewers, exports):
+    assert len(viewers) == len(originals) == chart_count
+    for viewer, original_bytes in zip(viewers, originals):
         delivered = SITE / 'dist' / viewer.attrs['href'].lstrip('/')
-        assert hashlib.sha256(delivered.read_bytes()).digest() == hashlib.sha256(export.read_bytes()).digest(), 'Viewer must deliver untouched source chart.'
+        assert hashlib.sha256(delivered.read_bytes()).digest() == hashlib.sha256(original_bytes).digest(), 'Viewer must deliver untouched source chart.'
     assert 'data-global-navigation' in html and 'data-toc' in html
-    assert any(x.attrs.get('href') == '/heir/#first-launch' for x in native.all('a'))
+    assert any(x.attrs.get('href') == f'/heir/#{return_anchor}' for x in native.all('a'))
     assert any(x.attrs.get('aria-label') == 'Breadcrumb' for x in native.all('nav'))
     assert any(x.attrs.get('href') == '/heir/' for x in native.all('a'))
     print(f'{slug}: all source text/emphasis, QMD section hierarchy, {chart_count} original charts, {table_count} exact tables/captions, and contextual links passed.')
 
 case = Document((SITE / 'dist/heir/index.html').read_text()).root
-for link_id, slug in [('heir-ia-study', 'information-architecture'), ('heir-usability-validation', 'usability-validation')]:
+for slug, _, _, _, _, _, return_anchor, link_id in REPORTS:
     link = next(x for x in case.all('a') if x.attrs.get('data-content-link') == link_id)
     assert link.attrs['href'] == f'/heir/research/{slug}/'
-print('Both permanent case-study links resolve to their native research pages.')
+    section = next(x for x in case.all('section') if x.attrs.get('aria-labelledby') == return_anchor)
+    assert any(x.attrs.get('data-content-link') == link_id for x in section.all('a')), f'{link_id}: return anchor must match its originating section.'
+print('All five permanent case-study links resolve to native research pages and return to their originating sections.')

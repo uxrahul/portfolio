@@ -14,8 +14,8 @@
       "newTab": false
     },
     "heir-customer-survey": {
-      "status": "pending",
-      "href": null,
+      "status": "published",
+      "href": "/heir/research/customer-survey/",
       "newTab": false
     },
     "heir-gallery-phase-two-alerts": {
@@ -24,13 +24,13 @@
       "newTab": false
     },
     "heir-feature-adoption": {
-      "status": "pending",
-      "href": null,
+      "status": "published",
+      "href": "/heir/research/feature-adoption/",
       "newTab": false
     },
     "heir-activity-analysis": {
-      "status": "pending",
-      "href": null,
+      "status": "published",
+      "href": "/heir/research/activity-analysis/",
       "newTab": false
     },
     "heir-adaptive-target-logic": {

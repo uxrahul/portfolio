@@ -227,7 +227,8 @@ or added research summaries.
 Research pages use the same shell and reading measure. Optional `researchContext`
 frontmatter adds `ResearchContext` above h1: a wrapping breadcrumb in small,
 secondary text, followed by an inline arrow return link. Work at Ganance is plain
-text; Case study links to `/heir/`; the return targets `/heir/#first-launch`.
+text; Case study links to `/heir/`; the return targets the originating section:
+`/heir/#first-launch`, `/heir/#haptic-roadmap`, or `/heir/#activity-guidance`.
 Native Astro routing and normal browser history apply to these links.
 
 Source research questions retain their numbering and wording as h2 headings;
@@ -242,10 +243,10 @@ embedded report document, or R code is published.
 
 ## Publication and checks
 
-About, HEIR, and the two first-launch research reports are content routes;
+About, HEIR, and all five linked Quarto research reports are content routes;
 404 uses the same layout. HEIR contains
 the entire source narrative, five projects, and “Where HEIR stands now.” The TOC
-selects those six major sections. Other supporting reports, gallery destinations, and
+selects those six major sections. Supporting Word documents, gallery destinations, and
 resume content remain outside the current migration scope.
 
 The original archive and raw research stay outside the site. Only selected image
