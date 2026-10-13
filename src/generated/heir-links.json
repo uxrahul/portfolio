@@ -64,8 +64,8 @@
       "newTab": false
     },
     "heir-gallery-face-scan": {
-      "status": "pending",
-      "href": null,
+      "status": "published",
+      "href": "/heir/gallery/face-scan/",
       "newTab": false
     }
   }

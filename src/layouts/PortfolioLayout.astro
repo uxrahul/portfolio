@@ -14,8 +14,9 @@ interface Props {
   prev?: false | { link: string; label: string };
   next?: false | { link: string; label: string };
   researchContext?: { label: string; returnHref: string };
+  gallery?: boolean;
 }
-const { title, description, tableOfContents = true, toc, prev, next, researchContext } = Astro.props;
+const { title, description, tableOfContents = true, toc, prev, next, researchContext, gallery = false } = Astro.props;
 const isHome = withoutBase(Astro.url.pathname) === '/';
 const showToc = tableOfContents && toc.length > 0;
 ---
@@ -58,7 +59,7 @@ const showToc = tableOfContents && toc.length > 0;
       </div>
     </aside>
     <button class="menu-backdrop" tabindex="-1" aria-label="Close navigation"></button>
-    <div class:list={['reading-region', { 'is-home': isHome }]}>
+    <div class:list={['reading-region', { 'is-home': isHome, 'is-gallery': gallery }]}>
       <aside class="contextual-toc" transition:name="contextual-toc" transition:animate="none">
         {showToc && <TableOfContents headings={toc} />}
       </aside>

@@ -21,7 +21,7 @@ export const navigation: NavigationItem[] = [
         children: [
           { id: 'phase-one', label: 'Phase one' },
           { id: 'phase-two', label: 'Phase two' },
-          { id: 'face-scan', label: 'Face scan' },
+          { id: 'face-scan', label: 'Face scan', href: '/heir/gallery/face-scan/' },
         ],
       },
     ],

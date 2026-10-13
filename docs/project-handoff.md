@@ -16,8 +16,8 @@ subsequently rolled-back editorial hierarchy experiments.
 All five linked Quarto reports are complete and approved native MDX pages: information architecture,
 usability validation, customer survey, feature adoption, and activity analysis.
 Pending work: the supporting Word documents,
-HEIR product galleries and Lira content. The supplied résumé PDF is available at
-`/resume.pdf`; its editable source is not published. Seven internal content
+Remaining HEIR product galleries and Lira content. The supplied résumé PDF is available at
+`/resume.pdf`; its editable source is not published. Six internal content
 destinations remain quiet text; the existing
 sedentary demo is the one published external destination. Preserve all 13 IDs and
 relationships in the sibling `heir-content-map.yml`; activate routes only when their
@@ -224,6 +224,66 @@ navigation and page-transition system.
 
 ## Evidence, carousels, and milestones
 
+The complete Face Scan Gallery is implemented at `/heir/gallery/face-scan/`.
+`src/data/heir-face-scan-gallery.yml` remains the authoritative six-chapter,
+28-story registry. The only approved metadata correction changes the camera
+permission alt button from Allow to OK; numeric 60-second/30-second captions and
+generic reference credits remain as supplied. All 60 original HEIR designs and
+15 reference placements (13 distinct images) render in Word order. Only the 73
+used PNG originals are copied into `src/assets/heir/face-scan/`; the seven unused
+moodboard assets and private Word source remain excluded.
+
+`face-scan-gallery.ts` resolves explicit image imports through the metadata.
+`GalleryImage` uses responsive quality-95 Astro WebP delivery and untouched
+originals in the existing viewer. Static references retain individual captions,
+a Reference label, and the centralized source credit. `DesignRail` is a separate
+native continuous scrolling component, not an Embla single-slide carousel.
+Multiple full/partial screens appear according to container width, with natural
+aspect ratios and captions directly beneath. Arrow controls move 75% of the
+available width; keyboard arrows, Page Up/Down, Home/End, native trackpad/touch
+scrolling, and mouse dragging are supported. Controls remain focusable at ends,
+with aria-disabled states. Swipe/drag release uses the existing viewer click guard.
+There is no autoplay, looping, scroll snapping, or new runtime dependency.
+
+The optional layout `gallery` flag scopes a 70rem maximum exhibition canvas;
+case-study/research measures stay unchanged. References occupy a smaller adjacent
+area where width permits and stack above designs on phones. Design-only stories
+use the full canvas. Chapter rules/numbers and generous story spacing establish
+editorial rhythm. `gallery-motion.ts` supplies token-based vertical entrances and
+a restrained 90ms reference-to-design stagger, respecting reduced motion, focus,
+anchors, and Astro swap cleanup. The global shell, TOC, transitions, and six
+existing carousels retain their implementation.
+
+The existing Face scan navigation leaf and permanent `heir-gallery-face-scan`
+relationship are activated; other pending galleries stay disabled. The compact
+breadcrumb links to HEIR, with a return to `/heir/#health-scan`. All routes use
+the existing `/portfolio/` base helper and native browser history.
+
+`validate-gallery-build.mjs` runs in ordinary production builds using only public
+repository inputs: exact story text/order, 75 captions/alts, role separation,
+credited references, original viewer bytes, and the 73-asset import boundary.
+`validate-face-scan-gallery.mjs` additionally audits the private Word/PNG sources
+locally, including all 75 visual matches and approved wording differences.
+See `docs/face-scan-gallery-audit.md` for source provenance. The complete gallery
+is approved for publication on October 13, 2026; commit and push to `origin/main`
+are explicitly authorized.
+
+Implementation review covered Safari desktop and Brave's 768 × 1024 tablet and
+393 × 852 phone emulation, light/dark themes, chapter anchors/TOC progress,
+responsive complete/partial screens, caption alignment, keyboard Home/End/arrows
+and image activation, native touch swiping, drag-release suppression, and viewer
+Fit/100%/Escape/focus return. The anchored return resolves to HEIR's health-scan
+section, its existing gallery phrase navigates back, and browser back/forward
+preserve those destinations. No page-level horizontal overflow was observed.
+Intrinsic aspect ratios reserve space before lazy images load; reference widths
+also follow their original ratio under a 24rem height limit (20rem on phones).
+Reference sizing remains secondary to the 17rem HEIR screens without cropping.
+Final check/build, main HEIR fidelity, all five research fidelity checks, gallery
+source audit, and whitespace checks pass. There are no missing/mismatched gallery
+assets or unapproved content differences. The local production review route is
+`http://127.0.0.1:4331/portfolio/heir/gallery/face-scan/`. The public destination is
+`https://uxrahul.github.io/portfolio/heir/gallery/face-scan/`.
+
 `ResearchFigure`, `StatisticalPlot`, and `ProductFigure` share responsive Astro
 quality-95 WebP delivery and keyboard-accessible enlargement. Charts retain a
 padded white evidence surface in both themes; product imagery remains unframed.
@@ -308,15 +368,14 @@ script/stylesheet, favicon/theme asset, original viewer image, and private-file
 publication boundary under the base path. Source/research validators account for
 the prefix without changing their content/byte-fidelity assertions.
 
-Repository visibility remains private. GitHub Pages must use GitHub Actions as
-its source; private-repository Pages availability depends on the account plan.
-Do not make the repository public without separate authorization.
+Repository visibility is now public and GitHub reports Pages enabled. The existing
+GitHub Actions workflow deploys future pushes to `main`; no visibility or hosting
+configuration changes are part of this gallery publication.
 
 Publication setup check: GitHub returned HTTP 422 when enabling Pages:
 “Your current plan does not support GitHub Pages for this repository.”
-Hosting remains disabled; repository visibility is unchanged. To finish, use an
-eligible paid plan (or separately choose public visibility), then Settings → Pages
-→ Source: GitHub Actions, and rerun Deploy to GitHub Pages. Browser checks passed
+That initial private-repository limitation is historical: the repository is now
+public with Pages enabled. Browser checks passed
 homepage → HEIR → information architecture → anchored first-launch return under
 `/portfolio/`. Local check/build/source/research validation and private-file/credential
 review passed before the publication commit.

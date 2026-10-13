@@ -289,12 +289,51 @@ labeled, keyboard-focusable region on narrow screens. Charts use the existing
 StatisticalPlot frame and full-resolution viewer. No Quarto theme, runtime,
 embedded report document, or R code is published.
 
+### Continuous design galleries
+
+The approved Face Scan Gallery contains six chapters and 28 stories, preserving
+60 HEIR screens and 15 separately attributed reference placements.
+
+The Face Scan Gallery shares the stationary shell, theme, contextual TOC, and
+reading-canvas transitions. Its optional `gallery` layout flag permits a scoped
+70rem maximum exhibition canvas; prose keeps the 43rem reading measure. Chapter
+numbers, semantic top rules, and generous story spacing organize the six chapters.
+Story titles use the existing h3 scale, with exact explanatory copy beneath.
+
+`GalleryImage` preserves native image proportions and individual centered captions.
+References have subtle semantic borders, compact Reference/source labels, and
+smaller imagery, distinct from unframed HEIR originals. Reference image width
+is derived from the original aspect ratio under a 24rem height limit, 20rem on
+phones, without cropping. Explicit image ratios reserve lazy-loading space.
+Width-aware comparative
+compositions place references in a smaller adjacent area, stacking them above the
+rail on phones. Multiple references retain independent static frames. Stories
+without references allocate the full width to designs, without placeholder space.
+
+`DesignRail` uses native horizontal overflow, never forced snap points. Screen
+width is capped at 17rem and constrained to 82% of available rail width, exposing
+adjacent partial screens on phones without shrinking them into unreadable columns.
+The visible count follows available width. Captions travel with their screen.
+Opposite-end 44px arrows scroll 75% of the viewport; a quiet rule indicates
+position. Controls only appear when overflow exists and remain focusable with
+aria-disabled boundary states. Native trackpad/touch scrolling, mouse dragging,
+Arrow Left/Right, Page Up/Down, and Home/End are supported. All images remain
+accessible; scrolling does not make neighboring screens inert. No autoplay or loop.
+
+Gallery images reuse the existing full-screen viewer with untouched PNG originals;
+Astro supplies responsive quality-95 WebP inline delivery. Drag/swipe releases
+use the existing click guard, while normal clicks and keyboard activation enlarge.
+`gallery-motion.ts` uses the 400ms section tokens and 90ms reference-before-design
+stagger. Content is visible without JavaScript. Focus, anchor navigation, reduced
+motion, and Astro swaps cancel motion; page scrolling remains native. Existing
+Embla figure groups are unchanged.
+
 ## Publication and checks
 
-About, HEIR, and all five linked Quarto research reports are content routes;
+About, HEIR, all five linked Quarto research reports, and the Face Scan Gallery are content routes;
 404 uses the same layout. HEIR contains
 the entire source narrative, five projects, and “Where HEIR stands now.” The TOC
-selects those six major sections. Supporting Word documents and gallery destinations
+selects those six major sections. Other supporting Word documents and gallery destinations
 remain outside the current migration scope. Resume is a separate-tab static PDF,
 not a content route.
 

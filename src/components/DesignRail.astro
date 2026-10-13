@@ -1,0 +1,24 @@
+---
+import GalleryImage from './GalleryImage.astro';
+import type { GalleryImage as ImageItem } from '../data/face-scan-gallery';
+interface Props { id: string; label: string; images: ImageItem[]; eager?: boolean; }
+const { id, label, images, eager = false } = Astro.props;
+---
+<div class="design-rail" data-design-rail data-gallery-reveal>
+  <p class="gallery-label" id={`${id}-label`}>HEIR designs<span>{images.length} {images.length === 1 ? 'screen' : 'screens'}</span></p>
+  <div class="design-rail-viewport" id={id} tabindex="0" role="region" aria-label={`${label} — HEIR designs`} aria-describedby={`${id}-help`}>
+    <div class="design-rail-track">
+      {images.map((image) => <GalleryImage image={image} eager={eager} />)}
+    </div>
+  </div>
+  <span class="sr-only" id={`${id}-help`}>Scroll horizontally to explore. Use Left and Right arrow keys, Page Up and Page Down, or Home and End. Select a screen to enlarge it.</span>
+  <div class="design-rail-controls" hidden>
+    <button type="button" data-rail-previous aria-label={`Scroll previous HEIR screens: ${label}`} aria-controls={id}><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m12 5-5 5 5 5" /></svg></button>
+    <span class="rail-progress" aria-hidden="true"><span data-rail-progress></span></span>
+    <button type="button" data-rail-next aria-label={`Scroll next HEIR screens: ${label}`} aria-controls={id}><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m8 5 5 5-5 5" /></svg></button>
+  </div>
+</div>
+<script>
+  import { bindDesignRails } from '../lib/design-rail';
+  bindDesignRails();
+</script>

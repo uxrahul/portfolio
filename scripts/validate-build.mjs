@@ -100,3 +100,4 @@ assert.ok(files.some((file) => file.endsWith('.webp')), 'Expected optimized WebP
 assert.equal(figureLinks.length, 24, 'The complete HEIR case study must contain all 24 source visuals.');
 assert.equal((heir.match(/\sdata-carousel(?:\s|>)/g) || []).length, 6, 'Expected four statistical, haptics, and Health Scan carousels.');
 console.log(`Validated ${documents.size} HTML pages, ${checked} internal links/fragments, six TOC headings, 24 figures, six carousels, original-image integrity, and publication boundaries.`);
+await import('./validate-gallery-build.mjs');

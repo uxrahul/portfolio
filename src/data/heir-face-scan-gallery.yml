@@ -1,0 +1,806 @@
+schema_version: 1
+gallery_id: heir-face-scan
+title: HEIR Health Scan Gallery
+intro: I drew on wearable app patterns and Shen.ai reference screens, then adapted them around research on trust,
+  consistency, and clear explanations. This gallery brings those references together with the complete HEIR screen
+  collection.
+source_document: Gallery/Face scan/face-scan-gallery-document.docx
+source_zip: Gallery(1).zip
+notes:
+- The 28 stories are ordered as in the supplied Word document; references and finished designs are always separate
+  collections.
+- References are static framed images, never carousel slides; HEIR screens form a responsive, continuous horizontal
+  scroller.
+- Use the source_path to locate original high-resolution PNGs; do not extract reduced Word thumbnails.
+- Alt text describes the image independently of its visible caption. Visible captions stay attached to the corresponding
+  image.
+- 'Assets marked included_in_document: false are unused moodboard references; do not publish them unless the user
+  approves.'
+- External references must retain their visible Reference and source-credit labels; do not imply HEIR ownership of
+  these reference designs.
+chapters:
+- id: onboarding-and-permissions
+  title: Onboarding and permissions
+  stories:
+  - id: introducing-the-scan
+    title: Introducing the scan
+    explanation: Research highlighted the need for trust and clear explanations. I separated the introduction, technology
+      explanation, and consent so people could understand the scan before granting access.
+    references: []
+    screens:
+    - asset_id: onboarding-glance-1-png
+      caption: Health at a glance
+    - asset_id: onboarding-tech-2-png
+      caption: Explain the technology
+    - asset_id: onboarding-data-privacy-3-png
+      caption: Data privacy and consent
+  - id: turning-guidance-into-preparation
+    title: Turning guidance into preparation
+    explanation: I used the preparation requirements in the Shen.ai references as a starting point, then turned their
+      dense guidance into four steps. Rest, lighting, framing, and stillness become actions people can take before
+      starting.
+    references:
+    - asset_id: reference-image-11-png
+      caption: Technology and preparation
+    - asset_id: reference-image-12-png
+      caption: Capture instructions
+    screens:
+    - asset_id: onboarding-prepare-scan-4-png
+      caption: Prepare for the scan
+  - id: camera-access-and-recovery
+    title: Camera access and recovery
+    explanation: I kept camera prompts familiar and made each blocked state actionable. People can allow access, open
+      device settings, or retry when another app is using the camera.
+    references: []
+    screens:
+    - asset_id: onboarding-camera-access-5-png
+      caption: Allow camera access
+    - asset_id: onboarding-camera-settings-6-png
+      caption: Open camera settings
+    - asset_id: onboarding-camera-unavailable-7-png
+      caption: Camera unavailable
+- id: scan-experience
+  title: Scan experience
+  stories:
+  - id: starting-the-scan
+    title: Starting the scan
+    explanation: The live workout reference shows how a camera or activity view can keep a reading and a primary control
+      prominent. I adapted that hierarchy around face positioning, scan duration, and a clear start action.
+    references:
+    - asset_id: reference-frame-4-4-png
+      caption: Live workout display
+    screens:
+    - asset_id: capture-normal-scan-start-info-1-1-png
+      caption: Ready to scan
+    - asset_id: capture-normal-scan-starting-2-png
+      caption: Starting capture
+  - id: progress-and-completion
+    title: Progress and completion
+    explanation: I kept progress in the same position as capture began, advanced, and finished. A separate processing
+      message makes clear that capturing the scan and receiving its results are different states.
+    references: []
+    screens:
+    - asset_id: capture-normal-scan-progress-info-2-3-png
+      caption: Scan in progress
+    - asset_id: capture-normal-scan-complete-4-png
+      caption: Capture complete
+  - id: lighting-feedback
+    title: Lighting feedback
+    explanation: The preparation guidance carries into the live view as a specific correction. The banner tells people
+      whether to find more light, remove backlighting, or make illumination more even.
+    references: []
+    screens:
+    - asset_id: capture-warning-scan-well-lit-1-png
+      caption: Find a well lit area
+    - asset_id: capture-warning-scan-bright-light-2-png
+      caption: Remove backlighting
+    - asset_id: capture-warning-scan-even-light-3-png
+      caption: Find even light
+  - id: staying-still
+    title: Staying still
+    explanation: I paired each warning with an action people can perform immediately. Face movement, device movement,
+      and talking receive different instructions while the scan remains visible.
+    references: []
+    screens:
+    - asset_id: capture-warning-scan-hold-still-4-png
+      caption: Hold completely still
+    - asset_id: capture-warning-scan-hold-steady-5-png
+      caption: Hold the device steady
+    - asset_id: capture-warning-scan-relax-face-6-png
+      caption: Relax and avoid talking
+  - id: correcting-position
+    title: Correcting position
+    explanation: The frame changes with the detected position, while the message names the correction. Matching left
+      and right states keeps the same behavior understandable in either direction.
+    references: []
+    screens:
+    - asset_id: capture-warning-scan-center-face-8-png
+      caption: Center face from the left
+    - asset_id: capture-warning-scan-center-face-9-png
+      caption: Center face from the right
+  - id: correcting-distance
+    title: Correcting distance
+    explanation: I combined framing feedback with direct distance instructions. Moving closer or farther away uses
+      the same paused state and recovery path.
+    references: []
+    screens:
+    - asset_id: capture-warning-scan-move-close-10-png
+      caption: Move closer
+    - asset_id: capture-warning-scan-move-back-11-png
+      caption: Move farther away
+  - id: keeping-the-face-visible
+    title: Keeping the face visible
+    explanation: I distinguished a covered forehead from an obscured face so the instruction matches the obstruction.
+      Both warnings remain inside the capture view, where people can check the correction.
+    references: []
+    screens:
+    - asset_id: capture-warning-scan-uncover-7-png
+      caption: Uncover the forehead
+    - asset_id: capture-warning-scan-face-visible-12-png
+      caption: Keep the full face visible
+  - id: keeping-one-face-in-view
+    title: Keeping one face in view
+    explanation: Missing and multiple faces need different corrections. I made those states explicit rather than leaving
+      people to interpret an empty or ambiguous frame.
+    references: []
+    screens:
+    - asset_id: capture-warning-scan-face-view-13-png
+      caption: Bring face into view
+    - asset_id: capture-warning-scan-one-face-14-png
+      caption: Keep one face in view
+  - id: failed-and-timed-out-scans
+    title: Failed and timed out scans
+    explanation: Research made consistency central to trust, so failure needed a visible explanation and a predictable
+      retry. Failed capture and timeout share the same restart control.
+    references: []
+    screens:
+    - asset_id: capture-failure-scan-fail-1-png
+      caption: Scan failed
+    - asset_id: capture-failure-scan-time-out-2-png
+      caption: Scan timed out
+- id: scan-and-scan-history
+  title: Scan and scan history
+  stories:
+  - id: making-the-snapshot-legible
+    title: Making the snapshot legible
+    explanation: I combined the moodboard’s status gauge and grouped measurement cards into one health overview. A
+      scan-quality label and brief summary address the research need for interpretation before individual readings.
+    references:
+    - asset_id: reference-frame-4-4-png
+      caption: Live workout display
+    - asset_id: reference-frame-3-3-png
+      caption: Wearable wellbeing cards
+    screens:
+    - asset_id: history-health-main-3-png
+      caption: Health overview
+  - id: guest-results-and-saved-history
+    title: Guest results and saved history
+    explanation: I separated a guest snapshot from the personal history needed for repeated comparisons. Saved scans
+      use dated status summaries, with editing and deletion available from the result.
+    references: []
+    screens:
+    - asset_id: history-guest-result-2-png
+      caption: Guest snapshot
+    - asset_id: history-scan-history-1-png
+      caption: Scan history
+    - asset_id: history-scan-result-action-png
+      caption: Result actions
+- id: scan-details
+  title: Scan details
+  stories:
+  - id: giving-each-reading-a-clear-home
+    title: Giving each reading a clear home
+    explanation: Shen.ai’s cards establish a simple value-and-unit hierarchy. I carried that into individual detail
+      sheets, adding status labels and plain-language explanations of what each estimate represents.
+    references:
+    - asset_id: reference-image-13-png
+      caption: Vital sign cards
+    screens:
+    - asset_id: details-pulse-sheet-2-png
+      caption: Pulse
+    - asset_id: details-cardiac-effort-sheet-3-png
+      caption: Cardiac effort
+  - id: explaining-labels-and-personal-baselines
+    title: Explaining labels and personal baselines
+    explanation: The sleep reference pairs ranges with understandable labels, a pattern I adapted for interpreting
+      health readings. For variability, I also exposed the baseline-building state so a personal comparison does not
+      appear ready before it is established.
+    references:
+    - asset_id: reference-frame-1-1-png
+      caption: Sleep ranges
+    screens:
+    - asset_id: details-hrv-sheet-1-png
+      caption: Variability baseline
+    - asset_id: details-stress-level-sheet-4-png
+      caption: Stress level
+  - id: leaving-room-for-trends
+    title: Leaving room for trends
+    explanation: The AVI reference combines a reading, its range, and a trend chart with explanatory text. I adapted
+      that detail hierarchy for blood pressure and breathing, reserving a clearly marked Coming soon area for future
+      trends.
+    references:
+    - asset_id: reference-image-26-png
+      caption: Ranges and trends
+    screens:
+    - asset_id: details-bp-sheet-5-png
+      caption: Blood pressure estimate
+    - asset_id: details-br-sheet-below-65-9-png
+      caption: Breathing rhythm
+  - id: explaining-bp-outlook-and-its-limits
+    title: Explaining BP Outlook and its limits
+    explanation: Blood pressure was both desired and questioned in research, so I separated the estimate from its
+      meaning and required inputs. Setup needed and unavailable states explain why a result cannot be shown.
+    references: []
+    screens:
+    - asset_id: details-bp-outlook-sheet-6-png
+      caption: BP Outlook estimate
+    - asset_id: details-bp-outlook-setup-needed-7-png
+      caption: BP Outlook setup needed
+    - asset_id: details-bp-outlook-unavailable-8-png
+      caption: BP Outlook unavailable
+  - id: connecting-estimates-to-profile-information
+    title: Connecting estimates to profile information
+    explanation: Wearable profile references make age and body details part of the health experience. I connected
+      those inputs to the vascular-age sheet and made missing information visible before presenting an estimate.
+    references:
+    - asset_id: reference-frame-7-6-png
+      caption: Wearable profile fields
+    screens:
+    - asset_id: details-va-sheet-10-png
+      caption: Vascular age
+    - asset_id: details-va-sheet-setup-needed-11-png
+      caption: Vascular age setup needed
+  - id: separating-weight-from-its-estimated-label
+    title: Separating weight from its estimated label
+    explanation: The Shen.ai reference links body measurements to calculated indices. I made the weight sheet explicit
+      about whether its BMI label uses profile information or remains estimated because height is missing.
+    references:
+    - asset_id: reference-image-15-png
+      caption: Body mass and actions
+    screens:
+    - asset_id: details-weight-sheet-12-png
+      caption: Weight with profile height
+    - asset_id: details-weight-estimated-with-weight-13-png
+      caption: Estimated BMI label
+  - id: body-composition-and-setup-requirements
+    title: Body composition and setup requirements
+    explanation: I adapted the reference’s body-composition cards into a sheet that explains the estimate and its
+      labels. A separate setup state identifies the profile details needed before showing a result.
+    references:
+    - asset_id: reference-image-16-png
+      caption: Body composition
+    screens:
+    - asset_id: details-body-fat-sheet-14-png
+      caption: Body fat percentage
+    - asset_id: details-body-fat-sheet-setup-needed-15-png
+      caption: Body fat setup needed
+- id: scan-routine
+  title: Scan routine
+  stories:
+  - id: choosing-a-check-in-routine
+    title: Choosing a check in routine
+    explanation: The task-scheduling reference groups frequency, timing, and notification choices in one place. I
+      adapted that familiar structure to an active health check-in, pairing scan length with routines that fit different
+      schedules.
+    references:
+    - asset_id: reference-frame-6-5-png
+      caption: Task scheduling
+    screens:
+    - asset_id: routine-routine-question-60-selected-1-png
+      caption: 60-second scan
+    - asset_id: routine-routine-question-30-selected-2-png
+      caption: 30-second scan
+  - id: explaining-the-choices
+    title: Explaining the choices
+    explanation: Research showed uncertainty about fitting an active scan into a wearable routine. I placed the scan-length
+      explanation beside the choice and used expandable descriptions to explain what each routine is for.
+    references: []
+    screens:
+    - asset_id: routine-scan-length-info-3-png
+      caption: Explain scan length
+    - asset_id: routine-routine-once-daily-4-png
+      caption: Expanded routine guidance
+  - id: daily-timing-and-reminders
+    title: Daily timing and reminders
+    explanation: I turned the scheduling pattern into a daily time window with a specific reminder. Separate phone
+      and HEIR controls let people choose where that reminder arrives.
+    references: []
+    screens:
+    - asset_id: routine-once-daily-routine-5-png
+      caption: Daily morning window
+    - asset_id: routine-once-daily-set-reminder-6-png
+      caption: Choose reminder time
+  - id: routines-for-different-schedules
+    title: Routines for different schedules
+    explanation: I extended the same time-window and reminder controls to twice-daily, alternate-day, and twice-weekly
+      check-ins. Keeping the visual pattern consistent makes the schedule change easier to understand.
+    references: []
+    screens:
+    - asset_id: routine-twice-daily-routine-7-png
+      caption: Morning and evening
+    - asset_id: routine-alt-days-routine-9-png
+      caption: Alternate days
+    - asset_id: routine-twice-weekly-routine-10-png
+      caption: Choose two weekdays
+  - id: validating-the-schedule
+    title: Validating the schedule
+    explanation: I added validation to the reference scheduling pattern so the twice-daily routine requires two time
+      windows. The instruction sits beside the selection, and completion remains disabled until the choice is valid.
+    references:
+    - asset_id: reference-frame-6-5-png
+      caption: Task scheduling
+    screens:
+    - asset_id: routine-twice-daily-error-8-png
+      caption: Two windows required
+- id: user-profile
+  title: User profile
+  stories:
+  - id: organizing-account-controls
+    title: Organizing account controls
+    explanation: The settings reference uses familiar grouped rows and direct navigation. I adapted that structure
+      to keep personal details, scan preferences, security, and support in a consistent profile area.
+    references:
+    - asset_id: reference-frame-11-9-png
+      caption: Bevel settings
+    screens:
+    - asset_id: profile-profile-1-png
+      caption: Profile navigation
+    - asset_id: profile-signin-security-3-png
+      caption: Sign in and security
+  - id: explaining-why-personal-details-matter
+    title: Explaining why personal details matter
+    explanation: Oura’s profile explanation shows how to give personal questions a purpose. I used that approach to
+      connect body details and health history with the estimates they support, including choices for uncertain or
+      undisclosed answers.
+    references:
+    - asset_id: reference-frame-8-7-png
+      caption: Oura profile explanation
+    screens:
+    - asset_id: profile-personal-details-filled-2-png
+      caption: Personal details
+    - asset_id: profile-update-health-history-4-png
+      caption: Health history
+assets:
+  capture-failure-scan-fail-1-png:
+    source_path: Gallery/Face scan/Scan experience/Failure/Scan-Fail - Mockup 1.png
+    role: design
+    alt: HEIR face scan showing a red capture failed banner and a prominent restart button.
+    included_in_document: true
+  capture-failure-scan-time-out-2-png:
+    source_path: Gallery/Face scan/Scan experience/Failure/Scan-Time-Out - Mockup 2.png
+    role: design
+    alt: HEIR face scan showing a red scan timed out banner and a restart button.
+    included_in_document: true
+  capture-normal-scan-complete-4-png:
+    source_path: Gallery/Face scan/Scan experience/Normal/Scan-Complete - Mockup 4.png
+    role: design
+    alt: HEIR scan completion screen with teal face guides and a banner indicating the capture is complete and results
+      are processing.
+    included_in_document: true
+  capture-normal-scan-progress-info-2-3-png:
+    source_path: Gallery/Face scan/Scan experience/Normal/Scan-Progress-Info-2 - Mockup 3.png
+    role: design
+    alt: HEIR scan in progress with a teal progress banner, face framing guides, and a cancel control.
+    included_in_document: true
+  capture-normal-scan-start-info-1-1-png:
+    source_path: Gallery/Face scan/Scan experience/Normal/Scan-Start-Info-1 - Mockup 1.png
+    role: design
+    alt: Face scan ready state showing a centered face inside teal framing guides, a start button, and 60- and 30-second
+      scan options.
+    included_in_document: true
+  capture-normal-scan-starting-2-png:
+    source_path: Gallery/Face scan/Scan experience/Normal/Scan-Starting - Mockup 2.png
+    role: design
+    alt: HEIR face capture just starting, with a face inside teal framing guides and a cancel button.
+    included_in_document: true
+  capture-warning-scan-bright-light-2-png:
+    source_path: Gallery/Face scan/Scan experience/Warnings/Scan-Bright-Light - Mockup 2.png
+    role: design
+    alt: HEIR scan warning showing a strongly backlit face and a prompt to avoid bright light behind you.
+    included_in_document: true
+  capture-warning-scan-center-face-8-png:
+    source_path: Gallery/Face scan/Scan experience/Warnings/Scan-Center-Face - Mockup 8.png
+    role: design
+    alt: HEIR scan paused with the face cropped by the left edge and an instruction to center the face.
+    included_in_document: true
+  capture-warning-scan-center-face-9-png:
+    source_path: Gallery/Face scan/Scan experience/Warnings/Scan-Center-Face - Mockup 9.png
+    role: design
+    alt: HEIR scan paused with the face cropped by the right edge and an instruction to center the face.
+    included_in_document: true
+  capture-warning-scan-even-light-3-png:
+    source_path: Gallery/Face scan/Scan experience/Warnings/Scan-Even-Light - Mockup 3.png
+    role: design
+    alt: HEIR scan warning showing uneven light across the face and a prompt to use more even lighting.
+    included_in_document: true
+  capture-warning-scan-face-view-13-png:
+    source_path: Gallery/Face scan/Scan experience/Warnings/Scan-Face-View - Mockup 13.png
+    role: design
+    alt: HEIR scan paused on an empty camera view with red framing guides and a prompt to bring the face into view.
+    included_in_document: true
+  capture-warning-scan-face-visible-12-png:
+    source_path: Gallery/Face scan/Scan experience/Warnings/Scan-Face-Visible - Mockup 12.png
+    role: design
+    alt: HEIR scan warning showing a hand obscuring the mouth and nose, with a prompt to keep the full face visible.
+    included_in_document: true
+  capture-warning-scan-hold-steady-5-png:
+    source_path: Gallery/Face scan/Scan experience/Warnings/Scan-Hold-Steady - Mockup 5.png
+    role: design
+    alt: HEIR scan warning with a blurred face and a prompt to hold the device steady.
+    included_in_document: true
+  capture-warning-scan-hold-still-4-png:
+    source_path: Gallery/Face scan/Scan experience/Warnings/Scan-Hold-Still - Mockup 4.png
+    role: design
+    alt: HEIR scan warning showing a head turned to one side and a prompt to hold completely still.
+    included_in_document: true
+  capture-warning-scan-move-back-11-png:
+    source_path: Gallery/Face scan/Scan experience/Warnings/Scan-Move-Back - Mockup 11.png
+    role: design
+    alt: HEIR scan paused with the face too close to the camera and a prompt to move slightly back.
+    included_in_document: true
+  capture-warning-scan-move-close-10-png:
+    source_path: Gallery/Face scan/Scan experience/Warnings/Scan-Move-Close - Mockup 10.png
+    role: design
+    alt: HEIR scan paused with the face appearing too small inside red framing guides and a prompt to move closer.
+    included_in_document: true
+  capture-warning-scan-one-face-14-png:
+    source_path: Gallery/Face scan/Scan experience/Warnings/Scan-One-Face - Mockup 14.png
+    role: design
+    alt: HEIR scan paused because a second person appears behind the main subject, with a prompt to keep one face
+      in view.
+    included_in_document: true
+  capture-warning-scan-relax-face-6-png:
+    source_path: Gallery/Face scan/Scan experience/Warnings/Scan-Relax-Face - Mockup 6.png
+    role: design
+    alt: HEIR scan warning showing a person speaking and a prompt to relax the face and avoid talking.
+    included_in_document: true
+  capture-warning-scan-uncover-7-png:
+    source_path: Gallery/Face scan/Scan experience/Warnings/Scan-Uncover - Mockup 7.png
+    role: design
+    alt: HEIR scan warning showing a hat covering the forehead, with an instruction to uncover the forehead.
+    included_in_document: true
+  capture-warning-scan-well-lit-1-png:
+    source_path: Gallery/Face scan/Scan experience/Warnings/Scan-Well-Lit - Mockup 1.png
+    role: design
+    alt: HEIR scan warning showing a dimly lit face and a prompt to move to a well-lit area.
+    included_in_document: true
+  details-body-fat-sheet-14-png:
+    source_path: Gallery/Face scan/Scan details/Body-Fat-Sheet - Mockup 14.png
+    role: design
+    alt: HEIR body fat percentage detail sheet showing a 16 percent estimate, an Optimal status, and explanatory ranges.
+    included_in_document: true
+  details-body-fat-sheet-setup-needed-15-png:
+    source_path: Gallery/Face scan/Scan details/Body-Fat-Sheet-Setup-Needed - Mockup 15.png
+    role: design
+    alt: HEIR body fat percentage setup-needed state listing profile details required before showing an estimate.
+    included_in_document: true
+  details-bp-outlook-setup-needed-7-png:
+    source_path: Gallery/Face scan/Scan details/BP-Outlook-Setup-Needed - Mockup 7.png
+    role: design
+    alt: HEIR BP Outlook setup-needed state listing missing profile information such as age, smoking, and medical
+      history.
+    included_in_document: true
+  details-bp-outlook-sheet-6-png:
+    source_path: Gallery/Face scan/Scan details/BP-Outlook-Sheet - Mockup 6.png
+    role: design
+    alt: HEIR BP Outlook detail sheet showing a 4 percent estimate, an Optimal label, and explanatory text about future
+      risk.
+    included_in_document: true
+  details-bp-outlook-unavailable-8-png:
+    source_path: Gallery/Face scan/Scan details/BP-Outlook-Unavailable - Mockup 8.png
+    role: design
+    alt: HEIR BP Outlook unavailable state listing profiles for which the estimate cannot be shown.
+    included_in_document: true
+  details-bp-sheet-5-png:
+    source_path: Gallery/Face scan/Scan details/BP-Sheet - Mockup 5.png
+    role: design
+    alt: HEIR blood pressure estimate detail sheet showing 114/66 mmHg, an Optimal label, and interpretation ranges.
+    included_in_document: true
+  details-br-sheet-below-65-9-png:
+    source_path: Gallery/Face scan/Scan details/BR-Sheet-Below-65 - Mockup 9.png
+    role: design
+    alt: HEIR breathing rhythm detail sheet showing 14 breaths per minute, an Optimal label, and breathing-rate ranges.
+    included_in_document: true
+  details-cardiac-effort-sheet-3-png:
+    source_path: Gallery/Face scan/Scan details/Cardiac-Effort-Sheet - Mockup 3.png
+    role: design
+    alt: HEIR cardiac effort detail sheet displaying 154 mmHg/s, an Optimal status, and an explanation of the estimate.
+    included_in_document: true
+  details-hrv-sheet-1-png:
+    source_path: Gallery/Face scan/Scan details/HRV-Sheet - Mockup 1.png
+    role: design
+    alt: HEIR short-term variability detail sheet displaying a reading, baseline-building status, trend placeholder,
+      and interpretation ranges.
+    included_in_document: true
+  details-pulse-sheet-2-png:
+    source_path: Gallery/Face scan/Scan details/Pulse-Sheet - Mockup 2.png
+    role: design
+    alt: HEIR pulse detail sheet displaying 64 bpm, an Optimal status, trend placeholder, and explanatory ranges.
+    included_in_document: true
+  details-stress-level-sheet-4-png:
+    source_path: Gallery/Face scan/Scan details/Stress-Level-Sheet - Mockup 4.png
+    role: design
+    alt: HEIR stress level detail sheet displaying 2.4, an Optimal label, and a plain-language explanation of the
+      score.
+    included_in_document: true
+  details-va-sheet-10-png:
+    source_path: Gallery/Face scan/Scan details/VA-Sheet - Mockup 10.png
+    role: design
+    alt: HEIR vascular age detail sheet showing an estimate of 28 years and an age-comparison status.
+    included_in_document: true
+  details-va-sheet-setup-needed-11-png:
+    source_path: Gallery/Face scan/Scan details/VA-Sheet-Setup-Needed - Mockup 11.png
+    role: design
+    alt: HEIR vascular age setup-needed state listing required profile and health history information.
+    included_in_document: true
+  details-weight-estimated-with-weight-13-png:
+    source_path: Gallery/Face scan/Scan details/Weight-Estimated-With-Weight - Mockup 13.png
+    role: design
+    alt: HEIR weight detail sheet showing 152 lb and a notice that the BMI label is estimated because height is missing.
+    included_in_document: true
+  details-weight-sheet-12-png:
+    source_path: Gallery/Face scan/Scan details/Weight-Sheet - Mockup 12.png
+    role: design
+    alt: HEIR weight detail sheet showing 152 lb, a BMI label, and an explanation of how the label is determined.
+    included_in_document: true
+  history-guest-result-2-png:
+    source_path: Gallery/Face scan/Scan and scan history/Guest-Result - Mockup 2.png
+    role: design
+    alt: HEIR guest scan snapshot showing a one-time results summary, status gauge, and vital sign cards.
+    included_in_document: true
+  history-health-main-3-png:
+    source_path: Gallery/Face scan/Scan and scan history/Health-Main - Mockup 3.png
+    role: design
+    alt: HEIR health overview with a semicircular status gauge, scan-quality summary, and cards for pulse and other
+      readings.
+    included_in_document: true
+  history-scan-history-1-png:
+    source_path: Gallery/Face scan/Scan and scan history/Scan-History - Mockup 1.png
+    role: design
+    alt: HEIR scan history listing dated scan entries with times and their health-status labels.
+    included_in_document: true
+  history-scan-result-action-png:
+    source_path: Gallery/Face scan/Scan and scan history/Scan-Result-Action - Mockup.png
+    role: design
+    alt: HEIR scan results screen with an open menu offering Edit Personal Details and Delete Scan Result.
+    included_in_document: true
+  onboarding-camera-access-5-png:
+    source_path: Gallery/Face scan/Onboarding and system permission/Camera-Access - Mockup 5.png
+    role: design
+    alt: Face scan preview dimmed behind a camera permission dialog with OK and Don’t Allow options.
+    included_in_document: true
+  onboarding-camera-settings-6-png:
+    source_path: Gallery/Face scan/Onboarding and system permission/Camera-Settings - Mockup 6.png
+    role: design
+    alt: Face scan preview behind a dialog explaining camera access is required, with an Open Settings action.
+    included_in_document: true
+  onboarding-camera-unavailable-7-png:
+    source_path: Gallery/Face scan/Onboarding and system permission/Camera-Unavailable - Mockup 7.png
+    role: design
+    alt: HEIR health overview behind a Camera unavailable dialog, with Try Again and Cancel actions.
+    included_in_document: true
+  onboarding-data-privacy-3-png:
+    source_path: Gallery/Face scan/Onboarding and system permission/Data-Privacy - Mockup 3.png
+    role: design
+    alt: HEIR consent screen explaining on-device analysis, what is and is not stored, and a consent checkbox.
+    included_in_document: true
+  onboarding-glance-1-png:
+    source_path: Gallery/Face scan/Onboarding and system permission/Glance - Mockup 1.png
+    role: design
+    alt: HEIR introduction screen with a portrait, four scan benefits, and a Get started button.
+    included_in_document: true
+  onboarding-prepare-scan-4-png:
+    source_path: Gallery/Face scan/Onboarding and system permission/Prepare-Scan - Mockup 4.png
+    role: design
+    alt: 'HEIR preparation checklist showing four steps: rest, find even light, center your face, and stay still.'
+    included_in_document: true
+  onboarding-tech-2-png:
+    source_path: Gallery/Face scan/Onboarding and system permission/Tech - Mockup 2.png
+    role: design
+    alt: HEIR technology introduction describing camera-based health estimates, scientific validation, and how a scan
+      works.
+    included_in_document: true
+  profile-personal-details-filled-2-png:
+    source_path: Gallery/Face scan/User profile/Personal-Details-Filled - Mockup 2.png
+    role: design
+    alt: HEIR personal details form with name, weight, height, birthday, and gender fields used to support health
+      estimates.
+    included_in_document: true
+  profile-profile-1-png:
+    source_path: Gallery/Face scan/User profile/Profile - Mockup 1.png
+    role: design
+    alt: HEIR profile navigation listing account details, sign-in security, FaceScan settings, goals, appearance,
+      and support.
+    included_in_document: true
+  profile-signin-security-3-png:
+    source_path: Gallery/Face scan/User profile/SignIn-Security - Mockup 3.png
+    role: design
+    alt: HEIR sign-in and security screen listing email, password, Apple and Google sign-in, and passkeys.
+    included_in_document: true
+  profile-update-health-history-4-png:
+    source_path: Gallery/Face scan/User profile/Update-Health-History - Mockup 4.png
+    role: design
+    alt: HEIR health history form asking about smoking, diabetes, and blood pressure medication, with uncertainty
+      and privacy choices.
+    included_in_document: true
+  reference-frame-1-1-png:
+    source_path: Gallery/Face scan/Moodboard/Frame 1 - Mockup 1.png
+    role: reference
+    alt: Reference sleep-tracking app showing sleep quality bars with colored ranges, a date selector, and sleeping
+      heart rate.
+    included_in_document: true
+    source_credit: Wearable sleep reference
+  reference-frame-10-11-png:
+    source_path: Gallery/Face scan/Moodboard/Frame 10 - Mockup 11.png
+    role: reference
+    alt: Reference app integrations screen listing connected and available apps on a dark background.
+    included_in_document: false
+    source_credit: External moodboard reference; source not specified in document
+  reference-frame-11-9-png:
+    source_path: Gallery/Face scan/Moodboard/Frame 11 - Mockup 9.png
+    role: reference
+    alt: Reference Bevel settings screen with grouped privacy, legal, data, and support navigation rows.
+    included_in_document: true
+    source_credit: Bevel reference
+  reference-frame-2-2-png:
+    source_path: Gallery/Face scan/Moodboard/Frame 2 - Mockup 2.png
+    role: reference
+    alt: Reference health activity app showing measurements for weight, height, daily steps, and walking activity.
+    included_in_document: false
+    source_credit: External moodboard reference; source not specified in document
+  reference-frame-3-3-png:
+    source_path: Gallery/Face scan/Moodboard/Frame 3 - Mockup 3.png
+    role: reference
+    alt: Reference wearable wellbeing dashboard with grouped metric cards and a sleep recovery summary on a dark background.
+    included_in_document: true
+    source_credit: Wearable wellbeing reference
+  reference-frame-4-4-png:
+    source_path: Gallery/Face scan/Moodboard/Frame 4 - Mockup 4.png
+    role: reference
+    alt: Reference live workout screen with a large circular heart-rate gauge, heart-rate zone, elapsed time, and
+      a Pause control.
+    included_in_document: true
+    source_credit: Live workout reference
+  reference-frame-5-10-png:
+    source_path: Gallery/Face scan/Moodboard/Frame 5 - Mockup 10.png
+    role: reference
+    alt: Reference wearable device success screen with a circular result graphic and a Continue button.
+    included_in_document: false
+    source_credit: External moodboard reference; source not specified in document
+  reference-frame-6-5-png:
+    source_path: Gallery/Face scan/Moodboard/Frame 6 - Mockup 5.png
+    role: reference
+    alt: Reference task-scheduling form with task description, frequency, time, date, and notification preferences.
+    included_in_document: true
+    source_credit: Task-scheduling reference
+  reference-frame-7-6-png:
+    source_path: Gallery/Face scan/Moodboard/Frame 7 - Mockup 6.png
+    role: reference
+    alt: Reference wearable profile screen showing date of birth, height, weight, sex, and activity focus areas.
+    included_in_document: true
+    source_credit: Wearable profile reference
+  reference-frame-8-7-png:
+    source_path: Gallery/Face scan/Moodboard/Frame 8 - Mockup 7.png
+    role: reference
+    alt: Reference wearable profile explanation describing why personal details improve the health experience.
+    included_in_document: true
+    source_credit: Oura reference
+  reference-frame-9-8-png:
+    source_path: Gallery/Face scan/Moodboard/Frame 9 - Mockup 8.png
+    role: reference
+    alt: Reference connected-service permissions screen with access and export controls for a fitness data integration.
+    included_in_document: false
+    source_credit: External moodboard reference; source not specified in document
+  reference-image-11-png:
+    source_path: Gallery/Face scan/Moodboard/image 11.png
+    role: reference
+    alt: Shen.ai reference text panel introducing face-scanning technology, measurement guidance, and recommended
+      preparation.
+    included_in_document: true
+    source_credit: Shen.ai reference
+  reference-image-12-png:
+    source_path: Gallery/Face scan/Moodboard/image 12.png
+    role: reference
+    alt: Shen.ai reference text panel describing capture instructions, keeping still, camera positioning, and lighting
+      requirements.
+    included_in_document: true
+    source_credit: Shen.ai reference
+  reference-image-13-png:
+    source_path: Gallery/Face scan/Moodboard/image 13.png
+    role: reference
+    alt: Shen.ai reference vital-sign cards displaying pulse, estimated blood pressure, and short-term variability
+      readings.
+    included_in_document: true
+    source_credit: Shen.ai reference
+  reference-image-14-png:
+    source_path: Gallery/Face scan/Moodboard/image 14.png
+    role: reference
+    alt: Shen.ai reference metric cards displaying breathing rhythm, stress response, cardiovascular effort, and parasympathetic
+      activity.
+    included_in_document: false
+    source_credit: External moodboard reference; source not specified in document
+  reference-image-15-png:
+    source_path: Gallery/Face scan/Moodboard/image 15.png
+    role: reference
+    alt: Shen.ai reference results screen showing a body mass score, an activity insight, and actions to calculate
+      further insights.
+    included_in_document: true
+    source_credit: Shen.ai reference
+  reference-image-16-png:
+    source_path: Gallery/Face scan/Moodboard/image 16.png
+    role: reference
+    alt: Shen.ai reference body and wellness insights with vertically arranged wellness score and body-composition
+      cards.
+    included_in_document: true
+    source_credit: Shen.ai reference
+  reference-image-17-png:
+    source_path: Gallery/Face scan/Moodboard/image 17.png
+    role: reference
+    alt: Shen.ai reference body composition cards displaying body fat percentage, body roundness index, and shape
+      index.
+    included_in_document: false
+    source_credit: External moodboard reference; source not specified in document
+  reference-image-18-png:
+    source_path: Gallery/Face scan/Moodboard/image 18.png
+    role: reference
+    alt: Shen.ai reference results cards showing basal metabolic rate and estimated daily energy expenditure.
+    included_in_document: false
+    source_credit: External moodboard reference; source not specified in document
+  reference-image-26-png:
+    source_path: Gallery/Face scan/Moodboard/image 26.png
+    role: reference
+    alt: AVI reference promotional image showing three app screens for health results, measurement ranges, and trends.
+    included_in_document: true
+    source_credit: AVI reference
+  routine-alt-days-routine-9-png:
+    source_path: Gallery/Face scan/Scan routine/Alt-Days-Routine - Mockup 9.png
+    role: design
+    alt: HEIR alternate-days routine setup with a selected morning window, reminder time, and notification toggles.
+    included_in_document: true
+  routine-once-daily-routine-5-png:
+    source_path: Gallery/Face scan/Scan routine/Once-Daily-Routine - Mockup 5.png
+    role: design
+    alt: HEIR once-daily routine setup showing a morning time window, reminder time, and phone and HEIR notification
+      toggles.
+    included_in_document: true
+  routine-once-daily-set-reminder-6-png:
+    source_path: Gallery/Face scan/Scan routine/Once-Daily-Set-Reminder - Mockup 6.png
+    role: design
+    alt: HEIR once-daily setup with an open time picker for selecting the scan reminder time.
+    included_in_document: true
+  routine-routine-once-daily-4-png:
+    source_path: Gallery/Face scan/Scan routine/Routine-Once-Daily - Mockup 4.png
+    role: design
+    alt: HEIR routine selector with Once Daily expanded to explain the recommended daily check-in.
+    included_in_document: true
+  routine-routine-question-30-selected-2-png:
+    source_path: Gallery/Face scan/Scan routine/Routine-Question-30-Selected - Mockup 2.png
+    role: design
+    alt: HEIR scan routine selector with the 30-second scan selected and the same routine options below.
+    included_in_document: true
+  routine-routine-question-60-selected-1-png:
+    source_path: Gallery/Face scan/Scan routine/Routine-Question-60-Selected - Mockup 1.png
+    role: design
+    alt: HEIR scan routine selector with the 60-second scan selected and expandable daily, alternate-day, and weekly
+      routine options.
+    included_in_document: true
+  routine-scan-length-info-3-png:
+    source_path: Gallery/Face scan/Scan routine/Scan-Length-Info - Mockup 3.png
+    role: design
+    alt: HEIR scan routine screen with an explanation sheet comparing 60-second and 30-second scan lengths.
+    included_in_document: true
+  routine-twice-daily-error-8-png:
+    source_path: Gallery/Face scan/Scan routine/Twice-Daily-Error - Mockup 8.png
+    role: design
+    alt: HEIR twice-daily routine validation showing a missing second time window and a disabled Complete button.
+    included_in_document: true
+  routine-twice-daily-routine-7-png:
+    source_path: Gallery/Face scan/Scan routine/Twice-Daily-Routine - Mockup 7.png
+    role: design
+    alt: HEIR twice-daily routine setup with separate morning and evening windows and reminder controls.
+    included_in_document: true
+  routine-twice-weekly-routine-10-png:
+    source_path: Gallery/Face scan/Scan routine/Twice-Weekly-Routine - Mockup 10.png
+    role: design
+    alt: HEIR twice-weekly routine setup with selected weekdays, time windows, and a reminder time.
+    included_in_document: true
