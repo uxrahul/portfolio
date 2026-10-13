@@ -8,6 +8,7 @@ next: false
 tocSections: [first-launch, haptic-roadmap, activity-guidance, design-system, health-scan, where-heir-stands-now]
 ---
 
+import HeirTools from '../../../components/HeirTools.astro';
 import CaseSection from '../../../components/CaseSection.astro';
 import ContentLink from '../../../components/ContentLink.astro';
 import ResearchFigure from '../../../components/ResearchFigure.astro';
@@ -31,15 +32,21 @@ import movementComposition from '../../../assets/heir/research/movement-composit
 import healthPriorities from '../../../assets/heir/research/health-priorities.png';
 import { hapticScreenItems, healthScanItems } from '../../../data/heir-ui';
 
-<p class="page-deck"><em>A timeline of research and product design at Ganance between March 2025–October 2026. This timeline brings together five connected projects, each with its own context, contribution, and outcome.</em></p>
+<p class="page-deck"><em>Five connected projects from my work at Ganance between March 2025–October 2026.</em></p>
+
+<div class="heir-metadata">
+
+**My role:** UX research, product strategy, app architecture, interaction and visual design, activity logic, and implementation with engineering.
+
+<HeirTools />
+
+</div>
 
 HEIR adds activity tracking and vibration alerts to a traditional watch without adding another screen. Since March 2025, I have helped Ganance develop the product through its first public launch, activity guidance, and a camera-based Health Scan beta.
 
 <ResearchFigure src={hero} alt="HEIR mounted beneath a traditional watch, beside the standalone device." caption="HEIR mounted beneath a traditional watch, shown beside the standalone device." eager />
 
 Stakeholders described the audience as “corporate athletes”: people with demanding work lives who wanted to make more room for their health. The guiding idea was calm technology. HEIR should fit into their day and draw attention when it could help.
-
-**My role.** My work spans UX research, product strategy, app architecture, interaction and visual design, activity logic, and implementation with engineering.
 
 <section class="milestones" aria-labelledby="product-milestones" data-section-reveal>
   <h2 id="product-milestones">Product milestones during this work</h2>

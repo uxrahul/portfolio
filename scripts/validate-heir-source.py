@@ -25,10 +25,12 @@ def normal(value):
 class Published(HTMLParser):
     def __init__(self):
         super().__init__(); self.in_article = False; self.tokens = []; self.strong = []; self.italic = []
-        self.captures = []; self.figures = []; self.bullets = []; self.list_buffer = None
+        self.svg_depth = 0; self.captures = []; self.figures = []; self.bullets = []; self.list_buffer = None
         self.milestones = []; self.milestone_buffer = None
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
+        if tag == 'svg': self.svg_depth += 1
+        if self.svg_depth: return
         if tag == 'article': self.in_article = True
         if not self.in_article: return
         if tag in ['strong', 'em']: self.captures.append([tag, []])
@@ -37,6 +39,8 @@ class Published(HTMLParser):
             if 'data-product-milestone' in attrs: self.milestone_buffer = []
             else: self.list_buffer = []
     def handle_endtag(self, tag):
+        if tag == 'svg': self.svg_depth -= 1; return
+        if self.svg_depth: return
         if tag in ['h3', 'p'] and self.milestone_buffer is not None:
             self.milestone_buffer.append(' ')
         if self.captures and tag == self.captures[-1][0]:
@@ -48,7 +52,7 @@ class Published(HTMLParser):
             self.milestones.append(normal(''.join(self.milestone_buffer))); self.milestone_buffer = None
         if tag == 'article': self.in_article = False
     def handle_data(self, data):
-        if self.in_article:
+        if self.in_article and not self.svg_depth:
             self.tokens.append(data)
             for _, buffer in self.captures: buffer.append(data)
             if self.list_buffer is not None: self.list_buffer.append(data)
@@ -56,7 +60,7 @@ class Published(HTMLParser):
 
 published = Published(); published.feed((site / 'dist/heir/index.html').read_text())
 # Each editorial card preserves one complete column of the source milestone table.
-milestone_rows = [row.findall('w:tc', ns) for row in body[8].findall('w:tr', ns)]
+milestone_rows = [row.findall('w:tc', ns) for row in body[9].findall('w:tr', ns)]
 expected_milestones = [normal(' '.join(text(row[column]) for row in milestone_rows)) for column in range(3)]
 assert published.milestones == expected_milestones, 'Milestone stage wording or chronological order changed.'
 actual = normal(''.join(published.tokens)); cursor = 0; source_bullets = []; image_order = []
@@ -64,7 +68,7 @@ for index, block in enumerate(body):
     paragraphs = block.findall('.//w:tc/w:p', ns) if block.tag.endswith('tbl') else [block]
     for paragraph in paragraphs:
         value = normal(text(paragraph))
-        if value and index != 8:
+        if value and index != 9:
             found = actual.find(value, cursor)
             assert found >= cursor, f'Source block {index} missing, changed, or out of order: {value}'
             cursor = found + len(value)
@@ -90,10 +94,10 @@ for i, (figure, media) in enumerate(zip(published.figures, image_order)):
     expected = (site / 'src/assets/heir/product/hero-image.webp').read_bytes() if i == 0 else originals['word/'+media]
     assert hashlib.sha256(delivered).digest() == hashlib.sha256(expected).digest(), f'Wrong visual/rendition/order at figure {i+1}: {media}'
 # Ordinary image-paragraph captions and the two Word UI tables have distinct semantics.
-captions = [text(body[i]) for i in [4,21,23,31,33,44,46,57,59,70,77,79,84,96,120]]
+captions = [text(body[i]) for i in [6,22,24,32,34,45,47,58,60,71,78,80,85,97,121]]
 actual_captions = [f['data-caption'] for f in published.figures if ' — ' not in f['data-caption']]
 assert actual_captions == captions, 'Figure captions must match the source in order.'
-for i in [49,130]:
+for i in [50,131]:
     for cell in body[i].findall('.//w:tc', ns):
         values = [normal(text(p)) for p in cell.findall('w:p', ns) if normal(text(p))]
         assert ' — '.join(values) in [f['data-caption'] for f in published.figures], 'Missing UI stage title or full description.'

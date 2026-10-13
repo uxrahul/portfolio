@@ -1,0 +1,40 @@
+---
+import figma from '../assets/heir/tools/01_figma.svg?raw';
+import qualtrics from '../assets/heir/tools/02_qualtrics.svg?raw';
+import rstudio from '../assets/heir/tools/05_rstudio.svg?raw';
+import sql from '../assets/heir/tools/sql.svg?raw';
+import firebase from '../assets/heir/tools/09_firebase.svg?raw';
+import react from '../assets/heir/tools/11_react.svg?raw';
+import github from '../assets/heir/tools/16_github.svg?raw';
+import chatgpt from '../assets/heir/tools/18_chatgpt.svg?raw';
+
+const tools = [
+  { label: 'Figma', icon: figma },
+  { label: 'Qualtrics', icon: qualtrics },
+  { label: 'RStudio', icon: rstudio },
+  { label: 'MySQL', icon: sql },
+  { label: 'Firebase', icon: firebase },
+  { label: 'React', icon: react },
+  { label: 'Github', icon: github, monochrome: true },
+  { label: 'ChatGPT', icon: chatgpt, monochrome: true },
+];
+---
+
+<p class="heir-tools">
+  <strong>Tools:</strong>{' '}
+  <span class="tool-row">
+    {tools.map((tool, index) => <span class="tool-item">
+      {tool.icon && <span class:list={['tool-icon', { monochrome: tool.monochrome }]} aria-hidden="true" set:html={tool.icon} />}
+      <span>{tool.label}{index === tools.length - 1 ? '.' : ','}</span>{' '}
+    </span>)}
+  </span>
+</p>
+
+<style>
+  .heir-tools { display: flex; flex-direction: column; gap: var(--space-3); }
+  .tool-row { display: flex; flex-wrap: wrap; gap: var(--space-3) var(--space-5); }
+  .tool-item { display: inline-flex; align-items: center; gap: var(--space-2); white-space: nowrap; }
+  .tool-icon { display: inline-flex; width: var(--space-6); height: var(--space-6); flex: none; }
+  .tool-icon :global(svg) { width: 100%; height: 100%; }
+  .monochrome :global(path) { fill: currentColor; }
+</style>

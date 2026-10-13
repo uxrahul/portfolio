@@ -4,8 +4,11 @@
 
 About (`/`), the complete HEIR case study (`/heir/`), and a shared-layout 404 are
 implemented. HEIR preserves its introduction, five projects, conclusion, 48
-research bullets, 24 visuals, source emphasis, and captions. The latest approved
-change replaces only the introductory milestone table with three editorial cards.
+research bullets, 24 visuals, source emphasis, and captions. The approved
+introduction uses the shortened italic subtitle, revised role above
+the unchanged context paragraph, and eight labeled SVG tool icons inside one
+metadata block with subtle top/bottom dividers. The three editorial milestone
+cards remain approved.
 Other typography, section/Goal treatments, navigation, motion, figures, and viewer
 remain as implemented at the initial `ef62f53` baseline. Do not reintroduce the
 subsequently rolled-back editorial hierarchy experiments.
@@ -40,6 +43,22 @@ static pages. There is no Starlight or React runtime. Dependencies are all in us
   navigation, and TOC remain stationary. `section-motion.ts` supplies subtle 400ms
   vertical entrances for sections/figures/cards. Reduced motion and anchor targets
   skip motion as appropriate.
+
+## HEIR introduction
+
+The opening order is title, shortened italic subtitle, unified role/tools metadata,
+context paragraph, hero/caption, audience paragraph, and milestone cards.
+`HeirTools.astro` preserves the approved list and spelling: Figma, Qualtrics,
+RStudio, MySQL, Firebase, React, Github, ChatGPT. Eight selected SVGs live in
+`src/assets/heir/tools/`; no unused logo set or source manifest is imported.
+The supplied generic `sql.svg` is used for MySQL at the user's explicit request;
+it is not an official MySQL mark. Github/ChatGPT paths inherit text color for both
+themes; other marks preserve source colors. Icons are decorative to assistive
+technology, with visible labels, 24px boxes, and responsive flex wrapping.
+`.heir-metadata` uses `--divider` above/below, `--space-6` vertical padding and
+bottom margin, and no card background. Typography and all later content remain
+unchanged. Desktop and 393px mobile layouts were visually reviewed; light/dark
+introductory styling was verified before approval.
 
 ## Evidence, carousels, and milestones
 

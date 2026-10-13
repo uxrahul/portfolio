@@ -11,9 +11,12 @@ No research was rerun and no charts were redrawn.
 ## Representative implementation
 
 The introduction and first-launch section include every source block in order.
-The introduction has the italic subtitle, context, hero/caption, corporate-athlete
-and calm-technology paragraph, role, and three milestone cards preserving every
-column of the original 4-row × 3-column table. The first-launch section has Context, Goal, five contribution bullets,
+The approved introduction has the shortened italic subtitle, revised role and
+eight-tool list in a unified metadata block, context, hero/caption, corporate-athlete
+and calm-technology paragraph, and three milestone cards preserving every
+column of the original 4-row × 3-column table. The selected SVG tool assets are
+documented in `project-handoff.md`; the generic SQL symbol for MySQL was explicitly
+approved by the user. The first-launch section has Context, Goal, five contribution bullets,
 two figures, Outcome, five outcome bullets, and two further figures. Bold decision
 phrases and statistical evidence and the italic independent-sample qualification
 are preserved. Word's blue goal treatment becomes quiet rules and typography;

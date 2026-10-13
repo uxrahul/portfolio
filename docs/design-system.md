@@ -184,6 +184,23 @@ before the page router handles the click. Modified clicks retain native behavior
 Original files are delivered unchanged in the modal. Do not pass PNG originals
 through a quality encoder: even a PNG quality setting can quantize colors.
 
+### HEIR introductory metadata
+
+The shortened source subtitle keeps `.page-deck` typography and italic semantics.
+Role and Tools form a single `.heir-metadata` block before the context paragraph
+and hero. Top/bottom borders use `--divider`; vertical padding and bottom margin
+use `--space-6`. The final paragraph has no bottom margin, keeping padding even.
+There is no background, card frame, corner treatment, or added decoration.
+
+`HeirTools.astro` renders the exact approved tool order and labels. Its inline SVG
+boxes use `--space-6` (24px), with `--space-2` icon/label gaps. The row wraps at
+available width with `--space-3` row gaps and `--space-5` column gaps; each label
+stays with its icon. Labels retain body typography. SVGs are hidden from assistive
+technology to avoid duplicating visible labels. Github and ChatGPT path fills
+inherit text color; other source colors remain intact. MySQL uses the supplied
+generic SQL symbol by explicit user approval. Only the eight used SVGs are copied
+into the site. Metadata borders follow semantic light/dark theme roles.
+
 ### Milestone cards
 
 The labeled `product-milestones` section contains an ordered list of three cards.

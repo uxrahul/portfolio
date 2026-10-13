@@ -71,6 +71,8 @@ svg { width: 1rem; height: 1rem; fill: none; stroke: currentColor; stroke-width:
 .editorial li::marker { color: var(--color-on-surface-variant); font-size: .8em; }
 .page-deck { font-size: var(--type-lead); line-height: 1.5; color: var(--color-on-surface-variant); margin-bottom: var(--space-10) !important; }
 .page-deck em { font-style: italic; }
+.heir-metadata { border-block: var(--divider); padding-block: var(--space-6); margin-bottom: var(--space-6); }
+.heir-metadata > p:last-child { margin-bottom: 0; }
 .eyebrow { font-size: var(--type-small); color: var(--color-on-surface-variant); letter-spacing: var(--tracking-label); }
 .lead { font-size: var(--type-lead); line-height: 1.5; }
 .intro { display: grid; grid-template-columns: 1fr var(--portrait-width); gap: var(--space-10); max-width: var(--reading-width); align-items: start; margin: var(--space-8) 0 var(--space-12); }
