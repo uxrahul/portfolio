@@ -1,0 +1,17 @@
+---
+interface Props { headings: { slug: string; text: string }[]; }
+const { headings } = Astro.props;
+---
+<details class="toc-disclosure" open>
+  <summary>On this page <svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4" /></svg></summary>
+  <nav aria-label="On this page" data-toc>
+    <span class="toc-progress-track" aria-hidden="true"><span class="toc-progress-fill"></span></span>
+    <ol>
+      {headings.map((heading) => <li><a href={`#${heading.slug}`}>{heading.text}</a></li>)}
+    </ol>
+  </nav>
+</details>
+<script>
+  import { bindTableOfContents } from '../lib/table-of-contents';
+  bindTableOfContents();
+</script>

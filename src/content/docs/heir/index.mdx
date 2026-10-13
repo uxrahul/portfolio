@@ -1,0 +1,277 @@
+---
+title: 'HEIR: Making a Screenless Wearable Useful Beyond Its Form Factor'
+description: A timeline of research and product design at Ganance between March 2025–October 2026.
+prev:
+  link: /
+  label: About
+next: false
+tocSections: [first-launch, haptic-roadmap, activity-guidance, design-system, health-scan, where-heir-stands-now]
+---
+
+import CaseSection from '../../../components/CaseSection.astro';
+import ContentLink from '../../../components/ContentLink.astro';
+import ResearchFigure from '../../../components/ResearchFigure.astro';
+import StatisticalPlot from '../../../components/StatisticalPlot.astro';
+import ProductFigure from '../../../components/ProductFigure.astro';
+import StatisticalCarousel from '../../../components/StatisticalCarousel.astro';
+import MobileUICarousel from '../../../components/MobileUICarousel.astro';
+import hero from '../../../assets/heir/product/hero-image.webp';
+import ia from '../../../assets/heir/product/before-after-ia.png';
+import ambiguity from '../../../assets/heir/research/card-sort-ambiguity.png';
+import taskSuccess from '../../../assets/heir/research/task-success.png';
+import expectationGap from '../../../assets/heir/research/expectation-gap.png';
+import { activityGalleryItems } from '../../../data/galleries';
+import improvementPriorities from '../../../assets/heir/research/improvement-priorities.png';
+import primaryValue from '../../../assets/heir/research/primary-value.png';
+import featureAdoption from '../../../assets/heir/research/feature-adoption.png';
+import configurationRetention from '../../../assets/heir/research/configuration-retention.png';
+import targetAttainment from '../../../assets/heir/research/target-attainment.png';
+import weeklyStepChange from '../../../assets/heir/research/weekly-step-change.png';
+import movementComposition from '../../../assets/heir/research/movement-composition.png';
+import healthPriorities from '../../../assets/heir/research/health-priorities.png';
+import { hapticScreenItems, healthScanItems } from '../../../data/heir-ui';
+
+<p class="page-deck"><em>A timeline of research and product design at Ganance between March 2025–October 2026. This timeline brings together five connected projects, each with its own context, contribution, and outcome.</em></p>
+
+HEIR adds activity tracking and vibration alerts to a traditional watch without adding another screen. Since March 2025, I have helped Ganance develop the product through its first public launch, activity guidance, and a camera-based Health Scan beta.
+
+<ResearchFigure src={hero} alt="HEIR mounted beneath a traditional watch, beside the standalone device." caption="HEIR mounted beneath a traditional watch, shown beside the standalone device." eager />
+
+Stakeholders described the audience as “corporate athletes”: people with demanding work lives who wanted to make more room for their health. The guiding idea was calm technology. HEIR should fit into their day and draw attention when it could help.
+
+**My role.** My work spans UX research, product strategy, app architecture, interaction and visual design, activity logic, and implementation with engineering.
+
+<div class="milestones" data-section-reveal>
+  <h2 id="product-milestones">Product milestones during this work</h2>
+  <div class="table-scroll" role="region" aria-labelledby="product-milestones" tabindex="0">
+    <table>
+      <thead><tr><th scope="col">First launch</th><th scope="col">Strengthening the core experience</th><th scope="col">Expanding into health</th></tr></thead>
+      <tbody>
+        <tr class="milestone-numbers"><td><strong>1,000</strong> devices sold</td><td><strong>3,000+</strong> devices sold</td><td><strong>2,000</strong> additional devices preordered</td></tr>
+        <tr class="milestone-dates"><td>by August 2025</td><td>September 2026</td><td>In production</td></tr>
+        <tr><td>Redesigned core app flows for launch, raising task success from <strong>70% to 90%</strong>.</td><td>Put customer-valued haptics at the center of the roadmap; <strong>81% of users had app notifications enabled</strong>.</td><td>Designed the <strong>Health Scan beta</strong> as a bridge to the next device generation.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<CaseSection id="first-launch" title="A clearer app for the first launch">
+
+### Context
+
+The original app split device controls between Home and Settings. Users had to guess where common actions lived, and the structure left little room for the product to grow.
+
+<div class="research-goal">
+  <h3>Goal</h3>
+  <p>Make everyday device controls easy to find and use for the first public launch.</p>
+</div>
+
+### My contribution
+
+- I used a <ContentLink id="heir-ia-study"><strong>card sort followed by a first-choice tree test</strong></ContentLink> to understand where people expected those controls to live.
+- Most functions already had a recognizable home: **13 of 17 cards reached at least 70% agreement**. The recurring problem was the boundary between Device Settings and Customize.
+- I consolidated **configuration into one Settings destination** and kept **Account separate** where account-management functions consistently clustered.
+- I grouped tap and vibration, notifications, media controls, and connected apps into **clearer Settings subsections**.
+- I surfaced **device management from Home** through the device/battery control for pairing, unpairing, and disconnecting.
+
+<StatisticalPlot src={ambiguity} alt="Stacked bars show placement of four ambiguous controls across My Account, Device Settings, and Customize. All four controls fall below 70% agreement." caption="Card sort placement of four ambiguous controls" />
+
+<ProductFigure src={ia} alt="Complete annotated comparison: tap, vibration, media, and call controls move into Settings; Settings moves from Profile to the main navigation." caption="The first-launch redesign grouped device controls in Settings and gave Settings a dedicated place in the main navigation." />
+
+### Outcome
+
+- I tested an interactive Figma prototype against the old app using the **same core tasks**.
+- <ContentLink id="heir-usability-validation">Average task success increased from <strong>70.0% to 90.4%</strong></ContentLink>, while the System Usability Scale score rose from **47.5 to 75.8**.
+- Adjusting vibration intensity improved from **74% to 95%** success, and turning off vibration alerts improved from **60% to 95%**.
+- *The studies used independent samples of 50 and 60 participants.*
+- Goal setting remained the clearest efficiency problem: success rose slightly, but median completion time increased from **13.7 to 40.8 seconds**.
+
+<StatisticalCarousel id="first-launch-usability-figures" label="Usability study charts" items={[
+  { id: 'usability-task-success', kind: 'plot', src: taskSuccess, alt: 'Task success increased across all four tasks. Turning off alerts rose from 60% to 95%, activity insights from 66% to 83%, vibration intensity from 74% to 95%, and step goals from 80% to 88%.', caption: 'Task success in the old and redesigned app studies' },
+  { id: 'usability-expectation-gap', kind: 'plot', src: expectationGap, alt: 'Expected versus experienced ease shortfalls in the old and redesigned app. Shortfalls decrease for alerts, activity insights, and vibration intensity; goal setting retains a shortfall.', caption: 'Shortfall between expected and experienced task ease' },
+]} />
+
+</CaseSection>
+
+<CaseSection id="haptic-roadmap" title="Research moved haptics to the center of the roadmap">
+
+### Context
+
+After launch, <ContentLink id="heir-customer-survey">customer feedback repeatedly pointed to weak or unclear vibrations, notification control, custom app alerts, battery life, and reminder flexibility</ContentLink>.
+
+<div class="research-goal">
+  <h3>Goal</h3>
+  <p>Focus the roadmap on the haptic experiences customers valued most.</p>
+</div>
+
+### My contribution
+
+- I grouped those requests through <strong>thematic analysis</strong> and used the recurring themes to design a <strong>survey completed by 100 existing HEIR customers</strong>.
+- <strong>75%</strong> wanted at least one improvement to alerts, vibrations, quiet periods, alarms, or reminders.
+- <strong>58%</strong> named calls/app alerts, alarms, or reminders as HEIR’s primary value.
+
+<StatisticalCarousel id="haptic-customer-priorities-figures" label="Customer priorities charts" items={[
+  { id: 'haptic-improvement-priorities', kind: 'plot', src: improvementPriorities, alt: 'Bars show requested improvements, with notification and vibration controls leading the list.', caption: 'Requested improvements among 100 existing customers' },
+  { id: 'haptic-primary-value', kind: 'plot', src: primaryValue, alt: 'Bars show calls and app alerts as the most common primary source of HEIR value.', caption: 'Primary sources of value among 100 existing customers' },
+]} />
+
+- The findings pointed toward <strong>notification selection, better vibration behavior, and more flexible alarms and reminders</strong>.
+- I pushed for more <strong>firmware attention on vibration quality</strong> and helped prioritize <ContentLink id="heir-gallery-phase-two-alerts"><strong>app-specific notifications, Silent Alarm, reminders, and stronger alert controls</strong></ContentLink>.
+
+<MobileUICarousel id="haptic-ui-figures" label="Haptic controls" items={hapticScreenItems} />
+
+<p class="figure-group-caption"><strong>Customer priorities translated into notification selection, recurring silent alarms, and reminders with configurable schedules.</strong></p>
+
+### Outcome
+
+- Usage after release supported the decision. Across 1,800 users, <ContentLink id="heir-feature-adoption">app notifications had the strongest adoption: <strong>80.8% were currently enabled</strong></ContentLink>.
+- Among adopters with at least 45 days of follow-up, <strong>92.8% still had app notifications enabled at day 45</strong>.
+- Silent Alarm showed similar persistence, with <strong>86.7% still enabled</strong>.
+- <em>These measures reflect continued configuration, rather than how often an alert was delivered or acted on.</em>
+
+<StatisticalCarousel id="haptic-adoption-retention-figures" label="Haptic adoption and retention charts" items={[
+  { id: 'haptic-feature-adoption', kind: 'plot', src: featureAdoption, alt: 'Dot plot compares activation and current configuration for app notifications, reminders, and silent alarms.', caption: 'Activation and current configuration of haptic features' },
+  { id: 'haptic-configuration-retention', kind: 'plot', src: configurationRetention, alt: 'Dot plot compares day-zero and day-45 configuration among mature adopters.', caption: 'Continued configuration among mature adopters' },
+]} />
+
+</CaseSection>
+
+<CaseSection id="activity-guidance" title="Turning movement into useful guidance">
+
+### Context
+
+HEIR counted steps, but a daily total could not tell people how they moved or what they should realistically work toward next. I helped turn that data into a personal target, understandable movement categories, and a way to estimate sedentary time despite hardware limitations.
+
+A <ContentLink id="heir-activity-analysis">28-day analysis of 847 users</ContentLink> showed how these features operated as a low-touch layer: the median user opened the app on only two days, while movement continued to be tracked in the background.
+
+<div class="research-goal">
+  <h3>Goal</h3>
+  <p>Turn activity data into meaningful insights and actionable guidance.</p>
+</div>
+
+### Setting goals around the person
+
+#### My contribution
+
+- <ContentLink id="heir-adaptive-target-logic">I created <strong>Adaptive Target</strong></ContentLink>, a daily milestone that learns from each person’s recent activity <strong>alongside their primary goal</strong>. It was designed to balance attainability with challenge.
+
+<ProductFigure src={activityGalleryItems[0].src} alt="HEIR Adaptive Target displayed beside the primary step goal." caption="Personal target shown alongside the primary goal" />
+
+#### Outcome
+
+- The median user reached their target on <strong>40% of eligible days</strong>.
+- The most common longest streak was <strong>four to five days</strong>, and <strong>only 11% sustained six days or more</strong>, pointing to an opportunity to support consistency.
+- Among <strong>789 consistently tracked users</strong>, average daily steps <strong>increased by 375</strong> from Week 1 to Week 4, and <strong>59% increased their activity</strong>.
+- More frequent app use was <strong>not clearly associated with greater target attainment</strong>; <em>the data does not establish that Adaptive Target caused the increase.</em>
+
+<StatisticalCarousel id="activity-target-outcomes-figures" label="Activity target outcome charts" items={[
+  { id: 'activity-target-attainment', kind: 'plot', src: targetAttainment, alt: 'Histogram shows the distribution of the share of eligible days on which users reached their target.', caption: 'Distribution of users’ target-attainment rates' },
+  { id: 'activity-weekly-step-change', kind: 'plot', src: weeklyStepChange, alt: 'Line plot shows average daily steps increasing over four observed weeks.', caption: 'Average daily steps across four observed weeks' },
+]} />
+
+### Making everyday movement understandable
+
+#### My contribution
+
+- I defined a model that translated step data into <ContentLink id="heir-movement-categories-logic"><strong>sedentary, casual, and active categories</strong></ContentLink>, and created the <ContentLink id="heir-gallery-phase-two-data-viz"><strong>visual language</strong></ContentLink> for showing how movement accumulated over time.
+
+<ProductFigure src={activityGalleryItems[1].src} alt="HEIR Pace card with active, casual, and sedentary movement breakdowns." caption="Pace card showing the composition of a tracked day" />
+
+#### Outcome
+
+- <strong>20% of users viewed the Pace card</strong>, but <strong>only 8% opened its explanation</strong>. The feature reached a minority of users, while deeper exploration remained limited.
+- Across reliably classified time, <strong>69% was sedentary, 27% casual, and 4% active</strong>, pointing toward everyday movement as the clearest opportunity.
+
+### Making sedentary time measurable
+
+#### My contribution
+
+- I designed a <strong>conservative way to estimate sedentary time</strong> when the hardware could not reliably observe every quiet period.
+- I separated <strong>usable periods from missing or uncertain readings</strong> and turned the logic into an <ContentLink id="heir-sedentary-demo"><strong>interactive prototype</strong></ContentLink> so engineering and stakeholders could test edge cases before implementation.
+
+#### Outcome
+
+- The system made sedentary time visible <strong>without presenting uncertain gaps as inactivity</strong>.
+- Its relevance is supported by the <strong>69% sedentary share of reliably classified time</strong>; <em>its accuracy still needs comparison against labeled movement data.</em>
+
+<StatisticalPlot src={movementComposition} alt="Stacked bar shows reliably classified time: 69% sedentary, 27% casual, and 4% active." caption="Composition of reliably classified movement time" />
+
+</CaseSection>
+
+<CaseSection id="design-system" title="A design system that kept the product coherent">
+
+### Context
+
+As Ganance expanded into activity, haptic, and health features, each addition risked introducing its own language and visual logic. The product needed a <ContentLink id="heir-brand-companion">shared brand and design foundation</ContentLink>.
+
+<div class="research-goal">
+  <h3>Goal</h3>
+  <p>Give expanding features a shared brand and interface foundation.</p>
+</div>
+
+### My contribution
+
+- I led a <strong>four-hour brand workshop</strong> around Ganance’s purpose, vision, values, personality, and competitive position.
+- I <strong>standardized stakeholder responses</strong>, identified recurring themes, and <strong>synthesized them into principles</strong> the team could use.
+- I translated abstract traits into <strong>product rules</strong> for informing, explaining, guiding, reassuring, promoting, and acknowledging progress.
+- I connected the strategy to <strong>shared standards</strong> for interface language, typography, visual hierarchy, data, notifications, and new feature experiences.
+
+### Outcome
+
+- Design, engineering, and leadership gained a <strong>shared way to evaluate decisions</strong> and keep new features recognizable as parts of the same product.
+
+</CaseSection>
+
+<CaseSection id="health-scan" title="Bringing health to a device without health sensors">
+
+### Context
+
+The first HEIR device had no health sensors, but Ganance needed a credible way to expand into health while its second-generation hardware was being prototyped. A camera-based scan offered that bridge. The SDK did not determine which results people would trust, how to interpret them, or what should happen when measurement failed.
+
+<div class="research-goal">
+  <h3>Goal</h3>
+  <p>Introduce quick health snapshots as a bridge to health monitoring ahead of next-generation hardware.</p>
+</div>
+
+### My contribution
+
+#### Research and trust
+
+- I used a <strong>market survey and interviews with 12 users</strong> to define those requirements.
+- <strong>More than 55%</strong> of survey respondents prioritized everyday health vitals. <strong>Blood pressure</strong> was both highly desired and questioned.
+- People judged trust through <strong>consistency and comparisons with familiar devices</strong>; they wanted <strong>trends and explanations</strong>, and were unsure how an active scan fit into routines shaped by continuous wearables.
+
+<StatisticalPlot src={healthPriorities} alt="Bar chart shows health-information priorities, led by everyday vitals, followed by sleep and energy and recovery and exercise." caption="Health information priorities in the market survey" />
+
+#### Scan experience and safeguards
+
+- I reframed the feature as a <ContentLink id="heir-health-scan-detail"><strong>purposeful health check-in</strong></ContentLink> with consistent preparation, measurement, and recovery steps.
+- I assessed <strong>privacy and BIPA considerations</strong>, defining <strong>consent, local processing, deletion</strong>, and rules that kept raw camera data out of analytics.
+
+#### Metrics and interpretation
+
+- I defined an <strong>approved metric set</strong> and handling for <strong>weak signals, missing inputs, unsupported or partial results, retries, and discarded scans</strong>.
+- I designed <strong>personal baselines</strong> from comparable scans and analyzed <strong>weighted NHANES 2017–2018 data in R</strong> to create <strong>U.S. population reference bands</strong>. <em>These comparisons provided context without presenting descriptive data as clinical diagnoses.</em>
+
+#### Implementation contract
+
+- I separated the <strong>SDK’s responsibilities from the HEIR app’s</strong> and documented onboarding, permissions, guidance, progress, results, failure recovery, and analytics as <strong>one implementation contract</strong>.
+- I kept interpretation <strong>transparent and non-diagnostic</strong> and avoided presenting AI recommendations as medical advice.
+
+<MobileUICarousel id="health-scan-ui-figures" label="Health Scan experience" items={healthScanItems} />
+
+### Outcome
+
+<ContentLink id="heir-gallery-face-scan">See full app UI gallery</ContentLink>
+
+- Engineering used my plan as its working contract and completed the initial iOS beta in <strong>seven days without substantive integration rework</strong>.
+- <em>The feature remains in limited testing.</em>
+- The immediate result was a <strong>clearer implementation and reusable foundation for health insights</strong>, with product risks addressed before broader release.
+
+</CaseSection>
+
+<CaseSection id="where-heir-stands-now" title="Where HEIR stands now">
+
+HEIR is a live product with clearer navigation, haptic controls, and activity guidance; Health Scan remains in beta while the next device generation is prototyped. My contribution has been to use research to guide those decisions and build the design and technical foundations for what comes next.
+
+</CaseSection>

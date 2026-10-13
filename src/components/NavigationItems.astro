@@ -1,0 +1,23 @@
+---
+import type { NavigationItem } from '../data/navigation';
+import NavigationItems from './NavigationItems.astro';
+interface Props { items: NavigationItem[]; }
+const { items } = Astro.props;
+const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
+---
+<ul class="navigation-list">
+  {items.map((item) => (
+    <li>
+      {item.children ? (
+        <details data-nav-group={item.id} open={item.expanded}>
+          <summary><span>{item.label}</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m6 4 4 4-4 4" /></svg></summary>
+          <div class="nav-submenu"><NavigationItems items={item.children} /></div>
+        </details>
+      ) : item.href ? (
+        <a href={item.href} aria-current={(item.href.replace(/\/$/, '') || '/') === currentPath ? 'page' : undefined}>{item.label}</a>
+      ) : (
+        <span class="unpublished">{item.label}</span>
+      )}
+    </li>
+  ))}
+</ul>

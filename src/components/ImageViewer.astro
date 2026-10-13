@@ -1,0 +1,14 @@
+<dialog class="image-viewer" aria-label="Enlarged image" aria-describedby="viewer-caption">
+  <div class="viewer-toolbar">
+    <button type="button" data-viewer-zoom aria-pressed="false">View at 100%</button>
+    <button type="button" data-viewer-close aria-label="Close enlarged image">Close <span aria-hidden="true">×</span></button>
+  </div>
+  <div class="viewer-viewport" tabindex="0" aria-label="Image viewing area">
+    <img data-viewer-image alt="" />
+  </div>
+  <p id="viewer-caption" class="viewer-caption"></p>
+</dialog>
+<script>
+  import { bindImageViewer } from '../lib/image-viewer';
+  bindImageViewer();
+</script>

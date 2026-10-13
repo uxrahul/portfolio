@@ -1,0 +1,13 @@
+---
+import ProductFigure from './ProductFigure.astro';
+import type { GalleryItem } from '../data/galleries';
+interface Props { items: GalleryItem[]; }
+const { items } = Astro.props;
+---
+<div class="product-gallery">
+  {items.map((item) => (
+    <div id={item.id} data-source-id={item.sourceId}>
+      <ProductFigure src={item.src} alt={item.alt} caption={item.caption} />
+    </div>
+  ))}
+</div>

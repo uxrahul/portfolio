@@ -1,0 +1,72 @@
+{
+  "version": 1,
+  "project": "heir",
+  "registrySha256": "6427d9ed4f2838752808e001201745241bcee45d245f4599601e5b56503d7c26",
+  "links": {
+    "heir-ia-study": {
+      "status": "pending",
+      "href": null,
+      "newTab": false
+    },
+    "heir-usability-validation": {
+      "status": "pending",
+      "href": null,
+      "newTab": false
+    },
+    "heir-customer-survey": {
+      "status": "pending",
+      "href": null,
+      "newTab": false
+    },
+    "heir-gallery-phase-two-alerts": {
+      "status": "pending",
+      "href": null,
+      "newTab": false
+    },
+    "heir-feature-adoption": {
+      "status": "pending",
+      "href": null,
+      "newTab": false
+    },
+    "heir-activity-analysis": {
+      "status": "pending",
+      "href": null,
+      "newTab": false
+    },
+    "heir-adaptive-target-logic": {
+      "status": "pending",
+      "href": null,
+      "newTab": false
+    },
+    "heir-movement-categories-logic": {
+      "status": "pending",
+      "href": null,
+      "newTab": false
+    },
+    "heir-gallery-phase-two-data-viz": {
+      "status": "pending",
+      "href": null,
+      "newTab": false
+    },
+    "heir-sedentary-demo": {
+      "status": "published",
+      "href": "https://uxrahul.github.io/sedentary-algorithm-demo/",
+      "newTab": true
+    },
+    "heir-brand-companion": {
+      "status": "pending",
+      "href": null,
+      "newTab": false
+    },
+    "heir-health-scan-detail": {
+      "status": "pending",
+      "href": null,
+      "newTab": false
+    },
+    "heir-gallery-face-scan": {
+      "status": "pending",
+      "href": null,
+      "newTab": false
+    }
+  }
+}

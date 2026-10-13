@@ -1,0 +1,76 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import '../styles/global.css';
+import { navigation } from '../data/navigation';
+import NavigationItems from '../components/NavigationItems.astro';
+import ImageViewer from '../components/ImageViewer.astro';
+import TableOfContents from '../components/TableOfContents.astro';
+interface Props {
+  title: string; description: string; tableOfContents?: boolean;
+  toc: { slug: string; text: string }[];
+  prev?: false | { link: string; label: string };
+  next?: false | { link: string; label: string };
+}
+const { title, description, tableOfContents = true, toc, prev, next } = Astro.props;
+const isHome = Astro.url.pathname === '/';
+const showToc = tableOfContents && toc.length > 0;
+---
+<!doctype html>
+<html lang="en" transition:animate="none">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{isHome ? title : `${title} · Rahul Singh`}</title>
+    <script is:inline>
+      (() => {
+        let preference = 'auto';
+        try { preference = localStorage.getItem('portfolio-theme') || 'auto'; } catch {}
+        document.documentElement.dataset.theme = preference === 'auto'
+          ? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : preference;
+      })();
+    </script>
+    <ClientRouter fallback="swap" />
+  </head>
+  <body>
+    <a class="skip-link" href="#reading-canvas">Skip to content</a>
+    <header class="mobile-header" transition:name="portfolio-header" transition:animate="none">
+      <a href="/" class="identity">Rahul Singh</a>
+      <button type="button" class="menu-toggle" aria-label="Open navigation" aria-controls="global-navigation" aria-expanded="false"><span>Menu</span><svg viewBox="0 0 20 20" aria-hidden="true"><path class="menu-line-top" d="M3 10h14" /><path class="menu-line-bottom" d="M3 10h14" /></svg></button>
+    </header>
+    <aside id="global-navigation" class="global-navigation" data-global-navigation transition:name="global-navigation" transition:animate="none">
+      <a href="/" class="identity desktop-identity">Rahul Singh</a>
+      <nav aria-label="Portfolio"><NavigationItems items={navigation} /></nav>
+      <div class="theme-control">
+        <label for="theme-preference">Appearance</label>
+        <select id="theme-preference" aria-label="Color theme"><option value="auto">System</option><option value="light">Light</option><option value="dark">Dark</option></select>
+      </div>
+    </aside>
+    <button class="menu-backdrop" tabindex="-1" aria-label="Close navigation"></button>
+    <div class:list={['reading-region', { 'is-home': isHome }]}>
+      <aside class="contextual-toc" transition:name="contextual-toc" transition:animate="none">
+        {showToc && <TableOfContents headings={toc} />}
+      </aside>
+      <main id="reading-canvas" class="reading-canvas" tabindex="-1" transition:name="reading-canvas">
+        <article class:list={['editorial', { 'home-content': isHome }]}>
+          <h1>{title}</h1>
+          <slot />
+        </article>
+        {(prev || next) && <nav class="pagination" aria-label="Page navigation">
+          {prev && <a href={prev.link} rel="prev"><span aria-hidden="true">←</span><span><small>Previous</small>{prev.label}</span></a>}
+          {next && <a href={next.link} rel="next"><span><small>Next</small>{next.label}</span><span aria-hidden="true">→</span></a>}
+        </nav>}
+      </main>
+    </div>
+    <ImageViewer />
+    <script>
+      import { initializeNavigation } from '../lib/navigation-state';
+      import { bindShell } from '../lib/shell';
+      bindShell();
+      initializeNavigation();
+      document.addEventListener('astro:page-load', initializeNavigation);
+    </script>
+  </body>
+</html>

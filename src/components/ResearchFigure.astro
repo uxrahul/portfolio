@@ -1,0 +1,16 @@
+---
+import { Image } from 'astro:assets';
+import type { FigureKind, FigureProps } from '../data/figures';
+interface Props extends FigureProps { kind?: FigureKind; }
+const { src, alt, caption, captionTitle, eager = false, kind = 'photo', widths = [480, 800, 1200, 1600, 2000], sizes } = Astro.props;
+const viewerCaption = [captionTitle, caption].filter(Boolean).join(' — ') || alt;
+// The modal uses the untouched, fingerprinted source. Inline images use Astro optimization.
+const responsiveWidths = [...new Set(widths.map((width) => Math.min(width, src.width)))];
+---
+<figure class:list={['research-figure', `figure-${kind}`]} data-figure-kind={kind} data-section-reveal>
+  <a class="image-trigger" href={src.src} data-image-viewer data-astro-reload data-caption={viewerCaption} data-width={src.width} aria-label={`Enlarge image: ${viewerCaption}`} draggable="false">
+    <Image src={src} alt={alt} format="webp" quality={95} widths={responsiveWidths} sizes={sizes} layout="full-width" loading={eager ? 'eager' : 'lazy'} decoding="async" fetchpriority={eager ? 'high' : 'auto'} />
+    <span class="enlarge-cue" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M7 3H3v4m10-4h4v4M3 13v4h4m10-4v4h-4" /></svg></span>
+  </a>
+  {caption && <figcaption>{captionTitle && <strong class="figure-stage-title">{captionTitle}</strong>}{caption}</figcaption>}
+</figure>

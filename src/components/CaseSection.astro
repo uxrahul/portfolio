@@ -1,0 +1,12 @@
+---
+interface Props { id: string; title: string; }
+const { id } = Astro.props;
+// The remark plugin emits the real h2 in MDX, keeping the collection's TOC native.
+---
+<section class="case-section" data-case-section data-heading-id={id} aria-labelledby={id}>
+  <slot />
+</section>
+<script>
+  import { bindSectionMotion } from '../lib/section-motion';
+  bindSectionMotion();
+</script>

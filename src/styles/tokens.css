@@ -1,0 +1,138 @@
+/* Canonical variables. Primitive colors stay here; components use semantic roles. */
+:root {
+  --palette-light-background: #F8F7F4;
+  --palette-light-surface: #FFFFFF;
+  --palette-light-ink: #252B2D;
+  --palette-light-muted: #7B8585;
+  --palette-light-secondary: #596565;
+  --palette-light-teal: #315F64;
+  --palette-light-outline: #D9DEDB;
+  --palette-light-outline-strong: #73807F;
+  --palette-light-primary-container: #E3EEEC;
+  --palette-dark-charcoal: #191F21;
+  --palette-dark-surface: #222A2D;
+  --palette-dark-ink: #F1F0EB;
+  --palette-dark-secondary: #BBC5C4;
+  --palette-dark-teal: #9BD1D3;
+  --palette-dark-outline: #3C494B;
+  --palette-dark-outline-strong: #859896;
+  --palette-dark-primary-container: #2D4447;
+
+  --font-family-reading: 'Source Sans 3 Variable', 'Source Sans 3', Calibri, 'Segoe UI', sans-serif;
+  --font-family-code: ui-monospace, SFMono-Regular, Consolas, monospace;
+  --type-small: 0.875rem;
+  --type-navigation: 0.9375rem;
+  --type-body: clamp(1.0625rem, 1rem + 0.2vw, 1.125rem);
+  --type-lead: clamp(1.25rem, 1.125rem + 0.45vw, 1.5rem);
+  --type-heading-3: clamp(1.25rem, 1.125rem + 0.5vw, 1.5rem);
+  --type-heading-2: clamp(1.5rem, 1.25rem + 0.9vw, 1.9375rem);
+  --type-heading-1: clamp(2rem, 1.625rem + 1.2vw, 2.5rem);
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --line-height-reading: 1.7;
+  --line-height-heading: 1.2;
+  --line-height-navigation: 1.45;
+  --tracking-heading: -0.02em;
+  --tracking-label: 0.065em;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --section-gap: clamp(3rem, 2rem + 3vw, 5rem);
+  --page-padding: clamp(1.25rem, 1rem + 1.5vw, 2.5rem);
+  --content-width: 43rem;
+  --reading-width: var(--content-width);
+  --canvas-width: 53rem; /* Existing compact TOC measure; reading content uses content-width. */
+  --figure-gap: clamp(2rem, 1.5rem + 1vw, 3rem);
+  --figure-plot-padding: clamp(1rem, 0.5rem + 1.5vw, 2rem);
+  --figure-caption-gap: var(--space-3);
+  --figure-border: var(--border-width) solid var(--color-outline);
+  --figure-radius: var(--radius-subtle);
+  --figure-control-size: 2.75rem;
+  --figure-control-gap: var(--space-3);
+  --figure-motion-duration: 240ms;
+  --figure-motion-distance: var(--space-2);
+  --figure-ui-height: 32rem;
+  --figure-ui-gutter: calc(var(--figure-control-size) + var(--figure-control-gap));
+  --navigation-width: 14rem;
+  --toc-width: 13rem;
+  --navigation-indent: var(--space-4);
+  --navigation-row-height: 2.5rem;
+  --toc-inline-padding: var(--page-padding);
+  --toc-track-width: 1px;
+  --header-height: 4rem;
+  --portrait-width: 9rem;
+  --gallery-min-width: 14rem;
+  --image-inspection-height: 75vh;
+
+  --border-width: 1px;
+  --radius-subtle: 0.25rem;
+  --focus-width: 2px;
+  --focus-offset: 3px;
+  --underline-offset: 0.2em;
+
+  --motion-duration-page: 300ms;
+  --motion-duration-section: 400ms;
+  --motion-duration-control: 150ms;
+  --motion-duration-navigation: 260ms;
+  --motion-ease-standard: cubic-bezier(0.2, 0, 0.2, 1);
+  --motion-ease-enter: cubic-bezier(0.16, 1, 0.3, 1);
+  --motion-distance-page: 2rem;
+  --motion-distance-section: 1rem;
+}
+
+:root,
+:root[data-theme='light'] {
+  color-scheme: light;
+  --color-background: var(--palette-light-background);
+  --color-evidence-surface: var(--palette-light-surface);
+  --color-surface: var(--palette-light-surface);
+  --color-on-surface: var(--palette-light-ink);
+  --color-on-surface-variant: var(--palette-light-secondary);
+  --color-muted: var(--palette-light-muted);
+  --color-outline: var(--palette-light-outline);
+  --color-outline-strong: var(--palette-light-outline-strong);
+  --color-primary: var(--palette-light-teal);
+  --color-primary-container: var(--palette-light-primary-container);
+  --color-on-primary: var(--palette-light-surface);
+  --divider: var(--border-width) solid var(--color-outline);
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --color-background: var(--palette-dark-charcoal);
+  --color-surface: var(--palette-dark-surface);
+  --color-on-surface: var(--palette-dark-ink);
+  --color-on-surface-variant: var(--palette-dark-secondary);
+  --color-muted: var(--palette-dark-secondary);
+  --color-outline: var(--palette-dark-outline);
+  --color-outline-strong: var(--palette-dark-outline-strong);
+  --color-primary: var(--palette-dark-teal);
+  --color-primary-container: var(--palette-dark-primary-container);
+  --color-on-primary: var(--palette-dark-charcoal);
+}
+
+/* Default system mode before the early theme script sets data-theme. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    color-scheme: dark;
+    --color-background: var(--palette-dark-charcoal);
+    --color-surface: var(--palette-dark-surface);
+    --color-on-surface: var(--palette-dark-ink);
+    --color-on-surface-variant: var(--palette-dark-secondary);
+    --color-muted: var(--palette-dark-secondary);
+    --color-outline: var(--palette-dark-outline);
+    --color-outline-strong: var(--palette-dark-outline-strong);
+    --color-primary: var(--palette-dark-teal);
+    --color-primary-container: var(--palette-dark-primary-container);
+    --color-on-primary: var(--palette-dark-charcoal);
+  }
+}
