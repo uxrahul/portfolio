@@ -291,8 +291,16 @@ embedded report document, or R code is published.
 
 ### Continuous design galleries
 
+`DesignGallery.astro` supplies the same chapter/story/rail composition for Phase
+One (six chapters, 23 stories, 59 screens) and Face Scan. Phase One uses build-time
+Markdown solely to preserve authored prose emphasis; Face Scan keeps plain text.
+Both reuse the same existing styles, rails, motion, and original-image viewer.
+Gallery pagination uses the existing Previous/Next treatment: Phase One returns
+to the first-launch case-study section and continues to Face Scan; Face Scan
+links back to Phase One.
+
 The approved Face Scan Gallery contains six chapters and 28 stories, preserving
-60 HEIR screens and 15 separately attributed reference placements.
+60 HEIR screens. The revised gallery excludes external reference images and metadata.
 
 The Face Scan Gallery shares the stationary shell, theme, contextual TOC, and
 reading-canvas transitions. Its optional `gallery` layout flag permits a scoped
@@ -301,14 +309,9 @@ numbers, semantic top rules, and generous story spacing organize the six chapter
 Story titles use the existing h3 scale, with exact explanatory copy beneath.
 
 `GalleryImage` preserves native image proportions and individual centered captions.
-References have subtle semantic borders, compact Reference/source labels, and
-smaller imagery, distinct from unframed HEIR originals. Reference image width
-is derived from the original aspect ratio under a 24rem height limit, 20rem on
-phones, without cropping. Explicit image ratios reserve lazy-loading space.
-Width-aware comparative
-compositions place references in a smaller adjacent area, stacking them above the
-rail on phones. Multiple references retain independent static frames. Stories
-without references allocate the full width to designs, without placeholder space.
+Each story allocates the full available width to its design rail without reference
+frames, attribution labels, or placeholder space. Explicit image ratios reserve
+lazy-loading space. The existing visual tokens and screen presentation remain unchanged.
 
 `DesignRail` uses native horizontal overflow, never forced snap points. Screen
 width is capped at 17rem and constrained to 82% of available rail width, exposing
@@ -323,14 +326,13 @@ accessible; scrolling does not make neighboring screens inert. No autoplay or lo
 Gallery images reuse the existing full-screen viewer with untouched PNG originals;
 Astro supplies responsive quality-95 WebP inline delivery. Drag/swipe releases
 use the existing click guard, while normal clicks and keyboard activation enlarge.
-`gallery-motion.ts` uses the 400ms section tokens and 90ms reference-before-design
-stagger. Content is visible without JavaScript. Focus, anchor navigation, reduced
+`gallery-motion.ts` uses the 400ms section tokens for vertical entrances. Content is visible without JavaScript. Focus, anchor navigation, reduced
 motion, and Astro swaps cancel motion; page scrolling remains native. Existing
 Embla figure groups are unchanged.
 
 ## Publication and checks
 
-About, HEIR, all five linked Quarto research reports, and the Face Scan Gallery are content routes;
+About, HEIR, all five linked Quarto research reports, and both HEIR galleries are content routes;
 404 uses the same layout. HEIR contains
 the entire source narrative, five projects, and “Where HEIR stands now.” The TOC
 selects those six major sections. Other supporting Word documents and gallery destinations

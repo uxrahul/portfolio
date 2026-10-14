@@ -49,19 +49,6 @@ import image46 from '../assets/heir/face-scan/profile-personal-details-filled-2-
 import image47 from '../assets/heir/face-scan/profile-profile-1-png.png';
 import image48 from '../assets/heir/face-scan/profile-signin-security-3-png.png';
 import image49 from '../assets/heir/face-scan/profile-update-health-history-4-png.png';
-import image50 from '../assets/heir/face-scan/reference-frame-1-1-png.png';
-import image51 from '../assets/heir/face-scan/reference-frame-11-9-png.png';
-import image52 from '../assets/heir/face-scan/reference-frame-3-3-png.png';
-import image53 from '../assets/heir/face-scan/reference-frame-4-4-png.png';
-import image54 from '../assets/heir/face-scan/reference-frame-6-5-png.png';
-import image55 from '../assets/heir/face-scan/reference-frame-7-6-png.png';
-import image56 from '../assets/heir/face-scan/reference-frame-8-7-png.png';
-import image57 from '../assets/heir/face-scan/reference-image-11-png.png';
-import image58 from '../assets/heir/face-scan/reference-image-12-png.png';
-import image59 from '../assets/heir/face-scan/reference-image-13-png.png';
-import image60 from '../assets/heir/face-scan/reference-image-15-png.png';
-import image61 from '../assets/heir/face-scan/reference-image-16-png.png';
-import image62 from '../assets/heir/face-scan/reference-image-26-png.png';
 import image63 from '../assets/heir/face-scan/routine-alt-days-routine-9-png.png';
 import image64 from '../assets/heir/face-scan/routine-once-daily-routine-5-png.png';
 import image65 from '../assets/heir/face-scan/routine-once-daily-set-reminder-6-png.png';
@@ -125,19 +112,6 @@ export const faceScanImages: Record<string, ImageMetadata> = {
   'profile-profile-1-png': image47,
   'profile-signin-security-3-png': image48,
   'profile-update-health-history-4-png': image49,
-  'reference-frame-1-1-png': image50,
-  'reference-frame-11-9-png': image51,
-  'reference-frame-3-3-png': image52,
-  'reference-frame-4-4-png': image53,
-  'reference-frame-6-5-png': image54,
-  'reference-frame-7-6-png': image55,
-  'reference-frame-8-7-png': image56,
-  'reference-image-11-png': image57,
-  'reference-image-12-png': image58,
-  'reference-image-13-png': image59,
-  'reference-image-15-png': image60,
-  'reference-image-16-png': image61,
-  'reference-image-26-png': image62,
   'routine-alt-days-routine-9-png': image63,
   'routine-once-daily-routine-5-png': image64,
   'routine-once-daily-set-reminder-6-png': image65,

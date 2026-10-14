@@ -1,108 +1,48 @@
-# HEIR Face Scan Gallery metadata audit
+# HEIR Face Scan Gallery source audit
 
-Reviewed October 13, 2026. The complete gallery is implemented and approved for publication.
-The existing viewer is reused without changes.
+Updated October 14, 2026. The revised private Word document at
+`Gallery/Face scan/face-scan-gallery-document.docx` is authoritative.
+The reference-free gallery is preserved in the approved Phase One publication.
 
-## Sources and preservation
+## Content and images
 
-`src/data/heir-face-scan-gallery.yml` preserves the supplied
-sibling `heir-face-scan-gallery.yml`, with the approved camera-button alt correction. IDs, chapter/story order, explanations,
-captions, alt descriptions, role classifications, credits, and exclusion flags
-are otherwise unchanged. `heir-content-map.yml` is a separate registry and remains untouched.
-All source paths resolve relative to
-`../source-materials/Website portfolio/Heir case study/`.
+The six chapters, 28 story headings/order/IDs, and 60 original HEIR screens are
+preserved. The introduction and all explanations/captions match the revised Word
+text exactly. Twelve explanations and the introduction changed. The two scan-length
+captions now read “Sixty second scan” and “Thirty second scan” as in the document.
+Authored HEIR alt descriptions and original PNG bytes remain unchanged.
 
-The Word source is `Gallery/Face scan/face-scan-gallery-document.docx`.
-Its recorded page count is 28. Read-only OOXML inspection confirms the title,
-introduction, all 28 story titles/explanations in order, and 75 image placements.
-Its embedded JPEGs are reduced renditions; originals remain the supplied PNGs.
-Each of the 75 placements was matched against all 80 PNGs using normalized RGB
-thumbnails: the nearest match agrees with the supplied asset ID for every
-placement, with mean per-channel differences below 4/255. All 80 originals were
-also visually inspected against their authored descriptions. No substitutes used.
-Near-identical starting/progress and failed/timeout states were distinguished by
-their banner text; the failed/timeout Word renditions were enlarged for inspection.
+Every external reference placement, caption, credit, asset entry, and reference
+collection is removed from the gallery metadata. The 13 previously imported
+external originals are removed from the repository working tree. No external
+moodboard originals or optimized reference images are emitted by the fresh build.
+The private archive and its reference images remain untouched outside the site.
 
-## Inventory
+## Rendering and validation
 
-| Chapter | Stories | HEIR screens | Reference placements |
-| --- | ---: | ---: | ---: |
-| Onboarding and permissions | 3 | 7 | 2 |
-| Scan experience | 9 | 20 | 1 |
-| Scan and scan history | 2 | 4 | 2 |
-| Scan details | 7 | 15 | 7 |
-| Scan routine | 5 | 10 | 2 |
-| User profile | 2 | 4 | 1 |
-| Total | 28 | 60 | 15 |
+Each story uses the existing design rail across the available content width.
+No reference frames, labels, placeholders, or replacement images render. Typography,
+rail interactions, original-image viewer, themes, navigation, TOC, and motion remain
+unchanged.
 
-All 80 PNG entries exist: 60 designs and 20 references. All 60 design files in the
-source folders appear exactly once. Thirteen distinct references supply 15
-placements; `reference-frame-4-4-png` and `reference-frame-6-5-png` are reused.
-Their captions and centralized source credits stay consistent across stories.
-The seven unused references have `included_in_document: false` and no placements:
+`validate-gallery-build.mjs` verifies 28 stories, six chapters, 60 captions/alts,
+original-image integrity, design-only metadata, and reference-free build output
+without private source dependencies. `validate-face-scan-gallery.mjs` additionally
+compares complete wording/captions and all 60 visual placements with read-only
+OOXML, checks every copied HEIR PNG against its source, and scans published assets
+for external moodboard image hashes.
 
-- `reference-frame-10-11-png`
-- `reference-frame-2-2-png`
-- `reference-frame-5-10-png`
-- `reference-frame-9-8-png`
-- `reference-image-14-png`
-- `reference-image-17-png`
-- `reference-image-18-png`
+Verification passed: production build and gallery validators, Astro/content checks,
+main HEIR and all five research fidelity checks, and whitespace checks. Desktop
+and 393 × 852 phone emulation covered full-width rails, readable captions,
+arrow/keyboard scrolling, original-image enlargement, Escape/focus return,
+mobile drawer, and light/dark appearance. No page-level overflow was observed.
+The unchanged rail/motion/style implementations are retained.
 
-Only 73 used originals are copied into the repository and explicitly imported.
-The audit compares every copied PNG byte-for-byte with its original and checks
-unused-file hashes against `src/assets`, `public`, and `dist`. The metadata powers
-the gallery at build time; private source paths/documents are not published.
+## Git history
 
-## Approved corrections and provenance
-
-1. In `choosing-a-check-in-routine`, YAML captions are **60-second scan** and
-   **30-second scan**; the Word captions are **Sixty second scan** and
-   **Thirty second scan**. The user approved retaining the numeric YAML wording.
-   All other story caption sequences match Word exactly.
-2. `onboarding-camera-access-5-png` alt says **Allow and Don’t Allow options**.
-   The original permission dialog actually reads **OK** and **Don’t Allow**.
-   The user approved replacing “Allow” with “OK” in this alt only.
-   The integrated metadata now contains that correction; its action-oriented visible
-   caption “Allow camera access” remains appropriate.
-3. Five included references have descriptive credits rather than named apps:
-   `reference-frame-1-1-png`, `reference-frame-3-3-png`,
-   `reference-frame-4-4-png`, `reference-frame-6-5-png`, and
-   `reference-frame-7-6-png`. Preserve these approved descriptions; confirm source
-   names/URLs before replacing them with more specific attribution. No app names
-   were inferred from appearance. Shen.ai, AVI, Bevel, and Oura credits are retained.
-4. `source_zip: Gallery(1).zip` is retained as supplied provenance, but that archive
-   was not located in this workspace. It is not needed to resolve any of the 80
-   extracted PNGs or the Word document. Retained as an archival provenance label; no gallery assets depend on it.
-
-## Implemented rendering contract
-
-Each chapter has an ordered `stories` array. Each story retains title, explanation,
-an independent `references` array (zero, one, or more), and `screens` (one or more).
-Placements resolve `asset_id` through the shared asset map, with captions attached
-to each occurrence and alt/role/source credit attached to the asset itself.
-
-References must render as static frames outside the HEIR rail, with an explicit
-Reference label, the asset's source credit, and the placement's individual caption.
-Only `role: design` placements in `screens` belong in the responsive HEIR design
-rail. Preserve source order, complete native aspect ratios, and per-image captions;
-available width may expose multiple full/partial screens. Do not flatten both
-collections into the existing single-image carousel model. Only explicit story
-placements are imported; never glob the whole source asset map or publish
-assets whose inclusion flag is false. The complete interface is approved, including its static reference frames and responsive design rails.
-
-Run `node scripts/validate-face-scan-gallery.mjs` locally with the sibling sources
-present. It validates the schema/counts, role separation, file formats/existence,
-design coverage, Word text/order, every visual placement, caption differences,
-centralized reference attribution, and unused-original publication exclusions.
-This is a local source audit; it must not become a deployment prerequisite that
-requires private source documents on GitHub.
-
-Automated implementation validation passes: gallery source audit, Astro/content
-checks, production build, and original HEIR/all five research fidelity checks.
-Production has nine pages and 254 internal links/fragments. The build also verifies
-all gallery story text, alt descriptions, captions, order, roles, credits, original
-image bytes, and import exclusions without requiring private sources.
-Desktop/tablet/phone, theme, rail, viewer, TOC, and contextual navigation review
-are completed and recorded in the project handoff. The user approved the gallery
-and authorized commit and push to `origin/main` on October 13, 2026.
+The 13 removed external PNG files remain in commit
+`903ea967cfaf32ff1b3f5b65314d04e42ad69e6e`, along with the previous identifying
+metadata. Removing them from the current working tree does not remove that history.
+No history rewrite or force-push has been performed. The approved publication removes those files from the deployed build, while
+prior Git history remains unchanged.

@@ -1,0 +1,9 @@
+---
+import PortfolioLayout from '../../../layouts/PortfolioLayout.astro';
+import DesignGallery from '../../../components/DesignGallery.astro';
+import { phaseOneGallery as gallery } from '../../../data/phase-one-gallery';
+const toc = gallery.chapters.map((chapter) => ({ slug: chapter.id, text: chapter.title, depth: 2 }));
+---
+<PortfolioLayout title={gallery.title} description={gallery.intro} toc={toc} gallery researchContext={{ label: 'Phase One Gallery', returnHref: '/heir/#first-launch' }} prev={{ link: '/heir/#first-launch', label: 'HEIR case study' }} next={{ link: '/heir/gallery/face-scan/', label: 'Face Scan Gallery' }}>
+  <DesignGallery gallery={gallery} markdown />
+</PortfolioLayout>

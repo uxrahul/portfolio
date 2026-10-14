@@ -1,0 +1,40 @@
+---
+import DesignRail from './DesignRail.astro';
+import type { GalleryImage } from '../data/face-scan-gallery';
+import { createMarkdownProcessor } from '@astrojs/markdown-remark';
+import '../styles/face-scan-gallery.css';
+interface Props {
+  gallery: { intro: string; chapters: { id: string; title: string; stories: { id: string; title: string; explanation: string; screens: GalleryImage[] }[] }[] };
+  markdown?: boolean;
+}
+const { gallery, markdown = false } = Astro.props;
+const processor = markdown ? await createMarkdownProcessor({ smartypants: false }) : undefined;
+const explanations = new Map<string, string>();
+if (processor) for (const chapter of gallery.chapters) for (const story of chapter.stories) explanations.set(story.id, (await processor.render(story.explanation)).code);
+---
+  <div class="face-scan-gallery">
+    <p class="gallery-intro">{gallery.intro}</p>
+    {gallery.chapters.map((chapter, index) => (
+      <section class="gallery-chapter" aria-labelledby={chapter.id}>
+        <header class="gallery-chapter-header" data-gallery-reveal>
+          <span class="gallery-chapter-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+          <h2 id={chapter.id}>{chapter.title}</h2>
+        </header>
+        {chapter.stories.map((story, storyIndex) => (
+          <section class="gallery-story" id={story.id} aria-labelledby={`${story.id}-title`}>
+            <header class="gallery-story-header" data-gallery-reveal>
+              <h3 id={`${story.id}-title`}>{story.title}</h3>
+              {markdown ? <Fragment set:html={explanations.get(story.id)} /> : <p>{story.explanation}</p>}
+            </header>
+            <div class="gallery-composition">
+              <DesignRail id={`${story.id}-designs`} label={story.title} images={story.screens} eager={index === 0 && storyIndex === 0} />
+            </div>
+          </section>
+        ))}
+      </section>
+    ))}
+  </div>
+<script>
+  import { bindGalleryMotion } from '../lib/gallery-motion';
+  bindGalleryMotion();
+</script>

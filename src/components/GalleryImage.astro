@@ -3,14 +3,12 @@ import { Image } from 'astro:assets';
 import type { GalleryImage } from '../data/face-scan-gallery';
 interface Props { image: GalleryImage; eager?: boolean; }
 const { image, eager = false } = Astro.props;
-const reference = image.role === 'reference';
-const caption = reference ? `${image.caption} — ${image.source_credit}` : image.caption;
+const caption = image.caption;
 const widths = [...new Set([240, 480, 720, 1080].map((width) => Math.min(width, image.src.width)))];
 ---
-<figure class:list={['gallery-image', { 'gallery-reference': reference }]} data-gallery-asset={image.asset_id} data-gallery-role={image.role}>
-  {reference && <div class="reference-credit"><span>Reference</span><span>{image.source_credit}</span></div>}
-  <a class="image-trigger" href={image.src.src} style={reference ? `--reference-ratio: ${image.src.width / image.src.height}` : undefined} data-image-viewer data-astro-reload data-caption={caption} data-width={image.src.width} aria-label={`Enlarge image: ${caption}`} draggable="false">
-    <Image src={image.src} alt={image.alt} format="webp" quality={95} widths={widths} sizes={reference ? '(max-width: 600px) 45vw, 224px' : '(max-width: 380px) 80vw, 272px'} style={`aspect-ratio: ${image.src.width} / ${image.src.height}`} loading={eager ? 'eager' : 'lazy'} decoding="async" draggable="false" />
+<figure class="gallery-image" data-gallery-asset={image.asset_id} data-gallery-role={image.role}>
+  <a class="image-trigger" href={image.src.src} data-image-viewer data-astro-reload data-caption={caption} data-width={image.src.width} aria-label={`Enlarge image: ${caption}`} draggable="false">
+    <Image src={image.src} alt={image.alt} format="webp" quality={95} widths={widths} sizes="(max-width: 380px) 80vw, 272px" style={`aspect-ratio: ${image.src.width} / ${image.src.height}`} loading={eager ? 'eager' : 'lazy'} decoding="async" draggable="false" />
     <span class="enlarge-cue" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M7 3H3v4m10-4h4v4M3 13v4h4m10-4v4h-4" /></svg></span>
   </a>
   <figcaption>{image.caption}</figcaption>

@@ -1,0 +1,721 @@
+schema_version: 1
+gallery_id: heir-phase-one
+title: HEIR Phase One Gallery
+eyebrow: GANANCE / HEIR PHASE ONE
+intro: This first redesign organized the original app around Home, Insights, Settings, and Account for
+  the public launch. I adapted familiar wearable patterns to HEIR’s screenless device, from setup and
+  daily activity to controls and connection recovery.
+source_document: Gallery/Phase one/heir-phase-one-product-gallery.docx
+source_archive: Gallery/Phase one.zip
+notes:
+  - Only the 59 explicitly listed HEIR designs may be imported during implementation.
+  - The Word document and original PNGs remain outside the published website.
+  - Moodboard images and all unselected PNGs are excluded.
+  - The onboarding apostrophe filename is resolved to the existing Unicode filename; no source asset is
+    renamed.
+  - Explanations retain authored inline Markdown emphasis.
+publication_rules:
+  include_only_screens_listed_in_this_manifest: true
+  exclude_reference_images: true
+  exclude_source_directory: Phase one/Moodboard/
+  reuse_existing_gallery_components: true
+  do_not_publish_source_documents_or_unselected_images: true
+  preserve_screen_and_story_order: true
+chapters:
+  - id: onboarding
+    title: Onboarding
+    order: 1
+    stories:
+      - id: introducing-the-product
+        title: Introducing the product
+        order: 1
+        source_document_page: 1
+        explanation: I used lifestyle imagery to show how HEIR fits beneath a traditional watch, then introduced
+          its capabilities before account setup. A consistent primary action carries the introduction
+          into the app.
+        screens:
+          - asset_id: introducing-the-product--lifestyle-introduction
+            order: 1
+            caption: Lifestyle introduction
+          - asset_id: introducing-the-product--getting-started
+            order: 2
+            caption: Getting started
+          - asset_id: introducing-the-product--product-capabilities
+            order: 3
+            caption: Product capabilities
+      - id: creating-an-account-and-personalizing-setup
+        title: Creating an account and personalizing setup
+        order: 2
+        source_document_page: 2
+        explanation: I broke account creation into short steps and explained why personal details were requested.
+          The optional profile step gives people a way to continue without completing every field.
+        screens:
+          - asset_id: creating-an-account-and-personalizing-setup--create-an-account
+            order: 1
+            caption: Create an account
+          - asset_id: creating-an-account-and-personalizing-setup--account-details
+            order: 2
+            caption: Account details
+          - asset_id: creating-an-account-and-personalizing-setup--personalize-setup
+            order: 3
+            caption: Personalize setup
+  - id: pairing-and-connection
+    title: Pairing and connection
+    order: 2
+    stories:
+      - id: preparing-the-device-and-permissions
+        title: Preparing the device and permissions
+        order: 1
+        source_document_page: 3
+        explanation: I paired physical setup instructions with contextual permission requests. The alert
+          preferences explain what HEIR will notify people about before the system asks for access.
+        screens:
+          - asset_id: preparing-the-device-and-permissions--wear-the-device
+            order: 1
+            caption: Wear the device
+          - asset_id: preparing-the-device-and-permissions--bluetooth-permission
+            order: 2
+            caption: Bluetooth permission
+          - asset_id: preparing-the-device-and-permissions--alert-preferences
+            order: 3
+            caption: Alert preferences
+      - id: finding-and-connecting-heir
+        title: Finding and connecting HEIR
+        order: 2
+        source_document_page: 4
+        explanation: The pairing flow combines a physical gesture with visible search feedback and a selectable
+          device list. A separate confirmation marks the transition from setup to a connected device.
+        screens:
+          - asset_id: finding-and-connecting-heir--searching-for-heir
+            order: 1
+            caption: Searching for HEIR
+          - asset_id: finding-and-connecting-heir--available-devices
+            order: 2
+            caption: Available devices
+          - asset_id: finding-and-connecting-heir--connection-complete
+            order: 3
+            caption: Connection complete
+      - id: recovering-from-connection-problems
+        title: Recovering from connection problems
+        order: 3
+        source_document_page: 5
+        explanation: I kept retry guidance beside the activation instruction and distinguished a paired device
+          from one that is currently detected. These states make the connection problem visible without
+          restarting the whole setup.
+        screens:
+          - asset_id: recovering-from-connection-problems--retry-connection
+            order: 1
+            caption: Retry connection
+          - asset_id: recovering-from-connection-problems--paired-but-not-detected
+            order: 2
+            caption: Paired but not detected
+      - id: learning-the-app-in-place
+        title: Learning the app in place
+        order: 4
+        source_document_page: 6
+        explanation: I used an optional walkthrough to point directly to device management, customization, and
+          the daily breakdown. Highlighting each control in context connects the explanation to the
+          action people will use.
+        screens:
+          - asset_id: learning-the-app-in-place--find-device-controls
+            order: 1
+            caption: Find device controls
+          - asset_id: learning-the-app-in-place--find-customization
+            order: 2
+            caption: Find customization
+          - asset_id: learning-the-app-in-place--explore-daily-movement
+            order: 3
+            caption: Explore daily movement
+  - id: home-and-insights
+    title: Home and insights
+    order: 3
+    stories:
+      - id: reading-the-day-at-a-glance
+        title: Reading the day at a glance
+        order: 1
+        source_document_page: 7
+        explanation: I drew on Cole Nussbaumer Knaflic’s *Storytelling with Data* to focus attention on daily
+          progress. A prominent total, secondary metrics, and a time-of-day breakdown give the activity
+          views a clear reading order.
+        screens:
+          - asset_id: reading-the-day-at-a-glance--home-overview
+            order: 1
+            caption: Home overview
+          - asset_id: reading-the-day-at-a-glance--goal-achieved
+            order: 2
+            caption: Goal achieved
+          - asset_id: reading-the-day-at-a-glance--daily-breakdown
+            order: 3
+            caption: Daily breakdown
+      - id: exploring-steps-over-time
+        title: Exploring steps over time
+        order: 2
+        source_document_page: 8
+        explanation: I kept gridlines subdued and placed the selected value beside its bar, applying the book’s
+          emphasis on reducing clutter and directing attention. Familiar time filters connect the daily
+          view to the weekly summary.
+        screens:
+          - asset_id: exploring-steps-over-time--daily-steps
+            order: 1
+            caption: Daily steps
+          - asset_id: exploring-steps-over-time--weekly-chart-selection
+            order: 2
+            caption: Weekly chart selection
+      - id: keeping-activity-views-consistent
+        title: Keeping activity views consistent
+        order: 3
+        source_document_page: 9
+        explanation: "I matched the chart to the question: a cumulative curve shows activity building through the
+          day, while bars compare days within a week. The same filters and summary hierarchy carry across
+          steps and calories."
+        screens:
+          - asset_id: keeping-activity-views-consistent--daily-calories
+            order: 1
+            caption: Daily calories
+          - asset_id: keeping-activity-views-consistent--weekly-calories
+            order: 2
+            caption: Weekly calories
+  - id: settings-and-controls
+    title: Settings and controls
+    order: 4
+    stories:
+      - id: giving-customization-a-clear-home
+        title: Giving customization a clear home
+        order: 1
+        source_document_page: 10
+        explanation: Card sorting and tree testing informed one Settings destination with recognizable groups for
+          controls, alerts, and integrations. I used grouped rows to lead into focused screens for tap
+          behavior and vibration intensity.
+        screens:
+          - asset_id: giving-customization-a-clear-home--settings-groups
+            order: 1
+            caption: Settings groups
+          - asset_id: giving-customization-a-clear-home--tap-controls
+            order: 2
+            caption: Tap controls
+          - asset_id: giving-customization-a-clear-home--vibration-intensity
+            order: 3
+            caption: Vibration intensity
+      - id: adjusting-tap-behavior
+        title: Adjusting tap behavior
+        order: 2
+        source_document_page: 11
+        explanation: I kept sensitivity choices in focused dialogs with explicit confirmation. Turning off the
+          triple-tap action changes the available controls while retaining the settings for tap force and
+          speed.
+        screens:
+          - asset_id: adjusting-tap-behavior--tap-force
+            order: 1
+            caption: Tap force
+          - asset_id: adjusting-tap-behavior--tap-speed
+            order: 2
+            caption: Tap speed
+          - asset_id: adjusting-tap-behavior--triple-tap-disabled
+            order: 3
+            caption: Triple tap disabled
+      - id: choosing-alerts-and-understanding-feedback
+        title: Choosing alerts and understanding feedback
+        order: 3
+        source_document_page: 12
+        explanation: Separate toggles let people choose message and call alerts. An information sheet explains
+          the vibration patterns and connection requirements without filling the main controls screen
+          with instructions.
+        screens:
+          - asset_id: choosing-alerts-and-understanding-feedback--message-and-call-alerts
+            order: 1
+            caption: Message and call alerts
+          - asset_id: choosing-alerts-and-understanding-feedback--alert-guidance
+            order: 2
+            caption: Alert guidance
+      - id: mapping-gestures-to-media-and-calls
+        title: Mapping gestures to media and calls
+        order: 4
+        source_document_page: 13
+        explanation: I placed gesture mappings beside the functions they control, using the same compact guide
+          for media and incoming calls. The call screen also makes its always-active behavior explicit.
+        screens:
+          - asset_id: mapping-gestures-to-media-and-calls--media-gestures
+            order: 1
+            caption: Media gestures
+          - asset_id: mapping-gestures-to-media-and-calls--call-gestures
+            order: 2
+            caption: Call gestures
+      - id: connecting-activity-data
+        title: Connecting activity data
+        order: 5
+        source_document_page: 14
+        explanation: I gave health syncing a focused control and a short explanation of what is shared. The same
+          information-sheet pattern provides detail when needed while leaving the main choice easy to
+          scan.
+        screens:
+          - asset_id: connecting-activity-data--health-syncing
+            order: 1
+            caption: Health syncing
+          - asset_id: connecting-activity-data--sync-explanation
+            order: 2
+            caption: Sync explanation
+  - id: device-management
+    title: Device management
+    order: 5
+    stories:
+      - id: checking-status-and-reconnecting
+        title: Checking status and reconnecting
+        order: 1
+        source_document_page: 15
+        explanation: Wearable device references informed the product image, battery readout, and connection
+          actions in one place. A low-battery treatment and a disconnected state preserve that hierarchy
+          while changing the feedback and next action.
+        screens:
+          - asset_id: checking-status-and-reconnecting--connected-device
+            order: 1
+            caption: Connected device
+          - asset_id: checking-status-and-reconnecting--low-battery
+            order: 2
+            caption: Low battery
+          - asset_id: checking-status-and-reconnecting--disconnected-device
+            order: 3
+            caption: Disconnected device
+      - id: finding-help-beside-device-information
+        title: Finding help beside device information
+        order: 2
+        source_document_page: 16
+        explanation: I grouped device details with expandable FAQs and a route to connection troubleshooting.
+          Illustrated recovery steps and a question form offer more help without interrupting the main
+          device view.
+        screens:
+          - asset_id: finding-help-beside-device-information--device-information
+            order: 1
+            caption: Device information
+          - asset_id: finding-help-beside-device-information--connection-troubleshooting
+            order: 2
+            caption: Connection troubleshooting
+          - asset_id: finding-help-beside-device-information--ask-a-question
+            order: 3
+            caption: Ask a question
+      - id: explaining-disconnect-and-reset-actions
+        title: Explaining disconnect and reset actions
+        order: 3
+        source_document_page: 17
+        explanation: I separated forgetting the device from resetting its connection and placed guidance before
+          the reset action. Confirmation dialogs explain the consequence and provide a way to cancel.
+        screens:
+          - asset_id: explaining-disconnect-and-reset-actions--disconnect-confirmation
+            order: 1
+            caption: Disconnect confirmation
+          - asset_id: explaining-disconnect-and-reset-actions--reset-guidance
+            order: 2
+            caption: Reset guidance
+          - asset_id: explaining-disconnect-and-reset-actions--reset-confirmation
+            order: 3
+            caption: Reset confirmation
+      - id: making-an-update-actionable
+        title: Making an update actionable
+        order: 4
+        source_document_page: 18
+        explanation: Connected-device references informed a clear update prompt with release notes and
+          preparation requirements. A notice on Home gives the update a visible entry point in the
+          everyday experience.
+        screens:
+          - asset_id: making-an-update-actionable--update-notice-on-home
+            order: 1
+            caption: Update notice on Home
+          - asset_id: making-an-update-actionable--update-requirements
+            order: 2
+            caption: Update requirements
+      - id: showing-update-progress-and-completion
+        title: Showing update progress and completion
+        order: 5
+        source_document_page: 19
+        explanation: I carried the circular status treatment from the update prompt into percentage progress and
+          a completion check. The progress screen explains what to do while the update runs, and the
+          final screen provides a clear exit.
+        screens:
+          - asset_id: showing-update-progress-and-completion--update-in-progress
+            order: 1
+            caption: Update in progress
+          - asset_id: showing-update-progress-and-completion--update-complete
+            order: 2
+            caption: Update complete
+  - id: account-and-profile
+    title: Account and profile
+    order: 6
+    stories:
+      - id: separating-account-management-from-device-controls
+        title: Separating account management from device controls
+        order: 1
+        source_document_page: 20
+        explanation: Research placed account functions in a distinct destination. I grouped profile, goals, and
+          support here, then used confirmation dialogs to distinguish signing out from permanently
+          deleting the account.
+        screens:
+          - asset_id: separating-account-management-from-device-controls--account-navigation
+            order: 1
+            caption: Account navigation
+          - asset_id: separating-account-management-from-device-controls--sign-out-confirmation
+            order: 2
+            caption: Sign out confirmation
+          - asset_id: separating-account-management-from-device-controls--delete-account-confirmation
+            order: 3
+            caption: Delete account confirmation
+      - id: editing-details-with-local-feedback
+        title: Editing details with local feedback
+        order: 2
+        source_document_page: 21
+        explanation: I kept personal details in one form with a brief explanation of their purpose. Field-level
+          validation identifies an incorrect entry beside the value that needs attention.
+        screens:
+          - asset_id: editing-details-with-local-feedback--personal-details
+            order: 1
+            caption: Personal details
+          - asset_id: editing-details-with-local-feedback--name-validation
+            order: 2
+            caption: Name validation
+      - id: using-focused-input-controls
+        title: Using focused input controls
+        order: 3
+        source_document_page: 22
+        explanation: I used dedicated pickers for dates and measurements, with unit selection where needed. A
+          separate choice dialog includes a way to leave gender undisclosed.
+        screens:
+          - asset_id: using-focused-input-controls--birthday-picker
+            order: 1
+            caption: Birthday picker
+          - asset_id: using-focused-input-controls--height-and-units
+            order: 2
+            caption: Height and units
+          - asset_id: using-focused-input-controls--gender-choices
+            order: 3
+            caption: Gender choices
+      - id: setting-a-daily-goal
+        title: Setting a daily goal
+        order: 4
+        source_document_page: 23
+        explanation: I gave the step goal a focused screen with a large value and adjustment controls. Inline
+          validation places the minimum requirement beside the value being edited.
+        screens:
+          - asset_id: setting-a-daily-goal--daily-step-goal
+            order: 1
+            caption: Daily step goal
+          - asset_id: setting-a-daily-goal--minimum-goal-feedback
+            order: 2
+            caption: Minimum goal feedback
+assets:
+  introducing-the-product--lifestyle-introduction:
+    source_path: Gallery/Phase one/Onboarding/Splash Video - Mockup 1.png
+    role: design
+    alt: App introduction shows a person holding HEIR beside a traditional watch.
+    included_in_document: true
+  introducing-the-product--getting-started:
+    source_path: Gallery/Phase one/Onboarding/Get Started - Mockup 3.png
+    role: design
+    alt: Product welcome screen shows HEIR beside a watch with Get Started and Order your HEIR Device
+      actions.
+    included_in_document: true
+  introducing-the-product--product-capabilities:
+    source_path: Gallery/Phase one/Onboarding/Onboarding - Product Messaging 1 - Mockup 4.png
+    role: design
+    alt: Introduction explains activity tracking, music control, and connectivity, with create account and
+      login actions.
+    included_in_document: true
+  creating-an-account-and-personalizing-setup--create-an-account:
+    source_path: Gallery/Phase one/Onboarding/Create Account - Mockup 6.png
+    role: design
+    alt: Account creation screen asks for email and offers a Next action with terms and privacy links.
+    included_in_document: true
+  creating-an-account-and-personalizing-setup--account-details:
+    source_path: Gallery/Phase one/Onboarding/Welcome - Mockup 7.png
+    role: design
+    alt: Welcome form asks for name and password before Get Started.
+    included_in_document: true
+  creating-an-account-and-personalizing-setup--personalize-setup:
+    source_path: Gallery/Phase one/Onboarding/Let’s Make It Yours - Mockup 8.png
+    role: design
+    alt: Optional profile setup asks for birthday, height, weight, and gender, with Skip and Next actions.
+    included_in_document: true
+  preparing-the-device-and-permissions--wear-the-device:
+    source_path: Gallery/Phase one/Pairing and connection/Setup 1 - Mockup 1.png
+    role: design
+    alt: Setup screen illustrates sliding HEIR beneath a watch and offers help and a Next action.
+    included_in_document: true
+  preparing-the-device-and-permissions--bluetooth-permission:
+    source_path: Gallery/Phase one/Pairing and connection/Bluetooth Permission - Mockup 2.png
+    role: design
+    alt: System Bluetooth permission alert appears over the physical setup instruction, with deny and allow
+      actions.
+    included_in_document: true
+  preparing-the-device-and-permissions--alert-preferences:
+    source_path: Gallery/Phase one/Pairing and connection/Notification Permission Base - Mockup 3.png
+    role: design
+    alt: Setup screen explains essential alerts and provides message and call toggles before allowing
+      notifications.
+    included_in_document: true
+  finding-and-connecting-heir--searching-for-heir:
+    source_path: Gallery/Phase one/Pairing and connection/Setup 2 - Mockup 5.png
+    role: design
+    alt: Pairing screen asks for a triple tap and displays a search status below the watch illustration.
+    included_in_document: true
+  finding-and-connecting-heir--available-devices:
+    source_path: Gallery/Phase one/Pairing and connection/Connect Your Heir - Mockup 7.png
+    role: design
+    alt: Pairing screen displays three available devices with the selected device highlighted.
+    included_in_document: true
+  finding-and-connecting-heir--connection-complete:
+    source_path: Gallery/Phase one/Pairing and connection/Setup 3 - Mockup 9.png
+    role: design
+    alt: Setup confirmation shows a green check and a Continue action after connecting HEIR.
+    included_in_document: true
+  recovering-from-connection-problems--retry-connection:
+    source_path: Gallery/Phase one/Pairing and connection/Rescan - Mockup 8.png
+    role: design
+    alt: Pairing screen reports that HEIR did not respond and offers a Try Again action.
+    included_in_document: true
+  recovering-from-connection-problems--paired-but-not-detected:
+    source_path: Gallery/Phase one/Pairing and connection/Connect Your Heir - Mockup 11.png
+    role: design
+    alt: Connection screen shows HEIR as paired but not detected beside an illustration of the activation
+      gesture.
+    included_in_document: true
+  learning-the-app-in-place--find-device-controls:
+    source_path: Gallery/Phase one/App walkthrough/Walkthrough - 1 - Mockup 1.png
+    role: design
+    alt: Optional walkthrough highlights the battery and connection control at the top of Home.
+    included_in_document: true
+  learning-the-app-in-place--find-customization:
+    source_path: Gallery/Phase one/App walkthrough/Walkthrough - 3 - Mockup 3.png
+    role: design
+    alt: Optional walkthrough highlights the Settings tab and explains where to customize taps and alerts.
+    included_in_document: true
+  learning-the-app-in-place--explore-daily-movement:
+    source_path: Gallery/Phase one/App walkthrough/Walkthrough - 4 - Mockup 4.png
+    role: design
+    alt: Optional walkthrough highlights the daily step breakdown and explains the time-of-day chart.
+    included_in_document: true
+  reading-the-day-at-a-glance--home-overview:
+    source_path: Gallery/Phase one/Home/Home - Connected - Hero1 - Mockup 1.png
+    role: design
+    alt: Home shows 7362 steps in a goal ring, activity summary, daily breakdown, and connected battery
+      status.
+    included_in_document: true
+  reading-the-day-at-a-glance--goal-achieved:
+    source_path: Gallery/Phase one/Home/Home - Charging - Goal Achieved - Mockup 2.png
+    role: design
+    alt: Home shows a completed 10000-step goal and charging status above the activity summary.
+    included_in_document: true
+  reading-the-day-at-a-glance--daily-breakdown:
+    source_path: Gallery/Phase one/Home/Home - Daily Step Breakdown - Mockup 3.png
+    role: design
+    alt: Scrolled Home shows a cumulative step chart divided into morning, afternoon, and evening.
+    included_in_document: true
+  exploring-steps-over-time--daily-steps:
+    source_path: Gallery/Phase one/Insights/Insights - Day - Goal Completed - Mockup 1.png
+    role: design
+    alt: Insights shows daily steps, an activity summary, a time-of-day breakdown, and Day Week Month Year
+      filters.
+    included_in_document: true
+  exploring-steps-over-time--weekly-chart-selection:
+    source_path: Gallery/Phase one/Insights/Insights - Previous Week - Expanded - Mockup 4.png
+    role: design
+    alt: Weekly step insights shows average steps, goal completion, and a selected bar with a precise value.
+    included_in_document: true
+  keeping-activity-views-consistent--daily-calories:
+    source_path: Gallery/Phase one/Insights/Insights - Calories - Day - Mockup 6.png
+    role: design
+    alt: Calorie insights shows a daily total and a cumulative chart divided into morning, afternoon, and
+      evening.
+    included_in_document: true
+  keeping-activity-views-consistent--weekly-calories:
+    source_path: Gallery/Phase one/Insights/Insights - Calories - Week - Mockup 5.png
+    role: design
+    alt: Calorie insights shows an average daily total and a bar chart for the selected week.
+    included_in_document: true
+  giving-customization-a-clear-home--settings-groups:
+    source_path: Gallery/Phase one/Settings/Settings - Mockup 1.png
+    role: design
+    alt: Settings groups tap and vibration controls, alerts and media, app integrations, and device
+      connection actions.
+    included_in_document: true
+  giving-customization-a-clear-home--tap-controls:
+    source_path: Gallery/Phase one/Settings/Tap Controls - Mockup 2.png
+    role: design
+    alt: Tap Controls shows the triple-tap toggle, choices for its action, and tap force and speed settings.
+    included_in_document: true
+  giving-customization-a-clear-home--vibration-intensity:
+    source_path: Gallery/Phase one/Settings/Vibration Controls - Mockup 8.png
+    role: design
+    alt: Vibration Controls shows an intensity selector with a brief explanation of vibration strength.
+    included_in_document: true
+  adjusting-tap-behavior--tap-force:
+    source_path: Gallery/Phase one/Settings/Tap Force - Mockup 3.png
+    role: design
+    alt: Tap Force dialog offers Soft Medium and Heavy choices with Cancel and OK actions.
+    included_in_document: true
+  adjusting-tap-behavior--tap-speed:
+    source_path: Gallery/Phase one/Settings/Tap Speed - Mockup 4.png
+    role: design
+    alt: Tap Speed dialog offers Slow Medium and Fast choices with Cancel and OK actions.
+    included_in_document: true
+  adjusting-tap-behavior--triple-tap-disabled:
+    source_path: Gallery/Phase one/Settings/Tap Controls - Triple Tap OFF - Mockup 5.png
+    role: design
+    alt: Tap Controls shows triple tap off, with its action choices hidden and force and speed controls
+      retained.
+    included_in_document: true
+  choosing-alerts-and-understanding-feedback--message-and-call-alerts:
+    source_path: Gallery/Phase one/Settings/Alerts - Mockup 9.png
+    role: design
+    alt: Alerts screen provides separate toggles for message and call vibrations.
+    included_in_document: true
+  choosing-alerts-and-understanding-feedback--alert-guidance:
+    source_path: Gallery/Phase one/Settings/About Alerts - Mockup 13.png
+    role: design
+    alt: Information sheet explains vibration patterns and connection requirements over the Alerts screen.
+    included_in_document: true
+  mapping-gestures-to-media-and-calls--media-gestures:
+    source_path: Gallery/Phase one/Settings/Media Controls - Mockup 10.png
+    role: design
+    alt: Media Controls shows a toggle and a gesture guide for play or pause and changing tracks.
+    included_in_document: true
+  mapping-gestures-to-media-and-calls--call-gestures:
+    source_path: Gallery/Phase one/Settings/Call Controls - Mockup 12.png
+    role: design
+    alt: Call Controls explains that the feature is always active and lists gestures to silence and decline
+      calls.
+    included_in_document: true
+  connecting-activity-data--health-syncing:
+    source_path: Gallery/Phase one/Settings/Apple Health Sync - Mockup 11.png
+    role: design
+    alt: HEIR health sync screen shows an integration toggle and a brief explanation of syncing activity
+      data.
+    included_in_document: true
+  connecting-activity-data--sync-explanation:
+    source_path: Gallery/Phase one/Settings/About Apple Health Sync - Mockup 16.png
+    role: design
+    alt: Information sheet explains that health syncing combines steps, calories, and other activity data in
+      one place.
+    included_in_document: true
+  checking-status-and-reconnecting--connected-device:
+    source_path: Gallery/Phase one/About device/Device Settings - Mockup 1.png
+    role: design
+    alt: Device Settings shows the connected HEIR image, a 29 percent battery readout, and a disconnect
+      action.
+    included_in_document: true
+  checking-status-and-reconnecting--low-battery:
+    source_path: Gallery/Phase one/About device/Device Settings - Mockup 2.png
+    role: design
+    alt: Device Settings shows a 10 percent battery readout with a red low-battery indicator.
+    included_in_document: true
+  checking-status-and-reconnecting--disconnected-device:
+    source_path: Gallery/Phase one/About device/Connect Device - Mockup 4.png
+    role: design
+    alt: Device Settings shows HEIR as not connected with Connect HEIR and troubleshooting actions.
+    included_in_document: true
+  finding-help-beside-device-information--device-information:
+    source_path: Gallery/Phase one/About device/Info - About Device - Mockup 6.png
+    role: design
+    alt: About Device groups model information, expandable FAQs, troubleshooting, technical specifications,
+      and a question action.
+    included_in_document: true
+  finding-help-beside-device-information--connection-troubleshooting:
+    source_path: Gallery/Phase one/About device/Troubleshoot Connection - 1 - Mockup 5.png
+    role: design
+    alt: Troubleshooting sheet presents illustrated steps for checking charge and Bluetooth permissions.
+    included_in_document: true
+  finding-help-beside-device-information--ask-a-question:
+    source_path: Gallery/Phase one/About device/Ask a Question - Mockup 7.png
+    role: design
+    alt: Support form asks for name, email, and a question, with the Send action disabled while empty.
+    included_in_document: true
+  explaining-disconnect-and-reset-actions--disconnect-confirmation:
+    source_path: Gallery/Phase one/About device/Disconnect Your Heir - Mockup 8.png
+    role: design
+    alt: Confirmation alert explains that forgetting HEIR removes it from the app and provides Cancel and
+      Forget actions.
+    included_in_document: true
+  explaining-disconnect-and-reset-actions--reset-guidance:
+    source_path: Gallery/Phase one/Settings/Reset Connection - Mockup 6.png
+    role: design
+    alt: Reset Connection screen explains when to reset and gives troubleshooting guidance before a reset
+      action.
+    included_in_document: true
+  explaining-disconnect-and-reset-actions--reset-confirmation:
+    source_path: Gallery/Phase one/Settings/Reset Connection Confirmation - Mockup 7.png
+    role: design
+    alt: Reset Connection alert explains reconnection and Bluetooth notification settings with Cancel and
+      Reset actions.
+    included_in_document: true
+  making-an-update-actionable--update-notice-on-home:
+    source_path: Gallery/Phase one/Firmware update/Refresh Status - Mockup 4.png
+    role: design
+    alt: Home displays a firmware update notice near the device status with an Open Settings action.
+    included_in_document: true
+  making-an-update-actionable--update-requirements:
+    source_path: Gallery/Phase one/Firmware update/Firmware Update - Popup - Mockup 1.png
+    role: design
+    alt: Firmware update prompt presents release notes, charging and proximity requirements, and an Update
+      Now action.
+    included_in_document: true
+  showing-update-progress-and-completion--update-in-progress:
+    source_path: Gallery/Phase one/Firmware update/Update Progress - Mockup 2.png
+    role: design
+    alt: Firmware screen shows a circular indicator at 34 percent and asks the user to keep the app open near
+      the phone.
+    included_in_document: true
+  showing-update-progress-and-completion--update-complete:
+    source_path: Gallery/Phase one/Firmware update/Update Completed - Mockup 3.png
+    role: design
+    alt: Firmware completion screen shows a check inside a ring, release notes, and a Done action.
+    included_in_document: true
+  separating-account-management-from-device-controls--account-navigation:
+    source_path: Gallery/Phase one/Accout and profile/Account - Mockup 1.png
+    role: design
+    alt: Account screen groups profile, step goal, password, support, deletion, and sign-out actions.
+    included_in_document: true
+  separating-account-management-from-device-controls--sign-out-confirmation:
+    source_path: Gallery/Phase one/Accout and profile/Sign Out - Mockup 9.png
+    role: design
+    alt: Sign-out alert explains that login will be required to continue and provides Cancel and Sign Out
+      actions.
+    included_in_document: true
+  separating-account-management-from-device-controls--delete-account-confirmation:
+    source_path: Gallery/Phase one/Accout and profile/Delete My Account - Mockup 8.png
+    role: design
+    alt: Account deletion alert warns that the account and associated data will be permanently deleted.
+    included_in_document: true
+  editing-details-with-local-feedback--personal-details:
+    source_path: Gallery/Phase one/Accout and profile/Profile - Mockup 2.png
+    role: design
+    alt: Profile form groups name, birthday, height, weight, and gender fields with an explanation of their
+      purpose.
+    included_in_document: true
+  editing-details-with-local-feedback--name-validation:
+    source_path: Gallery/Phase one/Accout and profile/Profile - First Name - Incorrect entry. - Mockup 3.png
+    role: design
+    alt: Profile form highlights an incorrect first-name entry with a red border and an inline error message.
+    included_in_document: true
+  using-focused-input-controls--birthday-picker:
+    source_path: Gallery/Phase one/Accout and profile/Birthday - Mockup 4.png
+    role: design
+    alt: Birthday dialog presents month day and year choices with Cancel and OK actions.
+    included_in_document: true
+  using-focused-input-controls--height-and-units:
+    source_path: Gallery/Phase one/Accout and profile/Height - Mockup 5.png
+    role: design
+    alt: Height dialog shows feet and inches pickers with an option to switch to centimeters.
+    included_in_document: true
+  using-focused-input-controls--gender-choices:
+    source_path: Gallery/Phase one/Accout and profile/Gender - Mockup 7.png
+    role: design
+    alt: Gender dialog offers Female Male Non-binary and Prefer not to say choices with explicit
+      confirmation.
+    included_in_document: true
+  setting-a-daily-goal--daily-step-goal:
+    source_path: Gallery/Phase one/Set goal/Set Goal - Mockup 1.png
+    role: design
+    alt: Set Goal screen shows 10000 steps per day with minus and plus controls and a Save action.
+    included_in_document: true
+  setting-a-daily-goal--minimum-goal-feedback:
+    source_path: Gallery/Phase one/Set goal/Save Goal - If 0 - Mockup 2.png
+    role: design
+    alt: Set Goal screen shows 500 steps with a red field border and a message that the value cannot be below
+      500.
+    included_in_document: true

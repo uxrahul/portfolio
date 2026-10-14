@@ -19,7 +19,7 @@ export const navigation: NavigationItem[] = [
       {
         id: 'ganance-gallery', label: 'Product Gallery', expanded: false,
         children: [
-          { id: 'phase-one', label: 'Phase one' },
+          { id: 'phase-one', label: 'Phase one', href: '/heir/gallery/phase-one/' },
           { id: 'phase-two', label: 'Phase two' },
           { id: 'face-scan', label: 'Face scan', href: '/heir/gallery/face-scan/' },
         ],

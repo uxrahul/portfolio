@@ -1,32 +1,24 @@
 schema_version: 1
 gallery_id: heir-face-scan
 title: HEIR Health Scan Gallery
-intro: I drew on wearable app patterns and Shen.ai reference screens, then adapted them around research on trust,
-  consistency, and clear explanations. This gallery brings those references together with the complete HEIR screen
-  collection.
+intro: I drew on familiar health and wearable interface patterns, adapting them around research on trust,
+  consistency, and clear explanations. This gallery presents the resulting HEIR screens.
 source_document: Gallery/Face scan/face-scan-gallery-document.docx
-source_zip: Gallery(1).zip
 notes:
-- The 28 stories are ordered as in the supplied Word document; references and finished designs are always separate
-  collections.
-- References are static framed images, never carousel slides; HEIR screens form a responsive, continuous horizontal
-  scroller.
-- Use the source_path to locate original high-resolution PNGs; do not extract reduced Word thumbnails.
-- Alt text describes the image independently of its visible caption. Visible captions stay attached to the corresponding
-  image.
-- 'Assets marked included_in_document: false are unused moodboard references; do not publish them unless the user
-  approves.'
-- External references must retain their visible Reference and source-credit labels; do not imply HEIR ownership of
-  these reference designs.
+  - The revised Word document is authoritative for all 28 stories, their explanations, and captions.
+  - Only original HEIR designs are included; each story uses the existing responsive continuous
+    horizontal rail.
+  - Use source_path for original high-resolution PNGs; do not extract reduced Word thumbnails.
+  - Alt descriptions remain attached to their original HEIR screens.
 chapters:
 - id: onboarding-and-permissions
   title: Onboarding and permissions
   stories:
   - id: introducing-the-scan
     title: Introducing the scan
-    explanation: Research highlighted the need for trust and clear explanations. I separated the introduction, technology
-      explanation, and consent so people could understand the scan before granting access.
-    references: []
+    explanation: Research highlighted the need for trust and clear explanations. I separated the
+      introduction, technology explanation, and consent so people could understand the scan before
+      granting access.
     screens:
     - asset_id: onboarding-glance-1-png
       caption: Health at a glance
@@ -36,22 +28,16 @@ chapters:
       caption: Data privacy and consent
   - id: turning-guidance-into-preparation
     title: Turning guidance into preparation
-    explanation: I used the preparation requirements in the Shen.ai references as a starting point, then turned their
-      dense guidance into four steps. Rest, lighting, framing, and stillness become actions people can take before
-      starting.
-    references:
-    - asset_id: reference-image-11-png
-      caption: Technology and preparation
-    - asset_id: reference-image-12-png
-      caption: Capture instructions
+    explanation: I used preparation guidance from existing scan interfaces as a starting point, then
+      turned it into four steps. Rest, lighting, framing, and stillness become actions people can take
+      before starting.
     screens:
     - asset_id: onboarding-prepare-scan-4-png
       caption: Prepare for the scan
   - id: camera-access-and-recovery
     title: Camera access and recovery
-    explanation: I kept camera prompts familiar and made each blocked state actionable. People can allow access, open
-      device settings, or retry when another app is using the camera.
-    references: []
+    explanation: I kept camera prompts familiar and made each blocked state actionable. People can allow
+      access, open device settings, or retry when another app is using the camera.
     screens:
     - asset_id: onboarding-camera-access-5-png
       caption: Allow camera access
@@ -64,11 +50,8 @@ chapters:
   stories:
   - id: starting-the-scan
     title: Starting the scan
-    explanation: The live workout reference shows how a camera or activity view can keep a reading and a primary control
-      prominent. I adapted that hierarchy around face positioning, scan duration, and a clear start action.
-    references:
-    - asset_id: reference-frame-4-4-png
-      caption: Live workout display
+    explanation: Wearable references informed a hierarchy that keeps live readings and primary controls
+      prominent. I adapted this around face positioning, scan duration, and a clear start action.
     screens:
     - asset_id: capture-normal-scan-start-info-1-1-png
       caption: Ready to scan
@@ -76,9 +59,9 @@ chapters:
       caption: Starting capture
   - id: progress-and-completion
     title: Progress and completion
-    explanation: I kept progress in the same position as capture began, advanced, and finished. A separate processing
-      message makes clear that capturing the scan and receiving its results are different states.
-    references: []
+    explanation: I kept progress in the same position as capture began, advanced, and finished. A
+      separate processing message makes clear that capturing the scan and receiving its results are
+      different states.
     screens:
     - asset_id: capture-normal-scan-progress-info-2-3-png
       caption: Scan in progress
@@ -86,9 +69,8 @@ chapters:
       caption: Capture complete
   - id: lighting-feedback
     title: Lighting feedback
-    explanation: The preparation guidance carries into the live view as a specific correction. The banner tells people
-      whether to find more light, remove backlighting, or make illumination more even.
-    references: []
+    explanation: The preparation guidance carries into the live view as a specific correction. The banner
+      tells people whether to find more light, remove backlighting, or make illumination more even.
     screens:
     - asset_id: capture-warning-scan-well-lit-1-png
       caption: Find a well lit area
@@ -98,9 +80,8 @@ chapters:
       caption: Find even light
   - id: staying-still
     title: Staying still
-    explanation: I paired each warning with an action people can perform immediately. Face movement, device movement,
-      and talking receive different instructions while the scan remains visible.
-    references: []
+    explanation: I paired each warning with an action people can perform immediately. Face movement,
+      device movement, and talking receive different instructions while the scan remains visible.
     screens:
     - asset_id: capture-warning-scan-hold-still-4-png
       caption: Hold completely still
@@ -110,9 +91,8 @@ chapters:
       caption: Relax and avoid talking
   - id: correcting-position
     title: Correcting position
-    explanation: The frame changes with the detected position, while the message names the correction. Matching left
-      and right states keeps the same behavior understandable in either direction.
-    references: []
+    explanation: The frame changes with the detected position, while the message names the correction.
+      Matching left and right states keeps the same behavior understandable in either direction.
     screens:
     - asset_id: capture-warning-scan-center-face-8-png
       caption: Center face from the left
@@ -120,9 +100,8 @@ chapters:
       caption: Center face from the right
   - id: correcting-distance
     title: Correcting distance
-    explanation: I combined framing feedback with direct distance instructions. Moving closer or farther away uses
-      the same paused state and recovery path.
-    references: []
+    explanation: I combined framing feedback with direct distance instructions. Moving closer or farther
+      away uses the same paused state and recovery path.
     screens:
     - asset_id: capture-warning-scan-move-close-10-png
       caption: Move closer
@@ -130,9 +109,8 @@ chapters:
       caption: Move farther away
   - id: keeping-the-face-visible
     title: Keeping the face visible
-    explanation: I distinguished a covered forehead from an obscured face so the instruction matches the obstruction.
-      Both warnings remain inside the capture view, where people can check the correction.
-    references: []
+    explanation: I distinguished a covered forehead from an obscured face so the instruction matches the
+      obstruction. Both warnings remain inside the capture view, where people can check the correction.
     screens:
     - asset_id: capture-warning-scan-uncover-7-png
       caption: Uncover the forehead
@@ -140,9 +118,8 @@ chapters:
       caption: Keep the full face visible
   - id: keeping-one-face-in-view
     title: Keeping one face in view
-    explanation: Missing and multiple faces need different corrections. I made those states explicit rather than leaving
-      people to interpret an empty or ambiguous frame.
-    references: []
+    explanation: Missing and multiple faces need different corrections. I made those states explicit
+      rather than leaving people to interpret an empty or ambiguous frame.
     screens:
     - asset_id: capture-warning-scan-face-view-13-png
       caption: Bring face into view
@@ -150,9 +127,8 @@ chapters:
       caption: Keep one face in view
   - id: failed-and-timed-out-scans
     title: Failed and timed out scans
-    explanation: Research made consistency central to trust, so failure needed a visible explanation and a predictable
-      retry. Failed capture and timeout share the same restart control.
-    references: []
+    explanation: Research made consistency central to trust, so failure needed a visible explanation and
+      a predictable retry. Failed capture and timeout share the same restart control.
     screens:
     - asset_id: capture-failure-scan-fail-1-png
       caption: Scan failed
@@ -163,21 +139,16 @@ chapters:
   stories:
   - id: making-the-snapshot-legible
     title: Making the snapshot legible
-    explanation: I combined the moodboard’s status gauge and grouped measurement cards into one health overview. A
-      scan-quality label and brief summary address the research need for interpretation before individual readings.
-    references:
-    - asset_id: reference-frame-4-4-png
-      caption: Live workout display
-    - asset_id: reference-frame-3-3-png
-      caption: Wearable wellbeing cards
+    explanation: I used familiar gauge and measurement-card patterns to organize the health overview. A
+      scan-quality label and brief summary address the research need for interpretation before individual
+      readings.
     screens:
     - asset_id: history-health-main-3-png
       caption: Health overview
   - id: guest-results-and-saved-history
     title: Guest results and saved history
-    explanation: I separated a guest snapshot from the personal history needed for repeated comparisons. Saved scans
-      use dated status summaries, with editing and deletion available from the result.
-    references: []
+    explanation: I separated a guest snapshot from the personal history needed for repeated comparisons.
+      Saved scans use dated status summaries, with editing and deletion available from the result.
     screens:
     - asset_id: history-guest-result-2-png
       caption: Guest snapshot
@@ -190,11 +161,9 @@ chapters:
   stories:
   - id: giving-each-reading-a-clear-home
     title: Giving each reading a clear home
-    explanation: Shen.ai’s cards establish a simple value-and-unit hierarchy. I carried that into individual detail
-      sheets, adding status labels and plain-language explanations of what each estimate represents.
-    references:
-    - asset_id: reference-image-13-png
-      caption: Vital sign cards
+    explanation: Health-app references inspired a simple value-and-unit hierarchy. I carried that into
+      individual detail sheets, adding status labels and plain-language explanations of what each
+      estimate represents.
     screens:
     - asset_id: details-pulse-sheet-2-png
       caption: Pulse
@@ -202,12 +171,9 @@ chapters:
       caption: Cardiac effort
   - id: explaining-labels-and-personal-baselines
     title: Explaining labels and personal baselines
-    explanation: The sleep reference pairs ranges with understandable labels, a pattern I adapted for interpreting
-      health readings. For variability, I also exposed the baseline-building state so a personal comparison does not
-      appear ready before it is established.
-    references:
-    - asset_id: reference-frame-1-1-png
-      caption: Sleep ranges
+    explanation: Wearable references paired ranges with understandable labels, a pattern I adapted for
+      interpreting health readings. For variability, I also exposed the baseline-building state so a
+      personal comparison does not appear ready before it is established.
     screens:
     - asset_id: details-hrv-sheet-1-png
       caption: Variability baseline
@@ -215,12 +181,9 @@ chapters:
       caption: Stress level
   - id: leaving-room-for-trends
     title: Leaving room for trends
-    explanation: The AVI reference combines a reading, its range, and a trend chart with explanatory text. I adapted
-      that detail hierarchy for blood pressure and breathing, reserving a clearly marked Coming soon area for future
-      trends.
-    references:
-    - asset_id: reference-image-26-png
-      caption: Ranges and trends
+    explanation: Health-app references combined readings, ranges, and trend charts with explanatory text.
+      I adapted that detail hierarchy for blood pressure and breathing, reserving a clearly marked Coming
+      soon area for future trends.
     screens:
     - asset_id: details-bp-sheet-5-png
       caption: Blood pressure estimate
@@ -228,9 +191,9 @@ chapters:
       caption: Breathing rhythm
   - id: explaining-bp-outlook-and-its-limits
     title: Explaining BP Outlook and its limits
-    explanation: Blood pressure was both desired and questioned in research, so I separated the estimate from its
-      meaning and required inputs. Setup needed and unavailable states explain why a result cannot be shown.
-    references: []
+    explanation: Blood pressure was both desired and questioned in research, so I separated the estimate
+      from its meaning and required inputs. Setup needed and unavailable states explain why a result
+      cannot be shown.
     screens:
     - asset_id: details-bp-outlook-sheet-6-png
       caption: BP Outlook estimate
@@ -240,11 +203,9 @@ chapters:
       caption: BP Outlook unavailable
   - id: connecting-estimates-to-profile-information
     title: Connecting estimates to profile information
-    explanation: Wearable profile references make age and body details part of the health experience. I connected
-      those inputs to the vascular-age sheet and made missing information visible before presenting an estimate.
-    references:
-    - asset_id: reference-frame-7-6-png
-      caption: Wearable profile fields
+    explanation: Wearable profile references make age and body details part of the health experience. I
+      connected those inputs to the vascular-age sheet and made missing information visible before
+      presenting an estimate.
     screens:
     - asset_id: details-va-sheet-10-png
       caption: Vascular age
@@ -252,11 +213,9 @@ chapters:
       caption: Vascular age setup needed
   - id: separating-weight-from-its-estimated-label
     title: Separating weight from its estimated label
-    explanation: The Shen.ai reference links body measurements to calculated indices. I made the weight sheet explicit
-      about whether its BMI label uses profile information or remains estimated because height is missing.
-    references:
-    - asset_id: reference-image-15-png
-      caption: Body mass and actions
+    explanation: Health-app references linked body measurements to calculated indices. I made the weight
+      sheet explicit about whether its BMI label uses profile information or remains estimated because
+      height is missing.
     screens:
     - asset_id: details-weight-sheet-12-png
       caption: Weight with profile height
@@ -264,11 +223,9 @@ chapters:
       caption: Estimated BMI label
   - id: body-composition-and-setup-requirements
     title: Body composition and setup requirements
-    explanation: I adapted the reference’s body-composition cards into a sheet that explains the estimate and its
-      labels. A separate setup state identifies the profile details needed before showing a result.
-    references:
-    - asset_id: reference-image-16-png
-      caption: Body composition
+    explanation: I drew on body-composition reference patterns to create a sheet that explains the
+      estimate and its labels. A separate setup state identifies the profile details needed before
+      showing a result.
     screens:
     - asset_id: details-body-fat-sheet-14-png
       caption: Body fat percentage
@@ -279,22 +236,19 @@ chapters:
   stories:
   - id: choosing-a-check-in-routine
     title: Choosing a check in routine
-    explanation: The task-scheduling reference groups frequency, timing, and notification choices in one place. I
-      adapted that familiar structure to an active health check-in, pairing scan length with routines that fit different
-      schedules.
-    references:
-    - asset_id: reference-frame-6-5-png
-      caption: Task scheduling
+    explanation: Scheduling references grouped frequency, timing, and notification choices in one place.
+      I adapted that familiar structure to an active health check-in, pairing scan length with routines
+      that fit different schedules.
     screens:
     - asset_id: routine-routine-question-60-selected-1-png
-      caption: 60-second scan
+      caption: Sixty second scan
     - asset_id: routine-routine-question-30-selected-2-png
-      caption: 30-second scan
+      caption: Thirty second scan
   - id: explaining-the-choices
     title: Explaining the choices
-    explanation: Research showed uncertainty about fitting an active scan into a wearable routine. I placed the scan-length
-      explanation beside the choice and used expandable descriptions to explain what each routine is for.
-    references: []
+    explanation: Research showed uncertainty about fitting an active scan into a wearable routine. I
+      placed the scan-length explanation beside the choice and used expandable descriptions to explain
+      what each routine is for.
     screens:
     - asset_id: routine-scan-length-info-3-png
       caption: Explain scan length
@@ -302,9 +256,8 @@ chapters:
       caption: Expanded routine guidance
   - id: daily-timing-and-reminders
     title: Daily timing and reminders
-    explanation: I turned the scheduling pattern into a daily time window with a specific reminder. Separate phone
-      and HEIR controls let people choose where that reminder arrives.
-    references: []
+    explanation: I turned the scheduling pattern into a daily time window with a specific reminder.
+      Separate phone and HEIR controls let people choose where that reminder arrives.
     screens:
     - asset_id: routine-once-daily-routine-5-png
       caption: Daily morning window
@@ -312,9 +265,9 @@ chapters:
       caption: Choose reminder time
   - id: routines-for-different-schedules
     title: Routines for different schedules
-    explanation: I extended the same time-window and reminder controls to twice-daily, alternate-day, and twice-weekly
-      check-ins. Keeping the visual pattern consistent makes the schedule change easier to understand.
-    references: []
+    explanation: I extended the same time-window and reminder controls to twice-daily, alternate-day, and
+      twice-weekly check-ins. Keeping the visual pattern consistent makes the schedule change easier to
+      understand.
     screens:
     - asset_id: routine-twice-daily-routine-7-png
       caption: Morning and evening
@@ -324,11 +277,9 @@ chapters:
       caption: Choose two weekdays
   - id: validating-the-schedule
     title: Validating the schedule
-    explanation: I added validation to the reference scheduling pattern so the twice-daily routine requires two time
-      windows. The instruction sits beside the selection, and completion remains disabled until the choice is valid.
-    references:
-    - asset_id: reference-frame-6-5-png
-      caption: Task scheduling
+    explanation: I added validation to the scheduling flow so the twice-daily routine requires two time
+      windows. The instruction sits beside the selection, and completion remains disabled until the
+      choice is valid.
     screens:
     - asset_id: routine-twice-daily-error-8-png
       caption: Two windows required
@@ -337,11 +288,9 @@ chapters:
   stories:
   - id: organizing-account-controls
     title: Organizing account controls
-    explanation: The settings reference uses familiar grouped rows and direct navigation. I adapted that structure
-      to keep personal details, scan preferences, security, and support in a consistent profile area.
-    references:
-    - asset_id: reference-frame-11-9-png
-      caption: Bevel settings
+    explanation: Settings references informed familiar grouped rows and direct navigation. I adapted that
+      structure to keep personal details, scan preferences, security, and support in a consistent profile
+      area.
     screens:
     - asset_id: profile-profile-1-png
       caption: Profile navigation
@@ -349,12 +298,9 @@ chapters:
       caption: Sign in and security
   - id: explaining-why-personal-details-matter
     title: Explaining why personal details matter
-    explanation: Oura’s profile explanation shows how to give personal questions a purpose. I used that approach to
-      connect body details and health history with the estimates they support, including choices for uncertain or
-      undisclosed answers.
-    references:
-    - asset_id: reference-frame-8-7-png
-      caption: Oura profile explanation
+    explanation: Profile references showed how to give personal questions a purpose. I used that approach
+      to connect body details and health history with the estimates they support, including choices for
+      uncertain or undisclosed answers.
     screens:
     - asset_id: profile-personal-details-filled-2-png
       caption: Personal details
@@ -623,135 +569,6 @@ assets:
     alt: HEIR health history form asking about smoking, diabetes, and blood pressure medication, with uncertainty
       and privacy choices.
     included_in_document: true
-  reference-frame-1-1-png:
-    source_path: Gallery/Face scan/Moodboard/Frame 1 - Mockup 1.png
-    role: reference
-    alt: Reference sleep-tracking app showing sleep quality bars with colored ranges, a date selector, and sleeping
-      heart rate.
-    included_in_document: true
-    source_credit: Wearable sleep reference
-  reference-frame-10-11-png:
-    source_path: Gallery/Face scan/Moodboard/Frame 10 - Mockup 11.png
-    role: reference
-    alt: Reference app integrations screen listing connected and available apps on a dark background.
-    included_in_document: false
-    source_credit: External moodboard reference; source not specified in document
-  reference-frame-11-9-png:
-    source_path: Gallery/Face scan/Moodboard/Frame 11 - Mockup 9.png
-    role: reference
-    alt: Reference Bevel settings screen with grouped privacy, legal, data, and support navigation rows.
-    included_in_document: true
-    source_credit: Bevel reference
-  reference-frame-2-2-png:
-    source_path: Gallery/Face scan/Moodboard/Frame 2 - Mockup 2.png
-    role: reference
-    alt: Reference health activity app showing measurements for weight, height, daily steps, and walking activity.
-    included_in_document: false
-    source_credit: External moodboard reference; source not specified in document
-  reference-frame-3-3-png:
-    source_path: Gallery/Face scan/Moodboard/Frame 3 - Mockup 3.png
-    role: reference
-    alt: Reference wearable wellbeing dashboard with grouped metric cards and a sleep recovery summary on a dark background.
-    included_in_document: true
-    source_credit: Wearable wellbeing reference
-  reference-frame-4-4-png:
-    source_path: Gallery/Face scan/Moodboard/Frame 4 - Mockup 4.png
-    role: reference
-    alt: Reference live workout screen with a large circular heart-rate gauge, heart-rate zone, elapsed time, and
-      a Pause control.
-    included_in_document: true
-    source_credit: Live workout reference
-  reference-frame-5-10-png:
-    source_path: Gallery/Face scan/Moodboard/Frame 5 - Mockup 10.png
-    role: reference
-    alt: Reference wearable device success screen with a circular result graphic and a Continue button.
-    included_in_document: false
-    source_credit: External moodboard reference; source not specified in document
-  reference-frame-6-5-png:
-    source_path: Gallery/Face scan/Moodboard/Frame 6 - Mockup 5.png
-    role: reference
-    alt: Reference task-scheduling form with task description, frequency, time, date, and notification preferences.
-    included_in_document: true
-    source_credit: Task-scheduling reference
-  reference-frame-7-6-png:
-    source_path: Gallery/Face scan/Moodboard/Frame 7 - Mockup 6.png
-    role: reference
-    alt: Reference wearable profile screen showing date of birth, height, weight, sex, and activity focus areas.
-    included_in_document: true
-    source_credit: Wearable profile reference
-  reference-frame-8-7-png:
-    source_path: Gallery/Face scan/Moodboard/Frame 8 - Mockup 7.png
-    role: reference
-    alt: Reference wearable profile explanation describing why personal details improve the health experience.
-    included_in_document: true
-    source_credit: Oura reference
-  reference-frame-9-8-png:
-    source_path: Gallery/Face scan/Moodboard/Frame 9 - Mockup 8.png
-    role: reference
-    alt: Reference connected-service permissions screen with access and export controls for a fitness data integration.
-    included_in_document: false
-    source_credit: External moodboard reference; source not specified in document
-  reference-image-11-png:
-    source_path: Gallery/Face scan/Moodboard/image 11.png
-    role: reference
-    alt: Shen.ai reference text panel introducing face-scanning technology, measurement guidance, and recommended
-      preparation.
-    included_in_document: true
-    source_credit: Shen.ai reference
-  reference-image-12-png:
-    source_path: Gallery/Face scan/Moodboard/image 12.png
-    role: reference
-    alt: Shen.ai reference text panel describing capture instructions, keeping still, camera positioning, and lighting
-      requirements.
-    included_in_document: true
-    source_credit: Shen.ai reference
-  reference-image-13-png:
-    source_path: Gallery/Face scan/Moodboard/image 13.png
-    role: reference
-    alt: Shen.ai reference vital-sign cards displaying pulse, estimated blood pressure, and short-term variability
-      readings.
-    included_in_document: true
-    source_credit: Shen.ai reference
-  reference-image-14-png:
-    source_path: Gallery/Face scan/Moodboard/image 14.png
-    role: reference
-    alt: Shen.ai reference metric cards displaying breathing rhythm, stress response, cardiovascular effort, and parasympathetic
-      activity.
-    included_in_document: false
-    source_credit: External moodboard reference; source not specified in document
-  reference-image-15-png:
-    source_path: Gallery/Face scan/Moodboard/image 15.png
-    role: reference
-    alt: Shen.ai reference results screen showing a body mass score, an activity insight, and actions to calculate
-      further insights.
-    included_in_document: true
-    source_credit: Shen.ai reference
-  reference-image-16-png:
-    source_path: Gallery/Face scan/Moodboard/image 16.png
-    role: reference
-    alt: Shen.ai reference body and wellness insights with vertically arranged wellness score and body-composition
-      cards.
-    included_in_document: true
-    source_credit: Shen.ai reference
-  reference-image-17-png:
-    source_path: Gallery/Face scan/Moodboard/image 17.png
-    role: reference
-    alt: Shen.ai reference body composition cards displaying body fat percentage, body roundness index, and shape
-      index.
-    included_in_document: false
-    source_credit: External moodboard reference; source not specified in document
-  reference-image-18-png:
-    source_path: Gallery/Face scan/Moodboard/image 18.png
-    role: reference
-    alt: Shen.ai reference results cards showing basal metabolic rate and estimated daily energy expenditure.
-    included_in_document: false
-    source_credit: External moodboard reference; source not specified in document
-  reference-image-26-png:
-    source_path: Gallery/Face scan/Moodboard/image 26.png
-    role: reference
-    alt: AVI reference promotional image showing three app screens for health results, measurement ranges, and trends.
-    included_in_document: true
-    source_credit: AVI reference
   routine-alt-days-routine-9-png:
     source_path: Gallery/Face scan/Scan routine/Alt-Days-Routine - Mockup 9.png
     role: design

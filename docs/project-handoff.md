@@ -222,67 +222,86 @@ All five permanent research hyperlinks are active through the publication manife
 their contextual breadcrumbs, TOCs, and section return links use the approved
 navigation and page-transition system.
 
+## Phase One Product Gallery — approved
+
+`/heir/gallery/phase-one/` presents the six original chapters, 23 complete stories,
+and 59 selected HEIR screens from `src/data/heir-phase-one-gallery.yml`. Title,
+introduction, explanation wording, captions, alt descriptions, IDs, and order are
+preserved. Cole Nussbaumer Knaflic's *Storytelling with Data* remains an approved
+educational reference, with its book title rendered in italics. No external product
+references, frames, moodboards, or attribution panels are introduced.
+
+`DesignGallery.astro` extracts the existing Face Scan story/chapter renderer for
+both galleries. It reuses the unchanged `DesignRail`, `GalleryImage`, gallery CSS,
+`gallery-motion.ts`, and original full-screen viewer. Phase One alone enables
+build-time Markdown prose rendering through the existing markdown dependency;
+Face Scan retains its prior plain-text paragraph rendering. All 28 Face Scan story
+blocks were compared with the pre-extraction build and remain byte-identical.
+No typography, spacing, rail physics, theme, motion, or image-viewer styles changed.
+
+`phase-one-images.ts` explicitly imports only the 59 copied PNG originals under
+`src/assets/heir/phase-one/`; `phase-one-gallery.ts` resolves metadata at build time.
+Astro provides responsive quality-95 WebP inline images while enlargement uses the
+untouched originals. The 12 moodboard images, 16 unselected product images, Word
+document, and source ZIP remain outside the website. The Unicode onboarding
+filename resolution and existing source-directory typo are documented in
+`phase-one-gallery-audit.md`; original source files remain untouched.
+
+The existing global Phase one leaf is now active and reveals its ancestors.
+Its six-chapter TOC uses the unchanged scroll-progress behavior. Breadcrumb Case
+study returns to `/heir/`; the arrow return and Previous link target
+`/heir/#first-launch`. Next opens Face Scan, whose Previous link now returns to
+Phase One using the existing pagination treatment. Phase two stays disabled.
+All paths use the `/portfolio/` helper and native Astro transitions/history.
+The 13 permanent registry IDs and existing case-study narrative are unchanged;
+Phase One has no preexisting permanent registry entry to activate.
+
+Production build validation now checks both galleries from public inputs: exact
+story sequence/text, all captions/alts, design roles, original image bytes,
+optimized delivery, explicit asset boundaries, and educational emphasis.
+`node scripts/validate-phase-one-gallery.mjs` is a local read-only Word/PNG audit
+covering 59 visual matches and all 28 image exclusions; CI needs no private sources.
+Check/build, HEIR fidelity, all five research fidelity checks, both gallery source
+audits, and whitespace checks pass. The build has ten pages and 326 internal
+links/fragments. Desktop, 768 × 1024 tablet, and 393 × 852 phone emulation were
+reviewed for screen proportions, complete/partial screens, caption/prose wrapping,
+light/dark themes, touch swipe/release protection, arrows/keyboard, original viewer
+Fit/100%/Escape/focus return, reduced motion, TOC, drawer, breadcrumbs, anchored
+return, pagination, and browser Back. No page-level overflow or missing assets
+were observed. Physical-device and physical-trackpad testing were not performed;
+native horizontal scrolling handlers are unchanged.
+
+Local review: `http://127.0.0.1:4331/portfolio/heir/gallery/phase-one/`.
+The complete implementation was reviewed and approved on October 14, 2026.
+Commit and push to `origin/main` are authorized; the existing Pages workflow
+deploys the approved gallery at
+`https://uxrahul.github.io/portfolio/heir/gallery/phase-one/`.
+
 ## Evidence, carousels, and milestones
 
 The complete Face Scan Gallery is implemented at `/heir/gallery/face-scan/`.
-`src/data/heir-face-scan-gallery.yml` remains the authoritative six-chapter,
-28-story registry. The only approved metadata correction changes the camera
-permission alt button from Allow to OK; numeric 60-second/30-second captions and
-generic reference credits remain as supplied. All 60 original HEIR designs and
-15 reference placements (13 distinct images) render in Word order. Only the 73
-used PNG originals are copied into `src/assets/heir/face-scan/`; the seven unused
-moodboard assets and private Word source remain excluded.
+The October 14 privacy revision uses the revised private Word document as the
+source of record. `src/data/heir-face-scan-gallery.yml` preserves six chapters,
+28 story headings/order/IDs, and all 60 original HEIR designs, with exact revised
+introduction, explanations, and captions. External reference collections,
+identifying credits, and all external image assets are removed. Only the 60 HEIR
+PNG originals are imported; their bytes and authored alt descriptions are unchanged.
 
-`face-scan-gallery.ts` resolves explicit image imports through the metadata.
-`GalleryImage` uses responsive quality-95 Astro WebP delivery and untouched
-originals in the existing viewer. Static references retain individual captions,
-a Reference label, and the centralized source credit. `DesignRail` is a separate
-native continuous scrolling component, not an Embla single-slide carousel.
-Multiple full/partial screens appear according to container width, with natural
-aspect ratios and captions directly beneath. Arrow controls move 75% of the
-available width; keyboard arrows, Page Up/Down, Home/End, native trackpad/touch
-scrolling, and mouse dragging are supported. Controls remain focusable at ends,
-with aria-disabled states. Swipe/drag release uses the existing viewer click guard.
-There is no autoplay, looping, scroll snapping, or new runtime dependency.
+Each story uses the existing responsive `DesignRail` across the available canvas,
+without frames or placeholders. The 70rem gallery canvas, 43rem prose measure,
+17rem/82% screen sizing, keyboard/arrows/touch/drag interaction, Astro WebP delivery,
+original-image viewer, motion, themes, TOC, breadcrumbs, and navigation remain
+unchanged. The permanent `heir-gallery-face-scan` link and anchored return to
+`/heir/#health-scan` remain active.
 
-The optional layout `gallery` flag scopes a 70rem maximum exhibition canvas;
-case-study/research measures stay unchanged. References occupy a smaller adjacent
-area where width permits and stack above designs on phones. Design-only stories
-use the full canvas. Chapter rules/numbers and generous story spacing establish
-editorial rhythm. `gallery-motion.ts` supplies token-based vertical entrances and
-a restrained 90ms reference-to-design stagger, respecting reduced motion, focus,
-anchors, and Astro swap cleanup. The global shell, TOC, transitions, and six
-existing carousels retain their implementation.
-
-The existing Face scan navigation leaf and permanent `heir-gallery-face-scan`
-relationship are activated; other pending galleries stay disabled. The compact
-breadcrumb links to HEIR, with a return to `/heir/#health-scan`. All routes use
-the existing `/portfolio/` base helper and native browser history.
-
-`validate-gallery-build.mjs` runs in ordinary production builds using only public
-repository inputs: exact story text/order, 75 captions/alts, role separation,
-credited references, original viewer bytes, and the 73-asset import boundary.
-`validate-face-scan-gallery.mjs` additionally audits the private Word/PNG sources
-locally, including all 75 visual matches and approved wording differences.
-See `docs/face-scan-gallery-audit.md` for source provenance. The complete gallery
-is approved for publication on October 13, 2026; commit and push to `origin/main`
-are explicitly authorized.
-
-Implementation review covered Safari desktop and Brave's 768 × 1024 tablet and
-393 × 852 phone emulation, light/dark themes, chapter anchors/TOC progress,
-responsive complete/partial screens, caption alignment, keyboard Home/End/arrows
-and image activation, native touch swiping, drag-release suppression, and viewer
-Fit/100%/Escape/focus return. The anchored return resolves to HEIR's health-scan
-section, its existing gallery phrase navigates back, and browser back/forward
-preserve those destinations. No page-level horizontal overflow was observed.
-Intrinsic aspect ratios reserve space before lazy images load; reference widths
-also follow their original ratio under a 24rem height limit (20rem on phones).
-Reference sizing remains secondary to the 17rem HEIR screens without cropping.
-Final check/build, main HEIR fidelity, all five research fidelity checks, gallery
-source audit, and whitespace checks pass. There are no missing/mismatched gallery
-assets or unapproved content differences. The local production review route is
-`http://127.0.0.1:4331/portfolio/heir/gallery/face-scan/`. The public destination is
-`https://uxrahul.github.io/portfolio/heir/gallery/face-scan/`.
+Build validation checks exact story text/order, 60 captions/alts/original viewer
+bytes, and reference-free metadata/output without private source dependencies.
+The local source audit verifies all revised Word wording and 60 visual placements,
+original PNG hashes, and exclusion of all external moodboard originals.
+See `docs/face-scan-gallery-audit.md` for provenance and Git-history limitations.
+The reference-free Face Scan implementation is preserved in this approved
+publication, including the earlier privacy removals. Its 28 story blocks remain
+unchanged by the Phase One renderer extraction.
 
 `ResearchFigure`, `StatisticalPlot`, and `ProductFigure` share responsive Astro
 quality-95 WebP delivery and keyboard-accessible enlargement. Charts retain a

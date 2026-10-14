@@ -4,9 +4,9 @@ import { faceScanImages } from './face-scan-images';
 import type { ImageMetadata } from 'astro';
 
 type Placement = { asset_id: string; caption: string };
-type Asset = { role: 'reference' | 'design'; alt: string; source_credit?: string; included_in_document: boolean };
+type Asset = { role: 'design'; alt: string; included_in_document: boolean };
 export type GalleryImage = Placement & Asset & { src: ImageMetadata };
-type Story = { id: string; title: string; explanation: string; references: Placement[]; screens: Placement[] };
+type Story = { id: string; title: string; explanation: string; screens: Placement[] };
 type Chapter = { id: string; title: string; stories: Story[] };
 const source = parse(metadata) as { title: string; intro: string; chapters: Chapter[]; assets: Record<string, Asset> };
 function resolveImage(placement: Placement, role: Asset['role']): GalleryImage {
@@ -20,7 +20,6 @@ export const faceScanGallery = {
   intro: source.intro,
   chapters: source.chapters.map((chapter) => ({ ...chapter, stories: chapter.stories.map((story) => ({
     ...story,
-    references: story.references.map((image) => resolveImage(image, 'reference')),
     screens: story.screens.map((image) => resolveImage(image, 'design')),
   })) })),
 };
