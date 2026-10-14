@@ -1,6 +1,6 @@
 # HEIR source and visual audit
 
-Audited October 12, 2026. Source of record:
+Initial inventory audited October 12, 2026. First-launch revision verified October 14, 2026. Source of record:
 `../source-materials/Website portfolio/Heir case study/HEIR_case_study_structured_2.docx`.
 The archive was read only. Its complete body, run/paragraph styles, relationship
 map, 24 embedded images, three tables, and captions were inspected. Embedded
@@ -8,7 +8,27 @@ visuals were compared with contact sheets of all 43 standalone images in the
 HEIR folder. Matches below are based on visual content; 13 are also byte-identical.
 No research was rerun and no charts were redrawn.
 
-## Representative implementation
+## First-launch revision — October 14, 2026
+
+The authoritative revision has 28 embedded images and four tables. The earlier
+inventory below records the original 24-image document: in the revised Word,
+IA is image2, ambiguity is image3, the four new UI screens are image4–image7,
+and former image4–image24 become image8–image28. Existing published image files
+and captions remain unchanged. IA now follows Context directly; its Settings
+explanation remains the caption. The new screens follow the first Outcome bullet
+as two independent responsive rails, with the user-supplied captions and alt text.
+
+All four originals are 1322 × 2726, visually matched and byte-identical to the
+revised Word images. Paths below are relative to the first-launch `Visuals/` folder:
+
+| Word media | Approved caption | Original PNG / delivery |
+| --- | --- | --- |
+| image4.png | Old app — Home dashboard | `Old app/Dashboard - Mockup 1.png`; imported as `product/old-app-home.png`. |
+| image5.png | Old app — Profile and Settings access | `Old app/Profile - Mockup.png`; imported as `product/old-app-profile.png`. |
+| image6.png | Redesigned app — Home and activity overview | `Redesigned app/Home - Connected - Hero1 - Mockup 1.png`; reuses the identical Phase One `reading-the-day-at-a-glance--home-overview.png`. |
+| image7.png | Redesigned app — Consolidated Settings | `Redesigned app/Settings - Mockup 1.png`; reuses the identical Phase One `giving-customization-a-clear-home--settings-groups.png`. |
+
+## Original representative implementation
 
 The introduction and first-launch section include every source block in order.
 The approved introduction has the shortened italic subtitle, revised role and
@@ -76,10 +96,10 @@ in the main narrative. Their presence is not permission to add extra figures.
 ## Verification
 
 `python3 scripts/validate-heir-source.py` compares the entire built article with
-read-only OOXML: every narrative/UI table cell in order, all three complete milestone
+read-only OOXML: every narrative/UI table cell in order (the four new screen labels use the explicit user-approved captions), all three complete milestone
 stages from source-table columns, all 48 exact bullets,
 source emphasis/qualifications, all captions and nine UI descriptions, and the
-conclusion. It verifies all 24 modal images in order against source bytes (the
+conclusion. It verifies all 28 modal images in order against source bytes (the
 previously approved hero uses its visually matched standalone photograph; the
-other 23 match the embedded Word originals). Run after `npm run build`. Original
+other 27 match the embedded Word originals). Run after `npm run build`. Original
 source materials are never modified or published as research documents.

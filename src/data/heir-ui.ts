@@ -23,3 +23,19 @@ export const healthScanItems: FigureItem[] = [
   { id: 'scan-explain-figure', kind: 'product', src: image23, alt: "HEIR BP Outlook explanation screen describing the estimate, calculation, and limits.", captionTitle: "Explain", caption: "Explain what the estimate represents, how it is derived and its limits." },
   { id: 'scan-repeat-figure', kind: 'product', src: image24, alt: "HEIR routine screen with timing preferences and reminder controls.", captionTitle: "Repeat", caption: "Make a consistent check-in actionable through timing and reminder choices." },
 ];
+
+// First-launch comparison: explicit user-approved captions and alt descriptions.
+import type { GalleryImage } from './face-scan-gallery';
+import oldHome from '../assets/heir/product/old-app-home.png';
+import oldProfile from '../assets/heir/product/old-app-profile.png';
+import redesignedHome from '../assets/heir/phase-one/reading-the-day-at-a-glance--home-overview.png';
+import redesignedSettings from '../assets/heir/phase-one/giving-customization-a-clear-home--settings-groups.png';
+
+export const oldAppScreens: GalleryImage[] = [
+  { asset_id: 'old-app-home', role: 'design', included_in_document: true, src: oldHome, caption: 'Old app — Home dashboard', alt: 'Dark-themed HEIR home dashboard displaying 4,013 steps toward an 8,000-step goal, activity metrics, and bottom navigation.' },
+  { asset_id: 'old-app-profile', role: 'design', included_in_document: true, src: oldProfile, caption: 'Old app — Profile and Settings access', alt: 'Dark-themed HEIR profile showing cumulative activity totals and navigation to Set Goals, Connected Apps, Settings, and Support.' },
+];
+export const redesignedAppScreens: GalleryImage[] = [
+  { asset_id: 'redesigned-app-home', role: 'design', included_in_document: true, src: redesignedHome, caption: 'Redesigned app — Home and activity overview', alt: 'Light-themed HEIR Home screen displaying 7,362 steps, a circular goal indicator, activity metrics, daily step breakdown, and four-tab navigation.' },
+  { asset_id: 'redesigned-app-settings', role: 'design', included_in_document: true, src: redesignedSettings, caption: 'Redesigned app — Consolidated Settings', alt: 'Light-themed HEIR Settings screen grouping tap, vibration, alerts, media, calls, app integrations, and device connection controls.' },
+];

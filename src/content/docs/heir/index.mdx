@@ -8,6 +8,7 @@ next: false
 tocSections: [first-launch, haptic-roadmap, activity-guidance, design-system, health-scan, where-heir-stands-now]
 ---
 
+import AppComparison from '../../../components/AppComparison.astro';
 import HeirTools from '../../../components/HeirTools.astro';
 import CaseSection from '../../../components/CaseSection.astro';
 import ContentLink from '../../../components/ContentLink.astro';
@@ -78,6 +79,8 @@ Stakeholders described the audience as “corporate athletes”: people with dem
 
 The original app split device controls between Home and Settings. Users had to guess where common actions lived, and the structure left little room for the product to grow.
 
+<ProductFigure src={ia} alt="Complete annotated comparison: tap, vibration, media, and call controls move into Settings; Settings moves from Profile to the main navigation." caption="The first-launch redesign grouped device controls in Settings and gave Settings a dedicated place in the main navigation." />
+
 <div class="research-goal">
   <h3>Goal</h3>
   <p>Make everyday device controls easy to find and use for the first public launch.</p>
@@ -93,11 +96,12 @@ The original app split device controls between Home and Settings. Users had to g
 
 <StatisticalPlot src={ambiguity} alt="Stacked bars show placement of four ambiguous controls across My Account, Device Settings, and Customize. All four controls fall below 70% agreement." caption="Card sort placement of four ambiguous controls" />
 
-<ProductFigure src={ia} alt="Complete annotated comparison: tap, vibration, media, and call controls move into Settings; Settings moves from Profile to the main navigation." caption="The first-launch redesign grouped device controls in Settings and gave Settings a dedicated place in the main navigation." />
-
 ### Outcome
 
 - I tested an interactive Figma prototype against the old app using the **same core tasks**.
+
+<AppComparison />
+
 - <ContentLink id="heir-usability-validation">Average task success increased from <strong>70.0% to 90.4%</strong></ContentLink>, while the System Usability Scale score rose from **47.5 to 75.8**.
 - Adjusting vibration intensity improved from **74% to 95%** success, and turning off vibration alerts improved from **60% to 95%**.
 - *The studies used independent samples of 50 and 60 participants.*

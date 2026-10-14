@@ -1,0 +1,16 @@
+---
+import DesignRail from './DesignRail.astro';
+import { oldAppScreens, redesignedAppScreens } from '../data/heir-ui';
+import '../styles/face-scan-gallery.css';
+---
+<div class="heir-app-comparison image-rail-composition face-scan-gallery" role="group" aria-label="Old and redesigned HEIR app screens">
+  <DesignRail id="first-launch-old-app" label="Old app" heading="Old app" images={oldAppScreens} />
+  <DesignRail id="first-launch-redesigned-app" label="Redesigned app" heading="Redesigned app" images={redesignedAppScreens} />
+</div>
+<style>
+  .heir-app-comparison { margin-block: var(--space-8); }
+</style>
+<script>
+  import { bindGalleryMotion } from '../lib/gallery-motion';
+  bindGalleryMotion();
+</script>

@@ -1,0 +1,28 @@
+---
+import '../styles/image-rail.css';
+interface Props {
+  id: string; label: string; count: number; heading?: string;
+  class?: string; regionLabel?: string; noun?: string; reveal?: boolean;
+}
+const { id, label, count, heading, class: className, regionLabel = label,
+  noun = 'screen', reveal = false } = Astro.props;
+const controlNoun = noun === 'screen' ? 'HEIR screens' : `${noun}s`;
+---
+<div class:list={['design-rail', className]} data-design-rail data-gallery-reveal={reveal ? '' : undefined}>
+  {heading && <p class="gallery-label" id={`${id}-label`}>{heading}<span>{count} {count === 1 ? noun : `${noun}s`}</span></p>}
+  <div class="design-rail-viewport" id={id} tabindex="0" role="region" aria-label={regionLabel} aria-describedby={`${id}-help`}>
+    <div class="design-rail-track">
+      <slot />
+    </div>
+  </div>
+  <span class="sr-only" id={`${id}-help`}>Scroll horizontally to explore. Use Left and Right arrow keys, Page Up and Page Down, or Home and End. Select a {noun} to enlarge it.</span>
+  <div class="design-rail-controls" hidden>
+    <button type="button" data-rail-previous aria-label={`Scroll previous ${controlNoun}: ${label}`} aria-controls={id}><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m12 5-5 5 5 5" /></svg></button>
+    <span class="rail-progress" aria-hidden="true"><span data-rail-progress></span></span>
+    <button type="button" data-rail-next aria-label={`Scroll next ${controlNoun}: ${label}`} aria-controls={id}><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m8 5 5 5-5 5" /></svg></button>
+  </div>
+</div>
+<script>
+  import { bindDesignRails } from '../lib/design-rail';
+  bindDesignRails();
+</script>

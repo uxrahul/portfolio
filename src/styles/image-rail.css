@@ -1,0 +1,36 @@
+.design-rail { min-width: 0; container-type: inline-size; }
+.editorial .gallery-label { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--space-3); margin: 0 0 var(--space-5); font-size: var(--type-navigation); font-weight: var(--weight-semibold); }
+.gallery-label > span { color: var(--color-on-surface-variant); font-size: var(--type-small); font-weight: var(--weight-regular); }
+.design-rail-viewport { overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: thin; scrollbar-color: var(--color-outline-strong) transparent; padding: var(--space-1) var(--space-1) var(--space-4); }
+.design-rail-track { display: flex; gap: var(--space-6); align-items: flex-start; width: max-content; }
+.design-rail-track > .gallery-image { flex: 0 0 auto; width: min(var(--gallery-screen-width), 82cqi); }
+.design-rail .image-trigger { user-select: none; -webkit-user-drag: none; }
+.design-rail.is-dragging .image-trigger { cursor: grabbing; }
+.design-rail-controls { display: flex; align-items: center; justify-content: space-between; gap: var(--space-6); margin-top: var(--space-3); }
+.design-rail-controls[hidden] { display: none; }
+.design-rail-controls button { display: grid; place-items: center; width: var(--figure-control-size); height: var(--figure-control-size); border: var(--divider); border-radius: 50%; background: transparent; color: var(--color-primary); cursor: pointer; transition: border-color var(--motion-duration-control), opacity var(--motion-duration-control); flex-shrink: 0; }
+.design-rail-controls button:hover { border-color: var(--color-outline-strong); }
+.design-rail-controls button[aria-disabled='true'] { opacity: .45; cursor: default; }
+.rail-progress { width: min(100%, 8rem); height: var(--border-width); background: var(--color-outline); }
+.rail-progress > span { display: block; width: 100%; height: 100%; background: var(--color-primary); transform-origin: left; transform: scaleX(0); }
+
+/* Evidence stays complete and uses the existing reading measure. */
+.figure-rail { margin-block: var(--figure-gap); }
+.design-rail-track > .figure-slide { flex: 0 0 auto; min-width: 0; }
+.figure-rail-statistical .figure-slide { width: calc(100cqi - 2 * var(--space-1)); }
+.figure-rail-mobile-ui .figure-slide { width: min(calc(var(--figure-ui-height) * var(--rail-image-ratio)), 82cqi); }
+.figure-rail .research-figure { margin: 0; }
+.figure-rail-mobile-ui .image-trigger { background: transparent; }
+.figure-rail-mobile-ui .research-figure img { width: 100%; height: auto; }
+.figure-rail-mobile-ui .research-figure figcaption { margin-top: var(--space-6); font-size: var(--type-navigation); font-weight: var(--weight-regular); line-height: 1.6; }
+
+/* Equal-height grid columns retain natural captions and anchor controls below. */
+.image-rail-composition { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-8); min-width: 0; }
+@media (min-width: 700px) {
+  .image-rail-composition { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .image-rail-composition > .design-rail { display: flex; flex-direction: column; }
+  .image-rail-composition .design-rail-controls { margin-top: auto; padding-top: var(--space-3); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .design-rail-controls button { transition: none; }
+}

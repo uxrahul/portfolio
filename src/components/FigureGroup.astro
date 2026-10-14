@@ -1,4 +1,5 @@
 ---
+import ImageRail from './ImageRail.astro';
 import ResearchFigure from './ResearchFigure.astro';
 import type { FigureItem } from '../data/figures';
 interface Props {
@@ -10,27 +11,16 @@ const { id, label, items, presentation = 'stack', variant = 'statistical' } = As
 if (!items.length) throw new Error('FigureGroup requires at least one figure.');
 const carousel = presentation === 'carousel' && items.length > 1;
 ---
-<div id={id} class:list={['figure-group', `figure-group-${variant}`]} data-figure-group data-carousel={carousel ? '' : undefined} role="region" aria-label={label}>
-  <div class="figure-group-viewport" id={`${id}-slides`}>
-    <div class="figure-group-track">
+{carousel ? (
+  <ImageRail id={id} label={label} count={items.length} noun="figure" class={`figure-rail figure-rail-${variant}`}>
     {items.map((item, index) => (
-      <div class="figure-slide" id={item.id} data-figure-slide role="group" aria-label={`${index + 1} of ${items.length}`}>
+      <div class="figure-slide" id={item.id} style={`--rail-image-ratio: ${item.src.width / item.src.height}`} role="group" aria-label={`${index + 1} of ${items.length}`}>
         <ResearchFigure {...item} />
       </div>
     ))}
-    </div>
+  </ImageRail>
+) : (
+  <div id={id} class="figure-group" role="region" aria-label={label}>
+    {items.map((item) => <div class="figure-slide" id={item.id}><ResearchFigure {...item} /></div>)}
   </div>
-  {carousel && <div class="figure-group-controls" hidden>
-    <button type="button" data-figure-previous aria-label="Previous figure" aria-controls={`${id}-slides`}>
-      <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m12 5-5 5 5 5" /></svg>
-    </button>
-    <span class="figure-group-status" role="status" aria-live="polite" aria-atomic="true"><span data-figure-position>1</span><span aria-hidden="true"> / </span><span class="sr-only"> of </span>{items.length}</span>
-    <button type="button" data-figure-next aria-label="Next figure" aria-controls={`${id}-slides`}>
-      <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m8 5 5 5-5 5" /></svg>
-    </button>
-  </div>}
-</div>
-<script>
-  import { bindFigureGroups } from '../lib/figure-group';
-  bindFigureGroups();
-</script>
+)}

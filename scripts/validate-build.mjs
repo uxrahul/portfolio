@@ -87,8 +87,11 @@ const figureLinks = [...heir.matchAll(/<a\b[^>]*>/g)]
   .map((match) => match[0]).filter((tag) => /\sdata-image-viewer(?:\s|>)/.test(tag))
   .map((tag) => tag.match(/\bhref="([^"]+)"/)[1]);
 const representativeOriginals = [
-  'product/hero-image.webp', 'research/card-sort-ambiguity.png',
-  'product/before-after-ia.png', 'research/task-success.png', 'research/expectation-gap.png',
+  'product/hero-image.webp', 'product/before-after-ia.png',
+  'research/card-sort-ambiguity.png', 'product/old-app-home.png', 'product/old-app-profile.png',
+  'phase-one/reading-the-day-at-a-glance--home-overview.png',
+  'phase-one/giving-customization-a-clear-home--settings-groups.png',
+  'research/task-success.png', 'research/expectation-gap.png',
 ];
 for (const [index, original] of representativeOriginals.entries()) {
   const selected = await readFile(new URL(`../src/assets/heir/${original}`, import.meta.url));
@@ -97,7 +100,27 @@ for (const [index, original] of representativeOriginals.entries()) {
   assert.equal(digest(delivered), digest(selected), `Modal must deliver untouched original: ${original}`);
 }
 assert.ok(files.some((file) => file.endsWith('.webp')), 'Expected optimized WebP output.');
-assert.equal(figureLinks.length, 24, 'The complete HEIR case study must contain all 24 source visuals.');
-assert.equal((heir.match(/\sdata-carousel(?:\s|>)/g) || []).length, 6, 'Expected four statistical, haptics, and Health Scan carousels.');
-console.log(`Validated ${documents.size} HTML pages, ${checked} internal links/fragments, six TOC headings, 24 figures, six carousels, original-image integrity, and publication boundaries.`);
+assert.equal(figureLinks.length, 28, 'The complete HEIR case study must contain all 28 source visuals.');
+assert.equal((heir.match(/\sdata-carousel(?:\s|>)/g) || []).length, 0, 'Legacy carousels must be absent.');
+assert.equal((heir.match(/class="design-rail figure-rail figure-rail-statistical"/g) || []).length, 4, 'Expected four complete-chart rails.');
+assert.equal((heir.match(/class="design-rail figure-rail figure-rail-mobile-ui"/g) || []).length, 2, 'Expected haptics and Health Scan rails.');
+console.log(`Validated ${documents.size} HTML pages, ${checked} internal links/fragments, six TOC headings, 28 figures, eight unified image rails, original-image integrity, and publication boundaries.`);
 await import('./validate-gallery-build.mjs');
+
+const comparison = heir.match(/<div[^>]*class="heir-app-comparison[^>]*>([\s\S]*?)<\/div>\s*<\/div>/)?.[0];
+assert.ok(comparison, 'Missing old/redesigned app comparison.');
+assert.equal((heir.match(/\sdata-design-rail(?:\s|>)/g) || []).length, 8, 'Expected six figure rails and two independent comparison rails.');
+assert.ok(heir.indexOf('before-after-ia') < heir.indexOf('Make everyday device controls easy'), 'IA comparison must follow Context before Goal.');
+assert.ok(heir.indexOf('I tested an interactive Figma prototype') < heir.indexOf('class="heir-app-comparison'));
+assert.ok(heir.indexOf('class="heir-app-comparison') < heir.indexOf('Average task success increased'));
+console.log('First-launch comparison: relocated IA original and two independent two-screen design rails verified.');
+
+for (const route of ['heir/index.html', 'heir/gallery/phase-one/index.html', 'heir/gallery/face-scan/index.html']) {
+  const html = documents.get(resolve(root, route)).html;
+  const rails = (html.match(/\sdata-design-rail(?:\s|>)/g) || []).length;
+  for (const control of ['data-rail-previous', 'data-rail-next', 'data-rail-progress']) {
+    assert.equal((html.match(new RegExp(`\\s${control}(?:\\s|>)`, 'g')) || []).length, rails, `${route}: every rail must have shared arrows and progress.`);
+  }
+  assert.ok(!/data-figure-previous|data-figure-next|data-figure-position|data-carousel(?:\s|>)/.test(html), `${route}: legacy carousel presentation must be absent.`);
+}
+console.log('All 59 case-study/gallery rails use shared circular controls and progress indicators.');

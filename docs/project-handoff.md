@@ -4,7 +4,7 @@
 
 About (`/`), the complete HEIR case study (`/heir/`), and a shared-layout 404 are
 implemented. HEIR preserves its introduction, five projects, conclusion, 48
-research bullets, 24 visuals, source emphasis, and captions. The approved
+research bullets, 28 visuals, source emphasis, and captions. The approved
 introduction uses the shortened italic subtitle, revised role above
 the unchanged context paragraph, and eight labeled SVG tool icons inside one
 metadata block with subtle top/bottom dividers. The three editorial milestone
@@ -25,8 +25,9 @@ actual pages and fragments exist. Further content migration requires authorizati
 
 ## Architecture and main files
 
-Pinned Astro 7.3.8, MDX 8.0.3, Tailwind 4.3.3, TypeScript, and Embla 8.6.0 generate
-static pages. There is no Starlight or React runtime. Dependencies are all in use.
+Pinned Astro 7.3.8, MDX 8.0.3, Tailwind 4.3.3, and TypeScript generate
+static pages. There is no Starlight or React runtime. Native shared image rails
+replace the Embla runtime; its dependency remains installed without unrelated cleanup.
 
 - `PortfolioLayout.astro` owns the shared shell, theme, native Astro ClientRouter,
   pagination, and global image dialog. `[...slug].astro` renders MDX collections;
@@ -347,11 +348,59 @@ explicit user instructions. Preserve the local verified rollback
 backup under `.git/rollback-backups/`; it is private and must not be cleaned or
 published. Earlier private research notes survive in that backup/archive.
 
+## First-launch comparison update — October 14, 2026
+
+The revised main Word document places the existing information-architecture figure
+immediately after Context. Its unchanged Settings explanation stays in the
+figcaption, without adding a TOC entry. After the first Outcome bullet,
+`AppComparison` renders independent Old app and Redesigned app `DesignRail`s:
+two screens each, adjacent at 700px and above, stacked below. The existing 43rem
+case-study canvas is unchanged. Captions and alt descriptions use the exact user
+wording in `src/data/heir-ui.ts`; arrows, touch scrolling, partial previews,
+gallery entrance motion, and the shared original-image viewer are reused.
+
+All four 1322 × 2726 PNGs were visually matched and byte-verified against the new
+Word table. Only the two old-app PNGs were imported; the redesigned Home and
+Settings reuse byte-identical Phase One originals. Existing research pages,
+product galleries, six statistical/UI carousels, 48 bullets, and 13 link IDs remain
+unchanged. Desktop and 393 × 852 phone emulation were reviewed in light/dark
+with independent arrows, swiping, all four enlarged originals, Fit/100%, and
+focus return. Production, source-fidelity, research, and gallery checks pass.
+This first-launch update is approved for publication together with the unified
+carousel implementation described below.
+
+## Unified carousel standard — October 14, 2026
+
+The six legacy case-study carousels now use the gallery's approved native image
+rail through shared `ImageRail`, `image-rail.css`, and `design-rail.ts`. Existing
+`StatisticalCarousel`/`MobileUICarousel` authoring and source order are preserved;
+four chart groups use complete reading-width figures and two UI groups retain
+native-ratio compositions and captions. Circular arrows, continuous progress,
+fluid scrolling, keyboard, mouse/touch/trackpad, reduced motion, and the unchanged
+viewer now share one implementation. The existing galleries keep their visual
+presentation and metadata. `.image-rail-composition` aligns paired rails through
+equal-height grid columns and flex rows on desktop and natural-height stacks on mobile.
+No page width, navigation, prose, original asset, or section/route motion changed.
+Desktop/393px mobile emulation, light/dark, caption alignment, arrows/progress,
+keyboard, dragging/swiping, viewer, and reduced-motion checks are recorded in
+`docs/verification.md`. All check/build/source/research and gallery validation pass.
+The user approved publication of the current implementation, including carousel
+standardization. The commit titled `Update HEIR case study with before-and-after
+app comparisons` is the rollback baseline before any subsequent carousel or
+website-width design changes. This baseline includes the relocated IA figure,
+four approved comparison screens, shared circular controls/progress, and aligned
+comparison navigation. It does not include website-width changes. Preserve this
+approved state before starting the next design pass. Find its hash with
+`git log --format='%H %s' --grep='Update HEIR case study with before-and-after app comparisons'`.
+Private archives, Word documents, datasets, credentials, and temporary files are
+excluded; only the two needed old-app PNG originals were added. The redesigned
+screens reuse already-published Phase One originals.
+
 ## Verification and review
 
 Run `npm run check`, `npm run build`, `npm run verify:source`, and
 `npm run verify:research` sequentially.
-The build checks pages/fragments, six TOC entries, six carousels, 24 image originals,
+The build checks pages/fragments, six TOC entries, eight shared image rails, 28 image originals,
 13 content relationships, and private-file exclusions. Source verification checks
 complete milestone stages against Word table columns, all narrative/UI descriptions,
 bullets, emphasis, captions, figure bytes/order, and conclusion.

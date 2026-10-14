@@ -1,11 +1,40 @@
 # Portfolio verification
 
-This records checks for the current approved implementation: the complete HEIR
-case study, six shared carousels, and introductory milestone cards. Browser review
+This records carousel-standardization verification followed by the earlier
+case-study verification record. Browser review
 uses Brave and viewport emulation; it is not a physical-device or screen-reader
 audit. Earlier table/hierarchy experiments were rolled back and are not current.
 
-## Automated coverage
+## Unified carousel verification — October 14, 2026
+
+All six legacy case-study carousels use the approved gallery rail through shared
+`ImageRail`, styles, and native-scrolling runtime. The old/redesigned comparison
+uses equal-height grid columns and flex-column rails to align bottom controls
+without fixed caption heights; mobile stacks resume natural heights.
+
+- Desktop Brave and 393 × 852 phone emulation covered light/dark themes, complete
+  chart framing, UI partial previews, caption wrapping, arrows, progress, keyboard
+  navigation, mouse dragging, and an emulated horizontal touch swipe. Dragging did
+  not inadvertently open the viewer. Reduced-motion emulation kept arrow and
+  Home/End navigation functional without added travel.
+- The comparison's navigation rows align with one- and two-line captions in both
+  desktop themes. Charts retain their complete source labels/legends and reading
+  width. Captions, alt text, original URLs, image dimensions, and order match the
+  pre-change rendered output. No page-width or global-container changes were made.
+- Phase One and Face Scan were inspected on desktop and mobile. Their complete
+  rendered article structure and image metadata match saved pre-change output.
+  Gallery arrows/progress and the unchanged Fit/100%/Escape viewer were exercised.
+- Check/build/source/research validation passes: 57 Astro files, zero diagnostics,
+  10 pages, 330 internal links/fragments, 28 case-study originals, and 59 shared
+  rails. Gallery validation retains 6 chapters/23 stories/59 Phase One screens and
+  6 chapters/28 stories/60 Face Scan screens.
+
+Native overflow retains trackpad scrolling; a physical trackpad/device and
+Safari/Firefox/screen-reader audit were not performed. Native horizontal wheel
+injection through the automation tool did not establish a trackpad test.
+The refinement is local and awaiting review, with no commit or push.
+
+## Earlier automated coverage
 
 - `npm run check`: 32 Astro files, no errors/warnings/hints; 13 permanent link IDs,
   pending destinations, heading IDs, and semantic text contrast validated.
@@ -18,7 +47,7 @@ audit. Earlier table/hierarchy experiments were rolled back and are not current.
   order. All 24 modal originals are byte-verified: 23 match Word embeds; the
   approved hero matches its standalone original.
 
-## Browser evidence
+## Earlier browser evidence
 
 Review across the implementation covered desktop widths around 1440–1710px,
 tablet widths, and 390–393px phone emulation in light/dark themes.

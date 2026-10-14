@@ -185,47 +185,33 @@ titles embedded in a chart or redraw its contents. Images retain their native
 aspect ratio. Astro generates responsive delivery sizes without upscaling beyond
 the source width; full-resolution originals remain available in the viewer.
 
-`FigureGroup` is the shared Embla 8.6 interaction system, with `id`, accessible
-`label`, ordered `FigureItem` values, `presentation="stack" | "carousel"`, and
-`variant="statistical" | "mobile-ui"`. `StatisticalCarousel` and
-`MobileUICarousel` are the intended authoring wrappers. No React runtime or
-carousel autoplay plugin is needed. The existing usability group keeps its ID,
-plots, and captions. Four statistical groups cover usability, customer priorities,
-haptic adoption/retention, and activity target outcomes. Haptics also uses three
-intact paired-screen compositions; Health
-Scan uses six individual screens, each with its source stage title and full description.
+`ImageRail` is the single approved carousel standard. `DesignRail` supplies the
+existing gallery screens; `FigureGroup`, `StatisticalCarousel`, and
+`MobileUICarousel` retain their authoring APIs and supply ordered `ResearchFigure`s
+to the same rail. All use `image-rail.css` and `design-rail.ts`; the legacy Embla
+presentation and runtime are removed. Galleries retain their approved dimensions,
+labels, captions, entrance motion, and interactions.
 
-Both variants have Previous/Next controls on opposite edges, a polite live count,
-mouse/touch dragging, and Arrow Left/Right plus Home/End while focused. They do
-not autoplay, wrap, or loop. Boundary controls expose `aria-disabled` and remain
-focusable so reaching an end does not discard focus. Inactive slides are inert
-and hidden from assistive technology; selection transfers focus out of an inactive
-slide when necessary. The region itself is keyboard-focusable. Height reserves
-the tallest slide and caption, avoiding document jumps. Resize and Astro swaps
-reinitialize/destroy the interaction cleanly.
+Circular 44px previous/next controls flank a thin continuous position indicator.
+Arrows advance 75% of the viewport with native smooth scrolling; touch, trackpad,
+and mouse dragging remain fluid without forced snap points. Arrow Left/Right,
+Page Up/Down, and Home/End work in the focusable region. There is no autoplay,
+loop, or inactive-slide hiding. Boundary controls remain focusable with
+`aria-disabled`; controls hide when no overflow exists unless they contain focus.
+Reduced motion makes programmatic scrolling immediate and removes control motion.
+Resize observation updates boundaries and progress; Astro swaps dispose listeners.
+Drag releases use the unchanged viewer click guard. Native scrolling works without
+JavaScript; controls remain hidden until enhanced.
 
-Statistical carousels retain the approved plot frame, responsive padding, white
-evidence surface, and centered caption alignment. Their control row sits beneath
-captions, with arrows at its left/right edges. Mobile UI carousels have a transparent
-image area, no added frame/card/background, and centered native-ratio imagery
-bounded by `--figure-ui-height` (32rem). Precomposed pairs remain one image. Each
-caption stays directly beneath its composition, aligned with the reading grid;
-`captionTitle` supplies the stage title and `caption` its complete description.
-Descriptions wrap fully, without clipping or truncation. At wider widths arrows
-sit outside the imagery in `--figure-ui-gutter`; below 540px they move below the
-caption to preserve the image's usable width. No image is stretched or cropped.
-
-Embla supplies the horizontal motion; its physics duration is calibrated from
-`--figure-motion-duration` (240ms), rather than treating its API value as milliseconds.
-Reduced motion makes arrow/keyboard/wheel navigation immediate and snaps drag
-release without added travel. Horizontal wheel input steps through slides with a
-restrained threshold; vertical scrolling, pinch zoom, and boundary gestures remain
-native. The track uses `touch-action: pan-y pinch-zoom`. Pointer/touch displacement
-suppresses release clicks before the viewer's capture handler; an ordinary next
-press or keyboard activation still opens the untouched original in the same modal.
-Without JavaScript, figures remain a complete source-ordered stack with controls
-hidden. These wrappers can be reused by later Ganance/Lira galleries without
-publishing those destinations now.
+Statistical rails allocate the complete available reading width to each chart,
+including its existing evidence surface, padding, labels, legends, and caption.
+They preserve native proportions without cropping or applying the narrower
+product-screen sizing. Partial chart visibility occurs during fluid scrolling; at the
+start/end the complete figure fits. Mobile UI compositions preserve their source
+aspect ratios and use `--figure-ui-height` and available-width sizing, exposing
+neighboring screens where appropriate. Precomposed pairs remain one image.
+Captions retain their existing typography, stage titles, and full descriptions.
+No changes to page widths, global padding, source assets, or the viewer are needed.
 
 The image trigger opts out of Astro routing; its capture listener opens the dialog
 before the page router handles the click. Modified clicks retain native behavior.
@@ -327,8 +313,7 @@ Gallery images reuse the existing full-screen viewer with untouched PNG original
 Astro supplies responsive quality-95 WebP inline delivery. Drag/swipe releases
 use the existing click guard, while normal clicks and keyboard activation enlarge.
 `gallery-motion.ts` uses the 400ms section tokens for vertical entrances. Content is visible without JavaScript. Focus, anchor navigation, reduced
-motion, and Astro swaps cancel motion; page scrolling remains native. Existing
-Embla figure groups are unchanged.
+motion, and Astro swaps cancel motion; page scrolling remains native. All case-study carousels use the same rail controls and scrolling runtime.
 
 ## Publication and checks
 
@@ -348,3 +333,16 @@ Run `npm run check`, `npm run build`, `npm run verify:source`, and
 `npm run verify:research`. Then inspect
 actual desktop/mobile pages and test interactions; a successful build does not
 constitute visual approval.
+
+### Case-study app comparison
+
+`AppComparison` reuses two independent `DesignRail`s within the unchanged reading
+canvas. Old app is left and Redesigned app right from 700px; below that they stack
+in the same order. Separation uses `--space-8`. Each screen retains the gallery
+caption, optimized image, original-image viewer, scroll controls, and motion.
+`DesignRail` accepts an optional display `heading`, defaulting to the existing
+“HEIR designs”; comparison labels are paragraphs, not TOC headings.
+The reusable `.image-rail-composition` uses equal-height CSS Grid columns above 700px
+with flex-column rails and bottom-anchored controls. Content determines their height, so full
+captions wrap naturally and both bottom controls align without caption heights
+or filler. Below 700px each stacked rail resumes its natural height.

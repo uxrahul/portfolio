@@ -68,13 +68,13 @@ for index, block in enumerate(body):
     paragraphs = block.findall('.//w:tc/w:p', ns) if block.tag.endswith('tbl') else [block]
     for paragraph in paragraphs:
         value = normal(text(paragraph))
-        if value and index != 9:
+        if value and index not in [9,27]:
             found = actual.find(value, cursor)
             assert found >= cursor, f'Source block {index} missing, changed, or out of order: {value}'
             cursor = found + len(value)
         style = paragraph.find('w:pPr/w:pStyle', ns)
         style = style.get('{'+ns['w']+'}val') if style is not None else ''
-        if style in ['ContributionPoint', 'OutcomePoint', 'ResearchFinding']: source_bullets.append(value)
+        if value and index != 27 and style in ['ContributionPoint', 'OutcomePoint', 'ResearchFinding']: source_bullets.append(value)
         for run in paragraph.findall('.//w:r', ns):
             value = normal(text(run))
             if not value: continue
@@ -87,18 +87,25 @@ for index, block in enumerate(body):
     image_order.extend(relationships[image.get('{'+ns['r']+'}embed')] for image in block.findall('.//a:blip', ns))
 assert normal(text(body[1])) in published.italic, 'Subtitle must preserve italic semantics.'
 assert published.bullets == source_bullets, 'All source bullets must match in order, wording and count.'
-assert len(published.figures) == len(image_order) == 24, 'All 24 Word visuals must be present exactly once.'
+assert len(published.figures) == len(image_order) == 28, 'All 28 Word visuals must be present exactly once.'
 for i, (figure, media) in enumerate(zip(published.figures, image_order)):
     delivered = (site / 'dist' / figure['href'].removeprefix('/portfolio/').lstrip('/')).read_bytes()
     # The approved introductory hero uses the visually matched standalone photograph.
     expected = (site / 'src/assets/heir/product/hero-image.webp').read_bytes() if i == 0 else originals['word/'+media]
     assert hashlib.sha256(delivered).digest() == hashlib.sha256(expected).digest(), f'Wrong visual/rendition/order at figure {i+1}: {media}'
 # Ordinary image-paragraph captions and the two Word UI tables have distinct semantics.
-captions = [text(body[i]) for i in [6,22,24,32,34,45,47,58,60,71,78,80,85,97,121]]
+captions = [text(body[i]) for i in [6,14,24,34,36,47,49,60,62,73,80,82,87,99,123]]
 actual_captions = [f['data-caption'] for f in published.figures if ' — ' not in f['data-caption']]
 assert actual_captions == captions, 'Figure captions must match the source in order.'
-for i in [50,131]:
+for i in [52,133]:
     for cell in body[i].findall('.//w:tc', ns):
         values = [normal(text(p)) for p in cell.findall('w:p', ns) if normal(text(p))]
         assert ' — '.join(values) in [f['data-caption'] for f in published.figures], 'Missing UI stage title or full description.'
-print(f'Source fidelity passed: three complete milestone cards, all narrative/UI table cells in sequence, {len(source_bullets)} exact bullets, bold/italic emphasis, 24 byte-verified visuals, every caption/UI description, and conclusion.')
+print(f'Source fidelity passed: three complete milestone cards, all narrative/UI table cells in sequence, {len(source_bullets)} exact bullets, bold/italic emphasis, 28 byte-verified visuals, every caption/UI description, and conclusion.')
+
+# User-approved captions replace the new Word table's brief screen labels.
+comparison_captions = [
+    'Old app — Home dashboard', 'Old app — Profile and Settings access',
+    'Redesigned app — Home and activity overview', 'Redesigned app — Consolidated Settings',
+]
+assert [f['data-caption'] for f in published.figures[3:7]] == comparison_captions, 'Wrong comparison caption or screen association.'
