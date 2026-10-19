@@ -1,0 +1,44 @@
+/* The supplied WebP and its source-coordinate SVG share one square canvas.
+   No crop, recoloring, filter, or shadow is applied to the original artwork. */
+.lira-pendant { display: none; }
+[data-journey-active] .lira-pendant { display: block; position: relative; width: 100%; height: var(--lira-artwork-size); margin: 0;
+  --lira-emission: color-mix(in srgb, var(--color-primary) 28%, var(--color-evidence-surface));
+  --lira-bloom-strength: .22;
+  --lira-ambient-strength: .07;
+  --lira-indicator-bloom-strength: .35;
+}
+.lira-pendant-artwork { position: relative; width: var(--lira-artwork-size); height: var(--lira-artwork-size); left: calc(-1 * var(--lira-artwork-size) * var(--lira-body-inset)); isolation: isolate; }
+.lira-pendant-image { position: relative; z-index: 1; display: block; width: 100%; height: auto; }
+.lira-pendant-image--dark { display: none; }
+.lira-pendant-diffuser, .lira-pendant-light { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.lira-pendant-diffuser { z-index: 0; }
+.lira-pendant-light { z-index: 2; }
+.lira-frost-highlight { stop-color: color-mix(in srgb, var(--color-evidence-surface) 90%, var(--color-outline-strong)); }
+.lira-frost-body { stop-color: color-mix(in srgb, var(--color-evidence-surface) 65%, var(--color-outline-strong)); }
+.lira-frost-shadow { stop-color: color-mix(in srgb, var(--color-evidence-surface) 48%, var(--color-outline-strong)); }
+.lira-diffuser-channel { fill: none; stroke: url(#lira-frosted-material); stroke-width: 36; stroke-linecap: round; }
+.lira-diffuser-sheen { fill: none; stroke: var(--color-evidence-surface); stroke-width: 15; stroke-linecap: round; opacity: .28; filter: url(#lira-frost-softness); }
+.lira-diffuser-indicator { fill: url(#lira-frosted-material); }
+.lira-diffuser-indicator-sheen { fill: var(--color-evidence-surface); opacity: .28; filter: url(#lira-frost-softness); }
+.lira-light-highlight { stop-color: var(--color-evidence-surface); }
+.lira-light-tint { stop-color: var(--lira-emission); }
+.lira-ring-light { opacity: var(--lira-ring-strength, 0); }
+.lira-ring-light path { fill: none; stroke-linecap: round; stroke-dasharray: 1 1; stroke-dashoffset: calc(1 - var(--lira-ring-progress, 0)); }
+.lira-ring-ambient { stroke: var(--color-primary); stroke-width: 68; opacity: var(--lira-ambient-strength); filter: url(#lira-ring-ambient); }
+.lira-ring-bloom { stroke: var(--color-primary); stroke-width: 48; opacity: var(--lira-bloom-strength); filter: url(#lira-ring-diffusion); }
+.lira-ring-emitter { stroke: url(#lira-emitted-light); stroke-width: 29; filter: url(#lira-light-softness); }
+.lira-ring-core { stroke: var(--color-evidence-surface); stroke-width: 7; opacity: .72; filter: url(#lira-light-softness); }
+.lira-indicator-light { opacity: var(--lira-indicator, 0); }
+.lira-indicator-bloom { fill: var(--color-primary); opacity: var(--lira-indicator-bloom-strength); filter: url(#lira-indicator-diffusion); }
+.lira-indicator-emitter { fill: var(--lira-emission); filter: url(#lira-light-softness); }
+.lira-indicator-core { fill: var(--color-evidence-surface); opacity: .8; filter: url(#lira-light-softness); }
+
+/* Follow the resolved site theme, including the existing System preference. */
+:root[data-theme='dark'] .lira-pendant-image--light { display: none; }
+:root[data-theme='dark'] .lira-pendant-image--dark { display: block; }
+:root[data-theme='dark'] .lira-pendant { --lira-bloom-strength: .42; --lira-ambient-strength: .16; --lira-indicator-bloom-strength: .62; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .lira-pendant-image--light { display: none; }
+  :root:not([data-theme]) .lira-pendant-image--dark { display: block; }
+  :root:not([data-theme]) .lira-pendant { --lira-bloom-strength: .42; --lira-ambient-strength: .16; --lira-indicator-bloom-strength: .62; }
+}

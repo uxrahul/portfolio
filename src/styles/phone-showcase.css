@@ -1,0 +1,12 @@
+.homepage .phone-showcase { margin: 0 auto; width: min(100%, 21rem); }
+.phone-showcase-device { position: relative; width: 100%; aspect-ratio: 1322 / 2726; isolation: isolate; }
+.phone-showcase-window {
+  position: absolute; left: 4%; top: 1.3%; width: 92%; height: 97.2%;
+  border-radius: 19.5% / 9%; overflow: hidden;
+  background: var(--color-evidence-surface);
+}
+.phone-showcase-screen { display: block; width: 100%; height: auto; max-width: none; }
+.phone-showcase-frame { position: relative; display: block; width: 100%; height: auto; pointer-events: none; }
+
+@media (max-width: 1199px) { .homepage .phone-showcase { width: min(85%, 19rem); } }
+@media (max-width: 599px) { .homepage .phone-showcase { width: min(100%, 17rem); } }

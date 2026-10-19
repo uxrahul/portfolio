@@ -1,0 +1,20 @@
+---
+import { homepageTools } from '../data/homepage-tools';
+import '../styles/tool-swarm.css';
+const sizes = [1, .94, 1.04, 1.02, .98, 1.04, 1, .96, 1.02, 1.04, .98];
+---
+<div class="tool-swarm" data-tool-swarm>
+  <div class="tool-swarm-field" role="group" aria-label="Explore selected tools" data-tool-field>
+    {homepageTools.map((tool, index) => <button type="button" class="tool-bubble" data-tool-bubble={index} style={`--tool-size: ${sizes[index]}`} aria-pressed="false" aria-controls={`tool-info-${index}`}>
+      <span class="swarm-tool-mark" aria-hidden="true" set:html={tool.icon} />
+      <span class="tool-bubble-label">{tool.label}</span>
+    </button>)}
+  </div>
+  <div class="tool-swarm-info" aria-live="polite" aria-atomic="true" data-tool-info>
+    <p class="tool-swarm-invitation" data-tool-invitation>Explore the tools behind my work.</p>
+    {homepageTools.map((tool, index) => <article id={`tool-info-${index}`} class="tool-swarm-detail" hidden>
+      <header><span class="swarm-tool-mark" aria-hidden="true" set:html={tool.icon} /><h3>{tool.label}</h3></header>
+      <p id={`tool-description-${index}`}>{tool.description}</p>
+    </article>)}
+  </div>
+</div>

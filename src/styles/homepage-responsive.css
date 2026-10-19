@@ -1,0 +1,33 @@
+/* One contextual Tools treatment for every naturally scrolling homepage. */
+.homepage-tool-select { display: inline-flex; align-items: center; gap: var(--space-2); border: 0; padding: 0; margin: 0; background: transparent; color: inherit; font: inherit; text-align: left; }
+.homepage-tool-select:disabled { opacity: 1; }
+.homepage-tool-popover { display: none; }
+.homepage-tool-select:not(:disabled) { cursor: pointer; min-height: 44px; }
+.homepage-tool-select[aria-expanded='true'] { color: var(--color-primary); }
+.homepage-tool-select:focus-visible { outline: var(--focus-width) solid var(--color-primary); outline-offset: var(--focus-offset); border-radius: var(--radius-subtle); }
+.homepage-tool-popover:popover-open {
+  display: block; position: fixed; inset: auto; margin: 0; padding: var(--space-5);
+  width: min(22rem, calc(100vw - 2rem)); max-height: calc(100dvh - 2rem); overflow: auto;
+  border: var(--divider); border-radius: var(--radius-subtle);
+  background: var(--color-surface); color: var(--color-on-surface);
+  box-shadow: 0 var(--space-2) var(--space-6) color-mix(in srgb, var(--color-on-surface) 10%, transparent);
+}
+.homepage-tool-popover [hidden] { display: none; }
+.homepage-tool-popover header { display: flex; align-items: center; gap: var(--space-3); }
+.homepage .homepage-tool-popover h3 { font-size: var(--type-body); line-height: var(--line-height-heading); margin: 0; }
+.homepage .homepage-tool-popover p { font-size: var(--type-navigation); line-height: var(--line-height-supporting); color: var(--color-on-surface-variant); margin: var(--space-3) 0 0; }
+
+.homepage [data-home-journey]:not([data-journey-active]) .journey-project { border-top: var(--divider); padding-top: var(--space-8); }
+.homepage [data-home-journey]:not([data-journey-active]) .journey-project > .homepage-label { display: block; }
+.homepage [data-home-journey]:not([data-journey-active]) .journey-project-copy { max-width: 42rem; margin: 0; padding: 0; border: 0; }
+.homepage [data-home-journey]:not([data-journey-active]) .journey-project-copy h3 { font-size: var(--homepage-statement); line-height: 1.12; letter-spacing: var(--tracking-heading); margin: 0 0 var(--space-6); }
+.homepage [data-home-journey]:not([data-journey-active]) .journey-project-description { margin: 0; color: var(--color-on-surface-variant); }
+.homepage [data-home-journey]:not([data-journey-active]) .journey-project-status { display: block; margin: var(--space-4) 0 0; font-size: var(--type-small); line-height: var(--line-height-supporting); color: var(--color-on-surface-variant); }
+
+/* Touch scenes retain natural height; desktop geometry lives in homepage-products.css. */
+@media (max-width: 1199px), (hover: none), (pointer: coarse) {
+  .homepage [data-home-journey]:not([data-journey-active]) .journey-project-composition { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-10); align-items: center; }
+}
+@media (max-width: 599px) {
+  .homepage [data-home-journey]:not([data-journey-active]) .homepage-portrait { grid-row: 1; }
+}

@@ -31,6 +31,7 @@
   --weight-medium: 500;
   --weight-semibold: 600;
   --line-height-reading: 1.7;
+  --line-height-supporting: 1.5; /* Existing lead, short supporting copy and caption leading. */
   --line-height-heading: 1.2;
   --line-height-navigation: 1.45;
   --tracking-heading: -0.02em;
@@ -135,4 +136,9 @@
     --color-primary-container: var(--palette-dark-primary-container);
     --color-on-primary: var(--palette-dark-charcoal);
   }
+}
+
+/* Desktop visual ceilings adapt to height; touch/landscape keeps natural flow. */
+@media (hover: hover) and (pointer: fine) {
+  :root { --figure-ui-height: min(32rem, max(20rem, 75dvh)); }
 }

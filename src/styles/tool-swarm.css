@@ -1,0 +1,47 @@
+/* The original list remains the sole smaller-screen / static presentation. */
+.tool-swarm { display: none; }
+[data-journey-active] .homepage-tool-section {
+  width: var(--journey-scene-max-width); height: 100%; min-height: 0;
+  max-height: var(--journey-content-height); margin: 0; padding: 0; border: 0;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.homepage [data-journey-active] .homepage-tool-section > .homepage-label { margin: 0 0 var(--space-6); }
+[data-journey-active] .tools-static { display: none; }
+[data-journey-active] .tool-swarm {
+  --tools-bubble-size: clamp(5.5rem, 7.6vw, 6.5rem);
+  display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+  gap: var(--space-8); flex: 1; min-height: 0; max-height: 32rem;
+}
+.tool-swarm-field { position: relative; min-width: 0; min-height: 0; isolation: isolate; }
+.tool-bubble {
+  position: absolute; left: 0; top: 0; width: calc(var(--tools-bubble-size) * var(--tool-size));
+  height: calc(var(--tools-bubble-size) * var(--tool-size)); margin: 0; padding: var(--space-3);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-2);
+  border: 1px solid var(--color-outline); border-radius: 50%;
+  background: color-mix(in srgb, var(--color-surface) 95%, var(--color-primary-container));
+  box-shadow: 0 .25rem .875rem color-mix(in srgb, var(--color-on-surface) 6%, transparent);
+  color: var(--color-on-surface); font: inherit; cursor: pointer; transform-origin: center;
+  transition: border-color 140ms ease, box-shadow 140ms ease; will-change: transform;
+}
+.tool-bubble[aria-pressed='true'] { border-color: var(--color-primary); box-shadow: 0 .25rem 1rem color-mix(in srgb, var(--color-primary) 12%, transparent); }
+.tool-bubble:focus-visible { outline: var(--focus-width) solid var(--color-primary); outline-offset: var(--focus-offset); z-index: 2; }
+.tool-bubble-label { font-size: .8125rem; font-weight: var(--weight-medium); line-height: var(--line-height-heading); white-space: nowrap; }
+.swarm-tool-mark {
+  display: inline-flex; flex: none; align-items: center; justify-content: center;
+  width: 2.5rem; height: 2.5rem; padding: .375rem; border-radius: 50%;
+  /* Preserve authored SVG fills, including dark wordmarks, in both themes. */
+  background: var(--color-evidence-surface); color: light-dark(var(--color-on-surface), var(--color-background));
+}
+.swarm-tool-mark svg { width: 100%; height: 100%; display: block; }
+.tool-bubble .swarm-tool-mark { width: 2.875rem; height: 2.875rem; }
+.tool-swarm-info {
+  position: relative; align-self: start; height: 22rem; max-height: 100%; min-width: 0;
+  border-left: var(--divider); padding-left: var(--space-8);
+}
+.homepage .tool-swarm-invitation { font-size: clamp(1.75rem, 2.4vw, 2.5rem); line-height: 1.16; letter-spacing: var(--tracking-heading); max-width: 14ch; margin: 0; }
+.tool-swarm-detail { position: absolute; inset: 0 0 0 var(--space-8); }
+.tool-swarm-detail[hidden] { display: none; }
+.tool-swarm-detail header { display: flex; align-items: center; gap: var(--space-4); min-height: 3.5rem; }
+.homepage .tool-swarm-detail h3 { font-size: var(--type-heading-2); font-weight: var(--weight-semibold); margin: 0; line-height: var(--line-height-heading); }
+.tool-swarm-detail .swarm-tool-mark { width: 3rem; height: 3rem; }
+.homepage .tool-swarm-detail > p { margin: var(--space-6) 0 0; font-size: var(--type-body); line-height: 1.6; color: var(--color-on-surface-variant); }

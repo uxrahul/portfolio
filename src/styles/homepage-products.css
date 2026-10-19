@@ -1,0 +1,73 @@
+/* Vertical product previews share their approved source canvas and materials.
+   All rules exclude the cinematic camera, including during mode transitions. */
+.homepage [data-home-journey]:not([data-journey-active]) .lira-pendant {
+  --lira-emission: color-mix(in srgb, var(--color-primary) 28%, var(--color-evidence-surface));
+  --lira-bloom-strength: .22;
+  --lira-ambient-strength: .07;
+  --lira-indicator-bloom-strength: .35;
+  display: block; width: min(100%, 30rem); margin: var(--space-10) auto 0; position: relative;
+}
+.homepage [data-home-journey]:not([data-journey-active]) .lira-pendant-artwork { left: 0; width: 100%; height: auto; aspect-ratio: 1; }
+.homepage [data-home-journey]:not([data-journey-active]) .lira-pendant-light {
+  --lira-ring-progress: var(--preview-ring-progress, 1);
+  --lira-ring-strength: var(--preview-ring-strength, 1);
+  --lira-indicator: var(--preview-indicator, 1);
+}
+:root[data-theme='dark'] .homepage [data-home-journey]:not([data-journey-active]) .lira-pendant { --lira-bloom-strength: .42; --lira-ambient-strength: .16; --lira-indicator-bloom-strength: .62; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .homepage [data-home-journey]:not([data-journey-active]) .lira-pendant { --lira-bloom-strength: .42; --lira-ambient-strength: .16; --lira-indicator-bloom-strength: .62; }
+}
+.homepage [data-home-journey]:not([data-journey-active]) .phone-showcase-screen { transform: translateY(var(--preview-phone-y, 0px)); }
+.homepage [data-home-journey]:not([data-journey-active]) [data-phone-native] {
+  overflow-y: auto; overflow-x: hidden; scrollbar-width: none;
+  /* Native boundary chaining keeps the surrounding document reachable. */
+  overscroll-behavior-y: auto; scroll-behavior: auto;
+}
+[data-phone-native]::-webkit-scrollbar { display: none; }
+[data-phone-native]:focus-visible { outline: var(--focus-width) solid var(--color-primary); outline-offset: calc(-1 * var(--focus-offset)); }
+.lira-pendant-replay { display: none; }
+.homepage [data-home-journey]:not([data-journey-active]) .lira-pendant-replay:not([hidden]) {
+  display: block; position: absolute; z-index: 3; inset: 12% 22.7% 10%;
+  padding: 0; border: 0; border-radius: var(--radius-subtle); background: transparent; cursor: pointer;
+}
+.lira-pendant-replay:focus-visible { outline: var(--focus-width) solid var(--color-primary); outline-offset: var(--focus-offset); }
+@media (max-width: 1199px), (hover: none), (pointer: coarse) {
+  .homepage [data-home-journey]:not([data-journey-active]) .lira-pendant { margin-top: 0; }
+}
+
+/* Standard desktop: one reading composition and one physical-product envelope.
+   Touch layouts above retain their natural, potentially multi-viewport flow. */
+@media (min-width: 1200px) and (hover: hover) and (pointer: fine) {
+  .homepage [data-home-journey]:not([data-journey-active]) {
+    --standard-visual-height: min(32rem, max(16rem, calc(100dvh - 12rem)));
+    --standard-visual-width: calc(var(--standard-visual-height) * .55);
+    --standard-composition-gap: clamp(2rem, 4vw, 4rem);
+    --standard-composition-max-width: calc(31rem + var(--standard-composition-gap) + var(--standard-visual-width));
+    /* The square source extends past the body's right-hand layout boundary. */
+    --standard-artwork-overhang: calc(var(--standard-visual-height) * (1 - .55 - 285 / 1254));
+  }
+  .homepage [data-home-journey]:not([data-journey-active]) .homepage-portrait {
+    width: min(100%, max(16rem, calc((100dvh - 8rem) * 4 / 5))); margin-inline: auto;
+  }
+  .homepage [data-home-journey]:not([data-journey-active]) .journey-project { overflow: visible; }
+  .homepage [data-home-journey]:not([data-journey-active]) .journey-project-composition {
+    display: grid; grid-template-columns: minmax(0, 1fr) min(38%, var(--standard-visual-width));
+    /* Center the physical composition, leaving the full source/shadow canvas
+       room inside the viewport even at the smallest desktop width. */
+    width: min(100%, var(--standard-composition-max-width), calc(100vw - var(--navigation-width) - 2 * var(--standard-artwork-overhang) - 2 * var(--space-4)));
+    margin-inline: auto;
+    min-height: var(--standard-visual-height); gap: var(--standard-composition-gap); align-items: center;
+  }
+  .homepage [data-home-journey]:not([data-journey-active]) .journey-project-copy { max-width: 31rem; }
+  .homepage [data-home-journey]:not([data-journey-active]) .phone-showcase {
+    width: calc(100% * 1322 / 2726 / .55); margin: 0 auto;
+  }
+  /* Match the visible body rather than centering the transparent source canvas.
+     The full canvas and all diffuser/glow layers keep their original aspect. */
+  .homepage [data-home-journey]:not([data-journey-active]) .lira-pendant {
+    width: 100%; height: auto; aspect-ratio: .55; margin: 0;
+  }
+  .homepage [data-home-journey]:not([data-journey-active]) .lira-pendant-artwork {
+    width: calc(100% / .55); left: calc(-100% / .55 * 285 / 1254); top: 0;
+  }
+}

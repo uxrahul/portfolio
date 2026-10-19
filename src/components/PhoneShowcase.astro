@@ -1,0 +1,15 @@
+---
+import { Image } from 'astro:assets';
+import '../styles/phone-showcase.css';
+import type { ImageMetadata } from 'astro';
+interface Props { frame: ImageMetadata; screen: ImageMetadata; description: string; }
+const { frame, screen, description } = Astro.props;
+---
+<figure class="phone-showcase" data-phone-showcase>
+  <div class="phone-showcase-device" data-phone-device>
+    <div class="phone-showcase-window" data-phone-window>
+      <Image src={screen} alt={description} widths={[320, 640, 960, screen.width]} sizes="(min-width: 1200px) 320px, 70vw" format="webp" quality={95} loading="eager" class="phone-showcase-screen" data-phone-screen />
+    </div>
+    <Image src={frame} alt="" widths={[400, 800, frame.width]} sizes="(min-width: 1200px) 350px, 75vw" format="webp" quality={95} loading="eager" class="phone-showcase-frame" />
+  </div>
+</figure>

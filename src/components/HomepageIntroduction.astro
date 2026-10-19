@@ -1,0 +1,21 @@
+---
+import { Image } from 'astro:assets';
+import portrait from '../assets/homepage/about-me.webp';
+---
+<section class="homepage-hero" aria-labelledby="homepage-headline">
+  <div class="homepage-hero-grid">
+    <div class="homepage-hero-copy">
+      <h1 id="homepage-headline">Rahul Singh</h1>
+      <p class="homepage-designation">Chicago-based Sr. Product Designer</p>
+      <p class="homepage-disciplines">Product Research · Product Design · Product Analytics</p>
+      <p class="homepage-support">I turn customer research into product priorities and working experiences, then use behavioral data to guide what comes next—with experience across consumer technology, digital health, and applied AI.</p>
+      <section class="homepage-education" aria-labelledby="education">
+        <h2 id="education" class="homepage-label">EDUCATION</h2>
+        <p>M.S. Human–Computer Interaction · DePaul University</p>
+      </section>
+    </div>
+    <figure class="homepage-portrait">
+      <Image src={portrait} alt="Rahul Singh standing in front of an ivy-covered wall" widths={[320, 480, 640, 768]} sizes="(min-width: 1200px) 38vw, (min-width: 600px) 36vw, 80vw" format="webp" quality={90} loading="eager" fetchpriority="high" />
+    </figure>
+  </div>
+</section>

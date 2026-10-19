@@ -17,7 +17,7 @@ function initializeHomepageMotion() {
   let frame = 0;
   let observer: IntersectionObserver | undefined;
   const animate = (element: HTMLElement, delay: number) => {
-    if (reducedMotion.matches || element.contains(document.activeElement) || location.hash) return;
+    if (element.closest('[data-journey-active] [data-journey-scene]') || reducedMotion.matches || element.contains(document.activeElement) || location.hash) return;
     const styles = getComputedStyle(home);
     const animation = element.animate([
       { opacity: 0, transform: 'translateY(var(--motion-distance-section))' },
@@ -34,6 +34,7 @@ function initializeHomepageMotion() {
     let distance = Infinity;
     stages.forEach((stage, index) => {
       const rect = stage.getBoundingClientRect();
+      if (stage.closest('[data-journey-active]')) return;
       if (rect.bottom < 0 || rect.top > innerHeight) return;
       const nextDistance = Math.abs(rect.top + rect.height / 2 - center);
       if (nextDistance < distance) { distance = nextDistance; closest = index; }
@@ -44,7 +45,10 @@ function initializeHomepageMotion() {
     });
   };
   if (!reducedMotion.matches) {
-    home.querySelectorAll<HTMLElement>('[data-home-entrance]').forEach((element, index) => animate(element, index * 90));
+    // The camera controller owns hero visibility and transforms, including on Astro returns.
+    if (!home.querySelector('[data-home-journey]')) {
+      home.querySelectorAll<HTMLElement>('[data-home-entrance]').forEach((element, index) => animate(element, index * 90));
+    }
     if ('IntersectionObserver' in window) {
       observer = new IntersectionObserver((entries) => {
         entries.forEach((entry, index) => {

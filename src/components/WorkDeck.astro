@@ -1,0 +1,28 @@
+---
+import '../styles/work-deck.css';
+const capabilities = [
+  { number: '01', discipline: 'PRODUCT STRATEGY & RESEARCH', title: 'Find the right opportunity.', description: 'Turn customer understanding and research into meaningful product priorities.' },
+  { number: '02', discipline: 'PRODUCT & EXPERIENCE DESIGN', title: 'Make the experience work.', description: 'Translate complex problems into intuitive, scalable products that teams can ship.' },
+  { number: '03', discipline: 'PRODUCT ANALYTICS & OPTIMIZATION', title: 'Make progress measurable.', description: 'Define success, instrument behavior, and use product data to inform what comes next.' },
+];
+---
+<section class="homepage-section homepage-expertise" aria-labelledby="how-i-work" data-home-section data-work-deck>
+  <header class="work-deck-cover" data-home-reveal>
+    <div class="work-cover-surface" aria-hidden="true"></div>
+    <p class="homepage-label work-deck-identifier">EXPERTISE / HOW I WORK</p>
+    <span class="work-cover-label" aria-hidden="true">HOW I WORK</span>
+    <h2 id="how-i-work" class="homepage-section-statement">From understanding what matters to measuring what works.</h2>
+  </header>
+  <ol class="homepage-stages">
+    {capabilities.map((capability) => <li class="homepage-stage" data-home-stage data-home-reveal>
+      <div class="work-card-content">
+        <span class="homepage-stage-number" aria-hidden="true">{capability.number}</span>
+        <div class="homepage-stage-heading">
+          <p class="homepage-metadata">{capability.discipline}</p>
+          <h3>{capability.title}</h3>
+        </div>
+        <p class="homepage-stage-description">{capability.description}</p>
+      </div>
+    </li>)}
+  </ol>
+</section>

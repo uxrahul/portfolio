@@ -1,5 +1,768 @@
 # Portfolio project handoff
 
+## Publication configuration — October 19, 2026
+
+The user authorized committing and publishing the completed experiment without
+merging into `main`. `.github/workflows/deploy.yml` on
+`experiment/homepage-scroll-animation` now deploys pushes to that branch; its
+build job also guards manual dispatch against other refs. The existing Astro
+build/upload and GitHub Pages deploy actions, concurrency group, Node 24 and
+`/portfolio/` base are preserved. Pages remains in GitHub Actions mode.
+
+The existing `github-pages` environment now permits only the exact branch
+`experiment/homepage-scroll-animation` (branch rule, no wildcard). This also
+prevents the unchanged workflow on `main` from publishing over the experiment;
+main's historical push trigger may still run CI, but cannot pass the environment
+restriction. `main` stays at `735b3938d8a0e0a573e9f5989f79a8ac0f43ea15`.
+No branches are created, merged or deleted. Future animation variations should
+start from a separate branch after this completed version is published.
+
+Publication validation: 72 Astro files with zero diagnostics, 10 built routes,
+329 links/fragments, gallery/original-asset/publication-boundary checks, HEIR
+source fidelity and all five research reports pass. The five added image assets
+are approved homepage artwork; source archives, datasets, local backups, caches,
+credentials and build output are excluded. Deployment success must be confirmed
+from the workflow run and the public site; configuration alone is not deployment.
+Live URL: `https://uxrahul.github.io/portfolio/`.
+
+Earlier “no commit/push” statements below describe the completed refinement
+passes before this publication authorization.
+
+## Current refinement — pinned Standard View and viewport-aware geometry
+
+Latest Standard View layout refinement: `homepage-products.css` now caps both
+compositions at the existing 31rem text measure + gap + product width and centers
+them inside the full-width section. The viewport cap accounts for the pendant's
+square-canvas overhang and 16px edge clearance. Removed the section overflow clip
+that truncated the shadow. Both original images have transparent right edges;
+the asset was not the cause. No image, component, animation/controller, type,
+Animated View or mobile rule changed in this refinement.
+
+Reviewed both projects at 1366 × 768 and 1920 × 1080, with Lira in light/dark.
+Also checked 1200 × 800 and 2560 × 1440: matching composition widths are about
+716px and 842px respectively, centered with no horizontal document overflow.
+The complete source canvas fits; product aspect ratios and illumination remain
+intact. Forward/reverse pin samples hold the expected section position.
+`npm run check` (72 files, zero diagnostics), build (10 routes/329 links) and
+`npm run verify:source` pass. This supersedes the earlier width measurements and
+overflow-clipping decision in the historical validation below. No commit/push.
+
+Standard View now pins each complete HEIR/Lira section at its measured centered
+resting position, scrubs the product directly, then releases through native pin
+spacing. Reverse scrolling re-pins/reverses. HEIR uses .8–1.25 viewport heights,
+bounded by screenshot travel; Lira uses .85. There are no wheel handlers or scroll
+locks. If actual section height exceeds `innerHeight - 96`, natural unpinned
+scrubbing preserves readability. Resize/observed composition changes/image load
+refresh measurements and rebuild pins only when the fit decision changes.
+
+Both projects share copy-left/product-right geometry, typography, full-width
+separators, section labels and status treatment. `--standard-visual-height` adapts
+to viewport height with a 32rem ceiling; the .55-width product envelope preserves
+phone aspect and the pendant's real body bounds rather than its transparent
+canvas. The source assets, diffuser, layered glow, exact copy and destinations
+are untouched. Scene overflow is visible; the centered composition reserves the
+full pendant canvas within the viewport, including its soft shadow.
+
+Standard View Tools now uses the same eleven-source native popover as touch.
+Hover previews, click selects/toggles, keyboard focus/activation, outside/Escape
+dismissal and edge-aware placement share one controller. A 180ms hover bridge
+permits entering the panel without flicker. The approved wrapped list stays intact;
+only the cinematic view has the existing magnetic swarm.
+
+Animated View visually hides the document scrollbar under its existing active
+HTML flag. Scroll mechanics remain native. A measured gutter prevents a classic
+scrollbar from changing the underlying body width. Cleanup removes the flag and
+gutter; Standard View, touch and other routes restore ordinary scrollbar behavior.
+Camera phases, timings, scene registry, deck and swarm are unchanged.
+
+The responsive audit retains readable type and natural long-form flow. Desktop
+portrait, UI-figure/gallery visual ceilings now account for dynamic viewport
+height. The existing viewer can wrap its toolbar and scroll long captions within
+25dvh; Fit/100% remains intact. Navigation/TOCs already have bounded overflow.
+Cinematic minimum height, content-fit fallback and refresh behavior are retained.
+Short touch/landscape layouts never mount desktop pins/camera or inherit desktop
+visual ceilings. Touch product autoplay/native scrolling/replay is unchanged.
+See `design-system.md` for reusable geometry and fallback constraints.
+
+This section supersedes the former unpinned Standard behavior below.
+
+Mode coordination now dispatches `homepage:before-camera` before synchronous
+camera fit measurement, releasing Standard pins and their inline dimensions
+first. The existing active-flag observer then mounts the correct product mode.
+A resize rechecks the cinematic content-fit guard even when its media query stays
+matched, allowing oversized-content fallback and recovery without a reload.
+
+Verification (Brave/Chromium local production build):
+
+- Standard composition at 1329 × 868: both sections 999 × 589px, identical
+  663.94/281.59px columns, 53.16px gaps and 39.87px headings. Lira's divider spans
+  the same section width. At 1200 × 800 both sections are 880 × 589px, with the
+  same 48px gap. Pendant transparency no longer creates horizontal overflow.
+- Pin samples at 0/.25/.5/1 and reverse hold section top near 140px at 868px
+  viewport height. The phone reaches its measured endpoint; Lira's ring/indicator
+  reach 1, reverse through .676/0 at halfway, and return to 0. Arrival/departure
+  advance normally outside the range; pin rounding stays below one pixel.
+- Native wheel forward/reverse at 1280 × 600 holds the section at about 57px
+  top/542px bottom while phone progress changes. Rapid input completes HEIR and
+  enters Lira normally. A 400ms stop leaves light values unchanged. Both scenes
+  are 485px high there, with 480px/510px interaction ranges.
+- Reviewed 1440 × 1000, 1366 × 768, 1200 × 800 and 1280 × 600. At 1280 × 400 both
+  sections stay in natural unpinned flow (333px section height, 18px body text).
+  Growing the viewport restores pins. No document horizontal overflow remains.
+- Six consecutive mode toggles alternate exactly two Standard pins/normal
+  scrollbar with one camera pin/hidden scrollbar. All five cinematic scene IDs
+  match their requested stations with one master trigger. Native vertical wheel
+  input continues advancing camera progress. At 1200 × 800 the camera remains
+  available. An oversized-heading fit test falls back to Standard and recovers
+  to the camera after removing the temporary style, without a reload.
+- All eleven Tools hover events expose exactly one description within 16px
+  viewport clearance. Native click selects, keyboard Tab/Enter opens/selects,
+  Escape dismisses, and the pointer-to-panel dismissal bridge stays open.
+  The shared data and wrapped list are unchanged; listeners remain single.
+- Navigation from pinned Standard View to HEIR leaves zero triggers/spacers and
+  normal scrollbars; return restores the correct viewport-dependent products.
+  Light/dark assets, .22/.42 glow strengths and existing copy remain intact.
+- Coarse-pointer 844 × 390 landscape has zero triggers/pins, a naturally tall
+  627px phone, native screen scrolling and pendant replay. Autoplay reaches the
+  611px native boundary with an identity screenshot transform. Reduced-motion
+  touch retains manual scrolling and lit material; reduced desktop has zero
+  pins while contextual Tools stays enabled. Touch animation functions unchanged.
+- Script-blocked served HTML retains both visible products, Lira eyebrow/status,
+  matching desktop columns, hidden replay and no horizontal overflow.
+- At 1280 × 400 the shared Fit viewer keeps a 211px image viewport and visible
+  controls inside its 24–376px dialog bounds. 100% retains native overflow;
+  native Escape closes and returns focus to the original figure. Gallery phone
+  visuals adapt to 155 × 320px while the page remains naturally scrollable.
+- `npm run check`: 72 files, zero errors/warnings/hints. Build: 10 routes/329
+  links, asset/gallery integrity and publication boundaries pass. Source fidelity
+  and all five research reports pass. No copy, component markup, source assets,
+  scene timing/registry, deck or swarm changes; no new dependencies.
+
+Physical trackpad/touch momentum, Safari and classic OS scrollbars were not
+hardware-tested. Local preview: `http://127.0.0.1:4333/portfolio/`.
+No staging, commit or push; HEAD/main remain `735b393`.
+
+
+## Previous refinement — interactive touch previews and unpinned Standard scrubbing
+
+`homepage-products.ts` now owns product mode selection and teardown. The existing
+responsive controller retains only Tools/popovers; that interaction function and
+its styles are unchanged. The desktop camera, scene registry, view toggle, About
+layout, deck, swarm, navigation, typography tokens, copy and assets are unchanged.
+`pendantLightAt()` extracts the existing three-value light curve for reuse;
+1,201 samples match the previous camera math exactly.
+
+| Mode | HEIR | Lira |
+| --- | --- | --- |
+| Desktop Animated | Existing master-camera scroll scrub, unchanged | Existing reversible camera illumination, unchanged |
+| Desktop Standard | Independent unpinned vertical ScrollTrigger | Independent unpinned vertical ScrollTrigger using the same light curve |
+| Tablet/mobile | One-time 1.8s native scrollTop autoplay, then manual screen exploration | One-time 1.4s illumination, then pendant tap/Enter/Space replay |
+
+Touch products retain the existing observer activation point (product top enters
+the top 65% of the viewport, threshold 0). HEIR is a native clipped scroll region
+with a named keyboard focus target. Autoplay animates its actual scroll offset;
+pointer-down, wheel or scrolling keys cancel the remaining tween. No default
+input is prevented, and scroll chaining remains enabled at both boundaries.
+Autoplay never restarts on page re-entry. The current manual fraction survives
+orientation and mode changes; rotation during autoplay hands control to the user.
+
+Lira uses the existing diffuser and theme images. Its invisible native button
+over the pendant body supplies a replay label, visible keyboard focus and busy
+state without adding visible copy. Replay resets to unlit material and runs the
+same ring-then-indicator sequence. Activations while running are ignored; there
+is never a queue or overlapping light timeline. Neither product visual is nested
+inside a navigation link. Existing HEIR title navigation and Lira's current
+informational copy/destination status remain unchanged.
+
+Standard View keeps its existing text layout; the previously hidden pendant is
+exposed underneath Lira's existing copy. Each product scrubs between `top 80%`
+and `top 15%` without pinning, added section height or horizontal camera movement.
+Both effects pause and reverse with vertical scrolling. Figure-owned
+`--preview-*` properties isolate these effects from the cinematic image transform
+and SVG variables. Mode cleanup removes both Standard triggers, kills touch
+tweens/observers, clears preview properties, hides replay and resets native screen
+offset/attributes. The camera controller itself is not modified.
+
+Reduced motion has no automatic or scrubbed motion. Manual native phone scrolling
+remains available on touch layouts, and pendant replay gives immediate lit state.
+Script-free HTML retains readable static products. No dependencies added.
+
+This section supersedes the earlier automatic-only product behavior below.
+
+Validation for this refinement:
+
+- Touch-layout HEIR autoplay reaches the native scroll boundary, with an identity
+  screenshot transform. Native wheel scrolling explores both directions; Home and
+  End work in the named region. The document stays still during internal movement,
+  then scrolls normally when continuing past the bottom boundary. No navigation.
+- A pointer-down interruption at 350ms holds the current offset (13.5px in the
+  check) after the original autoplay would have finished and after page re-entry.
+  Landscape 844 × 390 supports a phone taller than the viewport and reaches its
+  611px scroll boundary. A manual .37 position survives rotation to 768 × 1024.
+- Lira initial autoplay, native touch activation, Enter replay and both
+  themes pass. Thirty extra activations during replay leave the in-flight light
+  value unchanged; the sequence completes with ring/indicator at 1 and busy state
+  cleared. Native replay produces no route change. Tools popovers still open and
+  retain one listener after mode/preference changes.
+- Standard View samples 0 → .25 → .5 → .9 → 1 → .5 → 0 follow and reverse scroll
+  progress; the phone frame's document position stays constant. The light follows
+  the same curve in each direction and remains unchanged during a 400ms stop.
+  There are exactly two unpinned triggers and zero pin spacers. Resize from
+  1329 × 868 to 1200 × 800 refreshes the progress range from 564px to 520px.
+- Eight consecutive mode switches alternate exactly one `homepage-camera` pin
+  with two unpinned Standard triggers. No native/replay controls remain on desktop;
+  the toggle keeps one listener. HEIR navigation removes all triggers; Back
+  restores exactly the two Standard triggers.
+- Animated View traverses all five existing scenes with one camera trigger. Its
+  phone and light reverse correctly; the magnetic swarm remains active at Tools.
+  Camera/controller, scene geometry, card deck, swarm and cinematic styles match
+  their pre-pass source hashes. Only the pure pendant-curve helper is shared.
+- Reduced-motion touch keeps manual native phone scrolling, gives immediate lit
+  pendant feedback and has no running light tween/ScrollTriggers. Reduced-motion
+  desktop has zero triggers/pins and no native/replay attributes. A served-HTML
+  frame with all scripts blocked retains the clipped initial phone, lit pendant,
+  hidden replay control and no horizontal document overflow.
+- `npm run check`: 72 files, zero errors/warnings/hints. Production build: 10
+  routes/329 links, gallery/asset integrity and publication checks pass. HEIR
+  source fidelity passes. No new dependencies, copy, assets or typography tokens.
+
+Review used Brave/Chromium emulation plus native wheel and keyboard input. Physical
+touch swipes/momentum on iOS/Android hardware and Safari remain unverified.
+Local production preview: `http://127.0.0.1:4333/portfolio/`. No commit or push;
+Main and HEAD remain `735b393`.
+
+## Current refinement — tablet and mobile homepage
+
+Only `Homepage.astro`, `HomepageTools.astro`, the new `homepage-responsive.css` /
+`homepage-responsive.ts` and these documentation sections change in this pass.
+All desktop camera/choreography, deck, swarm, pendant controllers and styles,
+shared navigation, type tokens, authored content and assets remain unchanged.
+
+- Tablet keeps the approved side-by-side profile. Below 600px the existing
+  photograph appears above the copy; education stays in the same text column.
+- Responsive HEIR and Lira share presentation rules and title emphasis. Lira's
+  eyebrow, work-in-progress line and approved theme-specific pendant are now
+  present in vertical flow, with the same diffuser and premium layered light.
+- One reusable viewport trigger observes intersection at threshold 0 in the top
+  65% of the viewport (35%-of-height bottom inset, expressed in pixels). HEIR's
+  screenshot auto-plays for 1.8s inside the stationary clipped frame. Lira's ring
+  and indicator complete in 1.4s. They do not scrub, reverse or replay on re-entry.
+  A per-page WeakSet retains started state across media changes; resize maintains
+  the completed screenshot alignment. No pins, touch handlers or scroll locks.
+- A separate responsive controller owns only figure-level `--responsive-*`
+  properties. It cleans up observers/tweens/listeners on media changes and Astro
+  swaps. The desktop retains its exact existing GSAP/ScrollTrigger controller.
+- Tools reuse the eleven descriptions from `homepageTools` in one anchored
+  native auto-popover. Existing wrapped logos/labels remain in place, with native
+  keyboard-accessible buttons and 44px touch targets. Only one panel opens;
+  outside tapping and Escape dismiss, selection updates ARIA state, and viewport
+  placement clamps the panel with 16px edge clearance. No dependencies added.
+- Reduced motion and no-JavaScript HTML retain meaningful static products: initial
+  phone dashboard and fully illuminated pendant. Tools degrade to the readable
+  logo/label list if scripting or native Popover API support is unavailable.
+
+Validation for this pass:
+
+- Reviewed 390 × 844 portrait, 844 × 390 landscape, 768 × 1024 tablet and
+  1024 × 768 tablet layouts; also tested the 320 × 568 narrow phone. No horizontal
+  document overflow. Tablet retains two profile columns; phone puts the portrait
+  first. Both case-study headings compute to the same statement scale.
+- HEIR is ready before the threshold, running just afterward, and complete with
+  scrolling stopped after 1.8s. The frame stays stationary; the final screenshot
+  bottom matches the aperture exactly. A phone taller than the 390px landscape
+  viewport activates successfully, and document scrolling continues during play.
+- Lira's ring progresses before the upper indicator, completes and holds. Light
+  mode uses the standard image/.22 bloom; dark mode uses the dark image/.42 bloom.
+  Reverse scrolling preserves both completed products. A responsive → desktop →
+  responsive round trip restores completed products and exact phone alignment.
+- All eleven exact tool descriptions fit viewport bounds without panel clipping
+  at 390px portrait, 844px landscape, 1024px tablet and 320px phone widths. Native
+  touch selection changes Figma → R; keyboard Tab, Enter, Space and Escape work.
+  Outside tapping clears expanded state and body overflow remains unlocked.
+- Reduced-motion emulation removes product tweens/inline states while keeping the
+  initial phone dashboard, fully lit pendant and selectable tools. A separate
+  served-HTML frame with script execution blocked confirms those static products,
+  readable content and no horizontal overflow without controller initialization.
+- Tablet Menu → HEIR → Back leaves no popover on HEIR and restores eleven enabled
+  tool buttons, one click listener and closed navigation on the homepage.
+- Desktop 1329 × 868 traverses all five existing scenes with exactly one pin,
+  no responsive product states, and the magnetic swarm running at Select Tools.
+  Media cleanup closes open popovers and removes responsive custom properties.
+- `npm run check` passes for 71 files with zero errors/warnings/hints. Production
+  build passes for 10 routes/329 internal links, gallery/asset integrity and
+  publication boundaries. HEIR source fidelity passes. Desktop source/controller,
+  scene geometry, tokens, assets and content hashes match the pre-pass baseline.
+
+Browser verification uses Brave/Chromium emulation. Physical iOS/Android hardware
+and Safari have not been tested. Local preview: `http://127.0.0.1:4333/portfolio/`.
+No commit or push; Main and HEAD remain `735b393`.
+
+## Current refinement — view switching, Tools alignment and typography
+
+The experiment remains uncommitted on `experiment/homepage-scroll-animation`.
+This section supersedes older references to the one-way Skip control below.
+
+- The same upper-right native button now offers **Standard View** in the camera
+  experience and **Animated View** in standard flow. Both directions reuse
+  `initializeJourney()` and its full teardown: abort instance listeners, revert
+  the GSAP context/pin, reset scene controllers, dispose the Tools loop and close
+  navigation. Explicit return clears saved progress/static anchors and starts at
+  the opening with scroll zero. Focus remains on the toggle. History retains the
+  standard choice for navigation away/back. Existing desktop media and fit guards,
+  reduced motion and no-JavaScript fallback remain in force.
+- Tools information uses `align-self: start`; its invitation's former 40px top
+  margin is removed. The divider, gutter, fixed panel height and transition stay
+  unchanged. No changes to tool data, bubble physics or dimensions.
+- The site-wide typography audit is recorded in `design-system.md`. Seventeen
+  existing 1.5 line-height declarations share `--line-height-supporting`; two 1.2
+  declarations reuse `--line-height-heading`. One duplicate homepage h3 size rule
+  is removed. All existing font sizes, weights, tracking, font files and distinct
+  semantic scales remain unchanged. No content or asset changes.
+
+Validation for this refinement:
+
+- Eight complete switch pairs (16 changes) leave zero pins/transforms in standard
+  flow, and exactly one pin at scroll zero/opening on return. One click listener
+  remains on the toggle. Native mouse, Enter and Space activation retain focus.
+- Tools field, panel and invitation tops match within 0.01px at 1329 × 868.
+  All eleven tool selections preserve the panel rectangle and fit its height.
+- Reduced-motion emulation yields standard content, zero pins and a hidden
+  control. Desktop boundaries 1200 × 799 and 1199 × 800 do the same; 1200 × 800
+  restores one camera pin when animation is the chosen mode.
+- Shared Menu → HEIR → browser Back restores animated mode with one pin, closed
+  menu and one toggle listener. Standard → HEIR → Back retains standard mode.
+- Browser review includes homepage modes, HEIR, customer-survey research and
+  Health Scan gallery typography; reading/gallery routes have no camera pins or
+  horizontal document overflow. The existing italic subtitle and gallery leading
+  render correctly.
+- `npm run check` passes for 70 files (zero errors/warnings/hints); production
+  build passes for 10 routes and 329 links/fragments, including asset/gallery and
+  publication checks. HEIR source fidelity and all five research verifications
+  pass. Safari and physical trackpad hardware were not tested in this pass.
+
+Local production preview: `http://127.0.0.1:4333/portfolio/`. No commit or push;
+Main and HEAD remain `735b393`.
+
+## Current opening — single text and portrait row
+
+`HomepageIntroduction.astro` renders one semantic profile in the existing
+Introduction slot. The name, Chicago designation, full disciplines, personal
+description and education retain the approved homepage wording. The professional
+experience heading/list and all four roles, connector, nodes and associated CSS
+are removed at the user's request. The horizontal divider and separate background
+grid are also removed.
+
+The left column contains Rahul Singh (sole h1) → Chicago-based Sr. Product Designer
+→ Product Research · Product Design · Product Analytics → personal description
+→ Education. Education is exactly M.S. Human–Computer Interaction · DePaul
+University, using the existing label/body styles directly beneath the description.
+There is no education card or second education column. The right column contains
+only the approved portrait, enlarged and vertically centered in a 1.5:1 grid with
+the existing 4rem gutter. The portrait file, 4:5 crop and object position are
+unchanged. No new typography tokens, fonts, colors, assets or dependencies.
+
+All content belongs to the same grid row; nothing extends as a separate section
+below the photograph. Existing tablet/phone stacking and static/reduced-motion
+fallback remain in place. No camera math, timeline, navigation, lifecycle or
+other scene files are changed in this refinement. The live DOM still transforms
+uniformly into the existing MacBook screen at the approved endpoint.
+
+Validation for this layout refinement:
+
+- Desktop opening reviewed at 1700 × 868, 1329 × 868 and 1200 × 800. Copy and
+  education stay inside the portrait's vertical region; no live-plane overflow.
+- Six forward/reverse opening stops at 1329 × 868 keep both columns inside the
+  laptop opening, with center mismatch at most 0.04px. The established resting
+  MacBook shot at 1200 × 800 is also contained (center mismatch below 0.1px).
+- Skip restores normal flow, zero pins and scroll zero, focuses the unchanged
+  `homepage-headline`, and preserves education immediately below the description.
+  The built HTML retains all five approved source paragraphs and contains no
+  professional-experience markup. Its obsolete CSS selectors are removed.
+- Check passes for 70 files with zero errors/warnings/hints. Production build
+  passes with 10 routes and 329 internal links/fragments, gallery/image integrity
+  and publication boundaries. HEIR source fidelity passes.
+- Only the introductory component/styles and these two documentation sections
+  change this pass. All other scene components, assets, controllers, navigation,
+  camera configuration and typography tokens remain byte-unchanged. No commit
+  or push; Main and HEAD remain `735b393`.
+
+Local preview: `http://127.0.0.1:4333/portfolio/`. Review uses Brave/Chromium;
+Safari and physical trackpad review remain unverified.
+
+## Homepage scroll experiment — reusable camera choreography
+
+All experiment work remains uncommitted on `experiment/homepage-scroll-animation`,
+based on approved `main` commit `735b393`. The read-only master reference remains
+`portfolio-animation-handoff/references/artboards/Desktop Scroll Experience Storyboard.png`
+in the sibling source archive. It supersedes the original greeting intro and
+separate vertical project pins; those are not layered below this implementation.
+
+`HomepageJourney.astro`, `homepage-journey.ts`, and `homepage-journey.css` own the
+homepage-only, single pinned GSAP/ScrollTrigger camera. The new
+`src/lib/homepage-scenes.ts` registry supplies scene order, native timeline nodes,
+travel/focus poses, phase scroll budgets, and optional content interactions.
+The actual authored slots are Introduction → HEIR → Lira → How I Work. Expertise
+appears once in the fourth scene as three readable columns; Tools and About stay
+in native vertical flow after the final camera pullback/hold. There is no card
+stack/fan/tarot interaction or invented Lira asset, destination, or copy.
+
+Each scene supports approach, focus, interaction, pullback, and departure.
+Departure plus the next approach share one eased movement, without a velocity
+break at their semantic boundary. A single normalized GSAP clock evaluates the
+measured plan. Refresh recomputes CSS positions, phone travel, phase distances,
+and station labels; every lens, aperture, track, progress, and screenshot state
+is a function of that clock and reverses with upward scrolling. No second pin or
+independently advancing interaction timeline exists. Native station buttons target
+the traveling arrival, before focus; Introduction targets its established laptop
+shot with the thread already visible.
+
+Travel starts at scale 1.00; HEIR focuses at 1.05 and Lira / How I Work at 1.04.
+Offsets start at x=0, y=0 (viewport fractions). Focus/pullback each use 0.12 viewport
+heights; each horizontal handoff uses 0.30H departure + 0.50H incoming approach.
+HEIR exploration uses max(1.40H, measured screenshot travel × 1.60), Lira lighting
+uses 1.20H, and How I Work uses 1.10H. The final traveling hold uses 0.15H. Pose
+changes/handoffs use power2.inOut without overshoot; screenshot exploration is
+linear. The master retains 0.45-second scrub smoothing. Detailed configuration
+rules and the parameter table live in `docs/design-system.md`.
+
+The opening starts with the same single live homepage filling the viewport.
+Its DOM plane and supplied MacBook frame retain their measured common screen
+center and uniform scale. The laptop now stops at min(70vw, shared content-stage
+height × 3880/2400). It can use the full stage because it has no external heading
+or caption; the phone retains its existing heading/caption allowances and size.
+The initial pullback budget is 0.66H, 45% shorter than the former approximate
+1.20H budget, followed by 0.12H to establish the shot and reveal the timeline.
+There is no further shrinking while the thread reveals or the camera departs.
+The requested 70% width takes priority as the concrete visual target, subject to
+stage height. Physical pullback reduction varies by viewport and is not a fixed
+45%; the 45% configuration value explicitly controls opening scroll distance.
+
+Focus transforms the complete text/device scene around the shared content-stage
+center. An animated aperture follows the scaled/translated stage bounds with
+half the shared stage gap around them, keeping headings/captions safe at taller
+desktop heights. The spatial timeline passes outside that camera frame rather
+than fading independently; its opacity stays 1 throughout project exploration.
+Pullback reverses this framing and restores the thread before horizontal travel.
+Menu and Skip stay stationary outside the aperture. Keyboard focus on a clipped
+station reveals its traveling shot without destroying the pin. Phone travel is
+measured from untransformed layout heights, so lens scale does not change the
+screenshot endpoint. Native homepage entrances/emphasis exclude camera scenes.
+Cold initialization waits for locally hosted fonts before testing scene fit.
+
+The existing geometry still reserves a shared content stage, five-rem timeline
+band below it, and six-rem navigation layer. One indexed CSS pitch derives from
+viewport width and the wider exhibit envelope. The same rule governs all adjacent
+scenes; both exhibits can be partially visible during a handoff. One continuous
+thread fills according to actual horizontal displacement. Future nodes are hollow,
+reached nodes filled, current station accented; reverse movement reverses state.
+There is no second progress bar or dock destination list.
+
+The compact glass-style Menu toggles the existing real navigation in its rounded
+left drawer. Theme selection, expandable groups, Tab containment, Escape/focus
+return, explicit dismissal, and actual navigation remain intact. Background clicks
+do not close it or exit the camera. The earlier click-to-exit root cause remains
+fixed: blank pointer clicks can focus `main#reading-canvas[tabindex=-1]`; that focus
+must never call `media.revert()` or set the skip flag. Only explicit Skip controls
+or deliberate hash navigation restore static mode. Ordinary clicks preserve scroll,
+camera transform, the single pin, and history state.
+
+Skip reverts the context, clears camera/framing transforms and attributes, restores
+normal navigation and content, focuses the hero headline, and returns to scroll
+zero. The choice persists for that history entry. Astro page-load/before-swap/HMR
+cleanup and normalized history restoration remain in place. Font/image completion
+refreshes the same pin. All original devices/screens and the portrait remain
+unchanged; the real HEIR case-study link and reading-page image viewers are preserved.
+The homepage-only full-screen screenshot link/caption has been removed.
+`PhoneShowcase.astro` retains its clipped rounded screen under the untouched frame
+and Dynamic Island. No case-study, research, or gallery page was edited.
+
+Enhancement still requires width ≥1200px, height ≥800px, fine pointer/hover, no
+reduced-motion preference, and content that fits. Static, reduced-motion, skipped,
+hash, and no-JavaScript visits retain the conventional vertical document with one
+copy of Expertise and the original static rows. No tablet/mobile animation variant
+was modified or tested in this desktop-only pass.
+
+Prior camera-system verification in Brave (before the Lira completion pass):
+
+- At 1329 × 868 the traveling laptop is 930.30 × 575.44px (70% viewport width),
+  inside the 607.91px content stage. The phone retains its approved size. At the
+  full 1700px desktop width the stage-height cap takes priority. The line remains
+  beneath the device composition, and opening/node reversal does not shrink the
+  laptop farther. Introduction navigation keeps the thread visible.
+- HEIR focus is exactly 1.05. The combined text/phone composition stays balanced,
+  the thread clips outside the camera while its opacity remains 1, and the Menu /
+  Skip controls remain visible. Screenshot completion has less than 0.001px bottom
+  error and zero phone movement during exploration. Reverse scrolling restores the
+  same intermediate screenshot transform; pullback returns scale 1 and the thread.
+- Lira and How I Work are horizontal destinations with synchronized 67% and 100%
+  progress (HEIR is 33%). How I Work contains all three original descriptions once,
+  in readable columns. Native scrolling continues to Tools/About only after this
+  final exploration and pullback. Keyboard Tab/Shift-Tab navigates scenes in both
+  directions and brings off-camera nodes into view. A taller 1476 × 964 desktop
+  also retains one pin, correct 1.05 focus, a fully visible caption inside the
+  measured aperture, and zero document overflow. Browser zoom was restored to 100%.
+- Blank clicks retain one pin and do not set the skip flag. Menu background clicks
+  leave the drawer open, Escape returns focus, and light/dark themes work. Visiting
+  the real case-study route leaves zero pins/camera attributes; Back restores the
+  focused HEIR scene at the matching normalized progress. Reduced motion clears
+  the pin, lens, and aperture, and restores the original expertise rows. Keyboard
+  Skip returns focus to the headline at scroll zero with no leftover pin/framing.
+- Check/build and source/research fidelity validation pass. The build verifies all
+  10 routes, 330 links/fragments, galleries, image integrity, and publication
+  boundaries. A direct phase-plan check verifies contiguous finite intervals,
+  ordered station labels, final destination, and content-dependent phone budgets.
+  Homepage wording differs from the pre-pass copy only by moving the same expertise
+  section into its new slot. `main`/HEAD remain at `735b393`.
+
+Local production preview: `http://127.0.0.1:4332/portfolio/`.
+The browser is left on a fresh unskipped homepage with its original System theme
+preference restored. Safari and physical trackpad review remain unverified. The
+How I Work card interaction is deliberately deferred. No commits or pushes made.
+
+### Lira completion — product and lighting
+
+The supplied `Lira pendant/lira-pendant-studio.webp` and dark-optimized
+`lira-pendant-studio-dark.webp` are copied unchanged to
+`src/assets/homepage/lira/`; source PNGs/WebPs/archive remain untouched. CSS
+selects the standard or dark variant from the resolved site theme, including
+System preference. The standard WebP SHA-256 is
+`f4757618edb5e6e44eed12b36ac53f43d56cc86a4265e8f13f1af459f3267c9c`.
+`LiraPendant.astro` renders it with its natural square aspect ratio, transparent
+background, materials, and original shadow. No upward entrance is implemented.
+A shared project presentation now gives HEIR and Lira identical eyebrow,
+identifier, heading, description, spacing, and vertical-stage rules. Per-asset
+right-column widths preserve the existing exhibit envelope and station pitch;
+Lira keeps its prior artwork-size constraint (exhibit minus 25rem and the shared
+gap), capped at the existing device-height limit. Its visual grid track now
+measures the physical body at source x285–969 of 1254; the full square artwork
+offsets its transparent inset, without cropping or changing its scale/shadow.
+This restores the common 31rem copy measure and optical gap to the visible device.
+Both projects retain their exact headings/descriptions. Lira gets one
+SELECTED IMPACT label and the requested noninteractive coming-soon status.
+The old smaller Lira heading override is superseded by the common project style.
+
+The SVG overlay follows the actual open C-shaped channel, not a full circle. In
+the 1254px source canvas it runs from (459,638) around the lower arc of radius
+216px to (794,638). The separate upper indicator matches the capsule near
+(626.5,524.5); it is not an invented top dot. A source-alpha check confirms all
+363 sampled points across the emitter's central 24px lie inside the actual
+channel. The SVG and image share identical bounds, so camera scale and desktop
+resize preserve registration. Normalized stroke dashes reveal soft emission,
+a narrow bright core, and restrained bloom; the upper capsule has matching fill.
+Existing semantic colors adapt this lighting to light/dark themes. A permanent
+shaded frosted SVG diffuser now sits beneath the original image, filling the
+ring channel and upper indicator even when illumination is zero. Animated graded
+emission, narrow highlights, and close/ambient bloom sit above the image, with
+subtler bloom in light mode and stronger bloom in dark mode. The original product
+images are never filtered, recolored, or redrawn.
+
+`homepage-scenes.ts` now assigns Lira the `pendant` interaction for 1.20 viewport
+heights. Its existing focus scale 1.04 and brief 0.12H focus/pullback stay intact.
+The master GSAP clock calls the small `lira-pendant.ts` controller: the ring
+finishes at 74% of interaction progress, the upper indicator illuminates during
+78–88%, and the final 12% holds the completed light before pullback. Lighting
+stays on while departing; upward scrolling reverses every state. No new pins,
+independent timers, dependencies, or camera architecture changes were added.
+Teardown clears the lighting variables. The new Lira presentation is scoped to
+the existing desktop enhancement; text-only static/reduced-motion fallbacks stay
+intact. The removed HEIR viewer link is homepage-only, with its unused caption
+styles removed; no shared image-viewer handler was changed.
+
+Timeline buttons now read About Me, Work at Ganance, Work at Lira, How I Work.
+Their underlying scene IDs, positions, label destinations, progress, and keyboard
+handlers are unchanged. MacBook/hero, Menu/drawer, How I Work, and all case-study,
+research, and gallery files remain unchanged by this pass.
+
+Lira-pass validation:
+
+- Production check/build pass with zero Astro diagnostics; build validates 10
+  routes, 329 links/fragments (one homepage viewer link removed), all galleries,
+  original-image integrity, and publication boundaries. Source/research checks
+  pass; `main`/HEAD remain `735b393`. All work remains uncommitted.
+- Brave desktop review at 1329 × 868 and full 1700px width confirms the transparent
+  pendant/shadow, restrained 1.04 focus, correctly traced partial/completed light,
+  and readable light/dark emission. Image/overlay rectangle error is 0px at the
+  measured focused composition. The pendant stays stationary across lighting
+  progress. Ring completion precedes the upper indicator; reverse scrolling
+  restores the identical partial ring value and turns the indicator off.
+- Both headings compute to 39.87px / weight 600 / line-height 44.6544px at the
+  measured 1329px viewport. There are exactly two project eyebrows, one per scene,
+  no HEIR homepage viewer anchor, and all four updated native timeline names.
+  The HEIR screenshot bottom gap remains below 0.001px with one master pin.
+- The restored Lira timeline button accepts pointer navigation. Tab moves onward
+  to How I Work; Shift-Tab returns through Work at Lira, Work at Ganance, About Me,
+  revealing each destination without bypassing the camera. Native wheel scrolling
+  was exercised from HEIR into Lira. Menu theme selection and Escape/focus return
+  continue working. The original System theme preference was restored.
+- Switching to reduced motion from illuminated Lira leaves zero pins and no inline
+  light variables, with the pendant/status hidden in the original static fallback.
+  Keyboard Skip from illuminated Lira clears lighting and pin state, focuses the
+  unchanged hero headline, and returns to scroll zero. The test skip flag was
+  cleared for the final preview, which was reloaded with motion emulation off.
+
+The C-shaped completion is deliberate hardware fidelity, not a missing segment.
+The subsequent diffuser/theme/spacing refinement passes check/build and desktop
+review in light and dark themes. At 1329 × 868, both copy columns measure 496px;
+the optical gaps are 66.45px for both projects (within 0.01px). Artwork size is
+unchanged at 463.84px. Both theme images and the light overlay have identical
+bounds (0px error); reverse scrolling restores ring/indicator to zero while the
+diffuser remains visible. One master pin and zero horizontal overflow remain.
+No camera controller, scene timing, homepage copy, or unrelated section changed
+during this refinement.
+Safari and physical trackpad review remain unverified. No tablet/mobile visual
+testing, card animation, unrelated polishing, commits, or pushes were performed.
+Local production preview remains `http://127.0.0.1:4332/portfolio/`.
+
+### How I Work — scroll-driven editorial deck
+
+This completes the card interaction deferred in the earlier camera/Lira passes.
+
+The existing How I Work destination now renders `WorkDeck.astro`, preserving all
+three approved categories, headings, descriptions, numbering, and the main
+statement exactly. The statement is one semantic h2; the cover uses that same
+live heading throughout its transformation. Only its visual HOW I WORK label
+and surface are decorative/aria-hidden. Content remains available once to screen
+readers. Static, reduced-motion, no-JavaScript, and smaller-screen layouts retain
+the earlier readable expertise rows; no tablet/mobile animation was added.
+
+On arrival, the approved four-card stack is unchanged, as are the final three
+editorial cards, semantic heading, typography, surfaces, themes, and fallback.
+The existing 1.04 camera focus, 1.10H interaction, pullback/finish, and all scroll
+distances remain intact. The original scrubbed fan/cover morph is superseded by
+a threshold-triggered transition: crossing .08 of the interaction window plays
+one .72-second GSAP animation; crossing back reverses it automatically. The
+master camera still owns the only ScrollTrigger/pin. There is no scroll locking,
+additional listener, timer, or independent pinned section.
+
+`workDeckMotion` in `work-deck.ts` now exposes the threshold and second-based
+durations. Cards separate directly to their final positions with `power3.inOut`,
+removing the intermediate fan. The cover keeps its original rectangle dimensions
+and clears in .14 seconds with a small lift, eliminating the prolonged translucent
+surface. Its single live h2 moves/scales into the approved heading over .58 seconds
+with `power3.out`; card text appears during .24–.46 seconds once it clears. No
+headings are swapped or duplicated. The expanded state persists through forward
+pullback and departure/conclusion.
+
+Only threshold crossings call play/reverse; stopping the wheel cannot pause the
+transition. Rapid recrossings reverse from the current frame without restarting
+or queueing animations. Refresh preserves the playhead and target direction when
+rebuilding measured geometry. Skip, reduced motion, and Astro cleanup kill the
+transition and restore static inline styles.
+
+The MacBook, HEIR, Lira, timeline geometry/labels, Menu/drawer, hero copy, case
+studies, galleries, research sources, and mobile/tablet fallback are unchanged.
+This refinement changes only `work-deck.ts` and these two documentation sections.
+Main/HEAD remain `735b393`; no staging, commits, or pushes.
+
+Desktop verification of the trigger refinement:
+
+- Check passes with 65 files and zero errors/warnings/hints; production build
+  validates 10 routes, 329 links/fragments, galleries, originals, and boundaries.
+- A 17px native scroll across the threshold completes the reveal after scrolling
+  stops. Frame sampling measures approximately 718ms for the cards and 134ms for
+  the cover to clear. Reversing across it restores identical initial transforms,
+  surface opacity one, and hidden capability text.
+- Continuous scroll bursts emulate trackpad-style input, including rapid changes
+  of direction and a resize refresh during the transition. One master pin remains;
+  cards settle at zero transforms with text opacity one. Physical trackpad and
+  Safari review remain unverified.
+- Small native forward/reverse wheel crossings both complete after input stops.
+  Skip during the active transition cancels it, leaves zero pins/animated styles,
+  returns to scroll zero, and focuses the hero headline. Light/dark final layouts
+  remain unchanged; forward travel retains expanded cards. The System theme
+  preference is restored for the review preview.
+
+The previous desktop layout/accessibility review covered 1329 × 868,
+1700 × 868, and 1700 × 800. The approved shorter-stage fit remains untouched
+(544px stage with 341px cards at 1700 × 800, no text overflow). No tablet/mobile
+animation work or testing was performed. Local production preview:
+`http://127.0.0.1:4333/portfolio/`.
+
+### Select Tools — interactive bubble swarm
+
+Select Tools now follows How I Work as the fifth destination on the same master
+camera timeline. It uses the existing scene factory (1.04 focus, .12H focus and
+pullback, .80H exploration, normal approach/departure), with no second pin, scroll
+lock, or forced completion of a tool interaction. How I Work now has its existing
+departure leg into the new scene; its approved card controller is untouched.
+The previous tools section moves into this slot, including its original static
+list. It is not duplicated after the journey. All prior labels and choreography
+parameters remain unchanged.
+
+`src/data/homepage-tools.ts` shares the eleven original SVG imports plus the
+approved descriptions verbatim. `ToolSwarm.astro`/`tool-swarm.css` provide eleven
+named circular buttons and a fixed editorial panel, approximately 63% field / 37%
+panel after the gutter. Logos retain their authored colors and geometry; small
+light evidence-surface backings keep marks readable in both themes. Slight diameter
+variation is ornamental and does not represent skill. Static/no-JavaScript,
+smaller-screen, reduced-motion, and Skip presentations keep the original list.
+
+Physics is a small dependency-free 2D spring/collision solver rather than D3:
+eleven bodies require only 55 pair checks per pass. `swarmMotion` exposes 25%
+enlargement, 12px gaps/walls, 24px scale-following clearance, .003 home spring,
+.0007 pair attraction toward .86 of anchor separation, .84 damping, 18px individual
+and 7px shared drift, and six soft collision passes. Weak attraction produces a
+cohesive floating cluster; the selected body holds its center while neighbors
+yield. Hover, focus and click directly select the body without depending on
+hover state. Enlargement persists with the description until another selection
+or scene exit; the previous body and its clearance ease back together. Bubble
+icon backings increase from 40px to 46px; panel marks remain unchanged. The
+information panel does not move. Pointer entry, click, and keyboard focus show
+the exact corresponding description, retained across empty space. A 140ms panel
+transition avoids dimensional changes; hidden articles are excluded from the
+accessibility tree, with controls/describedby/pressed and a polite live region.
+
+`tool-swarm.ts` runs one requestAnimationFrame loop only when its scene is active,
+visible, inside the pinned journey, in a visible document, and outside the inert
+navigation-drawer state. Refresh renews the visibility subscription and consumes
+the latest intersection record so viewport changes cannot leave it paused.
+It measures only on master refresh and preserves normalized positions on resize.
+Reset stops physics, cancels panel animation, and clears selection/transforms;
+Astro disposal aborts listeners and disconnects observers. Scroll does not control
+individual bubbles and remains available throughout exploration.
+
+The MacBook, HEIR, Lira, How I Work controller/styles/copy, navigation/drawer,
+homepage hero/about, case studies, galleries, research, and source materials are
+preserved. No dependencies were added. No tablet/mobile animation work or visual
+testing is included, and nothing is staged, committed, or pushed.
+
+Select Tools validation:
+
+- Check passes: 69 files, zero errors/warnings/hints, semantic contrast and
+  content validation. Production build passes with 10 routes, 329 links/fragments,
+  galleries, original-image integrity, and publication boundaries. HEIR source
+  and all five research fidelity checks pass. All eleven descriptions match the
+  attached request verbatim; the SVG asset files are unchanged.
+- Refinement solver checks cover three desktop fields and all eleven active
+  bodies, idle, and release. All bodies remain bounded with no physical overlaps;
+  minimum measured gap is 11.30px during soft relaxation. Compared with matching
+  idle trajectories, strongest neighbor displacement after one second ranges
+  from 14.3–41.1px across the eleven selections. Scale reaches 1.25 and returns
+  to 1 after release. Browser idle samples show 12–21px travel, visibly floating
+  while remaining easy to target.
+- Brave desktop review at 1329 × 868 and 1700 × 800 verifies all eleven logos,
+  labels, pointer enlargement, neighbor response, stationary panel, persistence
+  through empty space, and readable light/dark treatments. Selecting every tool
+  preserves identical panel bounds and fits every description without overflow.
+  At 1700 × 800, the 544px stage contains a 501px field with zero stage/document
+  overflow. No mobile/tablet emulation is used.
+- Native Tab and Enter select the correct tool, expose its description, retain
+  visible focus, and enlarge it to 1.25 even with the pointer over a different
+  bubble. Menu open pauses the loop; close resumes it. Desktop viewport changes
+  renew visibility observation and the active field restarts correctly.
+- Normal scrolling reaches the vertical About conclusion; at master finish the
+  loop stops and the panel clears. There is exactly one SELECT TOOLS section.
+  Native Menu navigation to HEIR and browser Back restore one field, eleven
+  buttons, one pin, and a running scene without duplicate listeners/content.
+- Reduced motion leaves zero pins/physics transforms, hides the swarm, and shows
+  the original eleven-item list. Keyboard Skip likewise stops the loop, clears
+  all bubble transforms, focuses the unchanged hero headline, and returns to
+  scroll zero. Test Skip state is cleared; motion emulation is off and the
+  original Light theme preference is retained for the preview.
+
+Safari and physical trackpad review remain unverified. The local production
+preview is `http://127.0.0.1:4333/portfolio/`. Main/HEAD remain `735b393`.
+
 ## Approved state and boundaries
 
 About (`/`), the complete HEIR case study (`/heir/`), and a shared-layout 404 are

@@ -1,7 +1,7 @@
 /* Exhibition layout is scoped to this route; reading pages keep their measure. */
 .is-gallery .reading-canvas { max-width: 70rem; min-width: 0; }
-.face-scan-gallery { --gallery-screen-width: 17rem; --gallery-reference-height: 24rem; }
-.editorial .gallery-intro { font-size: var(--type-lead); line-height: 1.5; margin-bottom: var(--space-16); }
+.face-scan-gallery { --gallery-screen-width: 17rem; --gallery-reference-height: min(24rem, var(--gallery-height-limit, 24rem)); }
+.editorial .gallery-intro { font-size: var(--type-lead); line-height: var(--line-height-supporting); margin-bottom: var(--space-16); }
 .gallery-chapter { margin-block: clamp(5rem, 6vw, 8rem); }
 .gallery-chapter-header { display: flex; align-items: baseline; gap: var(--space-6); border-top: var(--divider); padding-top: var(--space-6); margin-bottom: var(--space-12); }
 .gallery-chapter-number { color: var(--color-primary); font-size: var(--type-small); font-variant-numeric: tabular-nums; }
@@ -28,8 +28,15 @@
   .has-many-references .gallery-reference { padding: var(--space-3); }
 }
 @media (max-width: 699px), (min-width: 900px) and (max-width: 999px) {
-  .face-scan-gallery { --gallery-reference-height: 20rem; }
+  .face-scan-gallery { --gallery-reference-height: min(20rem, var(--gallery-height-limit, 20rem)); }
   .gallery-references { grid-template-columns: repeat(auto-fit, minmax(min(100%, 9rem), 1fr)); max-width: 32rem; }
   .gallery-reference { max-width: 17rem; }
   .gallery-chapter-header { gap: var(--space-4); margin-bottom: var(--space-8); }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .face-scan-gallery {
+    --gallery-screen-width: min(17rem, calc(var(--figure-ui-height) * 1322 / 2726));
+    --gallery-height-limit: 75dvh;
+  }
 }

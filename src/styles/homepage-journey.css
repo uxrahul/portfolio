@@ -1,0 +1,101 @@
+/* Static fallback remains the original vertical document. */
+.journey-laptop, .journey-scroll-cue, .journey-connection, .journey-dock { display: none; }
+.journey-heir-composition { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); align-items: center; gap: clamp(2rem, 5vw, 5rem); }
+.homepage .journey-continuation .homepage-lira { margin-top: 0; }
+.journey-lira-eyebrow, .journey-project-status { display: none; }
+@media (max-width: 1199px) { .journey-heir-composition { grid-template-columns: minmax(0, 1fr); } }
+
+/* One shared height budget: content, whitespace, timeline band, navigation layer.
+   Geometry is scoped to the desktop enhancement, never ordinary reading routes. */
+[data-journey-active] {
+  --journey-stage-top: clamp(3rem, 6svh, 4rem);
+  --journey-stage-gap: 2rem;
+  --journey-timeline-band: 5rem;
+  --journey-navigation-band: 6rem;
+  --journey-content-height: calc(100svh - var(--journey-stage-top) - var(--journey-stage-gap) - var(--journey-timeline-band) - var(--journey-navigation-band));
+  --journey-heading-space: 2.75rem;
+  --journey-caption-space: 2.25rem;
+  --journey-device-max-height: min(calc(var(--journey-content-height) - var(--journey-heading-space) - var(--journey-caption-space)), calc(var(--journey-scene-max-width) * 2400 / 3880));
+  --journey-scene-inset: clamp(3rem, 5vw, 5rem);
+  --journey-scene-max-width: min(64rem, calc(100vw - 2 * var(--journey-scene-inset)));
+  --journey-composition-gap: clamp(3rem, 5vw, 5rem);
+  --journey-text-measure: 31rem;
+  --journey-phone-width: calc(var(--journey-device-max-height) * 1322 / 2726);
+  --journey-composition-width: min(var(--journey-scene-max-width), calc(var(--journey-text-measure) + var(--journey-composition-gap) + var(--journey-phone-width)));
+  --journey-laptop-width: min(var(--journey-laptop-target, 70vw), calc(var(--journey-content-height) * 3880 / 2400));
+  --journey-exhibit-width: max(var(--journey-laptop-width), var(--journey-composition-width));
+  --journey-station-gap: 2rem;
+  /* Adjacent exhibits start entering just as the previous one departs. The
+     shared envelope clears the viewport at rest without a full-viewport gap. */
+  --journey-scene-step: calc((100vw + var(--journey-exhibit-width)) / 2 + var(--journey-station-gap));
+  --journey-timeline-top: calc(var(--journey-stage-top) + var(--journey-content-height) + var(--journey-stage-gap));
+  --journey-thread-offset: 1rem;
+  --journey-material: color-mix(in srgb, var(--color-surface) 91%, transparent);
+  --journey-material-border: color-mix(in srgb, var(--color-outline) 75%, transparent);
+  --journey-elevation: 0 .5rem 2rem color-mix(in srgb, var(--color-on-surface) 10%, transparent);
+}
+html[data-home-camera] { scrollbar-width: none; }
+html[data-home-camera]::-webkit-scrollbar { display: none; }
+html[data-home-camera] body { padding-right: var(--home-scrollbar-gutter, 0px); }
+html[data-home-camera] .reading-region.is-home { margin: 0; padding: 0; }
+html[data-home-camera] .is-home .reading-canvas { max-width: none; }
+html[data-home-camera] .homepage { padding-top: 0; }
+html[data-home-camera] .homepage > .homepage-section { max-width: 76rem; margin-inline: auto; padding-inline: clamp(2rem, 5vw, 5rem); }
+[data-journey-active] .journey-stage { position: relative; height: 100svh; max-width: 100vw; max-height: 100svh; overflow: clip; background: var(--color-background); }
+/* ScrollTrigger rounds pin sizes up; constrain its spacer at fractional zoom. */
+[data-journey-active] > .pin-spacer { max-width: 100%; }
+[data-journey-active] .journey-aperture { position: absolute; inset: 0; overflow: clip; }
+[data-journey-active] .journey-camera { position: absolute; inset: 0; transform-origin: var(--journey-camera-origin, 50% 40%); will-change: transform; }
+[data-journey-active] .journey-track { position: relative; height: 100%; width: calc(100vw + (var(--journey-scene-count) - 1) * var(--journey-scene-step)); will-change: transform; }
+[data-journey-active] .journey-scene { position: absolute; width: 100vw; height: 100%; top: 0; left: calc(var(--journey-scene-index) * var(--journey-scene-step)); }
+[data-journey-active] .journey-scene:not(.journey-introduction) { height: var(--journey-content-height); top: var(--journey-stage-top); display: grid; place-items: center; }
+[data-journey-active] .journey-live-home { position: absolute; inset: 0; background: var(--color-background); transform-origin: 0 0; will-change: transform; padding: 4rem clamp(2rem, 5vw, 5rem) 7rem; }
+[data-journey-active] .homepage-hero { max-width: 76rem; height: 100%; margin-inline: auto; align-content: center; }
+[data-journey-active] .journey-laptop { position: absolute; display: block; width: var(--journey-laptop-width); left: var(--journey-laptop-left); top: var(--journey-laptop-top); z-index: 2; transform-origin: 50% 49.7%; will-change: transform; }
+.journey-laptop-frame { position: relative; display: block; width: 100%; height: auto; pointer-events: none; }
+[data-journey-active] .journey-scroll-cue { display: flex; align-items: center; gap: 1rem; position: absolute; right: var(--journey-scene-inset); bottom: var(--journey-navigation-band); margin: 0; font-size: var(--type-small); color: var(--color-on-surface-variant); }
+[data-journey-active] .journey-project { --journey-visual-width: var(--journey-phone-width); width: var(--journey-project-width, var(--journey-composition-width)); max-width: none; padding: 0; margin: 0; border: 0; }
+.homepage [data-journey-active] .journey-project > .homepage-label { display: block; margin-bottom: calc(var(--journey-heading-space) - 1.21875rem); line-height: var(--line-height-supporting); }
+[data-journey-active] .journey-project-composition { display: grid; grid-template-columns: minmax(0, 1fr) var(--journey-visual-width); min-height: var(--journey-device-max-height); align-items: center; gap: var(--journey-composition-gap); }
+.homepage [data-journey-active] .journey-project-copy { max-width: var(--journey-text-measure); margin: 0; border: 0; padding: 0; }
+.homepage [data-journey-active] .journey-project-copy h3 { font-size: var(--homepage-statement); margin: 0 0 var(--space-6); line-height: 1.12; letter-spacing: var(--tracking-heading); }
+.homepage [data-journey-active] .journey-project-description { margin: 0; color: var(--color-on-surface-variant); }
+.homepage [data-journey-active] .journey-project-status { display: block; margin: var(--space-4) 0 0; font-size: var(--type-small); line-height: var(--line-height-supporting); color: var(--color-on-surface-variant); }
+/* Measure the pendant column by its physical body, not transparent margins.
+   Keep the existing artwork scale and full shadow; only its layout box changes. */
+[data-journey-active] .journey-project--pendant {
+  --lira-artwork-size: min(var(--journey-device-max-height), calc(var(--journey-exhibit-width) - var(--journey-composition-gap) - 25rem));
+  --lira-body-inset: 285 / 1254;
+  --lira-body-width: 684 / 1254;
+  --journey-visual-width: calc(var(--lira-artwork-size) * var(--lira-body-width));
+  --journey-project-width: min(var(--journey-exhibit-width), calc(var(--journey-text-measure) + var(--journey-composition-gap) + var(--journey-visual-width)));
+}
+[data-journey-active] .journey-heir .phone-showcase { width: 100%; margin: 0; }
+
+/* A single spatial thread, with stations at exactly the scene centers. */
+[data-journey-active] .journey-connection { display: block; position: absolute; z-index: 3; left: 50vw; top: var(--journey-timeline-top); width: calc((var(--journey-scene-count) - 1) * var(--journey-scene-step)); height: var(--journey-timeline-band); }
+.journey-thread { position: absolute; top: var(--journey-thread-offset); width: 100%; height: 2px; background: color-mix(in srgb, var(--color-outline) 65%, transparent); }
+.journey-thread > span { display: block; height: 100%; background: var(--color-primary); transform: scaleX(0); transform-origin: left; }
+.journey-connection button { position: absolute; left: calc(var(--journey-station-index) * 100% / (var(--journey-scene-count) - 1)); top: calc(var(--journey-thread-offset) - 5px); transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: .5rem; width: max-content; min-width: 44px; min-height: 44px; padding: 0 .75rem; border: 0; background: transparent; color: var(--color-on-surface-variant); font: inherit; font-size: var(--type-small); line-height: var(--line-height-supporting); white-space: nowrap; cursor: pointer; }
+.journey-station-node { display: block; flex: 0 0 12px; width: 12px; border: 2px solid var(--color-outline-strong); border-radius: 50%; background: var(--color-background); outline: 5px solid var(--color-background); }
+.journey-connection [data-reached] .journey-station-node { border-color: var(--color-primary); background: var(--color-primary); }
+.journey-connection [aria-current] { color: var(--color-primary); font-weight: var(--weight-semibold); }
+.journey-connection [aria-current] .journey-station-node { box-shadow: 0 0 0 3px var(--color-background), 0 0 0 4px var(--color-primary); }
+.journey-connection button:hover { color: var(--color-primary); }
+
+/* Controls float in their own layer; the dock contains only Menu. */
+.journey-view-toggle { display: block; position: fixed; z-index: 50; top: 1rem; right: 2rem; padding: .5rem .75rem; min-height: 36px; border: 0; background: transparent; color: var(--color-on-surface-variant); font: inherit; font-size: var(--type-small); cursor: pointer; text-underline-offset: var(--underline-offset); }
+.journey-view-toggle[hidden] { display: none; }
+.journey-view-toggle:hover { text-decoration: underline; }
+[data-journey-active] .journey-dock { display: block; position: fixed; z-index: 70; left: 50%; bottom: 1.25rem; transform: translateX(-50%); border: 1px solid var(--journey-material-border); border-radius: 1rem; background: var(--journey-material); backdrop-filter: blur(20px) saturate(115%); box-shadow: var(--journey-elevation), inset 0 1px 0 color-mix(in srgb, var(--color-on-surface) 4%, transparent); }
+.journey-dock button { display: flex; align-items: center; justify-content: center; gap: .75rem; min-height: 48px; padding: .5rem 1.25rem; border: 0; border-radius: inherit; color: var(--color-on-surface); background: transparent; font: inherit; font-size: var(--type-navigation); cursor: pointer; }
+.journey-dock button:hover { background: color-mix(in srgb, var(--color-primary-container) 35%, transparent); }
+.journey-dock svg { width: 18px; height: 18px; stroke: currentColor; stroke-width: 1.5; fill: none; }
+
+/* Reuse the existing real navigation; only the enhanced homepage gets a drawer.
+   Regular-material approximation: readable tint, restrained blur, no glass layers. */
+html[data-home-camera] .global-navigation { inset: 1rem auto 1rem 1rem; width: min(21rem, 32vw); padding: var(--space-8) var(--space-5); z-index: 65; border: 1px solid color-mix(in srgb, var(--color-outline) 75%, transparent); border-radius: 1.5rem; background: color-mix(in srgb, var(--color-surface) 93%, transparent); backdrop-filter: blur(24px) saturate(115%); box-shadow: .5rem 0 2rem color-mix(in srgb, var(--color-on-surface) 12%, transparent), inset 0 1px 0 color-mix(in srgb, var(--color-on-surface) 4%, transparent); transform: translateX(calc(-100% - 2rem)); visibility: hidden; pointer-events: none; transition: transform var(--motion-duration-navigation) var(--motion-ease-standard), visibility 0s var(--motion-duration-navigation); }
+html[data-home-camera][data-journey-menu-open] .global-navigation { transform: translateX(0); visibility: visible; pointer-events: auto; transition-delay: 0s; }
+@media (prefers-contrast: more), (prefers-reduced-transparency: reduce) {
+  html[data-home-camera] .global-navigation, [data-journey-active] .journey-dock { background: var(--color-surface); backdrop-filter: none; border-color: var(--color-outline-strong); }
+}

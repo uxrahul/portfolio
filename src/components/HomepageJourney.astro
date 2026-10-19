@@ -1,0 +1,39 @@
+---
+import { Image } from 'astro:assets';
+import macbook from '../assets/homepage/intro/macbook-frame.png';
+import '../styles/homepage-journey.css';
+import { journeyScenes, openingCamera } from '../lib/homepage-scenes';
+const stations = journeyScenes;
+---
+<div id="homepage-journey" class="homepage-journey" data-home-journey style={`--journey-scene-count: ${stations.length}; --journey-laptop-target: ${openingCamera.targetViewportWidth * 100}vw`}>
+  <div class="journey-stage" data-journey-stage>
+    <div class="journey-aperture" data-journey-aperture>
+    <div class="journey-camera" data-journey-camera>
+    <div class="journey-track" data-journey-track>
+      <nav class="journey-connection" aria-label="Homepage timeline">
+        <div class="journey-thread" role="progressbar" aria-label="Camera journey" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span data-journey-progress></span></div>
+        {stations.map((station, index) => <button type="button" data-journey-destination={station.id} style={`--journey-station-index: ${index}`}>
+          <span class="journey-station-node" aria-hidden="true"></span><span>{station.label}</span>
+        </button>)}
+      </nav>
+      <div class="journey-scene journey-introduction" data-journey-scene="introduction" style="--journey-scene-index: 0">
+        <div class="journey-laptop" data-journey-laptop aria-hidden="true">
+          <Image src={macbook} alt="" widths={[960, 1600, 2400, 3880]} sizes="100vw" format="webp" quality={95} loading="eager" class="journey-laptop-frame" />
+        </div>
+        <div class="journey-live-home" data-journey-live-home><slot name="introduction" /></div>
+        <p class="journey-scroll-cue" aria-hidden="true">Scroll to explore <span>↓</span></p>
+      </div>
+      {stations.slice(1).map((station, index) => <div class:list={['journey-scene', { 'journey-heir': station.id === 'heir', 'journey-ending': station.id === 'continuation', 'journey-work': station.id === 'how-i-work' }]} data-journey-heir={station.id === 'heir' || undefined} data-journey-ending={station.id === 'continuation' || undefined} data-journey-scene={station.id} style={`--journey-scene-index: ${index + 1}`}><slot name={station.id} /></div>)}
+    </div>
+    </div>
+    </div>
+  </div>
+  <button type="button" class="journey-view-toggle" data-journey-view-toggle aria-controls="homepage-journey" hidden>Standard View</button>
+  <div class="journey-dock" data-journey-dock>
+    <button type="button" data-journey-menu aria-controls="global-navigation" aria-expanded="false">Menu <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14" /></svg></button>
+  </div>
+</div>
+<script>
+  import { bindHomepageJourney } from '../lib/homepage-journey';
+  bindHomepageJourney();
+</script>

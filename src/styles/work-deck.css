@@ -1,0 +1,50 @@
+/* Preserve the authored vertical presentation outside the cinematic desktop. */
+.work-cover-surface, .work-cover-label { display: none; }
+.work-card-content { display: contents; }
+.homepage .work-deck-cover .homepage-section-statement { font-weight: var(--weight-regular); }
+
+[data-journey-active] [data-work-deck] {
+  --work-card-height: min(24rem, calc(var(--journey-content-height) - 9rem));
+  --work-card-gap: var(--space-6);
+  --work-card-padding: var(--space-6);
+  --work-card-radius: .875rem;
+  --work-card-shadow: 0 .5rem 1.5rem color-mix(in srgb, var(--color-on-surface) 7%, transparent);
+  position: relative; display: flex; flex-direction: column; justify-content: center;
+  width: var(--journey-scene-max-width); height: 100%; max-height: var(--journey-content-height);
+  min-height: 0; margin: 0; gap: var(--work-card-gap);
+}
+[data-journey-active] .work-deck-cover { position: relative; z-index: 4; flex: none; }
+.homepage [data-journey-active] .work-deck-identifier { position: relative; margin: 0 0 var(--space-3); }
+.homepage [data-journey-active] .work-deck-cover .homepage-section-statement {
+  position: relative; width: min(100%, 34rem); max-width: none; margin: 0;
+  font-size: clamp(2rem, 2.6vw, 2.75rem); font-weight: var(--weight-regular); line-height: 1.12;
+  transform-origin: 0 0;
+}
+[data-journey-active] .work-cover-surface {
+  display: block; position: absolute; inset: 0 auto auto 0;
+  background: var(--color-surface); border: 1px solid var(--color-outline);
+  border-radius: var(--work-card-radius); box-shadow: var(--work-card-shadow);
+  pointer-events: none; transform-origin: 0 0;
+}
+[data-journey-active] .work-cover-label {
+  display: block; position: absolute; left: 0; top: 0;
+  font-size: var(--type-small); letter-spacing: var(--tracking-label);
+  font-weight: var(--weight-semibold); color: var(--color-primary);
+}
+[data-journey-active] [data-work-deck] .homepage-stages {
+  position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: minmax(0, 1fr);
+  gap: var(--work-card-gap); height: var(--work-card-height);
+  flex: 0 1 var(--work-card-height); min-height: 20rem;
+}
+.homepage [data-journey-active] [data-work-deck] .homepage-stage {
+  position: relative; display: block; min-width: 0; min-height: 0; padding: var(--work-card-padding);
+  border: 1px solid var(--color-outline); border-radius: var(--work-card-radius);
+  background: var(--color-surface); box-shadow: var(--work-card-shadow); transform-origin: 50% 50%;
+}
+.homepage [data-journey-active] [data-work-deck] .homepage-stage:nth-child(2) { background: color-mix(in srgb, var(--color-surface) 96%, var(--color-primary-container)); }
+.homepage [data-journey-active] [data-work-deck] .homepage-stage:nth-child(3) { background: color-mix(in srgb, var(--color-surface) 92%, var(--color-primary-container)); }
+[data-journey-active] .work-card-content { display: flex; flex-direction: column; align-items: flex-start; height: 100%; gap: var(--space-5); }
+.homepage [data-journey-active] [data-work-deck] .homepage-stage-number { font-size: 3rem; line-height: 1; color: var(--color-primary); }
+.homepage [data-journey-active] [data-work-deck] .homepage-metadata { margin-bottom: var(--space-3); min-height: 2.25rem; }
+.homepage [data-journey-active] [data-work-deck] .homepage-stage h3 { font-size: clamp(1.5rem, 1.8vw, 1.75rem); line-height: 1.15; color: var(--color-on-surface); transform: none; }
+.homepage [data-journey-active] [data-work-deck] .homepage-stage-description { font-size: var(--type-body); max-width: none; line-height: var(--line-height-supporting); }
