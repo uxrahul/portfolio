@@ -27,7 +27,7 @@ function initializeResponsiveHomepage() {
   cleanup = () => { events.abort(); camera.disconnect(); disposeMode?.(); };
 }
 
-function initializeToolPopovers(root: HTMLElement) {
+export function initializeToolPopovers(root: HTMLElement, options: { stickySelection?: boolean } = {}) {
   const buttons = [...root.querySelectorAll<HTMLButtonElement>('[data-tool-select]')];
   const panel = root.querySelector<HTMLElement>('#homepage-tool-popover')!;
   if (typeof panel.showPopover !== 'function') return () => {};
@@ -35,6 +35,7 @@ function initializeToolPopovers(root: HTMLElement) {
   const events = new AbortController();
   let selected: number | undefined;
   let focusPreview = false;
+  let restoringFocus = false;
   let frame = 0;
   let dismissTimer: ReturnType<typeof setTimeout> | undefined;
   const cancelDismiss = () => { clearTimeout(dismissTimer); };
@@ -48,7 +49,9 @@ function initializeToolPopovers(root: HTMLElement) {
     const button = selected === undefined ? undefined : buttons[selected];
     if (open()) panel.hidePopover();
     clear();
-    if (restoreFocus) button?.focus({ preventScroll: true });
+    if (restoreFocus) {
+      restoringFocus = true; button?.focus({ preventScroll: true }); restoringFocus = false;
+    }
   };
   const position = () => {
     frame = 0;
@@ -86,7 +89,8 @@ function initializeToolPopovers(root: HTMLElement) {
     cancelDismiss();
     // Bridge the eight-pixel anchor gap. A clicked selection stays until dismissed.
     if (focusPreview) dismissTimer = setTimeout(() => {
-      if (!panel.matches(':hover') && !buttons.some((button) => button.matches(':hover, :focus-visible'))) close();
+      if (!panel.matches(':hover') && !(options.stickySelection && panel.matches(':focus-within'))
+        && !buttons.some((button) => button.matches(':hover, :focus-visible'))) close();
     }, 180);
   };
   panel.addEventListener('pointerenter', cancelDismiss, { signal: events.signal });
@@ -94,10 +98,13 @@ function initializeToolPopovers(root: HTMLElement) {
   buttons.forEach((button, index) => {
     button.disabled = false;
     button.addEventListener('pointerenter', (event) => {
+      if (options.stickySelection && open() && !focusPreview) return;
       if (event.pointerType !== 'touch' && matchMedia('(hover: hover)').matches) select(index, true);
     }, { signal: events.signal });
     button.addEventListener('pointerleave', leave, { signal: events.signal });
     button.addEventListener('focus', () => {
+      if (options.stickySelection && restoringFocus) return;
+      if (options.stickySelection && open() && !focusPreview && selected === index) return;
       if (button.matches(':focus-visible')) select(index, true);
     }, { signal: events.signal });
     button.addEventListener('click', () => {
@@ -105,6 +112,11 @@ function initializeToolPopovers(root: HTMLElement) {
       else select(index);
     }, { signal: events.signal });
   });
+  if (options.stickySelection) {
+    panel.addEventListener('focusin', cancelDismiss, { signal: events.signal });
+    buttons.forEach((button) => button.addEventListener('blur', leave, { signal: events.signal }));
+    panel.addEventListener('focusout', leave, { signal: events.signal });
+  }
   // Native auto-popover supplies outside-tap and Escape light dismissal, without
   // a backdrop, focus trap, scroll lock or modal semantics.
   panel.addEventListener('toggle', () => { if (!open()) clear(); }, { signal: events.signal });

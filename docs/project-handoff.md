@@ -1,6 +1,159 @@
 # Portfolio project handoff
 
-## Publication configuration — October 19, 2026
+## Homepage v2 — Five Stories, One Canvas (Passes 1–2)
+
+The completed accordion is scoped to `experiment/homepage-animation-v2`.
+Its production publication was authorized on October 21, 2026. Desktop Animated View
+now mounts `HomepageAccordion.astro` and `homepage-accordion.ts` instead of the
+old journey. The old journey, camera, deck and swarm source files remain available
+for reuse; their cinematic controllers are not mounted by this homepage.
+
+The five slots reuse the existing introduction, HEIR phone, theme-aware Lira
+pendant/diffuser, three authored work cards and eleven-tool data source. There is
+one copy of each story in the DOM. Standard/touch use the same authored content
+and their existing controllers. Pass 2 now enables phone exploration, pendant illumination/replay and contextual
+Tools in settled expanded panels, without changing the Pass 1 compositions.
+
+One GSAP timeline owns selection, widths and preview recomposition. Native buttons
+select panels; Arrow Left/Right and Home/End move selector focus. The 550ms
+transition interrupts at its current values when a later selection arrives.
+Inactive story content is inert; overflowing active regions become keyboard
+scroll targets. The existing Menu tree and view switch are reused. Astro swaps,
+media changes and Standard View release all owned styles, timelines and listeners.
+No additional ScrollTrigger, pinning, wheel interception or scroll lock is added.
+The shared `homepage:before-camera` coordination event releases Standard product
+pins before accordion measurement; `data-journey-active` suspends the published
+vertical product/Tools controllers while the accordion is active.
+
+Desktop eligibility requires at least 1200px × 600px, a fine hover pointer and no
+reduced-motion preference. The measured canvas also needs 600px for the open panel
+and 104px per closed panel. Otherwise the existing readable fallback is retained.
+The stage is viewport height minus 9rem, with 12px gutters. Preferred open widths
+now come from panel metadata: About 42%, HEIR 58%, Lira 53%, How I Work 60%, Tools
+38%, bounded by their reading minimum and four 104px neighbors. How I Work keeps
+its original 60% geometry and unchanged internal styles/transforms. Short windows retain body-sized
+type and internal panel scrolling. About now restores a full-bleed photographic cover
+with its introduction integrated over a lower gradient; HEIR/Lira have larger products and compact heading-1
+titles; Tools has a centered 360px grid. Consistent label container queries and
+collapsed semantic surface tints apply only inside the active accordion; expanded
+content panels use the neutral surface. Case-study copy and footer labels share
+the same 24–40px start inset while preserving independent outer widths.
+The About reading minimum is now 448px, and its actual panel targets 42% rather
+than 48%; neighboring widths redistribute through the unchanged sizing owner.
+Expanded footer labels follow their editorial column’s start edge, with the same
+24px bottom inset. How I Work’s internal padding, cards and animation are unchanged.
+Final Pass 1 refinement (October 21): Tools targets an actual 38% open width
+with its existing 416px reading minimum and 16px/8px grid gaps.
+The final Tools-only refinement caps the actual panel at 440px, aligning the
+heading and footer with the unchanged centered 360px grid instead of leaving
+large outer gutters on wide screens. Collapsed marks use grayscale; expanded
+marks retain full color. Accordion labels/title/accessibility names read “Tools I use”;
+Standard/touch keep their original title and accessible list name. Menu uses
+the same aria-expanded-driven two-line morph as mobile. Every fresh activation
+opens About synchronously; in-session resize and font updates preserve selection.
+Initialization is idempotent for the mounted root, including Astro page-load events.
+See `design-system.md` for composition rules.
+
+October 21 verification: at 1366×768 and 1920×1080 in both themes, Tools
+opens at 470px and 669px (38% after gutters), with a centered three-column
+360px grid. HEIR/Lira start edges match at the shared responsive padding
+(34px/41px including border), with zero footer-label offset. Expanded surfaces
+resolve to white / #222A2D. Exactly one panel stays selected without horizontal
+overflow. Initial arrival, refresh, Standard → Animated and HEIR → home Astro
+return open About; Menu open/Escape produce the expected ±45° / translated
+line matrices. Check, build (10 routes/329 links), and source fidelity pass.
+
+Composition refinement verification: preferred widths redistribute correctly at
+2560×1440, 1920×1080, 1366×768, 1280×640 and 1200×800. Laptop/short panels retain
+keyboard-accessible internal scrolling; 1199px and mobile retain vertical flow.
+All five selections and rapid interruption retain one open panel with no horizontal
+document overflow. Reviewed expanded About, HEIR, Lira, Tools and the unchanged
+work cards; Lira's complete shadow/diffuser survives in both themes. Standard View
+cleanup/return and Menu/theme switching pass. Only the accordion component,
+controller, scoped CSS and these two layout documents changed in this refinement.
+
+Browser review covered all five selections, interrupted switching, light/dark
+Lira imagery, the eleven-logo grid, native keyboard selectors/view switching,
+Menu/Escape and HEIR route/back navigation. A browser-rendered viewport matrix
+covered 2560×1440, 1920×1080, 1366×768, 1280×640 and 1200×800; active panels
+scroll internally as needed, with no horizontal document overflow. 1199×800,
+1366×590, 768×1024 and 390×844 retain vertical flow. Disabling JavaScript and
+reloading retains all five readable sections and native navigation. Reduced-motion
+eligibility is enforced by the shared media query; no OS preference was changed.
+Validation passes: `npm run check` (74 files, zero diagnostics), `npm run build`
+(10 routes, 329 internal links plus gallery/publication checks) and
+`npm run verify:source`. No dependencies installed, commits created or pushes made.
+
+### Pass 2 product interactions — October 21, 2026
+
+`homepage-accordion-interactions.ts` owns one selected interaction. The existing
+550ms accordion timeline prepares selection immediately (disposing the previous
+interaction) and mounts the new interaction on completion. Synchronous resize
+painting preserves a mounted selection. Mode disable, Astro swaps and hot cleanup
+release the same owner. Width metadata, visual transforms, type and artwork remain
+unchanged; no new dependency, pin, scroll lock or wheel interception is added.
+
+- HEIR: the existing aperture becomes a labeled, focusable native scroll region.
+  Wheel/trackpad, native keyboard scrolling and primary-pointer dragging explore
+  the long source screenshot; the frame and rounded mask remain stationary.
+  Pointer capture ends on release/cancel/collapse/window blur. A fractional manual
+  position survives reopening/resizing; collapsed artwork resets to its preview.
+  There is no autoplay, viewer or extra link.
+- Lira: the existing `createPendantInteraction`/`pendantLightAt` curve drives its
+  exact open channel and separate top indicator. Initial playback starts after
+  expansion; 1.6s replay replaces the previous tween, starts unlit and holds full
+  illumination. The existing transparent replay button is enabled only while
+  expanded, with native keyboard activation and busy state. Diffuser, shadows,
+  stronger dark-theme bloom and both byte-matched source WebP assets are unchanged.
+- Tools I use: exports/reuses `initializeToolPopovers` with optional accordion-only
+  sticky selection/focus behavior. All eleven descriptions/icons stay in their
+  existing data/component. Native auto-popover escapes panel clipping, clamps
+  to the visual viewport, tracks internal scrolling and supplies outside dismissal.
+  Hover/focus previews, click pin/update, Escape and focus return retain the grid.
+  Closing or collapsing aborts listeners/timers, resets relationships, hides details
+  and disables inactive buttons. Default Standard/touch behavior is unchanged.
+
+Browser matrix: 1366×768, 1280×640 and 1920×1080. All 33 tool selections expose
+exactly one approved description with valid aria-describedby, inside viewport
+bounds. Phone travel reaches both ends with no autoplay, stationary frame and
+unchanged rounded mask. Pendant stays resting before settling, illuminates
+progressively, replaces repeated replays and ends at ring/indicator=1. Rapid
+selection interrupts leave no native/drag markers, popovers or active replay;
+light styles clear and exactly one panel remains expanded. Native wheel, End
+and pointer drag were additionally verified in the desktop browser.
+Native keyboard testing also verified Tab between tool descriptions after a pinned
+selection, Escape dismissal without reopening, and keyboard pendant replay.
+Light/dark pendant treatments, Menu, Standard/Animated switching, and Astro
+HEIR route/return navigation pass; returning opens About Me without stale details.
+Physical trackpad hardware and Safari were not tested; trackpads use the same
+unintercepted native scrolling path. Reduced-motion eligibility remains unchanged.
+
+Check (75 files, zero errors/warnings/hints), build (10 routes/329 links and private
+publication boundaries) and source-fidelity validation pass. Product components,
+assets, tool copy, How I Work and the published deployment files are untouched.
+
+## Current production publication — October 21, 2026
+
+The user authorized committing and publishing the completed v2 accordion and its
+product interactions from `experiment/homepage-animation-v2`, without merging
+into `main`. The existing Pages workflow now triggers and builds only that exact
+branch; Astro output, Node 24, Pages Actions, concurrency and the `/portfolio/`
+base are unchanged. The `github-pages` environment's exact branch restriction
+now selects only v2, preventing older workflows on other branches from deploying
+over this version. Pages stays in GitHub Actions mode.
+
+The first experiment remains at `cebbc2664e048296d46b3c6b9b0cb5982b935c32`;
+`main` remains at `735b3938d8a0e0a573e9f5989f79a8ac0f43ea15`. The pending
+initial-render flash fix is explicitly deferred; publication introduces no design
+or animation changes. Verify the deployment run and live output before reporting
+success. Earlier no-commit/no-push statements document prior refinement passes.
+Publication checks pass: 75 Astro files with zero diagnostics, 10 routes and
+329 internal links, private publication boundaries, HEIR source fidelity and all
+five native research reports. Only completed website source, documentation and
+the existing deployment workflow are included; private sources/build output stay
+excluded.
+
+## Previous publication configuration — October 19, 2026
 
 The user authorized committing and publishing the completed experiment without
 merging into `main`. `.github/workflows/deploy.yml` on
@@ -1210,3 +1363,10 @@ public with Pages enabled. Browser checks passed
 homepage → HEIR → information architecture → anchored first-launch return under
 `/portfolio/`. Local check/build/source/research validation and private-file/credential
 review passed before the publication commit.
+
+Tools-only final verification: 1366×768 and 1920×1080 in light/dark show
+grayscale(1) while collapsed (including selector focus) and no filter expanded.
+All eleven tools retain the 360px three-column grid and 16px/8px gaps. Heading
+and grid edges match; the bottom label differs by only its 1px panel border.
+Actual Tools width is 440px at those viewports; Standard title and colors restore
+on release. Check, production build and source verification passed.

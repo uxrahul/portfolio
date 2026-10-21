@@ -18,6 +18,9 @@
   --palette-dark-outline-strong: #859896;
   --palette-dark-primary-container: #2D4447;
 
+  --color-image-scrim: var(--palette-dark-charcoal);
+  --color-on-image: var(--palette-light-surface);
+
   --font-family-reading: 'Source Sans 3 Variable', 'Source Sans 3', Calibri, 'Segoe UI', sans-serif;
   --font-family-code: ui-monospace, SFMono-Regular, Consolas, monospace;
   --type-small: 0.875rem;

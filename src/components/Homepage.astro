@@ -2,11 +2,10 @@
 import { withBase } from '../lib/paths';
 import HomepageIntroduction from './HomepageIntroduction.astro';
 import HomepageTools from './HomepageTools.astro';
-import HomepageJourney from './HomepageJourney.astro';
+import HomepageAccordion from './HomepageAccordion.astro';
 import PhoneShowcase from './PhoneShowcase.astro';
 import LiraPendant from './LiraPendant.astro';
 import WorkDeck from './WorkDeck.astro';
-import ToolSwarm from './ToolSwarm.astro';
 import phoneFrame from '../assets/homepage/heir/iphone-frame.png';
 import phoneScreen from '../assets/homepage/heir/home-long.png';
 import '../styles/homepage.css';
@@ -14,7 +13,7 @@ import '../styles/homepage-responsive.css';
 import '../styles/homepage-products.css';
 ---
 <div class="homepage" data-homepage>
-  <HomepageJourney>
+  <HomepageAccordion>
   <HomepageIntroduction slot="introduction" />
   <section slot="heir" class="homepage-section homepage-impact journey-project" aria-labelledby="selected-impact">
     <h2 id="selected-impact" class="homepage-label">SELECTED IMPACT</h2>
@@ -45,9 +44,8 @@ import '../styles/homepage-products.css';
   <section slot="select-tools" class="homepage-section homepage-tool-section" aria-labelledby="selected-tools" data-home-section>
     <h2 id="selected-tools" class="homepage-label" data-home-reveal>SELECT TOOLS</h2>
     <div class="tools-static" data-home-reveal><HomepageTools /></div>
-    <ToolSwarm />
   </section>
-  </HomepageJourney>
+  </HomepageAccordion>
 </div>
 <script>
   import { bindHomepageMotion } from '../lib/homepage-motion';

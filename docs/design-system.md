@@ -51,6 +51,75 @@ Consolidation preserves the existing computed values, wrapping and camera geomet
 
 ## Tablet and mobile homepage
 
+### Desktop accordion experiment (v2, Passes 1–2)
+
+`homepage-accordion.css` gates every new composition behind the controller-owned
+`data-accordion-active` flag. The static document stays in published vertical flow.
+Five rounded panels share 12px gutters, 24px radii and responsive 24–40px internal
+padding. Shared panel metadata targets 42% About, 58% HEIR, 53% Lira, 60% How I
+Work and 38% Tools of the canvas after gutters. Reading minimums are respectively
+448, 512, 480, 600 and 416px; four closed panels retain at least 104px each.
+Tools additionally caps its open panel at 440px to remove empty outer gutters
+around its unchanged 360px grid. Its heading and footer share the grid start edge.
+Selecting a story redistributes the remainder equally among its neighbors. Each
+story retains its own expanded content measure during other selections, so copy
+and the approved work cards do not reflow to another story’s width. The stage uses `100dvh - 9rem`; overflowing active content
+scrolls internally instead of shrinking type. If these minimums cannot fit, or
+motion/pointer conditions are unsuitable, the existing Standard/touch view remains.
+
+About uses a full-bleed photographic cover in both states. Expanded width now
+comes from the actual 42% panel preference, not an internal content cap. The image
+fills the available panel width at 1× cover scale, without the old expanded 125%
+overzoom. Its upper viewport-height photograph continues into a dark lower region
+when readable copy requires internal scrolling. A lower gradient integrates the
+unchanged introduction without covering the subject’s face; source aspect ratio
+is preserved by object-fit rather than stretching. HEIR/Lira use 58% of stage
+height after the footer for their upper product region and a lower editorial
+measure (43rem max). Accordion case-study titles use the existing heading-1 token.
+Lira’s full square canvas is 10% larger to balance the pendant body against the
+phone, with its transparent shadow margin preserved. Collapsed product previews
+target 76% of stage height, capped at 1.8× expanded scale. Collapsed HEIR retains its muted primary-container tint; collapsed Lira combines
+the background and primary-container roles. All expanded content panels use the
+neutral surface token; About retains its photographic cover.
+The phone preserves its source aspect ratio; Lira retains the complete square
+canvas, theme assets and diffuser. The three existing work cards fan in preview
+and straighten into three columns. Tools recomposes the same eleven SVG/name
+entries from a cropped mosaic into a centered three-column grid capped at 360px, with unchanged 16px row and 8px column gaps.
+The accordion title and accessible labels read “Tools I use”; the eyebrow retains
+uppercase styling. Only collapsed accordion tool marks use grayscale(1), including
+selector hover/focus; expansion restores original SVG colors without altering assets.
+Standard/touch titles and colors are restored when the enhancement is released.
+Labels use the navigation token consistently: above 184px panel width they remain
+horizontal; at narrower widths every label uses an authored two-line split with
+the plus indicator centered above it. All labels share the same 24px bottom inset.
+Expanded labels align with their editorial column: shared panel padding for both case studies, Work
+and Tools. Case-study copy retains its 43rem ceiling but starts at the shared
+24–40px inset instead of centering the ceiling within wider panels. The 35rem
+About measure supplies an additional inset only when the panel is wider. This moves labels, not content.
+The approved Work padding and cards remain unchanged. Existing title, heading,
+body, metadata and spacing tokens supply hierarchy; there is no new type system.
+
+Selection is click/keyboard driven, with subtle border/label hover feedback only.
+One interruptible 550ms GSAP transition coordinates widths, visual transforms and
+short copy fades. There is no cinematic timeline or scroll-driven camera in v2.
+Pass 2 interactions mount only after the current panel settles. HEIR uses the
+existing rounded display opening as a native scroll region with no autoplay,
+keyboard access, optional pointer drag and natural wheel boundary chaining. Lira
+reuses the source-coordinate light layers/curve for a 1.6s automatic illumination
+and keyboard/click replay; replay replaces the current tween and holds the final
+light. Tools reuses the approved contextual popover in the browser top layer,
+with hover/focus previews and click-pinned selection. Its optional accordion mode
+preserves pinned details until selection/dismissal and prevents Escape focus-return
+from reopening a description. Grid geometry, icon sizes and copy do not change.
+The dedicated accordion interaction owner disposes dragging/capture, observers,
+listeners, popovers and light playback on selection change or mode/Astro cleanup.
+Same-selection resizing does not restart the pendant. Reduced-motion visitors
+retain the existing static/Standard fallback and approved contextual descriptions.
+Every fresh desktop Animated View activation starts with About selected, synchronously
+without an entrance tween; resize/font updates preserve the active selection.
+Astro lifecycle initialization is idempotent per mounted root. The bottom Menu
+reuses the mobile two-line hamburger/X morph, driven by its actual aria-expanded state.
+
 `homepage-responsive.css` shares case-study typography and contextual Tools across
 all naturally scrolling homepage modes, excluding an active desktop camera. Its
 stacked product layout applies below 1200px or on no-hover/coarse-pointer devices. The existing tablet profile grid is unchanged. Below 600px the existing

@@ -1,0 +1,31 @@
+---
+import '../styles/homepage-accordion.css';
+// Labels are presentation metadata; all authored story content stays in its slot.
+const panels = [
+  { id: 'introduction', label: 'About Me', preview: ['Rahul', 'Singh'], width: .42, minRem: 28 },
+  { id: 'heir', label: 'Work at Ganance', preview: ['Work at', 'Ganance'], width: .58, minRem: 32 },
+  { id: 'continuation', label: 'Work at Lira', preview: ['Work at', 'Lira'], width: .53, minRem: 30 },
+  { id: 'how-i-work', label: 'How I Work', preview: ['How I', 'Work'], width: .60, minRem: 37.5 },
+  { id: 'select-tools', label: 'Tools I use', preview: ['Tools', 'I use'], width: .38, minRem: 26, maxRem: 27.5 },
+];
+---
+<div id="homepage-journey" class="homepage-accordion" data-home-journey data-home-accordion>
+  <div class="accordion-stage" data-accordion-stage>
+    {panels.map((panel) => <article class:list={['accordion-panel', `accordion-panel--${panel.id}`, { 'journey-heir': panel.id === 'heir' }]} data-accordion-panel={panel.id} data-journey-scene={panel.id} data-preferred-width={panel.width} data-min-width-rem={panel.minRem} data-max-width-rem={'maxRem' in panel ? panel.maxRem : undefined}>
+      <div id={`story-${panel.id}`} class="accordion-content" data-accordion-content><slot name={panel.id} /></div>
+      <button type="button" id={`story-select-${panel.id}`} class="accordion-select" data-accordion-select aria-controls={`story-${panel.id}`} aria-expanded="false" aria-label={panel.label} hidden>
+        <span class="accordion-preview-label"><span>{panel.preview[0]}</span>{' '}<span>{panel.preview[1]}</span></span>
+        <span class="accordion-expanded-label">{panel.label}</span>
+        <svg class="accordion-select-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3v14M3 10h14" /></svg>
+      </button>
+    </article>)}
+  </div>
+  <button type="button" class="journey-view-toggle" data-journey-view-toggle aria-controls="homepage-journey" hidden>Standard View</button>
+  <div class="journey-dock">
+    <button type="button" data-journey-menu aria-controls="global-navigation" aria-expanded="false">Menu <svg viewBox="0 0 20 20" aria-hidden="true"><path class="menu-line-top" d="M3 10h14" /><path class="menu-line-bottom" d="M3 10h14" /></svg></button>
+  </div>
+</div>
+<script>
+  import { bindHomepageAccordion } from '../lib/homepage-accordion';
+  bindHomepageAccordion();
+</script>
