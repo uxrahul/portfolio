@@ -1,5 +1,9 @@
 ---
 import '../styles/homepage-accordion.css';
+import { accordionDesktopQuery, measureAccordion, accordionPoses } from '../lib/homepage-accordion-presentation';
+import { primeAccordion } from '../lib/homepage-accordion-startup';
+// The same geometry drives this parser-time pose and the deferred GSAP controller.
+const startup = `(${primeAccordion.toString()})(${JSON.stringify(accordionDesktopQuery)}, ${measureAccordion.toString()}, ${accordionPoses.toString()});`;
 // Labels are presentation metadata; all authored story content stays in its slot.
 const panels = [
   { id: 'introduction', label: 'About Me', preview: ['Rahul', 'Singh'], width: .42, minRem: 28 },
@@ -25,6 +29,7 @@ const panels = [
     <button type="button" data-journey-menu aria-controls="global-navigation" aria-expanded="false">Menu <svg viewBox="0 0 20 20" aria-hidden="true"><path class="menu-line-top" d="M3 10h14" /><path class="menu-line-bottom" d="M3 10h14" /></svg></button>
   </div>
 </div>
+<script is:inline data-astro-rerun set:html={startup} />
 <script>
   import { bindHomepageAccordion } from '../lib/homepage-accordion';
   bindHomepageAccordion();

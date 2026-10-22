@@ -1,7 +1,7 @@
 import { gsap } from 'gsap';
 import { createAccordionInteractions } from './homepage-accordion-interactions';
 
-const desktopQuery = '(min-width: 1200px) and (min-height: 600px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)';
+import { accordionDesktopQuery, measureAccordion, accordionPoses } from './homepage-accordion-presentation';
 const lifecycle = new AbortController();
 let bound = false;
 let cleanup: (() => void) | undefined;
@@ -13,6 +13,8 @@ function initializeAccordion() {
   if (root && root === mountedRoot) return;
   cleanup?.(); cleanup = undefined;
   if (!root) return;
+  // Parser-time styles are temporary; release them before capturing owned styles.
+  root.dispatchEvent(new Event('homepage:initialize-accordion'));
   mountedRoot = root;
   const html = document.documentElement;
   const stage = root.querySelector<HTMLElement>('[data-accordion-stage]')!;
@@ -26,7 +28,7 @@ function initializeAccordion() {
   const toolsList = root.querySelector<HTMLElement>('.homepage-tools')!;
   const originalToolsHeading = toolsHeading.textContent;
   const originalToolsLabel = toolsList.getAttribute('aria-label')!;
-  const media = matchMedia(desktopQuery);
+  const media = matchMedia(accordionDesktopQuery);
   const events = new AbortController();
   const originalStyles = new Map<HTMLElement, string | null>();
   const capture = (element: HTMLElement) => { if (!originalStyles.has(element)) originalStyles.set(element, element.getAttribute('style')); return element; };
@@ -35,7 +37,8 @@ function initializeAccordion() {
   let enabled = false, disposed = false, menuOpen = false;
   let standard = Boolean(location.hash || history.state?.portfolioJourneySkipped);
   let active = 0;
-  let preferredWidths: number[] = [], availableWidth = 0, frame = 0;
+  let geometry: ReturnType<typeof measureAccordion>;
+  let frame = 0;
   let navigationWasInert = navigation.inert;
 
   const closeMenu = (restoreFocus = false) => {
@@ -47,8 +50,6 @@ function initializeAccordion() {
   const paint = (animate: boolean) => {
     timeline?.kill();
     interactions!.prepare(panels[active].dataset.accordionPanel!);
-    const expandedWidth = preferredWidths[active];
-    const collapsedWidth = (availableWidth - expandedWidth) / 4;
     const updateScrollAccess = () => contents.forEach((content, index) => {
       content.tabIndex = index === active && content.scrollHeight > content.clientHeight + 1 ? 0 : -1;
     });
@@ -59,74 +60,12 @@ function initializeAccordion() {
       if (animate) timeline!.to(targets, vars, at);
       else gsap.set(targets, vars);
     };
-    panels.forEach((panel, index) => {
-      const selected = index === active;
-      const contentWidth = preferredWidths[index];
-      capture(panel);
-      panel.toggleAttribute('data-active', selected);
-      buttons[index].setAttribute('aria-expanded', String(selected));
-      contents[index].inert = !selected;
-      move(panel, { width: selected ? expandedWidth : collapsedWidth });
-      const copies = [...panel.querySelectorAll<HTMLElement>('.homepage-hero-copy, .journey-project-copy, .journey-project > .homepage-label, .work-deck-cover, .homepage-stage-description, .homepage-tool-section > .homepage-label')];
-      copies.forEach(capture);
-      if (copies.length) move(copies, { autoAlpha: selected ? 1 : 0, y: selected ? 0 : 12, duration: selected ? .28 : .12 }, selected ? .18 : 0);
-      const portrait = panel.querySelector<HTMLElement>('.homepage-portrait');
-      if (portrait) {
-        capture(portrait);
-        // Fill the visible cover; its lower content continues on the same scrim.
-        move(portrait, { width: selected ? contentWidth : collapsedWidth * 1.25,
-          height: stage.clientHeight, x: 0, y: 0 });
-      }
-      const product = panel.querySelector<HTMLElement>('[data-phone-showcase], [data-lira-pendant]');
-      if (product) {
-        capture(product);
-        const padding = parseFloat(getComputedStyle(panel.querySelector<HTMLElement>('.journey-project')!).paddingLeft);
-        const previewScale = Math.min(1.8, stage.clientHeight * .76 / product.offsetHeight);
-        move(product, { xPercent: -50, scale: selected ? 1 : previewScale,
-          y: selected ? 0 : (stage.clientHeight - product.offsetHeight) / 2 - padding - 18 });
-      }
-      const cards = [...panel.querySelectorAll<HTMLElement>('.homepage-stage')];
-      const list = panel.querySelector<HTMLElement>('.homepage-stages');
-      if (list) cards.forEach((card, cardIndex) => {
-        capture(card);
-        move(card, { x: selected ? 0 : list.clientWidth / 2 - card.offsetLeft - card.offsetWidth / 2 + (cardIndex - 1) * 32,
-          y: selected ? 0 : (stage.clientHeight - card.offsetHeight) / 2 - list.offsetTop + (cardIndex - 1) * 48,
-          rotation: selected ? 0 : (cardIndex - 1) * 8, scale: 1 });
-      });
-      const tools = panel.querySelector<HTMLElement>('.homepage-tools');
-      if (tools) {
-        capture(tools);
-        const inset = parseFloat(getComputedStyle(tools.parentElement!.parentElement!).paddingLeft);
-        const gridWidth = Math.min(contentWidth - inset * 2, 360);
-        const previewWidth = Math.min(gridWidth, 200);
-        move(tools, { width: selected ? gridWidth : previewWidth,
-          x: (contentWidth - inset * 2 - (selected ? gridWidth : previewWidth)) / 2,
-          rotation: selected ? 0 : -10, scale: selected ? 1 : 1.15,
-          y: selected ? 0 : stage.clientHeight * .18 - tools.offsetTop });
-        const labels = [...tools.querySelectorAll<HTMLElement>('.homepage-tool-select > span:last-child')];
-        labels.forEach(capture);
-        move(labels, { autoAlpha: selected ? 1 : 0, duration: .2 }, selected ? .18 : 0);
-      }
-    });
+    accordionPoses(root, active, geometry!, capture).forEach(({ targets, vars, at }) => move(targets, vars, at));
     updateScrollAccess();
     root.dataset.accordionSelection = panels[active].dataset.accordionPanel;
     if (!animate) interactions!.settle();
   };
-  const measure = () => {
-    const rem = parseFloat(getComputedStyle(html).fontSize);
-    const available = stage.clientWidth - parseFloat(getComputedStyle(stage).gap) * (panels.length - 1);
-    // Keep both the open reading composition and all four labels usable.
-    if (available < 37.5 * rem + 4 * 6.5 * rem) return false;
-    availableWidth = available;
-    preferredWidths = panels.map((panel) => {
-      const width = Math.max(Number(panel.dataset.minWidthRem) * rem,
-        Math.min(available * Number(panel.dataset.preferredWidth), available - 4 * 6.5 * rem,
-          panel.dataset.maxWidthRem ? Number(panel.dataset.maxWidthRem) * rem : Infinity));
-      capture(panel).style.setProperty('--accordion-expanded-width', `${width}px`);
-      return width;
-    });
-    return true;
-  };
+  const measure = () => Boolean(geometry = measureAccordion(root, capture));
   const disable = () => {
     if (!enabled) return;
     timeline?.kill(); timeline = undefined;
@@ -173,6 +112,7 @@ function initializeAccordion() {
     } else disable();
     toggle.hidden = !media.matches || !fits;
     toggle.textContent = enabled ? 'Standard View' : 'Animated View';
+    html.toggleAttribute('data-home-accordion', enabled);
   };
   const schedule = () => { cancelAnimationFrame(frame); frame = requestAnimationFrame(sync); };
   buttons.forEach((button, index) => {
@@ -245,9 +185,10 @@ function initializeAccordion() {
 export function bindHomepageAccordion() {
   if (bound) return;
   bound = true;
+  document.addEventListener('astro:after-swap', initializeAccordion, { signal: lifecycle.signal });
   document.addEventListener('astro:page-load', initializeAccordion, { signal: lifecycle.signal });
   document.addEventListener('astro:before-swap', () => cleanup?.(), { signal: lifecycle.signal });
-  // Initialize before the first paint when this module arrives before astro:page-load.
+  // The inline presentation handles the first paint while this module loads.
   if (document.readyState !== 'loading') initializeAccordion();
   else document.addEventListener('DOMContentLoaded', initializeAccordion, { once: true, signal: lifecycle.signal });
   if (import.meta.hot) import.meta.hot.dispose(() => { cleanup?.(); lifecycle.abort(); bound = false; });

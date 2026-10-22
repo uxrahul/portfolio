@@ -119,6 +119,12 @@ Every fresh desktop Animated View activation starts with About selected, synchro
 without an entrance tween; resize/font updates preserve the active selection.
 Astro lifecycle initialization is idempotent per mounted root. The bottom Menu
 reuses the mobile two-line hamburger/X morph, driven by its actual aria-expanded state.
+The homepage resolves the existing media/history/hash mode in the head, then
+draws the initial About-first pose synchronously after the markup while the
+module bundle loads. `homepage-accordion-presentation.ts` supplies identical
+geometry to this inline startup and GSAP; ownership transfers without resetting
+the shell flag. No hiding guard, timer or loading transition is used. Ineligible
+screens and no-JavaScript visits retain the unenhanced document.
 
 `homepage-responsive.css` shares case-study typography and contextual Tools across
 all naturally scrolling homepage modes, excluding an active desktop camera. Its

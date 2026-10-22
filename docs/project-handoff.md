@@ -54,6 +54,38 @@ opens About synchronously; in-session resize and font updates preserve selection
 Initialization is idempotent for the mounted root, including Astro page-load events.
 See `design-system.md` for composition rules.
 
+### Initial rendering correction — October 22, 2026
+
+The deferred accordion/GSAP module previously left the Standard shell visible
+until it downloaded. The homepage-only head script now resolves the existing
+desktop media query, hash and `history.state.portfolioJourneySkipped` before
+the shell paints. A parser-time inline presentation draws About plus the four
+collapsed previews immediately after the story markup. It shares measurement
+and pose functions with GSAP rather than maintaining a second layout. It follows
+font readiness while the bundle loads and preserves the shell flag through the
+synchronous ownership handoff, avoiding a sidebar visibility transition.
+The controller also initializes on `astro:after-swap`; its mounted-root guard,
+existing view switching and cleanup remain intact. Standard, reduced-motion,
+small-screen and no-JavaScript paths retain the authored fallback. No timeout,
+loading screen, content hiding, entrance fade or design changes are introduced.
+
+Browser verification withheld all module scripts until after first frames at
+1366×768, 1280×640 and 1920×1080: About was expanded and the sidebar hidden
+before the controller loaded, with zero recorded mode/sidebar flashes. The final
+font-ready handoff measured less than 0.01px change in product/card/grid geometry.
+Standard-history, 768×1024, 390×844 and stripped-script fallback checks retain
+their expected layouts. Native hard refreshes in both modes, panel switching,
+and HEIR/return Astro navigation pass. Check (78 files, no diagnostics), build
+(10 routes/329 links/publication checks) and source fidelity pass.
+
+Publication of this fix and the replacement `public/resume.pdf` was authorized
+on October 22 from the same v2 branch and existing production workflow. The shared
+Resume URL now includes a SHA-256 content version, so replacing the PDF invalidates
+cached navigation requests while preserving native viewing in a new tab. The
+built PDF is byte-identical to the supplied replacement; every navigation uses
+`/portfolio/resume.pdf?v=96e39dbd51c5`. No design or deployment configuration changes
+are part of this release; `main` and the previous experiment remain unchanged.
+
 October 21 verification: at 1366×768 and 1920×1080 in both themes, Tools
 opens at 470px and 669px (38% after gutters), with a centered three-column
 360px grid. HEIR/Lira start edges match at the shared responsive padding

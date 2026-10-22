@@ -8,6 +8,7 @@ import ImageViewer from '../components/ImageViewer.astro';
 import TableOfContents from '../components/TableOfContents.astro';
 import ResearchContext from '../components/ResearchContext.astro';
 import PersonalLogo from '../components/PersonalLogo.astro';
+import HomepageAccordionMode from '../components/HomepageAccordionMode.astro';
 interface Props {
   title: string; description: string; tableOfContents?: boolean;
   toc: { slug: string; text: string; depth?: number }[];
@@ -42,6 +43,7 @@ const showToc = tableOfContents && toc.length > 0;
         });
       })();
     </script>
+    {isHome && <HomepageAccordionMode />}
     <ClientRouter fallback="swap" />
   </head>
   <body>

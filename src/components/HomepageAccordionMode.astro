@@ -1,0 +1,8 @@
+---
+import { accordionDesktopQuery } from '../lib/homepage-accordion-presentation';
+---
+<!-- Resolve the shell before its sidebar or reading region can be painted. -->
+<script define:vars={{ accordionDesktopQuery }}>
+  document.documentElement.toggleAttribute('data-home-accordion',
+    matchMedia(accordionDesktopQuery).matches && !location.hash && !history.state?.portfolioJourneySkipped);
+</script>
