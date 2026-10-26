@@ -3,6 +3,9 @@
 Read `docs/project-handoff.md`, `docs/design-system.md`, and
 `docs/heir-asset-audit.md` before changing this project.
 
+Before changing analytics or tracking code, also read
+[docs/analytics-umami.md](docs/analytics-umami.md).
+
 ## Current scope and approval
 
 The user approved the shared Astro layout, navigation, figures, and viewer, then

@@ -1,4 +1,5 @@
 import { withBase } from './paths';
+import type { HeirEvents, ObservationName } from './heir-engagement';
 
 type PortfolioEvents = {
   panel_open: { panel: string };
@@ -9,11 +10,23 @@ type PortfolioEvents = {
   product_interaction: { product: 'heir' | 'lira'; action: 'scroll' | 'replay' };
 };
 type AnalyticsWindow = Window & { umami?: { track: (name: string, properties: object) => unknown } };
+type ActionEvents = PortfolioEvents & Pick<HeirEvents, 'heir_toc_click' | 'heir_resource_click'>;
 
 /** Optional, fire-and-forget analytics must never affect the original action.
- * Callers pass only authored identifiers, never URLs, form values or user data. */
-export function trackPortfolioEvent<K extends keyof PortfolioEvents>(name: K, properties: PortfolioEvents[K], source: Event) {
+ * Callers pass authored metadata and sanitized resource destinations, never form
+ * values, raw query strings or visitor data. */
+export function trackPortfolioEvent<K extends keyof ActionEvents>(name: K, properties: ActionEvents[K], source: Event) {
   if (!source.isTrusted) return;
+  send(name, properties);
+}
+
+/** Passive HEIR observations have viewport/focus/dwell qualification rather than
+ * a click event. Keep the original trusted-action contract intact. */
+export function trackHeirObservation<K extends ObservationName>(name: K, properties: HeirEvents[K]) {
+  send(name, properties);
+}
+
+function send(name: string, properties: object) {
   try {
     const tracker = (window as AnalyticsWindow).umami;
     if (typeof tracker?.track === 'function') {

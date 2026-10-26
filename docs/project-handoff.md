@@ -1,5 +1,9 @@
 # Portfolio project handoff
 
+**Analytics implementation and maintenance:** read
+[Umami Analytics handoff](analytics-umami.md) for the current architecture, exact
+event taxonomy, verification evidence, dashboard status and tracking-change procedure.
+
 ## Analytics production release — October 26, 2026
 
 Production now deploys directly from `feature/umami-analytics` using the existing
