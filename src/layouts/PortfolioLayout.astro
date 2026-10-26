@@ -28,6 +28,28 @@ const showToc = tableOfContents && toc.length > 0;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <meta name="color-scheme" content="light dark" />
+    {import.meta.env.PROD && (
+      <script is:inline defer id="portfolio-umami" src="https://cloud.umami.is/script.js"
+        data-website-id="c3a77bc9-8173-47ac-9b11-9aab74c75c88"
+        data-domains="uxrahul.github.io" data-auto-track="false" />
+      <script is:inline>
+        // Astro runs these shared scripts once. One completed navigation owns
+        // each page view, including the initial visit and back/forward history.
+        (() => {
+          let pendingPageView = false;
+          const sendPageView = () => {
+            if (!pendingPageView || !window.umami) return;
+            pendingPageView = false;
+            window.umami.track();
+          };
+          document.addEventListener('astro:page-load', () => {
+            pendingPageView = true;
+            sendPageView();
+          });
+          document.getElementById('portfolio-umami').addEventListener('load', sendPageView, { once: true });
+        })();
+      </script>
+    )}
     <link rel="icon" href={withBase('/favicon.ico')} sizes="any" />
     <link rel="icon" type="image/png" sizes="32x32" href={withBase('/branding/icon-light-32.png')} data-theme-icon data-light-src={withBase('/branding/icon-light-32.png')} data-dark-src={withBase('/branding/icon-dark-32.png')} />
     <link rel="apple-touch-icon" sizes="192x192" href={withBase('/branding/icon-light-192.png')} data-theme-icon data-light-src={withBase('/branding/icon-light-192.png')} data-dark-src={withBase('/branding/icon-dark-192.png')} />

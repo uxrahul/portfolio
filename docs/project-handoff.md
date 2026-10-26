@@ -1,5 +1,16 @@
 # Portfolio project handoff
 
+## Analytics production release — October 26, 2026
+
+Production now deploys directly from `feature/umami-analytics` using the existing
+Pages workflow and exact `github-pages` environment branch restriction. The v2
+and `main` branches remain intact. The shared head emits one deferred Umami
+script in production builds, restricted to `uxrahul.github.io`; localhost sends
+no events. Automatic tracking is disabled in favor of one page view per
+`astro:page-load`, including history navigation, with a load-ready handoff.
+No custom analytics events or visual changes are included. Check/build, all ten
+tracker inclusions, route validation and simulated tracking/deduplication pass.
+
 ## Homepage v2 — Five Stories, One Canvas (Passes 1–2)
 
 The completed accordion is scoped to `experiment/homepage-animation-v2`.
