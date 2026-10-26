@@ -103,6 +103,8 @@ const showToc = tableOfContents && toc.length > 0;
     <script>
       import { initializeNavigation } from '../lib/navigation-state';
       import { bindShell } from '../lib/shell';
+      import { bindPortfolioAnalytics } from '../lib/portfolio-analytics';
+      bindPortfolioAnalytics();
       bindShell();
       initializeNavigation();
       document.addEventListener('astro:page-load', initializeNavigation);

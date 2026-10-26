@@ -11,6 +11,34 @@ no events. Automatic tracking is disabled in favor of one page view per
 No custom analytics events or visual changes are included. Check/build, all ten
 tracker inclusions, route validation and simulated tracking/deduplication pass.
 
+### Custom interaction events
+
+`portfolio-analytics.ts` wraps the existing optional Umami API without changing
+its script or page-view owner. Trusted accepted actions send only authored values:
+`panel_open` (about/heir/lira/how_i_work/tools), `view_switch` (destination view),
+`case_study_open` (HEIR), `resume_click` (open/download), `tool_select` (tool name),
+and `product_interaction` (product plus scroll/replay). Link delegation binds once
+across Astro swaps and supports keyboard, primary and middle-click activation.
+Tool previews/closing/repeated open selections do not produce selection events.
+
+Product engagement counts once per product node per homepage visit, surviving
+panel reopening and view changes. HEIR needs trusted wheel/scroll-key/drag input
+and at least 8px movement; autoplay, restoration and boundary input alone do not
+count. Lira counts accepted replay clicks, never its initial illumination. Default
+About activation and automatic mode/resize changes are excluded. Missing/blocked
+or rejecting trackers are safely ignored without queuing actions. Browser PDF
+viewer toolbar downloads cannot be observed; the portfolio's PDF link activation
+and any download-attribute links are tracked. No custom personal data is sent.
+
+Verification: trusted native browser clicks/keyboard/wheel, repeated replay/tool
+activation, hover/synthetic exclusion, both view switches, PDF/case-study opening
+and Astro return pass against a local recording stub. Unit checks cover absent,
+throwing and rejecting trackers, autoplay/restoration exclusion, first engagement,
+middle-click/download links and singleton delegation. Check (79 files), build
+(10 pages/329 links) and HEIR source fidelity pass. Publication is authorized from
+`feature/umami-analytics` through its existing Pages workflow, without merging
+into `main`; the existing Umami script and page-view bridge remain unchanged.
+
 ## Homepage v2 — Five Stories, One Canvas (Passes 1–2)
 
 The completed accordion is scoped to `experiment/homepage-animation-v2`.

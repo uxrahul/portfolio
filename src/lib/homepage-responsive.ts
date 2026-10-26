@@ -1,3 +1,5 @@
+import { trackPortfolioEvent } from './portfolio-analytics';
+
 // Shared contextual descriptions for all naturally scrolling homepage modes.
 let cleanup: (() => void) | undefined;
 let bound = false;
@@ -34,6 +36,7 @@ export function initializeToolPopovers(root: HTMLElement, options: { stickySelec
   const details = [...panel.querySelectorAll<HTMLElement>('[data-tool-context]')];
   const events = new AbortController();
   let selected: number | undefined;
+  let clickedSelection: number | undefined;
   let focusPreview = false;
   let restoringFocus = false;
   let frame = 0;
@@ -46,6 +49,7 @@ export function initializeToolPopovers(root: HTMLElement, options: { stickySelec
   };
   const close = (restoreFocus = false) => {
     cancelDismiss();
+    clickedSelection = undefined;
     const button = selected === undefined ? undefined : buttons[selected];
     if (open()) panel.hidePopover();
     clear();
@@ -107,9 +111,19 @@ export function initializeToolPopovers(root: HTMLElement, options: { stickySelec
       if (options.stickySelection && open() && !focusPreview && selected === index) return;
       if (button.matches(':focus-visible')) select(index, true);
     }, { signal: events.signal });
-    button.addEventListener('click', () => {
+    button.addEventListener('click', (event) => {
       if (selected === index && open() && !focusPreview) close();
-      else select(index);
+      else {
+        // An auto-popover can light-dismiss on pointerdown on its own anchor,
+        // before this click reopens it. That is still the same chosen tool.
+        const alreadyChosen = clickedSelection === index;
+        select(index);
+        const tool = button.lastElementChild?.textContent?.trim();
+        if (event.isTrusted) {
+          clickedSelection = index;
+          if (tool && !alreadyChosen) trackPortfolioEvent('tool_select', { tool }, event);
+        }
+      }
     }, { signal: events.signal });
   });
   if (options.stickySelection) {
@@ -119,6 +133,10 @@ export function initializeToolPopovers(root: HTMLElement, options: { stickySelec
   }
   // Native auto-popover supplies outside-tap and Escape light dismissal, without
   // a backdrop, focus trap, scroll lock or modal semantics.
+  document.addEventListener('pointerdown', (event) => {
+    if (event.isTrusted && !panel.contains(event.target as Node)
+      && !buttons.some((button) => button.contains(event.target as Node))) clickedSelection = undefined;
+  }, { passive: true, capture: true, signal: events.signal });
   panel.addEventListener('toggle', () => { if (!open()) clear(); }, { signal: events.signal });
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape' && open()) { event.preventDefault(); close(true); }

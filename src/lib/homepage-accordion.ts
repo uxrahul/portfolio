@@ -1,5 +1,6 @@
 import { gsap } from 'gsap';
 import { createAccordionInteractions } from './homepage-accordion-interactions';
+import { trackPortfolioEvent } from './portfolio-analytics';
 
 import { accordionDesktopQuery, measureAccordion, accordionPoses } from './homepage-accordion-presentation';
 const lifecycle = new AbortController();
@@ -116,10 +117,12 @@ function initializeAccordion() {
   };
   const schedule = () => { cancelAnimationFrame(frame); frame = requestAnimationFrame(sync); };
   buttons.forEach((button, index) => {
-    button.addEventListener('click', () => {
+    button.addEventListener('click', (event) => {
       if (!enabled || index === active) return;
       active = index;
       paint(true);
+      const names: Record<string, string> = { introduction: 'about', heir: 'heir', continuation: 'lira', 'how-i-work': 'how_i_work', 'select-tools': 'tools' };
+      trackPortfolioEvent('panel_open', { panel: names[panels[index].dataset.accordionPanel!] }, event);
     }, { signal: events.signal });
     button.addEventListener('keydown', (event) => {
       let next: number;
@@ -131,7 +134,8 @@ function initializeAccordion() {
       event.preventDefault(); buttons[next].focus({ preventScroll: true });
     }, { signal: events.signal });
   });
-  toggle.addEventListener('click', () => {
+  toggle.addEventListener('click', (event) => {
+    const previous = enabled;
     standard = enabled;
     const state = { ...history.state };
     delete state.portfolioJourneyProgress;
@@ -139,6 +143,7 @@ function initializeAccordion() {
     else delete state.portfolioJourneySkipped;
     history.replaceState(state, '', standard ? location.href : location.pathname + location.search);
     scrollTo({ top: 0, behavior: 'instant' }); sync(); toggle.focus({ preventScroll: true });
+    if (previous !== enabled) trackPortfolioEvent('view_switch', { view: enabled ? 'animated' : 'standard' }, event);
   }, { signal: events.signal });
   menu.addEventListener('click', () => {
     if (menuOpen) { closeMenu(true); return; }

@@ -1,6 +1,7 @@
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { pendantLightAt } from './lira-pendant';
+import { trackProductOnce, watchPhoneExploration } from './portfolio-analytics';
 
 gsap.registerPlugin(ScrollTrigger);
 const touchQuery = '(max-width: 1199px), (hover: none), (pointer: coarse)';
@@ -77,6 +78,7 @@ function createTouchPhone(root: HTMLElement, memory: TouchMemory, reduced: boole
   const aperture = phone.querySelector<HTMLElement>('[data-phone-window]')!;
   const screen = phone.querySelector<HTMLImageElement>('[data-phone-screen]')!;
   const events = new AbortController();
+  const resetExploration = watchPhoneExploration(aperture, events.signal);
   let tween: gsap.core.Tween | undefined;
   let unobserve = () => {};
   const travel = () => Math.max(0, aperture.scrollHeight - aperture.clientHeight);
@@ -94,6 +96,7 @@ function createTouchPhone(root: HTMLElement, memory: TouchMemory, reduced: boole
   const measure = () => {
     const next = travel();
     if (next === lastTravel) return;
+    resetExploration();
     // Rotation hands an in-flight autoplay to native scrolling at its current
     // fraction; a manual position survives the new screenshot dimensions.
     if (tween?.isActive()) handoff();
@@ -157,7 +160,10 @@ function createTouchPendant(root: HTMLElement, memory: TouchMemory, reduced: boo
   setLight(memory.pendantStarted ? 1 : 0);
   pendant.dataset.responsiveProduct = memory.pendantStarted ? 'complete' : 'ready';
   replay.hidden = false;
-  replay.addEventListener('click', play, { signal: events.signal });
+  replay.addEventListener('click', (event) => {
+    if (running) return;
+    play(); trackProductOnce(pendant, 'lira', 'replay', event);
+  }, { signal: events.signal });
   if (!memory.pendantStarted) unobserve = observeOnce(pendant, play);
   return () => {
     events.abort(); unobserve(); timeline?.kill(); replay.hidden = true; replay.removeAttribute('aria-busy');

@@ -1,6 +1,7 @@
 import { gsap } from 'gsap';
 import { createPendantInteraction } from './lira-pendant';
 import { initializeToolPopovers } from './homepage-responsive';
+import { trackProductOnce, watchPhoneExploration } from './portfolio-analytics';
 
 /** Selection owns interaction lifetime; GSAP's existing width timeline owns settling. */
 export function createAccordionInteractions(root: HTMLElement) {
@@ -37,6 +38,7 @@ function enablePhone(panel: HTMLElement, memory: { fraction: number }) {
   const aperture = panel.querySelector<HTMLElement>('[data-phone-window]')!;
   const screen = panel.querySelector<HTMLImageElement>('[data-phone-screen]')!;
   const events = new AbortController();
+  const resetExploration = watchPhoneExploration(aperture, events.signal);
   const attributes = ['data-phone-native', 'tabindex', 'role', 'aria-label'] as const;
   const original = attributes.map((name) => aperture.getAttribute(name));
   const draggable = screen.getAttribute('draggable');
@@ -53,7 +55,7 @@ function enablePhone(panel: HTMLElement, memory: { fraction: number }) {
   aperture.setAttribute('role', 'region');
   aperture.setAttribute('aria-label', 'HEIR app preview. Scroll to explore the screen.');
   screen.draggable = false;
-  const measure = () => { if (!drag) aperture.scrollTop = memory.fraction * travel(); };
+  const measure = () => { if (!drag) { resetExploration(); aperture.scrollTop = memory.fraction * travel(); } };
   measure();
   aperture.addEventListener('scroll', remember, { passive: true, signal: events.signal });
   aperture.addEventListener('pointerdown', (event) => {
@@ -100,7 +102,9 @@ function enablePendant(panel: HTMLElement) {
     });
   };
   replay.hidden = false;
-  replay.addEventListener('click', play, { signal: events.signal });
+  replay.addEventListener('click', (event) => {
+    play(); trackProductOnce(panel.querySelector<HTMLElement>('[data-lira-pendant]')!, 'lira', 'replay', event);
+  }, { signal: events.signal });
   play();
   return () => {
     events.abort(); tween?.kill(); light.reset(); replay.hidden = true;
